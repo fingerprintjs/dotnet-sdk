@@ -481,7 +481,15 @@ namespace {{packageName}}.{{apiPackage}}
                     {{#-first}}
 
                     {{/-first}}
+                    {{#isArray}}
+                    foreach (var item in {{paramName}})
+                    {
+                        parseQueryStringLocalVar.Add("{{baseName}}[]", ClientUtils.ParameterToString(item));
+                    }
+                    {{/isArray}}
+                    {{^isArray}}
                     parseQueryStringLocalVar["{{baseName}}"] = ClientUtils.ParameterToString({{paramName}});
+                    {{/isArray}}
                     {{/required}}
                     {{/queryParams}}
 
@@ -493,8 +501,19 @@ namespace {{packageName}}.{{apiPackage}}
                     {{/constantParams}}
                     {{#queryParams}}
                     {{^required}}
+                    {{#isArray}}
+                    if ({{paramName}}.IsSet)
+                    {
+                        foreach (var item in {{paramName}}.Value)
+                        {
+                            parseQueryStringLocalVar.Add("{{baseName}}[]", ClientUtils.ParameterToString(item));
+                        }
+                    }
+                    {{/isArray}}
+                    {{^isArray}}
                     if ({{paramName}}.IsSet)
                         parseQueryStringLocalVar["{{baseName}}"] = ClientUtils.ParameterToString({{paramName}}.Value);
+                    {{/isArray}}
 
                     {{/required}}
                     {{/queryParams}}

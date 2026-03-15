@@ -277,55 +277,46 @@ namespace Fingerprint.ServerSdk.Test.Api
             const long totalHits = 1;
             const bool torNode = false;
 
-            var uriBuilder = new UriBuilder
-            {
-                Host = _instance.HttpClient.BaseAddress.Host,
-                Port = _instance.HttpClient.BaseAddress.Port,
-                Scheme = _instance.HttpClient.BaseAddress.Scheme,
-                Path = _instance.HttpClient.BaseAddress.AbsolutePath == "/"
-                    ? "/events"
-                    : string.Concat(_instance.HttpClient.BaseAddress.AbsolutePath, "/events")
-            };
-            var parseQueryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            parseQueryString["ii"] = $"fingerprint-pro-server-api-dotnet-sdk/{ClientUtils.ClientVersion}";
-            parseQueryString["limit"] = ClientUtils.ParameterToString(limit);
-            parseQueryString["pagination_key"] = ClientUtils.ParameterToString(paginationKey);
-            parseQueryString["visitor_id"] = ClientUtils.ParameterToString(visitorId);
-            parseQueryString["bot"] = ClientUtils.ParameterToString(bot);
-            parseQueryString["ip_address"] = ClientUtils.ParameterToString(ipAddress);
-            parseQueryString["asn"] = ClientUtils.ParameterToString(asn);
-            parseQueryString["linked_id"] = ClientUtils.ParameterToString(linkedId);
-            parseQueryString["url"] = ClientUtils.ParameterToString(url);
-            parseQueryString["origin"] = ClientUtils.ParameterToString(origin);
-            parseQueryString["start"] = ClientUtils.ParameterToString(start);
-            parseQueryString["end"] = ClientUtils.ParameterToString(end);
-            parseQueryString["reverse"] = ClientUtils.ParameterToString(reverse);
-            parseQueryString["suspect"] = ClientUtils.ParameterToString(suspect);
-            parseQueryString["vpn"] = ClientUtils.ParameterToString(vpn);
-            parseQueryString["virtual_machine"] = ClientUtils.ParameterToString(virtualMachine);
-            parseQueryString["tampering"] = ClientUtils.ParameterToString(tampering);
-            parseQueryString["anti_detect_browser"] = ClientUtils.ParameterToString(antiDetectBrowser);
-            parseQueryString["incognito"] = ClientUtils.ParameterToString(incognito);
-            parseQueryString["privacy_settings"] = ClientUtils.ParameterToString(privacySettings);
-            parseQueryString["jailbroken"] = ClientUtils.ParameterToString(jailbroken);
-            parseQueryString["frida"] = ClientUtils.ParameterToString(frida);
-            parseQueryString["factory_reset"] = ClientUtils.ParameterToString(factoryReset);
-            parseQueryString["cloned_app"] = ClientUtils.ParameterToString(clonedApp);
-            parseQueryString["emulator"] = ClientUtils.ParameterToString(emulator);
-            parseQueryString["root_apps"] = ClientUtils.ParameterToString(rootApps);
-            parseQueryString["vpn_confidence"] = ClientUtils.ParameterToString(vpnConfidence);
-            parseQueryString["min_suspect_score"] = ClientUtils.ParameterToString(minSuspectScore);
-            parseQueryString["developer_tools"] = ClientUtils.ParameterToString(developerTools);
-            parseQueryString["location_spoofing"] = ClientUtils.ParameterToString(locationSpoofing);
-            parseQueryString["mitm_attack"] = ClientUtils.ParameterToString(mitmAttack);
-            parseQueryString["proxy"] = ClientUtils.ParameterToString(proxy);
-            parseQueryString["sdk_version"] = ClientUtils.ParameterToString(sdkVersion);
-            parseQueryString["sdk_platform"] = ClientUtils.ParameterToString(sdkPlatform);
-            parseQueryString["environment"] = ClientUtils.ParameterToString(environment);
-            parseQueryString["proximity_id"] = ClientUtils.ParameterToString(proximityId);
-            parseQueryString["total_hits"] = ClientUtils.ParameterToString(totalHits);
-            parseQueryString["tor_node"] = ClientUtils.ParameterToString(torNode);
-            uriBuilder.Query = parseQueryString.ToString();
+            var expectedUrl = $"{ServerUrl}events?"
+                + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                + $"&limit={limit}"
+                + $"&pagination_key={paginationKey}"
+                + $"&visitor_id={visitorId}"
+                + $"&bot={SearchEventsBotValueConverter.ToJsonValue(bot)}"
+                + $"&ip_address={System.Web.HttpUtility.UrlEncode(ipAddress)}"
+                + $"&asn={asn}"
+                + $"&linked_id={linkedId}"
+                + $"&url=https%3a%2f%2fwww.example.com%2flogin%3fhope{{this{{works%5b!"
+                + $"&origin={origin}"
+                + $"&start={start}"
+                + $"&end={end}"
+                + $"&reverse={reverse.ToString().ToLower()}"
+                + $"&suspect={suspect.ToString().ToLower()}"
+                + $"&vpn={vpn.ToString().ToLower()}"
+                + $"&virtual_machine={virtualMachine.ToString().ToLower()}"
+                + $"&tampering={tampering.ToString().ToLower()}"
+                + $"&anti_detect_browser={antiDetectBrowser.ToString().ToLower()}"
+                + $"&incognito={incognito.ToString().ToLower()}"
+                + $"&privacy_settings={privacySettings.ToString().ToLower()}"
+                + $"&jailbroken={jailbroken.ToString().ToLower()}"
+                + $"&frida={frida.ToString().ToLower()}"
+                + $"&factory_reset={factoryReset.ToString().ToLower()}"
+                + $"&cloned_app={clonedApp.ToString().ToLower()}"
+                + $"&emulator={emulator.ToString().ToLower()}"
+                + $"&root_apps={rootApps.ToString().ToLower()}"
+                + $"&vpn_confidence={SearchEventsVpnConfidenceValueConverter.ToJsonValue(vpnConfidence)}"
+                + $"&min_suspect_score={minSuspectScore.ToString(CultureInfo.InvariantCulture)}"
+                + $"&developer_tools={developerTools.ToString().ToLower()}"
+                + $"&location_spoofing={locationSpoofing.ToString().ToLower()}"
+                + $"&mitm_attack={mitmAttack.ToString().ToLower()}"
+                + $"&proxy={proxy.ToString().ToLower()}"
+                + $"&sdk_version={sdkVersion}"
+                + $"&sdk_platform={SearchEventsSdkPlatformValueConverter.ToJsonValue(sdkPlatform)}"
+                + $"&environment[]={environment[0]}"
+                + $"&environment[]={environment[1]}"
+                + $"&proximity_id={proximityId}"
+                + $"&total_hits={totalHits}"
+                + $"&tor_node={torNode.ToString().ToLower()}";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithLimit(limit)
@@ -374,7 +365,7 @@ namespace Fingerprint.ServerSdk.Test.Api
                 var request = Requests.First().Request;
                 Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
 
-                Assert.Equal(uriBuilder.Uri.ToString(), request.Url.ToString());
+                Assert.Equal(expectedUrl, request.Url.ToString());
                 Assert.Equal("GET", request.HttpMethod);
 
                 var eventSearch = response.Ok();
