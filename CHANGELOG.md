@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.0.2
+
+### Patch Changes
+
+- **events-search:** use repeated keys for array parameter serialization ([7b2b46d](https://github.com/fingerprintjs/dotnet-sdk/commit/7b2b46d00afd9afdad9b4720f14e57d77b890e83))
+
 ## 8.0.1
 
 ### Patch Changes
