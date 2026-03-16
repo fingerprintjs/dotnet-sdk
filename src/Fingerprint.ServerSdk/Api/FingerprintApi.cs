@@ -2344,7 +2344,12 @@ namespace Fingerprint.ServerSdk.Api
                         parseQueryStringLocalVar["sdk_platform"] = ClientUtils.ParameterToString(sdkPlatform.Value);
 
                     if (environment.IsSet)
-                        parseQueryStringLocalVar["environment"] = ClientUtils.ParameterToString(environment.Value);
+                    {
+                        foreach (var item in environment.Value)
+                        {
+                            parseQueryStringLocalVar.Add("environment[]", ClientUtils.ParameterToString(item));
+                        }
+                    }
 
                     if (proximityId.IsSet)
                         parseQueryStringLocalVar["proximity_id"] = ClientUtils.ParameterToString(proximityId.Value);
