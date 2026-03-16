@@ -3,7 +3,7 @@
     <PropertyGroup>
         <PackageId>Fingerprint.ServerSdk</PackageId>
         <PackageTags>browser,detection,fingerprint,identification,fingerprinting,browser-fingerprinting,fraud-detection,fraud,audio-fingerprinting,fingerprintjs,fingerprintjs-pro,visitor-identification</PackageTags>
-        <Version>8.0.1</Version>
+        <Version>8.0.2</Version>
         <Authors>Fingerprint</Authors>
         <Company>Fingerprint</Company>
         <RepositoryUrl>https://github.com/fingerprintjs/dotnet-sdk</RepositoryUrl>

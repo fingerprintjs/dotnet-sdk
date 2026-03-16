@@ -30,7 +30,7 @@ namespace Fingerprint.ServerSdk.Client
         /// <summary>
         /// .NET SDK Client Version
         /// </summary>
-        public const string ClientVersion = "8.0.1";
+        public const string ClientVersion = "8.0.2";
 
 
         /// <summary>
