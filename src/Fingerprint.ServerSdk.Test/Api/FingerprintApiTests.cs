@@ -312,8 +312,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 + $"&proxy={proxy.ToString().ToLower()}"
                 + $"&sdk_version={sdkVersion}"
                 + $"&sdk_platform={SearchEventsSdkPlatformValueConverter.ToJsonValue(sdkPlatform)}"
-                + $"&environment[]={environment[0]}"
-                + $"&environment[]={environment[1]}"
+                + $"&environment={environment[0]}"
+                + $"&environment={environment[1]}"
                 + $"&proximity_id={proximityId}"
                 + $"&total_hits={totalHits}"
                 + $"&tor_node={torNode.ToString().ToLower()}";

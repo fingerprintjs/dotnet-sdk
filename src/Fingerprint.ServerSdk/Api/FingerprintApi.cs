@@ -2347,7 +2347,7 @@ namespace Fingerprint.ServerSdk.Api
                     {
                         foreach (var item in environment.Value)
                         {
-                            parseQueryStringLocalVar.Add("environment[]", ClientUtils.ParameterToString(item));
+                            parseQueryStringLocalVar.Add("environment", ClientUtils.ParameterToString(item));
                         }
                     }
 
