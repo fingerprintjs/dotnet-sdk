@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.0.1
+
+### Patch Changes
+
+- **events-search:** fix array query parameter serialization ([72cf441](https://github.com/fingerprintjs/dotnet-sdk/commit/72cf441e43d2b77a907e60913bacbd13cdaa36b3))
+
 ## 8.0.0
 
 ### Major Changes
