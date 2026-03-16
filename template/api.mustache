@@ -484,7 +484,7 @@ namespace {{packageName}}.{{apiPackage}}
                     {{#isArray}}
                     foreach (var item in {{paramName}})
                     {
-                        parseQueryStringLocalVar.Add("{{baseName}}[]", ClientUtils.ParameterToString(item));
+                        parseQueryStringLocalVar.Add("{{baseName}}", ClientUtils.ParameterToString(item));
                     }
                     {{/isArray}}
                     {{^isArray}}
@@ -506,7 +506,7 @@ namespace {{packageName}}.{{apiPackage}}
                     {
                         foreach (var item in {{paramName}}.Value)
                         {
-                            parseQueryStringLocalVar.Add("{{baseName}}[]", ClientUtils.ParameterToString(item));
+                            parseQueryStringLocalVar.Add("{{baseName}}", ClientUtils.ParameterToString(item));
                         }
                     }
                     {{/isArray}}
