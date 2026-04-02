@@ -35,9 +35,10 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         /// <param name="eventId">Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH`  (required).</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
+        /// <param name="incrementalIdentificationStatus">incrementalIdentificationStatus.</param>
         /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
         /// <param name="environmentId">Environment Id of the event. For example: `ae_47abaca3db2c7c43` .</param>
-        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent)..</param>
+        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event)..</param>
         /// <param name="sdk">sdk.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
         /// <param name="identification">identification.</param>
@@ -57,7 +58,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="clonedApp">Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. .</param>
         /// <param name="developerTools">`true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise. .</param>
         /// <param name="emulator">Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android. .</param>
-        /// <param name="factoryResetTimestamp">The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. .</param>
+        /// <param name="factoryResetTimestamp">The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal. .</param>
         /// <param name="frida">[Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * `true` - Frida detected * `false` - No signs of Frida or the client is not a mobile device. .</param>
         /// <param name="ipBlocklist">ipBlocklist.</param>
         /// <param name="ipInfo">ipInfo.</param>
@@ -67,15 +68,19 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="incognito">`true` if we detected incognito mode used in the browser, `false` otherwise. .</param>
         /// <param name="jailbroken">iOS specific jailbreak detection. There are 2 values:  * `true` - Jailbreak detected. * `false` - No signs of jailbreak or the client is not iOS. .</param>
         /// <param name="locationSpoofing">Flag indicating whether the request came from a mobile device with location spoofing enabled..</param>
-        /// <param name="mitmAttack">* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. .</param>
+        /// <param name="mitmAttack">* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://docs.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. .</param>
         /// <param name="privacySettings">`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. .</param>
         /// <param name="rootApps">Android specific root management apps detection. There are 2 values:  * `true` - Root Management Apps detected (e.g. Magisk). * `false` - No Root Management Apps detected or the client isn't Android. .</param>
         /// <param name="ruleAction">ruleAction.</param>
-        /// <param name="suspectScore">Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://dev.fingerprint.com/docs/suspect-score .</param>
+        /// <param name="simulator">iOS specific simulator detection. There are 2 values: * `true` - Simulator environment detected. * `false` - No signs of simulator or the client is not iOS. .</param>
+        /// <param name="suspectScore">Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://docs.fingerprint.com/docs/suspect-score .</param>
         /// <param name="tampering">Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`). .</param>
+        /// <param name="tamperingConfidence">tamperingConfidence.</param>
+        /// <param name="tamperingMlScore">A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model .</param>
         /// <param name="tamperingDetails">tamperingDetails.</param>
         /// <param name="velocity">velocity.</param>
         /// <param name="virtualMachine">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
+        /// <param name="virtualMachineMlScore">Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result .</param>
         /// <param name="vpn">VPN or other anonymizing service has been used when sending the request. .</param>
         /// <param name="vpnConfidence">vpnConfidence.</param>
         /// <param name="vpnOriginTimezone">Local timezone which is used in timezone_mismatch method. .</param>
@@ -84,10 +89,11 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="highActivityDevice">Flag indicating if the request came from a high-activity visitor..</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<RawDeviceAttributes> rawDeviceAttributes = default)
+        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<RawDeviceAttributes> rawDeviceAttributes = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
+            IncrementalIdentificationStatusOption = incrementalIdentificationStatus;
             LinkedIdOption = linkedId;
             EnvironmentIdOption = environmentId;
             SuspectOption = suspect;
@@ -124,11 +130,15 @@ namespace Fingerprint.ServerSdk.Model
             PrivacySettingsOption = privacySettings;
             RootAppsOption = rootApps;
             RuleActionOption = ruleAction;
+            SimulatorOption = simulator;
             SuspectScoreOption = suspectScore;
             TamperingOption = tampering;
+            TamperingConfidenceOption = tamperingConfidence;
+            TamperingMlScoreOption = tamperingMlScore;
             TamperingDetailsOption = tamperingDetails;
             VelocityOption = velocity;
             VirtualMachineOption = virtualMachine;
+            VirtualMachineMlScoreOption = virtualMachineMlScore;
             VpnOption = vpn;
             VpnConfidenceOption = vpnConfidence;
             VpnOriginTimezoneOption = vpnOriginTimezone;
@@ -140,6 +150,19 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Used to track the state of IncrementalIdentificationStatus
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<IncrementalIdentificationStatus?> IncrementalIdentificationStatusOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets IncrementalIdentificationStatus
+        /// </summary>
+        [JsonPropertyName("incremental_identification_status")]
+        public IncrementalIdentificationStatus? IncrementalIdentificationStatus { get { return this.IncrementalIdentificationStatusOption; } set { this.IncrementalIdentificationStatusOption = new Option<IncrementalIdentificationStatus?>(value); } }
 
         /// <summary>
         /// Used to track the state of Bot
@@ -166,6 +189,19 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("proxy_confidence")]
         public ProxyConfidence? ProxyConfidence { get { return this.ProxyConfidenceOption; } set { this.ProxyConfidenceOption = new Option<ProxyConfidence?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of TamperingConfidence
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<TamperingConfidence?> TamperingConfidenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TamperingConfidence
+        /// </summary>
+        [JsonPropertyName("tampering_confidence")]
+        public TamperingConfidence? TamperingConfidence { get { return this.TamperingConfidenceOption; } set { this.TamperingConfidenceOption = new Option<TamperingConfidence?>(value); } }
 
         /// <summary>
         /// Used to track the state of VpnConfidence
@@ -230,9 +266,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<bool?> SuspectOption { get; private set; }
 
         /// <summary>
-        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).
+        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).
         /// </summary>
-        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).</value>
+        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).</value>
         [JsonPropertyName("suspect")]
         public bool? Suspect { get { return this.SuspectOption; } set { this.SuspectOption = new Option<bool?>(value); } }
 
@@ -490,9 +526,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<long?> FactoryResetTimestampOption { get; private set; }
 
         /// <summary>
-        /// The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. 
+        /// The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal. 
         /// </summary>
-        /// <value>The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. </value>
+        /// <value>The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal. </value>
         [JsonPropertyName("factory_reset_timestamp")]
         public long? FactoryResetTimestamp { get { return this.FactoryResetTimestampOption; } set { this.FactoryResetTimestampOption = new Option<long?>(value); } }
 
@@ -613,9 +649,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<bool?> MitmAttackOption { get; private set; }
 
         /// <summary>
-        /// * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. 
+        /// * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://docs.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. 
         /// </summary>
-        /// <value>* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. </value>
+        /// <value>* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://docs.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. </value>
         [JsonPropertyName("mitm_attack")]
         public bool? MitmAttack { get { return this.MitmAttackOption; } set { this.MitmAttackOption = new Option<bool?>(value); } }
 
@@ -661,6 +697,20 @@ namespace Fingerprint.ServerSdk.Model
         public EventRuleAction RuleAction { get { return this.RuleActionOption; } set { this.RuleActionOption = new Option<EventRuleAction>(value); } }
 
         /// <summary>
+        /// Used to track the state of Simulator
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SimulatorOption { get; private set; }
+
+        /// <summary>
+        /// iOS specific simulator detection. There are 2 values: * `true` - Simulator environment detected. * `false` - No signs of simulator or the client is not iOS. 
+        /// </summary>
+        /// <value>iOS specific simulator detection. There are 2 values: * `true` - Simulator environment detected. * `false` - No signs of simulator or the client is not iOS. </value>
+        [JsonPropertyName("simulator")]
+        public bool? Simulator { get { return this.SimulatorOption; } set { this.SimulatorOption = new Option<bool?>(value); } }
+
+        /// <summary>
         /// Used to track the state of SuspectScore
         /// </summary>
         [JsonIgnore]
@@ -668,9 +718,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<int?> SuspectScoreOption { get; private set; }
 
         /// <summary>
-        /// Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://dev.fingerprint.com/docs/suspect-score 
+        /// Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://docs.fingerprint.com/docs/suspect-score 
         /// </summary>
-        /// <value>Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://dev.fingerprint.com/docs/suspect-score </value>
+        /// <value>Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://docs.fingerprint.com/docs/suspect-score </value>
         [JsonPropertyName("suspect_score")]
         public int? SuspectScore { get { return this.SuspectScoreOption; } set { this.SuspectScoreOption = new Option<int?>(value); } }
 
@@ -687,6 +737,20 @@ namespace Fingerprint.ServerSdk.Model
         /// <value>Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`). </value>
         [JsonPropertyName("tampering")]
         public bool? Tampering { get { return this.TamperingOption; } set { this.TamperingOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of TamperingMlScore
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<double?> TamperingMlScoreOption { get; private set; }
+
+        /// <summary>
+        /// A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model 
+        /// </summary>
+        /// <value>A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model </value>
+        [JsonPropertyName("tampering_ml_score")]
+        public double? TamperingMlScore { get { return this.TamperingMlScoreOption; } set { this.TamperingMlScoreOption = new Option<double?>(value); } }
 
         /// <summary>
         /// Used to track the state of TamperingDetails
@@ -727,6 +791,20 @@ namespace Fingerprint.ServerSdk.Model
         /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
         [JsonPropertyName("virtual_machine")]
         public bool? VirtualMachine { get { return this.VirtualMachineOption; } set { this.VirtualMachineOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of VirtualMachineMlScore
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<double?> VirtualMachineMlScoreOption { get; private set; }
+
+        /// <summary>
+        /// Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result 
+        /// </summary>
+        /// <value>Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result </value>
+        [JsonPropertyName("virtual_machine_ml_score")]
+        public double? VirtualMachineMlScore { get { return this.VirtualMachineMlScoreOption; } set { this.VirtualMachineMlScoreOption = new Option<double?>(value); } }
 
         /// <summary>
         /// Used to track the state of Vpn
@@ -820,6 +898,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("class Event {\n");
             sb.Append("  EventId: ").Append(EventId).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+            sb.Append("  IncrementalIdentificationStatus: ").Append(IncrementalIdentificationStatus).Append("\n");
             sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
             sb.Append("  EnvironmentId: ").Append(EnvironmentId).Append("\n");
             sb.Append("  Suspect: ").Append(Suspect).Append("\n");
@@ -856,11 +935,15 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  PrivacySettings: ").Append(PrivacySettings).Append("\n");
             sb.Append("  RootApps: ").Append(RootApps).Append("\n");
             sb.Append("  RuleAction: ").Append(RuleAction).Append("\n");
+            sb.Append("  Simulator: ").Append(Simulator).Append("\n");
             sb.Append("  SuspectScore: ").Append(SuspectScore).Append("\n");
             sb.Append("  Tampering: ").Append(Tampering).Append("\n");
+            sb.Append("  TamperingConfidence: ").Append(TamperingConfidence).Append("\n");
+            sb.Append("  TamperingMlScore: ").Append(TamperingMlScore).Append("\n");
             sb.Append("  TamperingDetails: ").Append(TamperingDetails).Append("\n");
             sb.Append("  Velocity: ").Append(Velocity).Append("\n");
             sb.Append("  VirtualMachine: ").Append(VirtualMachine).Append("\n");
+            sb.Append("  VirtualMachineMlScore: ").Append(VirtualMachineMlScore).Append("\n");
             sb.Append("  Vpn: ").Append(Vpn).Append("\n");
             sb.Append("  VpnConfidence: ").Append(VpnConfidence).Append("\n");
             sb.Append("  VpnOriginTimezone: ").Append(VpnOriginTimezone).Append("\n");
@@ -879,6 +962,30 @@ namespace Fingerprint.ServerSdk.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // TamperingMlScore (double) maximum
+            if (this.TamperingMlScoreOption.IsSet && this.TamperingMlScoreOption.Value > (double)1)
+            {
+                yield return new ValidationResult("Invalid value for TamperingMlScore, must be a value less than or equal to 1.", new [] { "TamperingMlScore" });
+            }
+
+            // TamperingMlScore (double) minimum
+            if (this.TamperingMlScoreOption.IsSet && this.TamperingMlScoreOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for TamperingMlScore, must be a value greater than or equal to 0.", new [] { "TamperingMlScore" });
+            }
+
+            // VirtualMachineMlScore (double) maximum
+            if (this.VirtualMachineMlScoreOption.IsSet && this.VirtualMachineMlScoreOption.Value > (double)1)
+            {
+                yield return new ValidationResult("Invalid value for VirtualMachineMlScore, must be a value less than or equal to 1.", new [] { "VirtualMachineMlScore" });
+            }
+
+            // VirtualMachineMlScore (double) minimum
+            if (this.VirtualMachineMlScoreOption.IsSet && this.VirtualMachineMlScoreOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for VirtualMachineMlScore, must be a value greater than or equal to 0.", new [] { "VirtualMachineMlScore" });
+            }
+
             yield break;
         }
     }
@@ -907,6 +1014,7 @@ namespace Fingerprint.ServerSdk.Model
 
             Option<string> eventId = default;
             Option<long?> timestamp = default;
+            Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default;
             Option<string> linkedId = default;
             Option<string> environmentId = default;
             Option<bool?> suspect = default;
@@ -943,11 +1051,15 @@ namespace Fingerprint.ServerSdk.Model
             Option<bool?> privacySettings = default;
             Option<bool?> rootApps = default;
             Option<EventRuleAction> ruleAction = default;
+            Option<bool?> simulator = default;
             Option<int?> suspectScore = default;
             Option<bool?> tampering = default;
+            Option<TamperingConfidence?> tamperingConfidence = default;
+            Option<double?> tamperingMlScore = default;
             Option<TamperingDetails> tamperingDetails = default;
             Option<Velocity> velocity = default;
             Option<bool?> virtualMachine = default;
+            Option<double?> virtualMachineMlScore = default;
             Option<bool?> vpn = default;
             Option<VpnConfidence?> vpnConfidence = default;
             Option<string> vpnOriginTimezone = default;
@@ -976,6 +1088,11 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "timestamp":
                             timestamp = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "incremental_identification_status":
+                            string incrementalIdentificationStatusRawValue = utf8JsonReader.GetString();
+                            if (incrementalIdentificationStatusRawValue != null)
+                                incrementalIdentificationStatus = new Option<IncrementalIdentificationStatus?>(IncrementalIdentificationStatusValueConverter.FromStringOrDefault(incrementalIdentificationStatusRawValue));
                             break;
                         case "linked_id":
                             linkedId = new Option<string>(utf8JsonReader.GetString());
@@ -1089,11 +1206,22 @@ namespace Fingerprint.ServerSdk.Model
                         case "rule_action":
                             ruleAction = new Option<EventRuleAction>(JsonSerializer.Deserialize<EventRuleAction>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "simulator":
+                            simulator = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         case "suspect_score":
                             suspectScore = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "tampering":
                             tampering = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "tampering_confidence":
+                            string tamperingConfidenceRawValue = utf8JsonReader.GetString();
+                            if (tamperingConfidenceRawValue != null)
+                                tamperingConfidence = new Option<TamperingConfidence?>(TamperingConfidenceValueConverter.FromStringOrDefault(tamperingConfidenceRawValue));
+                            break;
+                        case "tampering_ml_score":
+                            tamperingMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
                             break;
                         case "tampering_details":
                             tamperingDetails = new Option<TamperingDetails>(JsonSerializer.Deserialize<TamperingDetails>(ref utf8JsonReader, jsonSerializerOptions));
@@ -1103,6 +1231,9 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "virtual_machine":
                             virtualMachine = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "virtual_machine_ml_score":
+                            virtualMachineMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
                             break;
                         case "vpn":
                             vpn = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -1144,6 +1275,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (timestamp.IsSet && timestamp.Value == null)
                 throw new ArgumentNullException(nameof(timestamp), "Property is not nullable for class Event.");
+
+            if (incrementalIdentificationStatus.IsSet && incrementalIdentificationStatus.Value == null)
+                throw new ArgumentNullException(nameof(incrementalIdentificationStatus), "Property is not nullable for class Event.");
 
             if (linkedId.IsSet && linkedId.Value == null)
                 throw new ArgumentNullException(nameof(linkedId), "Property is not nullable for class Event.");
@@ -1253,11 +1387,20 @@ namespace Fingerprint.ServerSdk.Model
             if (ruleAction.IsSet && ruleAction.Value == null)
                 throw new ArgumentNullException(nameof(ruleAction), "Property is not nullable for class Event.");
 
+            if (simulator.IsSet && simulator.Value == null)
+                throw new ArgumentNullException(nameof(simulator), "Property is not nullable for class Event.");
+
             if (suspectScore.IsSet && suspectScore.Value == null)
                 throw new ArgumentNullException(nameof(suspectScore), "Property is not nullable for class Event.");
 
             if (tampering.IsSet && tampering.Value == null)
                 throw new ArgumentNullException(nameof(tampering), "Property is not nullable for class Event.");
+
+            if (tamperingConfidence.IsSet && tamperingConfidence.Value == null)
+                throw new ArgumentNullException(nameof(tamperingConfidence), "Property is not nullable for class Event.");
+
+            if (tamperingMlScore.IsSet && tamperingMlScore.Value == null)
+                throw new ArgumentNullException(nameof(tamperingMlScore), "Property is not nullable for class Event.");
 
             if (tamperingDetails.IsSet && tamperingDetails.Value == null)
                 throw new ArgumentNullException(nameof(tamperingDetails), "Property is not nullable for class Event.");
@@ -1267,6 +1410,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (virtualMachine.IsSet && virtualMachine.Value == null)
                 throw new ArgumentNullException(nameof(virtualMachine), "Property is not nullable for class Event.");
+
+            if (virtualMachineMlScore.IsSet && virtualMachineMlScore.Value == null)
+                throw new ArgumentNullException(nameof(virtualMachineMlScore), "Property is not nullable for class Event.");
 
             if (vpn.IsSet && vpn.Value == null)
                 throw new ArgumentNullException(nameof(vpn), "Property is not nullable for class Event.");
@@ -1289,7 +1435,7 @@ namespace Fingerprint.ServerSdk.Model
             if (rawDeviceAttributes.IsSet && rawDeviceAttributes.Value == null)
                 throw new ArgumentNullException(nameof(rawDeviceAttributes), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rawDeviceAttributes);
+            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rawDeviceAttributes);
         }
 
         /// <summary>
@@ -1401,6 +1547,11 @@ namespace Fingerprint.ServerSdk.Model
 
             writer.WriteNumber("timestamp", varEvent.Timestamp);
 
+            if (varEvent.IncrementalIdentificationStatusOption.IsSet)
+            {
+                var incrementalIdentificationStatusRawValue = IncrementalIdentificationStatusValueConverter.ToJsonValue(varEvent.IncrementalIdentificationStatus.Value);
+                writer.WriteString("incremental_identification_status", incrementalIdentificationStatusRawValue);
+            }
             if (varEvent.LinkedIdOption.IsSet)
                 writer.WriteString("linked_id", varEvent.LinkedId);
 
@@ -1535,11 +1686,22 @@ namespace Fingerprint.ServerSdk.Model
                 writer.WritePropertyName("rule_action");
                 JsonSerializer.Serialize(writer, varEvent.RuleAction, jsonSerializerOptions);
             }
+            if (varEvent.SimulatorOption.IsSet)
+                writer.WriteBoolean("simulator", varEvent.SimulatorOption.Value.Value);
+
             if (varEvent.SuspectScoreOption.IsSet)
                 writer.WriteNumber("suspect_score", varEvent.SuspectScoreOption.Value.Value);
 
             if (varEvent.TamperingOption.IsSet)
                 writer.WriteBoolean("tampering", varEvent.TamperingOption.Value.Value);
+
+            if (varEvent.TamperingConfidenceOption.IsSet)
+            {
+                var tamperingConfidenceRawValue = TamperingConfidenceValueConverter.ToJsonValue(varEvent.TamperingConfidence.Value);
+                writer.WriteString("tampering_confidence", tamperingConfidenceRawValue);
+            }
+            if (varEvent.TamperingMlScoreOption.IsSet)
+                writer.WriteNumber("tampering_ml_score", varEvent.TamperingMlScoreOption.Value.Value);
 
             if (varEvent.TamperingDetailsOption.IsSet)
             {
@@ -1553,6 +1715,9 @@ namespace Fingerprint.ServerSdk.Model
             }
             if (varEvent.VirtualMachineOption.IsSet)
                 writer.WriteBoolean("virtual_machine", varEvent.VirtualMachineOption.Value.Value);
+
+            if (varEvent.VirtualMachineMlScoreOption.IsSet)
+                writer.WriteNumber("virtual_machine_ml_score", varEvent.VirtualMachineMlScoreOption.Value.Value);
 
             if (varEvent.VpnOption.IsSet)
                 writer.WriteBoolean("vpn", varEvent.VpnOption.Value.Value);
