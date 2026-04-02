@@ -27,9 +27,11 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="WebhookVirtualMachine" /> class.
         /// </summary>
         /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
-        public WebhookVirtualMachine(bool? result = default(bool?))
+        /// <param name="mlScore">Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result .</param>
+        public WebhookVirtualMachine(bool? result = default(bool?), double? mlScore = default(double?))
         {
             this.Result = result;
+            this.MlScore = mlScore;
         }
 
         /// <summary>
@@ -41,6 +43,14 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? Result { get; set; }
 
         /// <summary>
+        /// Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result 
+        /// </summary>
+        /// <value>Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result </value>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -49,6 +59,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class WebhookVirtualMachine {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("  MlScore: ").Append(MlScore).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -77,6 +88,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result == input.Result ||
                 (this.Result != null &&
                 this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
                 );
         }
 
@@ -91,6 +107,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
                 return hashCode;
             }
         }
