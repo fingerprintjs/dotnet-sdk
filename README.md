@@ -1,6 +1,63 @@
 <p align="center">
     <a href="https://fingerprint.com">
-        <picture>
+// Example usage of our SDK
+
+// Import namespaces
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
+
+namespace YourProject
+{
+    public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
+            var api = host.Services.GetRequiredService<IFingerprintApi>();
+            var response = await api.SearchEventsAsync(limit: 2);
+
+            if (response.TryOk(out EventSearch events))
+            {
+                // Process events...
+            }
+
+            // You can also access the raw content and headers:
+            // string rawContent = response.RawContent;
+            // HttpResponseHeaders headers = response.Headers;
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+          .ConfigureFingerprint((context, services, options) =>
+          {
+              BearerToken token = new(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
+              options.AddTokens(token);
+
+              // optionally choose the method the tokens will be provided with, default is RateLimitProvider
+              options.UseProvider<RateLimitProvider<BearerToken>, BearerToken>();
+
+              options.ConfigureJsonOptions((jsonOptions) =>
+              {
+                  // your custom converters if any
+              });
+
+              options.AddApiHttpClients(client =>
+              {
+                  // custom client configuration
+              }, builder =>
+              {
+                  builder
+                      .AddRetryPolicy(2)
+                      .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
+                      .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30));
+                      // add whatever middleware you prefer
+                  }
+              );
+          });
+    }
+}        <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://fingerprintjs.github.io/home/resources/logo_light.svg" />
             <source media="(prefers-color-scheme: light)" srcset="https://fingerprintjs.github.io/home/resources/logo_dark.svg" />
             <img src="https://fingerprintjs.github.io/home/resources/logo_dark.svg" alt="Fingerprint logo" width="312px" />
