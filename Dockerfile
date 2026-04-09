@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 # Copy the project file and restore dependencies
-COPY ["fingerprint-server-dotnet-sdk.sln", "./"]
+COPY ["Fingerprint.ServerSdk.sln", "./"]
 # LICENSE is required for building the package
 COPY ["LICENSE", "./"]
 COPY ["res", "res/"]
