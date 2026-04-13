@@ -1,5 +1,15 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.11.0
+
+### Minor Changes
+
+- Add `MLScore` fields to the `VirtualMachine` signal ([a238ef1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a238ef1bb4f8a1eaaaa7836f2131c3cf8149e3e2))
+- Add `WorkspaceScopedSecretKeyRequired` error code ([a238ef1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a238ef1bb4f8a1eaaaa7836f2131c3cf8149e3e2))
+- Add optional `Type` field to `IPInfoASN` response model ([a238ef1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a238ef1bb4f8a1eaaaa7836f2131c3cf8149e3e2))
+- Add `Integrations` field to `SDK` model with a list of `Integration` and `IntegrationSubintegration`. ([a238ef1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a238ef1bb4f8a1eaaaa7836f2131c3cf8149e3e2))
+- Add `Confidence` and `MlScore` fields to the `Tampering` signal ([a238ef1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a238ef1bb4f8a1eaaaa7836f2131c3cf8149e3e2))
+
 ## 7.10.0
 
 ### Minor Changes

@@ -3,7 +3,7 @@
     <PropertyGroup>
         <PackageId>FingerprintPro.ServerSdk</PackageId>
         <PackageTags>browser,detection,fingerprint,identification,fingerprinting,browser-fingerprinting,fraud-detection,fraud,audio-fingerprinting,fingerprintjs,fingerprintjs-pro,visitor-identification</PackageTags>
-        <Version>7.10.0</Version>
+        <Version>7.11.0</Version>
         <Authors>Fingerprint</Authors>
         <Company>Fingerprint</Company>
         <RepositoryUrl>https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk</RepositoryUrl>
