@@ -276,12 +276,16 @@ namespace Fingerprint.ServerSdk.Test.Api
             const string proximityId = "testProximityId";
             const long totalHits = 1;
             const bool torNode = false;
+            const string highRecallId = "testHighRecallID";
+            const SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus = SearchEventsIncrementalIdentificationStatus.PartiallyCompleted;
+            const bool simulator = true;
 
             var expectedUrl = $"{ServerUrl}events?"
                 + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
                 + $"&limit={limit}"
                 + $"&pagination_key={paginationKey}"
                 + $"&visitor_id={visitorId}"
+                + $"&high_recall_id={highRecallId}"
                 + $"&bot={SearchEventsBotValueConverter.ToJsonValue(bot)}"
                 + $"&ip_address={System.Web.HttpUtility.UrlEncode(ipAddress)}"
                 + $"&asn={asn}"
@@ -316,7 +320,9 @@ namespace Fingerprint.ServerSdk.Test.Api
                 + $"&environment={environment[1]}"
                 + $"&proximity_id={proximityId}"
                 + $"&total_hits={totalHits}"
-                + $"&tor_node={torNode.ToString().ToLower()}";
+                + $"&tor_node={torNode.ToString().ToLower()}"
+                + $"&incremental_identification_status={SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus)}"
+                + $"&simulator={simulator.ToString().ToLower()}";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithLimit(limit)
@@ -355,7 +361,10 @@ namespace Fingerprint.ServerSdk.Test.Api
                 .WithEnvironment(environment)
                 .WithProximityId(proximityId)
                 .WithTotalHits(totalHits)
-                .WithTorNode(torNode));
+                .WithTorNode(torNode)
+                .WithHighRecallId(highRecallId)
+                .WithIncrementalIdentificationStatus(incrementalIdentificationStatus)
+                .WithSimulator(simulator));
 
             Assert.Multiple(() =>
             {

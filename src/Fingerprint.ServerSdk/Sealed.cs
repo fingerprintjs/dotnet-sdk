@@ -194,6 +194,8 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new IPInfoV6JsonConverter());
             jsonOptions.Converters.Add(new IdentificationJsonConverter());
             jsonOptions.Converters.Add(new IdentificationConfidenceJsonConverter());
+            jsonOptions.Converters.Add(new IncrementalIdentificationStatusJsonConverter());
+            jsonOptions.Converters.Add(new IncrementalIdentificationStatusNullableJsonConverter());
             jsonOptions.Converters.Add(new IntegrationJsonConverter());
             jsonOptions.Converters.Add(new IntegrationSubintegrationJsonConverter());
             jsonOptions.Converters.Add(new PluginsInnerJsonConverter());
@@ -210,11 +212,15 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new SDKJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());
+            jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
+            jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsSdkPlatformJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsSdkPlatformNullableJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsVpnConfidenceJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsVpnConfidenceNullableJsonConverter());
             jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
+            jsonOptions.Converters.Add(new TamperingConfidenceJsonConverter());
+            jsonOptions.Converters.Add(new TamperingConfidenceNullableJsonConverter());
             jsonOptions.Converters.Add(new TamperingDetailsJsonConverter());
             jsonOptions.Converters.Add(new TouchSupportJsonConverter());
             jsonOptions.Converters.Add(new VelocityJsonConverter());

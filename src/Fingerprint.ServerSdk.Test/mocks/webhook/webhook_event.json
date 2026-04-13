@@ -108,7 +108,8 @@
   "proxy_confidence": "low",
   "proxy_details": {
     "proxy_type": "residential",
-    "last_seen_at": 1708102555327
+    "last_seen_at": 1708102555327,
+    "provider": "Massive"
   },
   "vpn": false,
   "vpn_confidence": "high",
@@ -130,9 +131,11 @@
   "cloned_app": false,
   "factory_reset_timestamp": 0,
   "jailbroken": false,
+  "simulator": false,
   "frida": false,
   "privacy_settings": false,
   "virtual_machine": false,
+  "virtual_machine_ml_score": 0.2,
   "location_spoofing": false,
   "velocity": {
     "distinct_ip": {

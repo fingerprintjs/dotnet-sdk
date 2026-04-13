@@ -24,9 +24,9 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// Error code: * `request_cannot_be_parsed` - The query parameters or JSON payload contains some errors   that prevented us from parsing it (wrong type/surpassed limits). * `secret_api_key_required` - secret API key in header is missing or empty. * `secret_api_key_not_found` - No Fingerprint workspace found for specified secret API key. * `public_api_key_required` - public API key in header is missing or empty. * `public_api_key_not_found` - No Fingerprint workspace found for specified public API key. * `subscription_not_active` - Fingerprint workspace is not active. * `wrong_region` - Server and workspace region differ. * `feature_not_enabled` - This feature (for example, Delete API) is not enabled for your workspace. * `request_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted. * `visitor_not_found` - The specified visitor ID was not found. It never existed or it may have already been deleted. * `too_many_requests` - The limit on secret API key requests per second has been exceeded. * `state_not_ready` - The event specified with event ID is   not ready for updates yet. Try again.   This error happens in rare cases when update API is called immediately   after receiving the event ID on the client. In case you need to send   information right away, we recommend using the JS agent API instead. * `failed` - Internal server error. * `event_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted. * `missing_module` - The request is invalid because it is missing a required module. * `payload_too_large` - The request payload is too large and cannot be processed. * `service_unavailable` - The service was unable to process the request. * `ruleset_not_found` - The specified ruleset was not found. It never existed or it has been deleted. 
+    /// Error code: * `request_cannot_be_parsed` - The query parameters or JSON payload contains some errors   that prevented us from parsing it (wrong type/surpassed limits). * `secret_api_key_required` - secret API key in header is missing or empty. * `secret_api_key_not_found` - No Fingerprint workspace found for specified secret API key. * `public_api_key_required` - public API key in header is missing or empty. * `public_api_key_not_found` - No Fingerprint workspace found for specified public API key. * `subscription_not_active` - Fingerprint workspace is not active. * `wrong_region` - Server and workspace region differ. * `feature_not_enabled` - This feature (for example, Delete API) is not enabled for your workspace. * `visitor_not_found` - The specified visitor ID was not found. It never existed or it may have already been deleted. * `too_many_requests` - The limit on secret API key requests per second has been exceeded. * `state_not_ready` - The event specified with event ID is   not ready for updates yet. Try again.   This error happens in rare cases when update API is called immediately   after receiving the event ID on the client. In case you need to send   information right away, we recommend using the JS agent API instead. * `failed` - Internal server error. * `event_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted. * `missing_module` - The request is invalid because it is missing a required module. * `payload_too_large` - The request payload is too large and cannot be processed. * `service_unavailable` - The service was unable to process the request. * `ruleset_not_found` - The specified ruleset was not found. It never existed or it has been deleted. 
     /// </summary>
-    /// <value>Error code: * `request_cannot_be_parsed` - The query parameters or JSON payload contains some errors   that prevented us from parsing it (wrong type/surpassed limits). * `secret_api_key_required` - secret API key in header is missing or empty. * `secret_api_key_not_found` - No Fingerprint workspace found for specified secret API key. * `public_api_key_required` - public API key in header is missing or empty. * `public_api_key_not_found` - No Fingerprint workspace found for specified public API key. * `subscription_not_active` - Fingerprint workspace is not active. * `wrong_region` - Server and workspace region differ. * `feature_not_enabled` - This feature (for example, Delete API) is not enabled for your workspace. * `request_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted. * `visitor_not_found` - The specified visitor ID was not found. It never existed or it may have already been deleted. * `too_many_requests` - The limit on secret API key requests per second has been exceeded. * `state_not_ready` - The event specified with event ID is   not ready for updates yet. Try again.   This error happens in rare cases when update API is called immediately   after receiving the event ID on the client. In case you need to send   information right away, we recommend using the JS agent API instead. * `failed` - Internal server error. * `event_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted. * `missing_module` - The request is invalid because it is missing a required module. * `payload_too_large` - The request payload is too large and cannot be processed. * `service_unavailable` - The service was unable to process the request. * `ruleset_not_found` - The specified ruleset was not found. It never existed or it has been deleted. </value>
+    /// <value>Error code: * `request_cannot_be_parsed` - The query parameters or JSON payload contains some errors   that prevented us from parsing it (wrong type/surpassed limits). * `secret_api_key_required` - secret API key in header is missing or empty. * `secret_api_key_not_found` - No Fingerprint workspace found for specified secret API key. * `public_api_key_required` - public API key in header is missing or empty. * `public_api_key_not_found` - No Fingerprint workspace found for specified public API key. * `subscription_not_active` - Fingerprint workspace is not active. * `wrong_region` - Server and workspace region differ. * `feature_not_enabled` - This feature (for example, Delete API) is not enabled for your workspace. * `visitor_not_found` - The specified visitor ID was not found. It never existed or it may have already been deleted. * `too_many_requests` - The limit on secret API key requests per second has been exceeded. * `state_not_ready` - The event specified with event ID is   not ready for updates yet. Try again.   This error happens in rare cases when update API is called immediately   after receiving the event ID on the client. In case you need to send   information right away, we recommend using the JS agent API instead. * `failed` - Internal server error. * `event_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted. * `missing_module` - The request is invalid because it is missing a required module. * `payload_too_large` - The request payload is too large and cannot be processed. * `service_unavailable` - The service was unable to process the request. * `ruleset_not_found` - The specified ruleset was not found. It never existed or it has been deleted. </value>
     public enum ErrorCode
     {
         /// <summary>
@@ -70,54 +70,49 @@ namespace Fingerprint.ServerSdk.Model
         FeatureNotEnabled = 8,
 
         /// <summary>
-        /// Enum RequestNotFound for value: request_not_found
-        /// </summary>
-        RequestNotFound = 9,
-
-        /// <summary>
         /// Enum VisitorNotFound for value: visitor_not_found
         /// </summary>
-        VisitorNotFound = 10,
+        VisitorNotFound = 9,
 
         /// <summary>
         /// Enum TooManyRequests for value: too_many_requests
         /// </summary>
-        TooManyRequests = 11,
+        TooManyRequests = 10,
 
         /// <summary>
         /// Enum StateNotReady for value: state_not_ready
         /// </summary>
-        StateNotReady = 12,
+        StateNotReady = 11,
 
         /// <summary>
         /// Enum Failed for value: failed
         /// </summary>
-        Failed = 13,
+        Failed = 12,
 
         /// <summary>
         /// Enum EventNotFound for value: event_not_found
         /// </summary>
-        EventNotFound = 14,
+        EventNotFound = 13,
 
         /// <summary>
         /// Enum MissingModule for value: missing_module
         /// </summary>
-        MissingModule = 15,
+        MissingModule = 14,
 
         /// <summary>
         /// Enum PayloadTooLarge for value: payload_too_large
         /// </summary>
-        PayloadTooLarge = 16,
+        PayloadTooLarge = 15,
 
         /// <summary>
         /// Enum ServiceUnavailable for value: service_unavailable
         /// </summary>
-        ServiceUnavailable = 17,
+        ServiceUnavailable = 16,
 
         /// <summary>
         /// Enum RulesetNotFound for value: ruleset_not_found
         /// </summary>
-        RulesetNotFound = 18
+        RulesetNotFound = 17
     }
 
     /// <summary>
@@ -155,9 +150,6 @@ namespace Fingerprint.ServerSdk.Model
 
             if (value.Equals("feature_not_enabled"))
                 return ErrorCode.FeatureNotEnabled;
-
-            if (value.Equals("request_not_found"))
-                return ErrorCode.RequestNotFound;
 
             if (value.Equals("visitor_not_found"))
                 return ErrorCode.VisitorNotFound;
@@ -220,9 +212,6 @@ namespace Fingerprint.ServerSdk.Model
             if (value.Equals("feature_not_enabled"))
                 return ErrorCode.FeatureNotEnabled;
 
-            if (value.Equals("request_not_found"))
-                return ErrorCode.RequestNotFound;
-
             if (value.Equals("visitor_not_found"))
                 return ErrorCode.VisitorNotFound;
 
@@ -284,9 +273,6 @@ namespace Fingerprint.ServerSdk.Model
 
             if (value == ErrorCode.FeatureNotEnabled)
                 return "feature_not_enabled";
-
-            if (value == ErrorCode.RequestNotFound)
-                return "request_not_found";
 
             if (value == ErrorCode.VisitorNotFound)
                 return "visitor_not_found";

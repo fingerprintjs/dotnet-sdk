@@ -24,7 +24,7 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// A supplementary browser identifier that prioritizes coverage over precision. The High Recall ID algorithm matches more generously, i.e., this identifier will remain the same even when there are subtle differences between two requests. This algorithm does not create as many new visitor IDs as the standard algorithms do, but there could be an increase in false-positive identification.
+    /// The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.
     /// </summary>
     public partial class SupplementaryIDHighRecall : IValidatableObject
     {
@@ -33,11 +33,11 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SupplementaryIDHighRecall" /> class.
         /// </summary>
-        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser or mobile device. (required).</param>
-        /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
+        /// <param name="visitorId">The High Recall identifier for the visitor's browser. It is an alphanumeric string with a maximum length of 25 characters. (required).</param>
+        /// <param name="visitorFound">True if this is a returning browser and has been previously identified. Otherwise, false. (required).</param>
         /// <param name="confidence">confidence.</param>
-        /// <param name="firstSeenAt">Unix epoch time milliseconds timestamp indicating the time at which this ID was first seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 .</param>
-        /// <param name="lastSeenAt">Unix epoch time milliseconds timestamp indicating the time at which this ID was last seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 .</param>
+        /// <param name="firstSeenAt">Unix epoch timestamp (in milliseconds) indicating when the browser was first identified. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 .</param>
+        /// <param name="lastSeenAt">Unix epoch timestamp (in milliseconds) corresponding to the most recent visit by this browser. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 .</param>
         [JsonConstructor]
         public SupplementaryIDHighRecall(string visitorId, bool visitorFound, Option<IdentificationConfidence> confidence = default, Option<long?> firstSeenAt = default, Option<long?> lastSeenAt = default)
         {
@@ -52,16 +52,16 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// String of 20 characters that uniquely identifies the visitor's browser or mobile device.
+        /// The High Recall identifier for the visitor's browser. It is an alphanumeric string with a maximum length of 25 characters.
         /// </summary>
-        /// <value>String of 20 characters that uniquely identifies the visitor's browser or mobile device.</value>
+        /// <value>The High Recall identifier for the visitor's browser. It is an alphanumeric string with a maximum length of 25 characters.</value>
         [JsonPropertyName("visitor_id")]
         public string VisitorId { get; set; }
 
         /// <summary>
-        /// Attribute represents if a visitor had been identified before.
+        /// True if this is a returning browser and has been previously identified. Otherwise, false.
         /// </summary>
-        /// <value>Attribute represents if a visitor had been identified before.</value>
+        /// <value>True if this is a returning browser and has been previously identified. Otherwise, false.</value>
         [JsonPropertyName("visitor_found")]
         public bool VisitorFound { get; set; }
 
@@ -86,9 +86,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<long?> FirstSeenAtOption { get; private set; }
 
         /// <summary>
-        /// Unix epoch time milliseconds timestamp indicating the time at which this ID was first seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 
+        /// Unix epoch timestamp (in milliseconds) indicating when the browser was first identified. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 
         /// </summary>
-        /// <value>Unix epoch time milliseconds timestamp indicating the time at which this ID was first seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 </value>
+        /// <value>Unix epoch timestamp (in milliseconds) indicating when the browser was first identified. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 </value>
         [JsonPropertyName("first_seen_at")]
         public long? FirstSeenAt { get { return this.FirstSeenAtOption; } set { this.FirstSeenAtOption = new Option<long?>(value); } }
 
@@ -100,9 +100,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<long?> LastSeenAtOption { get; private set; }
 
         /// <summary>
-        /// Unix epoch time milliseconds timestamp indicating the time at which this ID was last seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 
+        /// Unix epoch timestamp (in milliseconds) corresponding to the most recent visit by this browser. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 
         /// </summary>
-        /// <value>Unix epoch time milliseconds timestamp indicating the time at which this ID was last seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 </value>
+        /// <value>Unix epoch timestamp (in milliseconds) corresponding to the most recent visit by this browser. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 </value>
         [JsonPropertyName("last_seen_at")]
         public long? LastSeenAt { get { return this.LastSeenAtOption; } set { this.LastSeenAtOption = new Option<long?>(value); } }
 

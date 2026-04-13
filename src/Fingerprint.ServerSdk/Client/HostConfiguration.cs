@@ -90,6 +90,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new IPInfoV6JsonConverter());
             _jsonOptions.Converters.Add(new IdentificationJsonConverter());
             _jsonOptions.Converters.Add(new IdentificationConfidenceJsonConverter());
+            _jsonOptions.Converters.Add(new IncrementalIdentificationStatusJsonConverter());
+            _jsonOptions.Converters.Add(new IncrementalIdentificationStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new IntegrationJsonConverter());
             _jsonOptions.Converters.Add(new IntegrationSubintegrationJsonConverter());
             _jsonOptions.Converters.Add(new PluginsInnerJsonConverter());
@@ -106,11 +108,15 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new SDKJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsVpnConfidenceJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsVpnConfidenceNullableJsonConverter());
             _jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
+            _jsonOptions.Converters.Add(new TamperingConfidenceJsonConverter());
+            _jsonOptions.Converters.Add(new TamperingConfidenceNullableJsonConverter());
             _jsonOptions.Converters.Add(new TamperingDetailsJsonConverter());
             _jsonOptions.Converters.Add(new TouchSupportJsonConverter());
             _jsonOptions.Converters.Add(new VelocityJsonConverter());

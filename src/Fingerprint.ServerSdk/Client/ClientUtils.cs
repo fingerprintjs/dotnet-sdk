@@ -120,6 +120,8 @@ namespace Fingerprint.ServerSdk.Client
                 return BotResultValueConverter.ToJsonValue(botResult);
             if (obj is ErrorCode errorCode)
                 return ErrorCodeValueConverter.ToJsonValue(errorCode);
+            if (obj is IncrementalIdentificationStatus incrementalIdentificationStatus)
+                return IncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus);
             if (obj is Proximity.PrecisionRadiusEnum proximityPrecisionRadiusEnum)
                 return Proximity.PrecisionRadiusEnumToJsonValue(proximityPrecisionRadiusEnum).ToString();
             if (obj is ProxyConfidence proxyConfidence)
@@ -132,10 +134,14 @@ namespace Fingerprint.ServerSdk.Client
                 return SDK.PlatformEnumToJsonValue(sDKPlatformEnum);
             if (obj is SearchEventsBot searchEventsBot)
                 return SearchEventsBotValueConverter.ToJsonValue(searchEventsBot);
+            if (obj is SearchEventsIncrementalIdentificationStatus searchEventsIncrementalIdentificationStatus)
+                return SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(searchEventsIncrementalIdentificationStatus);
             if (obj is SearchEventsSdkPlatform searchEventsSdkPlatform)
                 return SearchEventsSdkPlatformValueConverter.ToJsonValue(searchEventsSdkPlatform);
             if (obj is SearchEventsVpnConfidence searchEventsVpnConfidence)
                 return SearchEventsVpnConfidenceValueConverter.ToJsonValue(searchEventsVpnConfidence);
+            if (obj is TamperingConfidence tamperingConfidence)
+                return TamperingConfidenceValueConverter.ToJsonValue(tamperingConfidence);
             if (obj is VpnConfidence vpnConfidence)
                 return VpnConfidenceValueConverter.ToJsonValue(vpnConfidence);
             if (obj is ICollection collection)
