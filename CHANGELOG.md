@@ -1,5 +1,18 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.1.0
+
+### Minor Changes
+
+- Add `Simulator` signal for iOS platform ([d2fea09](https://github.com/fingerprintjs/dotnet-sdk/commit/d2fea0931c4c9c0abd3bbf851478f20b20589242))
+- Add `VirtualMachineMlScore` field for `VirtualMachine` signal ([d2fea09](https://github.com/fingerprintjs/dotnet-sdk/commit/d2fea0931c4c9c0abd3bbf851478f20b20589242))
+- Add `highRecallId` and `simulator` fileters for the `SearchEvents` method ([d2fea09](https://github.com/fingerprintjs/dotnet-sdk/commit/d2fea0931c4c9c0abd3bbf851478f20b20589242))
+- Add `TamperingConfidence` and `TamperingMlScore` fields for `Tampering` smart signal ([d2fea09](https://github.com/fingerprintjs/dotnet-sdk/commit/d2fea0931c4c9c0abd3bbf851478f20b20589242))
+
+### Patch Changes
+
+- Remove `RequestNotFound` value from the `ErrorCode` enum ([d2fea09](https://github.com/fingerprintjs/dotnet-sdk/commit/d2fea0931c4c9c0abd3bbf851478f20b20589242))
+
 ## 8.0.2
 
 ### Patch Changes
