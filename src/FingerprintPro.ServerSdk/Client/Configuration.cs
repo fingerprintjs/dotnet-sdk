@@ -34,7 +34,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "7.10.0";
+        public const string Version = "7.11.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
