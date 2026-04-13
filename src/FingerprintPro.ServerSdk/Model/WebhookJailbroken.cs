@@ -26,16 +26,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookJailbroken" /> class.
         /// </summary>
-        /// <param name="result">iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. .</param>
+        /// <param name="result">iOS specific jailbreak detection. There are 2 values:   * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. .</param>
         public WebhookJailbroken(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. 
+        /// iOS specific jailbreak detection. There are 2 values:   * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. 
         /// </summary>
-        /// <value>iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. </value>
+        /// <value>iOS specific jailbreak detection. There are 2 values:   * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         [JsonPropertyName("result")]
         public bool? Result { get; set; }

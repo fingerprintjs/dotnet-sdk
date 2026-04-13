@@ -297,7 +297,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.RootApps.Data.Result, Is.False);
                 Assert.That(response.Products.Tampering.Data.Result, Is.False);
                 Assert.That(response.Products.Tor.Data.Result, Is.False);
-                Assert.That(response.Products.VirtualMachine.Data.Result, Is.False);
+                Assert.That(response.Products.VirtualMachine.Data.Result, Is.True);
                 Assert.That(response.Products.Vpn.Data.Result, Is.False);
                 Assert.That(response.Products.ClonedApp.Data.Result, Is.False);
                 var factoryResedExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
@@ -306,7 +306,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.Jailbroken.Data.Result, Is.False);
                 Assert.That(response.Products.Frida.Data.Result, Is.False);
                 Assert.That(response.Products.PrivacySettings.Data.Result, Is.False);
-                Assert.That(response.Products.VirtualMachine.Data.Result, Is.False);
                 var rawDeviceAttributes = response.Products.RawDeviceAttributes.Data;
                 Assert.That(rawDeviceAttributes.ContainsKey("colorGamut"), Is.True);
                 Assert.That(rawDeviceAttributes["colorGamut"], Is.Not.Null);
@@ -984,7 +983,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(eventData.Products.RootApps.Data.Result, Is.False);
                 Assert.That(eventData.Products.Tampering.Data.Result, Is.False);
                 Assert.That(eventData.Products.Tor.Data.Result, Is.False);
-                Assert.That(eventData.Products.VirtualMachine.Data.Result, Is.False);
+                Assert.That(eventData.Products.VirtualMachine.Data.Result, Is.True);
                 Assert.That(eventData.Products.Vpn.Data.Result, Is.False);
                 Assert.That(eventData.Products.ClonedApp.Data.Result, Is.False);
                 var factoryResedExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
@@ -993,7 +992,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(eventData.Products.Jailbroken.Data.Result, Is.False);
                 Assert.That(eventData.Products.Frida.Data.Result, Is.False);
                 Assert.That(eventData.Products.PrivacySettings.Data.Result, Is.False);
-                Assert.That(eventData.Products.VirtualMachine.Data.Result, Is.False);
                 var rawDeviceAttributes = eventData.Products.RawDeviceAttributes.Data;
                 Assert.That(rawDeviceAttributes.ContainsKey("colorGamut"), Is.True);
                 Assert.That(rawDeviceAttributes["colorGamut"], Is.Not.Null);

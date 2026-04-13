@@ -98,7 +98,8 @@
       "asn": {
         "asn": "7922",
         "name": "COMCAST-7922",
-        "network": "73.136.0.0/13"
+        "network": "73.136.0.0/13",
+		    "type": "isp"
       },
       "datacenter": {
         "result": true,
@@ -250,7 +251,17 @@
   },
   "sdk": {
     "platform": "js",
-    "version": "3.11.10"
+    "version": "3.11.10",
+    "integrations": [
+      {
+        "name": "fingerprint-pro-react",
+        "version": "3.11.10",
+        "subintegration": {
+          "name": "preact",
+          "version": "10.21.0"
+        }
+      }
+    ]
   },
   "replayed": false,
   "supplementaryIds": {
