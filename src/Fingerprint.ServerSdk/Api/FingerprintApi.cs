@@ -283,7 +283,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<long> End { get; set; } = default;
 
         /// <summary>
-        /// When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).  (optional, default to false)
+        /// When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).  (optional)
         /// </summary>
         public Option<bool> Reverse { get; set; } = default;
 
