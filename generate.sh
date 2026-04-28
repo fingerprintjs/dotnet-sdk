@@ -16,4 +16,4 @@ docker run --rm -u "$(id -u):$(id -g)" -v "${PWD}:/local" -w /local "openapitool
 
 # Fix api doc
 mv ./docs/apis/FingerprintApi.md ./docs/FingerprintApi.md
-rmdir ./docs/apis
+rm -rf ./docs/apis
