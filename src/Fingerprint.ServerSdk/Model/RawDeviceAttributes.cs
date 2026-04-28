@@ -39,10 +39,10 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="deviceMemory">Rounded amount of RAM (in gigabytes) reported by the browser..</param>
         /// <param name="timezone">Timezone identifier detected on the client..</param>
         /// <param name="canvas">canvas.</param>
-        /// <param name="languages">Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. .</param>
+        /// <param name="languages">Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices .</param>
         /// <param name="webglExtensions">webglExtensions.</param>
         /// <param name="webglBasics">webglBasics.</param>
-        /// <param name="screenResolution">Current screen resolution..</param>
+        /// <param name="screenResolution">Current screen resolution. Available for both browsers and iOS devices.</param>
         /// <param name="touchSupport">touchSupport.</param>
         /// <param name="oscpu">Navigator `oscpu` string..</param>
         /// <param name="architecture">Integer representing the CPU architecture exposed by the browser..</param>
@@ -58,8 +58,12 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="plugins">Browser plugins reported by `navigator.plugins`..</param>
         /// <param name="indexedDb">Whether IndexedDB is available..</param>
         /// <param name="math">Hash of Math APIs used for entropy collection..</param>
+        /// <param name="deviceModel">Device model string. Available only for Android and iOS devices..</param>
+        /// <param name="deviceManufacturer">Device manufacturer string. Available only for Android and iOS devices..</param>
+        /// <param name="fontHash">Unique identifier for the user’s installed fonts..</param>
+        /// <param name="timezoneOffset">UTC offset in \"±HH:MM\" format derived from the detected IANA timezone..</param>
         [JsonConstructor]
-        public RawDeviceAttributes(Option<FontPreferences> fontPreferences = default, Option<Emoji> emoji = default, Option<List<string>> fonts = default, Option<int?> deviceMemory = default, Option<string> timezone = default, Option<Canvas> canvas = default, Option<List<List<string>>> languages = default, Option<WebGlExtensions> webglExtensions = default, Option<WebGlBasics> webglBasics = default, Option<List<int>> screenResolution = default, Option<TouchSupport> touchSupport = default, Option<string> oscpu = default, Option<int?> architecture = default, Option<bool?> cookiesEnabled = default, Option<int?> hardwareConcurrency = default, Option<string> dateTimeLocale = default, Option<string> vendor = default, Option<int?> colorDepth = default, Option<string> platform = default, Option<bool?> sessionStorage = default, Option<bool?> localStorage = default, Option<double?> audio = default, Option<List<PluginsInner>> plugins = default, Option<bool?> indexedDb = default, Option<string> math = default)
+        public RawDeviceAttributes(Option<FontPreferences> fontPreferences = default, Option<Emoji> emoji = default, Option<List<string>> fonts = default, Option<int?> deviceMemory = default, Option<string> timezone = default, Option<Canvas> canvas = default, Option<List<List<string>>> languages = default, Option<WebGlExtensions> webglExtensions = default, Option<WebGlBasics> webglBasics = default, Option<List<int>> screenResolution = default, Option<TouchSupport> touchSupport = default, Option<string> oscpu = default, Option<int?> architecture = default, Option<bool?> cookiesEnabled = default, Option<int?> hardwareConcurrency = default, Option<string> dateTimeLocale = default, Option<string> vendor = default, Option<int?> colorDepth = default, Option<string> platform = default, Option<bool?> sessionStorage = default, Option<bool?> localStorage = default, Option<double?> audio = default, Option<List<PluginsInner>> plugins = default, Option<bool?> indexedDb = default, Option<string> math = default, Option<string> deviceModel = default, Option<string> deviceManufacturer = default, Option<string> fontHash = default, Option<string> timezoneOffset = default)
         {
             FontPreferencesOption = fontPreferences;
             EmojiOption = emoji;
@@ -86,6 +90,10 @@ namespace Fingerprint.ServerSdk.Model
             PluginsOption = plugins;
             IndexedDbOption = indexedDb;
             MathOption = math;
+            DeviceModelOption = deviceModel;
+            DeviceManufacturerOption = deviceManufacturer;
+            FontHashOption = fontHash;
+            TimezoneOffsetOption = timezoneOffset;
             OnCreated();
         }
 
@@ -182,9 +190,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<List<List<string>>> LanguagesOption { get; private set; }
 
         /// <summary>
-        /// Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. 
+        /// Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices 
         /// </summary>
-        /// <value>Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. </value>
+        /// <value>Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices </value>
         [JsonPropertyName("languages")]
         public List<List<string>> Languages { get { return this.LanguagesOption; } set { this.LanguagesOption = new Option<List<List<string>>>(value); } }
 
@@ -222,9 +230,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<List<int>> ScreenResolutionOption { get; private set; }
 
         /// <summary>
-        /// Current screen resolution.
+        /// Current screen resolution. Available for both browsers and iOS devices
         /// </summary>
-        /// <value>Current screen resolution.</value>
+        /// <value>Current screen resolution. Available for both browsers and iOS devices</value>
         [JsonPropertyName("screen_resolution")]
         public List<int> ScreenResolution { get { return this.ScreenResolutionOption; } set { this.ScreenResolutionOption = new Option<List<int>>(value); } }
 
@@ -438,6 +446,62 @@ namespace Fingerprint.ServerSdk.Model
         public string Math { get { return this.MathOption; } set { this.MathOption = new Option<string>(value); } }
 
         /// <summary>
+        /// Used to track the state of DeviceModel
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DeviceModelOption { get; private set; }
+
+        /// <summary>
+        /// Device model string. Available only for Android and iOS devices.
+        /// </summary>
+        /// <value>Device model string. Available only for Android and iOS devices.</value>
+        [JsonPropertyName("device_model")]
+        public string DeviceModel { get { return this.DeviceModelOption; } set { this.DeviceModelOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of DeviceManufacturer
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DeviceManufacturerOption { get; private set; }
+
+        /// <summary>
+        /// Device manufacturer string. Available only for Android and iOS devices.
+        /// </summary>
+        /// <value>Device manufacturer string. Available only for Android and iOS devices.</value>
+        [JsonPropertyName("device_manufacturer")]
+        public string DeviceManufacturer { get { return this.DeviceManufacturerOption; } set { this.DeviceManufacturerOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of FontHash
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> FontHashOption { get; private set; }
+
+        /// <summary>
+        /// Unique identifier for the user’s installed fonts.
+        /// </summary>
+        /// <value>Unique identifier for the user’s installed fonts.</value>
+        [JsonPropertyName("font_hash")]
+        public string FontHash { get { return this.FontHashOption; } set { this.FontHashOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of TimezoneOffset
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TimezoneOffsetOption { get; private set; }
+
+        /// <summary>
+        /// UTC offset in \"±HH:MM\" format derived from the detected IANA timezone.
+        /// </summary>
+        /// <value>UTC offset in \"±HH:MM\" format derived from the detected IANA timezone.</value>
+        [JsonPropertyName("timezone_offset")]
+        public string TimezoneOffset { get { return this.TimezoneOffsetOption; } set { this.TimezoneOffsetOption = new Option<string>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -470,6 +534,10 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  Plugins: ").Append(Plugins).Append("\n");
             sb.Append("  IndexedDb: ").Append(IndexedDb).Append("\n");
             sb.Append("  Math: ").Append(Math).Append("\n");
+            sb.Append("  DeviceModel: ").Append(DeviceModel).Append("\n");
+            sb.Append("  DeviceManufacturer: ").Append(DeviceManufacturer).Append("\n");
+            sb.Append("  FontHash: ").Append(FontHash).Append("\n");
+            sb.Append("  TimezoneOffset: ").Append(TimezoneOffset).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -485,12 +553,6 @@ namespace Fingerprint.ServerSdk.Model
             if (this.DeviceMemoryOption.IsSet && this.DeviceMemoryOption.Value < (int)0)
             {
                 yield return new ValidationResult("Invalid value for DeviceMemory, must be a value greater than or equal to 0.", new [] { "DeviceMemory" });
-            }
-
-            // HardwareConcurrency (int) minimum
-            if (this.HardwareConcurrencyOption.IsSet && this.HardwareConcurrencyOption.Value < (int)1)
-            {
-                yield return new ValidationResult("Invalid value for HardwareConcurrency, must be a value greater than or equal to 1.", new [] { "HardwareConcurrency" });
             }
 
             yield break;
@@ -544,6 +606,10 @@ namespace Fingerprint.ServerSdk.Model
             Option<List<PluginsInner>> plugins = default;
             Option<bool?> indexedDb = default;
             Option<string> math = default;
+            Option<string> deviceModel = default;
+            Option<string> deviceManufacturer = default;
+            Option<string> fontHash = default;
+            Option<string> timezoneOffset = default;
 
             while (utf8JsonReader.Read())
             {
@@ -635,6 +701,18 @@ namespace Fingerprint.ServerSdk.Model
                         case "math":
                             math = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "device_model":
+                            deviceModel = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "device_manufacturer":
+                            deviceManufacturer = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "font_hash":
+                            fontHash = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "timezone_offset":
+                            timezoneOffset = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -716,7 +794,19 @@ namespace Fingerprint.ServerSdk.Model
             if (math.IsSet && math.Value == null)
                 throw new ArgumentNullException(nameof(math), "Property is not nullable for class RawDeviceAttributes.");
 
-            return new RawDeviceAttributes(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math);
+            if (deviceModel.IsSet && deviceModel.Value == null)
+                throw new ArgumentNullException(nameof(deviceModel), "Property is not nullable for class RawDeviceAttributes.");
+
+            if (deviceManufacturer.IsSet && deviceManufacturer.Value == null)
+                throw new ArgumentNullException(nameof(deviceManufacturer), "Property is not nullable for class RawDeviceAttributes.");
+
+            if (fontHash.IsSet && fontHash.Value == null)
+                throw new ArgumentNullException(nameof(fontHash), "Property is not nullable for class RawDeviceAttributes.");
+
+            if (timezoneOffset.IsSet && timezoneOffset.Value == null)
+                throw new ArgumentNullException(nameof(timezoneOffset), "Property is not nullable for class RawDeviceAttributes.");
+
+            return new RawDeviceAttributes(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math, deviceModel, deviceManufacturer, fontHash, timezoneOffset);
         }
 
         /// <summary>
@@ -790,6 +880,18 @@ namespace Fingerprint.ServerSdk.Model
 
             if (rawDeviceAttributes.MathOption.IsSet && rawDeviceAttributes.Math == null)
                 throw new ArgumentNullException(nameof(rawDeviceAttributes.Math), "Property is required for class RawDeviceAttributes.");
+
+            if (rawDeviceAttributes.DeviceModelOption.IsSet && rawDeviceAttributes.DeviceModel == null)
+                throw new ArgumentNullException(nameof(rawDeviceAttributes.DeviceModel), "Property is required for class RawDeviceAttributes.");
+
+            if (rawDeviceAttributes.DeviceManufacturerOption.IsSet && rawDeviceAttributes.DeviceManufacturer == null)
+                throw new ArgumentNullException(nameof(rawDeviceAttributes.DeviceManufacturer), "Property is required for class RawDeviceAttributes.");
+
+            if (rawDeviceAttributes.FontHashOption.IsSet && rawDeviceAttributes.FontHash == null)
+                throw new ArgumentNullException(nameof(rawDeviceAttributes.FontHash), "Property is required for class RawDeviceAttributes.");
+
+            if (rawDeviceAttributes.TimezoneOffsetOption.IsSet && rawDeviceAttributes.TimezoneOffset == null)
+                throw new ArgumentNullException(nameof(rawDeviceAttributes.TimezoneOffset), "Property is required for class RawDeviceAttributes.");
 
             if (rawDeviceAttributes.FontPreferencesOption.IsSet)
             {
@@ -885,6 +987,18 @@ namespace Fingerprint.ServerSdk.Model
 
             if (rawDeviceAttributes.MathOption.IsSet)
                 writer.WriteString("math", rawDeviceAttributes.Math);
+
+            if (rawDeviceAttributes.DeviceModelOption.IsSet)
+                writer.WriteString("device_model", rawDeviceAttributes.DeviceModel);
+
+            if (rawDeviceAttributes.DeviceManufacturerOption.IsSet)
+                writer.WriteString("device_manufacturer", rawDeviceAttributes.DeviceManufacturer);
+
+            if (rawDeviceAttributes.FontHashOption.IsSet)
+                writer.WriteString("font_hash", rawDeviceAttributes.FontHash);
+
+            if (rawDeviceAttributes.TimezoneOffsetOption.IsSet)
+                writer.WriteString("timezone_offset", rawDeviceAttributes.TimezoneOffset);
         }
     }
 }

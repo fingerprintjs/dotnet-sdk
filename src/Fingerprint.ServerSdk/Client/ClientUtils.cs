@@ -128,6 +128,8 @@ namespace Fingerprint.ServerSdk.Client
                 return ProxyConfidenceValueConverter.ToJsonValue(proxyConfidence);
             if (obj is ProxyDetails.ProxyTypeEnum proxyDetailsProxyTypeEnum)
                 return ProxyDetails.ProxyTypeEnumToJsonValue(proxyDetailsProxyTypeEnum);
+            if (obj is RareDevicePercentileBucket rareDevicePercentileBucket)
+                return RareDevicePercentileBucketValueConverter.ToJsonValue(rareDevicePercentileBucket);
             if (obj is RuleActionType ruleActionType)
                 return RuleActionTypeValueConverter.ToJsonValue(ruleActionType);
             if (obj is SDK.PlatformEnum sDKPlatformEnum)
@@ -136,6 +138,8 @@ namespace Fingerprint.ServerSdk.Client
                 return SearchEventsBotValueConverter.ToJsonValue(searchEventsBot);
             if (obj is SearchEventsIncrementalIdentificationStatus searchEventsIncrementalIdentificationStatus)
                 return SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(searchEventsIncrementalIdentificationStatus);
+            if (obj is SearchEventsRareDevicePercentileBucket searchEventsRareDevicePercentileBucket)
+                return SearchEventsRareDevicePercentileBucketValueConverter.ToJsonValue(searchEventsRareDevicePercentileBucket);
             if (obj is SearchEventsSdkPlatform searchEventsSdkPlatform)
                 return SearchEventsSdkPlatformValueConverter.ToJsonValue(searchEventsSdkPlatform);
             if (obj is SearchEventsVpnConfidence searchEventsVpnConfidence)

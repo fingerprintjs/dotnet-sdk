@@ -65,6 +65,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="proxy">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
         /// <param name="proxyConfidence">proxyConfidence.</param>
         /// <param name="proxyDetails">proxyDetails.</param>
+        /// <param name="proxyMlScore">Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result .</param>
         /// <param name="incognito">`true` if we detected incognito mode used in the browser, `false` otherwise. .</param>
         /// <param name="jailbroken">iOS specific jailbreak detection. There are 2 values:  * `true` - Jailbreak detected. * `false` - No signs of jailbreak or the client is not iOS. .</param>
         /// <param name="locationSpoofing">Flag indicating whether the request came from a mobile device with location spoofing enabled..</param>
@@ -74,9 +75,9 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="ruleAction">ruleAction.</param>
         /// <param name="simulator">iOS specific simulator detection. There are 2 values: * `true` - Simulator environment detected. * `false` - No signs of simulator or the client is not iOS. .</param>
         /// <param name="suspectScore">Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://docs.fingerprint.com/docs/suspect-score .</param>
-        /// <param name="tampering">Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`). .</param>
+        /// <param name="tampering">The field can be used as a standalone flag for tampering detection. Alternatively, the more granular fields documented below can be used for workflows that require more context. * `true` if tampering is detected through an anomalous browser signature, anti-detect browser detection, or other tampering-related methods * `false` if none of the tampering checks return a positive result .</param>
         /// <param name="tamperingConfidence">tamperingConfidence.</param>
-        /// <param name="tamperingMlScore">A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model .</param>
+        /// <param name="tamperingMlScore">The output of this model is captured as tampering_ml_score, a number indicating how likely an event is coming from an anti detect browser. Values close to 1 signify higher confidence and we consider anything above the threshold of 0.8 to be actionable (the result and anti_detect_browser fields conveniently captures that fact) .</param>
         /// <param name="tamperingDetails">tamperingDetails.</param>
         /// <param name="velocity">velocity.</param>
         /// <param name="virtualMachine">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
@@ -87,9 +88,11 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="vpnOriginCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). .</param>
         /// <param name="vpnMethods">vpnMethods.</param>
         /// <param name="highActivityDevice">Flag indicating if the request came from a high-activity visitor..</param>
+        /// <param name="rareDevice">`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
+        /// <param name="rareDevicePercentileBucket">rareDevicePercentileBucket.</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<RawDeviceAttributes> rawDeviceAttributes = default)
+        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
@@ -123,6 +126,7 @@ namespace Fingerprint.ServerSdk.Model
             ProxyOption = proxy;
             ProxyConfidenceOption = proxyConfidence;
             ProxyDetailsOption = proxyDetails;
+            ProxyMlScoreOption = proxyMlScore;
             IncognitoOption = incognito;
             JailbrokenOption = jailbroken;
             LocationSpoofingOption = locationSpoofing;
@@ -145,6 +149,8 @@ namespace Fingerprint.ServerSdk.Model
             VpnOriginCountryOption = vpnOriginCountry;
             VpnMethodsOption = vpnMethods;
             HighActivityDeviceOption = highActivityDevice;
+            RareDeviceOption = rareDevice;
+            RareDevicePercentileBucketOption = rareDevicePercentileBucket;
             RawDeviceAttributesOption = rawDeviceAttributes;
             OnCreated();
         }
@@ -215,6 +221,19 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("vpn_confidence")]
         public VpnConfidence? VpnConfidence { get { return this.VpnConfidenceOption; } set { this.VpnConfidenceOption = new Option<VpnConfidence?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of RareDevicePercentileBucket
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<RareDevicePercentileBucket?> RareDevicePercentileBucketOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets RareDevicePercentileBucket
+        /// </summary>
+        [JsonPropertyName("rare_device_percentile_bucket")]
+        public RareDevicePercentileBucket? RareDevicePercentileBucket { get { return this.RareDevicePercentileBucketOption; } set { this.RareDevicePercentileBucketOption = new Option<RareDevicePercentileBucket?>(value); } }
 
         /// <summary>
         /// Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH` 
@@ -600,6 +619,20 @@ namespace Fingerprint.ServerSdk.Model
         public ProxyDetails ProxyDetails { get { return this.ProxyDetailsOption; } set { this.ProxyDetailsOption = new Option<ProxyDetails>(value); } }
 
         /// <summary>
+        /// Used to track the state of ProxyMlScore
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<double?> ProxyMlScoreOption { get; private set; }
+
+        /// <summary>
+        /// Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result 
+        /// </summary>
+        /// <value>Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result </value>
+        [JsonPropertyName("proxy_ml_score")]
+        public double? ProxyMlScore { get { return this.ProxyMlScoreOption; } set { this.ProxyMlScoreOption = new Option<double?>(value); } }
+
+        /// <summary>
         /// Used to track the state of Incognito
         /// </summary>
         [JsonIgnore]
@@ -732,9 +765,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<bool?> TamperingOption { get; private set; }
 
         /// <summary>
-        /// Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`). 
+        /// The field can be used as a standalone flag for tampering detection. Alternatively, the more granular fields documented below can be used for workflows that require more context. * `true` if tampering is detected through an anomalous browser signature, anti-detect browser detection, or other tampering-related methods * `false` if none of the tampering checks return a positive result 
         /// </summary>
-        /// <value>Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`). </value>
+        /// <value>The field can be used as a standalone flag for tampering detection. Alternatively, the more granular fields documented below can be used for workflows that require more context. * `true` if tampering is detected through an anomalous browser signature, anti-detect browser detection, or other tampering-related methods * `false` if none of the tampering checks return a positive result </value>
         [JsonPropertyName("tampering")]
         public bool? Tampering { get { return this.TamperingOption; } set { this.TamperingOption = new Option<bool?>(value); } }
 
@@ -746,9 +779,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<double?> TamperingMlScoreOption { get; private set; }
 
         /// <summary>
-        /// A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model 
+        /// The output of this model is captured as tampering_ml_score, a number indicating how likely an event is coming from an anti detect browser. Values close to 1 signify higher confidence and we consider anything above the threshold of 0.8 to be actionable (the result and anti_detect_browser fields conveniently captures that fact) 
         /// </summary>
-        /// <value>A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model </value>
+        /// <value>The output of this model is captured as tampering_ml_score, a number indicating how likely an event is coming from an anti detect browser. Values close to 1 signify higher confidence and we consider anything above the threshold of 0.8 to be actionable (the result and anti_detect_browser fields conveniently captures that fact) </value>
         [JsonPropertyName("tampering_ml_score")]
         public double? TamperingMlScore { get { return this.TamperingMlScoreOption; } set { this.TamperingMlScoreOption = new Option<double?>(value); } }
 
@@ -876,6 +909,20 @@ namespace Fingerprint.ServerSdk.Model
         public bool? HighActivityDevice { get { return this.HighActivityDeviceOption; } set { this.HighActivityDeviceOption = new Option<bool?>(value); } }
 
         /// <summary>
+        /// Used to track the state of RareDevice
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> RareDeviceOption { get; private set; }
+
+        /// <summary>
+        /// `true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+        /// </summary>
+        /// <value>`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+        [JsonPropertyName("rare_device")]
+        public bool? RareDevice { get { return this.RareDeviceOption; } set { this.RareDeviceOption = new Option<bool?>(value); } }
+
+        /// <summary>
         /// Used to track the state of RawDeviceAttributes
         /// </summary>
         [JsonIgnore]
@@ -928,6 +975,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  Proxy: ").Append(Proxy).Append("\n");
             sb.Append("  ProxyConfidence: ").Append(ProxyConfidence).Append("\n");
             sb.Append("  ProxyDetails: ").Append(ProxyDetails).Append("\n");
+            sb.Append("  ProxyMlScore: ").Append(ProxyMlScore).Append("\n");
             sb.Append("  Incognito: ").Append(Incognito).Append("\n");
             sb.Append("  Jailbroken: ").Append(Jailbroken).Append("\n");
             sb.Append("  LocationSpoofing: ").Append(LocationSpoofing).Append("\n");
@@ -950,6 +998,8 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  VpnOriginCountry: ").Append(VpnOriginCountry).Append("\n");
             sb.Append("  VpnMethods: ").Append(VpnMethods).Append("\n");
             sb.Append("  HighActivityDevice: ").Append(HighActivityDevice).Append("\n");
+            sb.Append("  RareDevice: ").Append(RareDevice).Append("\n");
+            sb.Append("  RareDevicePercentileBucket: ").Append(RareDevicePercentileBucket).Append("\n");
             sb.Append("  RawDeviceAttributes: ").Append(RawDeviceAttributes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -962,6 +1012,18 @@ namespace Fingerprint.ServerSdk.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // ProxyMlScore (double) maximum
+            if (this.ProxyMlScoreOption.IsSet && this.ProxyMlScoreOption.Value > (double)1)
+            {
+                yield return new ValidationResult("Invalid value for ProxyMlScore, must be a value less than or equal to 1.", new [] { "ProxyMlScore" });
+            }
+
+            // ProxyMlScore (double) minimum
+            if (this.ProxyMlScoreOption.IsSet && this.ProxyMlScoreOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for ProxyMlScore, must be a value greater than or equal to 0.", new [] { "ProxyMlScore" });
+            }
+
             // TamperingMlScore (double) maximum
             if (this.TamperingMlScoreOption.IsSet && this.TamperingMlScoreOption.Value > (double)1)
             {
@@ -1044,6 +1106,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<bool?> proxy = default;
             Option<ProxyConfidence?> proxyConfidence = default;
             Option<ProxyDetails> proxyDetails = default;
+            Option<double?> proxyMlScore = default;
             Option<bool?> incognito = default;
             Option<bool?> jailbroken = default;
             Option<bool?> locationSpoofing = default;
@@ -1066,6 +1129,8 @@ namespace Fingerprint.ServerSdk.Model
             Option<string> vpnOriginCountry = default;
             Option<VpnMethods> vpnMethods = default;
             Option<bool?> highActivityDevice = default;
+            Option<bool?> rareDevice = default;
+            Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default;
             Option<RawDeviceAttributes> rawDeviceAttributes = default;
 
             while (utf8JsonReader.Read())
@@ -1185,6 +1250,9 @@ namespace Fingerprint.ServerSdk.Model
                         case "proxy_details":
                             proxyDetails = new Option<ProxyDetails>(JsonSerializer.Deserialize<ProxyDetails>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "proxy_ml_score":
+                            proxyMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
+                            break;
                         case "incognito":
                             incognito = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
@@ -1254,6 +1322,14 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "high_activity_device":
                             highActivityDevice = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "rare_device":
+                            rareDevice = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "rare_device_percentile_bucket":
+                            string rareDevicePercentileBucketRawValue = utf8JsonReader.GetString();
+                            if (rareDevicePercentileBucketRawValue != null)
+                                rareDevicePercentileBucket = new Option<RareDevicePercentileBucket?>(RareDevicePercentileBucketValueConverter.FromStringOrDefault(rareDevicePercentileBucketRawValue));
                             break;
                         case "raw_device_attributes":
                             rawDeviceAttributes = new Option<RawDeviceAttributes>(JsonSerializer.Deserialize<RawDeviceAttributes>(ref utf8JsonReader, jsonSerializerOptions));
@@ -1366,6 +1442,9 @@ namespace Fingerprint.ServerSdk.Model
             if (proxyDetails.IsSet && proxyDetails.Value == null)
                 throw new ArgumentNullException(nameof(proxyDetails), "Property is not nullable for class Event.");
 
+            if (proxyMlScore.IsSet && proxyMlScore.Value == null)
+                throw new ArgumentNullException(nameof(proxyMlScore), "Property is not nullable for class Event.");
+
             if (incognito.IsSet && incognito.Value == null)
                 throw new ArgumentNullException(nameof(incognito), "Property is not nullable for class Event.");
 
@@ -1432,10 +1511,16 @@ namespace Fingerprint.ServerSdk.Model
             if (highActivityDevice.IsSet && highActivityDevice.Value == null)
                 throw new ArgumentNullException(nameof(highActivityDevice), "Property is not nullable for class Event.");
 
+            if (rareDevice.IsSet && rareDevice.Value == null)
+                throw new ArgumentNullException(nameof(rareDevice), "Property is not nullable for class Event.");
+
+            if (rareDevicePercentileBucket.IsSet && rareDevicePercentileBucket.Value == null)
+                throw new ArgumentNullException(nameof(rareDevicePercentileBucket), "Property is not nullable for class Event.");
+
             if (rawDeviceAttributes.IsSet && rawDeviceAttributes.Value == null)
                 throw new ArgumentNullException(nameof(rawDeviceAttributes), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rawDeviceAttributes);
+            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes);
         }
 
         /// <summary>
@@ -1663,6 +1748,9 @@ namespace Fingerprint.ServerSdk.Model
                 writer.WritePropertyName("proxy_details");
                 JsonSerializer.Serialize(writer, varEvent.ProxyDetails, jsonSerializerOptions);
             }
+            if (varEvent.ProxyMlScoreOption.IsSet)
+                writer.WriteNumber("proxy_ml_score", varEvent.ProxyMlScoreOption.Value.Value);
+
             if (varEvent.IncognitoOption.IsSet)
                 writer.WriteBoolean("incognito", varEvent.IncognitoOption.Value.Value);
 
@@ -1741,6 +1829,14 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.HighActivityDeviceOption.IsSet)
                 writer.WriteBoolean("high_activity_device", varEvent.HighActivityDeviceOption.Value.Value);
 
+            if (varEvent.RareDeviceOption.IsSet)
+                writer.WriteBoolean("rare_device", varEvent.RareDeviceOption.Value.Value);
+
+            if (varEvent.RareDevicePercentileBucketOption.IsSet)
+            {
+                var rareDevicePercentileBucketRawValue = RareDevicePercentileBucketValueConverter.ToJsonValue(varEvent.RareDevicePercentileBucket.Value);
+                writer.WriteString("rare_device_percentile_bucket", rareDevicePercentileBucketRawValue);
+            }
             if (varEvent.RawDeviceAttributesOption.IsSet)
             {
                 writer.WritePropertyName("raw_device_attributes");
