@@ -1,5 +1,34 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.2.0
+
+### Minor Changes
+
+- Add `asn_type` field to the IPInfo signals ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Add `rule_action` field and `ruleset_id` query parameter for evaluating events against rulesets ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **webhook**: require event payload ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Add Device Rarity Smart Signal ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- Add `mlScore` field to the virtualMachine object in v3 ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Add `proxy_ml_score` to `Event` ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events-search**: Add `tor_node` filter parameter ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: add `simulator` smart signal ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Add `font_hash` and `timezone_offset` fields for the `RawDeviceAttributes` ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Enable `raw_device_attributes` for Android devices. Only `device_manufacturer` and `device_model` are currently supported for Android devices. ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Enable `raw_device_attributes` for iOS devices. Only `device_manufacturer`, `device_model`, `hardware_concurrency`, `languages`, and `screen_resolution` are currently supported for iOS devices. ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- Add `HighActivity` signal ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- Add `ClientReferrer` field to the Event ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Add `request_read_timeout` error code ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events**: Add `raw_device_attributes` field exposing browser fingerprinting signals ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events-search**: Add `simulator` filter parameter ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events-search**: Add `asn` and `proximity_id` filters to `searchEvents` method ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- Add `tampering_confidence` and `tampering_ml_score` fields for `tampering` smart signal. ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+
+### Patch Changes
+
+- **events**: Fix 429 error response being incorrectly placed under 403 status ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- **events-search**: Fix `searchEvents` method description ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+- Add `service_unavailable` error code ([4be03eb](https://github.com/fingerprintjs/dotnet-sdk/commit/4be03ebf7adb4c082999b2808d42babd7681a2ed))
+
 ## 8.1.0
 
 ### Minor Changes
