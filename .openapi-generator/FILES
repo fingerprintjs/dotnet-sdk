@@ -33,6 +33,7 @@ docs/models/PluginsInnerMimeTypesInner.md
 docs/models/Proximity.md
 docs/models/ProxyConfidence.md
 docs/models/ProxyDetails.md
+docs/models/RareDevicePercentileBucket.md
 docs/models/RawDeviceAttributes.md
 docs/models/RequestHeaderModifications.md
 docs/models/RuleActionHeaderField.md
@@ -41,6 +42,7 @@ docs/models/SDK.md
 docs/models/Sealed.md
 docs/models/SearchEventsBot.md
 docs/models/SearchEventsIncrementalIdentificationStatus.md
+docs/models/SearchEventsRareDevicePercentileBucket.md
 docs/models/SearchEventsSdkPlatform.md
 docs/models/SearchEventsVpnConfidence.md
 docs/models/SupplementaryIDHighRecall.md
@@ -111,6 +113,7 @@ src/Fingerprint.ServerSdk/Model/PluginsInnerMimeTypesInner.cs
 src/Fingerprint.ServerSdk/Model/Proximity.cs
 src/Fingerprint.ServerSdk/Model/ProxyConfidence.cs
 src/Fingerprint.ServerSdk/Model/ProxyDetails.cs
+src/Fingerprint.ServerSdk/Model/RareDevicePercentileBucket.cs
 src/Fingerprint.ServerSdk/Model/RawDeviceAttributes.cs
 src/Fingerprint.ServerSdk/Model/RequestHeaderModifications.cs
 src/Fingerprint.ServerSdk/Model/RuleActionHeaderField.cs
@@ -118,6 +121,7 @@ src/Fingerprint.ServerSdk/Model/RuleActionType.cs
 src/Fingerprint.ServerSdk/Model/SDK.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsBot.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsIncrementalIdentificationStatus.cs
+src/Fingerprint.ServerSdk/Model/SearchEventsRareDevicePercentileBucket.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsSdkPlatform.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsVpnConfidence.cs
 src/Fingerprint.ServerSdk/Model/SupplementaryIDHighRecall.cs

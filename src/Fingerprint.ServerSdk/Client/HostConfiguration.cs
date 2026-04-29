@@ -100,6 +100,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new ProxyConfidenceJsonConverter());
             _jsonOptions.Converters.Add(new ProxyConfidenceNullableJsonConverter());
             _jsonOptions.Converters.Add(new ProxyDetailsJsonConverter());
+            _jsonOptions.Converters.Add(new RareDevicePercentileBucketJsonConverter());
+            _jsonOptions.Converters.Add(new RareDevicePercentileBucketNullableJsonConverter());
             _jsonOptions.Converters.Add(new RawDeviceAttributesJsonConverter());
             _jsonOptions.Converters.Add(new RequestHeaderModificationsJsonConverter());
             _jsonOptions.Converters.Add(new RuleActionHeaderFieldJsonConverter());
@@ -110,6 +112,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsVpnConfidenceJsonConverter());

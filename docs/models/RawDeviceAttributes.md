@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **DeviceMemory** | **int** | Rounded amount of RAM (in gigabytes) reported by the browser. | [optional] 
 **Timezone** | **string** | Timezone identifier detected on the client. | [optional] 
 **Canvas** | [**Canvas**](Canvas.md) |  | [optional] 
-**Languages** | **List&lt;List&lt;string&gt;&gt;** | Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs.  | [optional] 
+**Languages** | **List&lt;List&lt;string&gt;&gt;** | Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices  | [optional] 
 **WebglExtensions** | [**WebGlExtensions**](WebGlExtensions.md) |  | [optional] 
 **WebglBasics** | [**WebGlBasics**](WebGlBasics.md) |  | [optional] 
-**ScreenResolution** | **List&lt;int&gt;** | Current screen resolution. | [optional] 
+**ScreenResolution** | **List&lt;int&gt;** | Current screen resolution. Available for both browsers and iOS devices | [optional] 
 **TouchSupport** | [**TouchSupport**](TouchSupport.md) |  | [optional] 
 **Oscpu** | **string** | Navigator `oscpu` string. | [optional] 
 **Architecture** | **int** | Integer representing the CPU architecture exposed by the browser. | [optional] 
@@ -31,6 +31,10 @@ Name | Type | Description | Notes
 **Plugins** | [**List&lt;PluginsInner&gt;**](PluginsInner.md) | Browser plugins reported by `navigator.plugins`. | [optional] 
 **IndexedDb** | **bool** | Whether IndexedDB is available. | [optional] 
 **Math** | **string** | Hash of Math APIs used for entropy collection. | [optional] 
+**DeviceModel** | **string** | Device model string. Available only for Android and iOS devices. | [optional] 
+**DeviceManufacturer** | **string** | Device manufacturer string. Available only for Android and iOS devices. | [optional] 
+**FontHash** | **string** | Unique identifier for the user’s installed fonts. | [optional] 
+**TimezoneOffset** | **string** | UTC offset in \"±HH:MM\" format derived from the detected IANA timezone. | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
