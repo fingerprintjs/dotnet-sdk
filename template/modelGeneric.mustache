@@ -412,7 +412,7 @@
             }
         {{/vendorExtensions.x-is-value-type}}
         {{#-last}}
-            throw new NotImplementedException("Value not set");
+            throw new InvalidOperationException("Value not set");
         }
         {{/-last}}
         {{/composedSchemas.oneOf}}
