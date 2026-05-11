@@ -388,6 +388,27 @@
         {{/-first}}
         {{/readOnlyVars}}
         {{/equatable}}
+        {{^model.discriminator}}
+        {{#composedSchemas.oneOf}}
+        {{#-first}}
+
+        /// <summary>
+        /// Formats the value contained by {{classname}} as a parameter
+        /// </summary>
+        /// <returns>Formatted string.</returns>
+        public string ToParameterString()
+        {
+        {{/-first}}
+            if ({{name}}.HasValue)
+            {
+                return ClientUtils.ParameterToString({{name}}.Value);
+            }
+        {{#-last}}
+            throw new NotImplementedException("Value not set");
+        }
+        {{/-last}}
+        {{/composedSchemas.oneOf}}
+        {{/model.discriminator}}
 {{#validatable}}
 {{^parentModel}}
 
