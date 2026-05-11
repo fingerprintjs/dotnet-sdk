@@ -41,9 +41,11 @@ docs/models/RuleActionType.md
 docs/models/SDK.md
 docs/models/Sealed.md
 docs/models/SearchEventsBot.md
+docs/models/SearchEventsEndParameter.md
 docs/models/SearchEventsIncrementalIdentificationStatus.md
 docs/models/SearchEventsRareDevicePercentileBucket.md
 docs/models/SearchEventsSdkPlatform.md
+docs/models/SearchEventsStartParameter.md
 docs/models/SearchEventsVpnConfidence.md
 docs/models/SupplementaryIDHighRecall.md
 docs/models/TamperingConfidence.md
@@ -120,9 +122,11 @@ src/Fingerprint.ServerSdk/Model/RuleActionHeaderField.cs
 src/Fingerprint.ServerSdk/Model/RuleActionType.cs
 src/Fingerprint.ServerSdk/Model/SDK.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsBot.cs
+src/Fingerprint.ServerSdk/Model/SearchEventsEndParameter.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsIncrementalIdentificationStatus.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsRareDevicePercentileBucket.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsSdkPlatform.cs
+src/Fingerprint.ServerSdk/Model/SearchEventsStartParameter.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsVpnConfidence.cs
 src/Fingerprint.ServerSdk/Model/SupplementaryIDHighRecall.cs
 src/Fingerprint.ServerSdk/Model/TamperingConfidence.cs

@@ -110,12 +110,14 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new SDKJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsEndParameterJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsStartParameterJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsVpnConfidenceJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsVpnConfidenceNullableJsonConverter());
             _jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());

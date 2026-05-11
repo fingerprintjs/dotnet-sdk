@@ -273,14 +273,14 @@ namespace Fingerprint.ServerSdk.Api
         public Option<string> Origin { get; set; } = default;
 
         /// <summary>
-        /// Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.  (optional)
+        /// Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value or RFC3339 timestamp). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.  (optional)
         /// </summary>
-        public Option<long> Start { get; set; } = default;
+        public Option<SearchEventsStartParameter> Start { get; set; } = default;
 
         /// <summary>
-        /// Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.  (optional)
+        /// Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value or RFC3339 timestamp). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.  (optional)
         /// </summary>
-        public Option<long> End { get; set; } = default;
+        public Option<SearchEventsEndParameter> End { get; set; } = default;
 
         /// <summary>
         /// When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).  (optional)
@@ -567,22 +567,22 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the start parameter.
         /// </summary>
-        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed. </param>
+        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value or RFC3339 timestamp). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed. </param>
         /// <returns>This request instance for fluent chaining.</returns>
-        public SearchEventsRequest WithStart(long value)
+        public SearchEventsRequest WithStart(SearchEventsStartParameter value)
         {
-            Start = new Option<long>(value);
+            Start = new Option<SearchEventsStartParameter>(value);
             return this;
         }
 
         /// <summary>
         /// Sets the end parameter.
         /// </summary>
-        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed. </param>
+        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value or RFC3339 timestamp). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed. </param>
         /// <returns>This request instance for fluent chaining.</returns>
-        public SearchEventsRequest WithEnd(long value)
+        public SearchEventsRequest WithEnd(SearchEventsEndParameter value)
         {
-            End = new Option<long>(value);
+            End = new Option<SearchEventsEndParameter>(value);
             return this;
         }
 
@@ -1972,7 +1972,7 @@ namespace Fingerprint.ServerSdk.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<string> highRecallId, ref Option<SearchEventsBot> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> bundleId, ref Option<string> packageName, ref Option<string> origin, ref Option<long> start, ref Option<long> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<SearchEventsVpnConfidence> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> rareDevice, ref Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode, ref Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, ref Option<bool> simulator);
+        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<string> highRecallId, ref Option<SearchEventsBot> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> bundleId, ref Option<string> packageName, ref Option<string> origin, Option<SearchEventsStartParameter> start, Option<SearchEventsEndParameter> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<SearchEventsVpnConfidence> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> rareDevice, ref Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode, ref Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, ref Option<bool> simulator);
 
         /// <summary>
         /// Validates the request parameters
@@ -1987,11 +1987,13 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="bundleId"></param>
         /// <param name="packageName"></param>
         /// <param name="origin"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         /// <param name="sdkVersion"></param>
         /// <param name="environment"></param>
         /// <param name="proximityId"></param>
         /// <returns></returns>
-        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<string> sdkVersion, Option<List<string>> environment, Option<string> proximityId)
+        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<SearchEventsStartParameter> start, Option<SearchEventsEndParameter> end, Option<string> sdkVersion, Option<List<string>> environment, Option<string> proximityId)
         {
             if (paginationKey.IsSet && paginationKey.Value == null)
                 throw new ArgumentNullException(nameof(paginationKey));
@@ -2022,6 +2024,12 @@ namespace Fingerprint.ServerSdk.Api
 
             if (origin.IsSet && origin.Value == null)
                 throw new ArgumentNullException(nameof(origin));
+
+            if (start.IsSet && start.Value == null)
+                throw new ArgumentNullException(nameof(start));
+
+            if (end.IsSet && end.Value == null)
+                throw new ArgumentNullException(nameof(end));
 
             if (sdkVersion.IsSet && sdkVersion.Value == null)
                 throw new ArgumentNullException(nameof(sdkVersion));
@@ -2081,7 +2089,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
+        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<SearchEventsStartParameter> start, Option<SearchEventsEndParameter> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
         {
             bool suppressDefaultLog = false;
             AfterSearchEvents(ref suppressDefaultLog, apiResponseLocalVar, limit, paginationKey, visitorId, highRecallId, bot, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
@@ -2138,7 +2146,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
+        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<SearchEventsStartParameter> start, Option<SearchEventsEndParameter> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2190,7 +2198,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
+        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<SearchEventsStartParameter> start, Option<SearchEventsEndParameter> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorSearchEvents(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, limit, paginationKey, visitorId, highRecallId, bot, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
@@ -2249,7 +2257,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
+        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<SearchEventsStartParameter> start, Option<SearchEventsEndParameter> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
 
         /// <summary>
         /// Search events ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  By default, the API searches events from the last 7 days, sorts them by newest first and returns the last 10 events.  - Use `start` and `end` to specify the time range of the search. - Use `reverse=true` to sort the results oldest first. - Use `limit` to specify the number of events to return. - Use `pagination_key` to get the next page of results if there are more than `limit` events.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
@@ -2296,8 +2304,8 @@ namespace Fingerprint.ServerSdk.Api
             Option<string> bundleId = request.BundleId;
             Option<string> packageName = request.PackageName;
             Option<string> origin = request.Origin;
-            Option<long> start = request.Start;
-            Option<long> end = request.End;
+            Option<SearchEventsStartParameter> start = request.Start;
+            Option<SearchEventsEndParameter> end = request.End;
             Option<bool> reverse = request.Reverse;
             Option<bool> suspect = request.Suspect;
             Option<bool> vpn = request.Vpn;
@@ -2331,9 +2339,9 @@ namespace Fingerprint.ServerSdk.Api
 
             try
             {
-                ValidateSearchEvents(paginationKey, visitorId, highRecallId, ipAddress, asn, linkedId, url, bundleId, packageName, origin, sdkVersion, environment, proximityId);
+                ValidateSearchEvents(paginationKey, visitorId, highRecallId, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, sdkVersion, environment, proximityId);
 
-                FormatSearchEvents(ref limit, ref paginationKey, ref visitorId, ref highRecallId, ref bot, ref ipAddress, ref asn, ref linkedId, ref url, ref bundleId, ref packageName, ref origin, ref start, ref end, ref reverse, ref suspect, ref vpn, ref virtualMachine, ref tampering, ref antiDetectBrowser, ref incognito, ref privacySettings, ref jailbroken, ref frida, ref factoryReset, ref clonedApp, ref emulator, ref rootApps, ref vpnConfidence, ref minSuspectScore, ref developerTools, ref locationSpoofing, ref mitmAttack, ref rareDevice, ref rareDevicePercentileBucket, ref proxy, ref sdkVersion, ref sdkPlatform, environment, ref proximityId, ref totalHits, ref torNode, ref incrementalIdentificationStatus, ref simulator);
+                FormatSearchEvents(ref limit, ref paginationKey, ref visitorId, ref highRecallId, ref bot, ref ipAddress, ref asn, ref linkedId, ref url, ref bundleId, ref packageName, ref origin, start, end, ref reverse, ref suspect, ref vpn, ref virtualMachine, ref tampering, ref antiDetectBrowser, ref incognito, ref privacySettings, ref jailbroken, ref frida, ref factoryReset, ref clonedApp, ref emulator, ref rootApps, ref vpnConfidence, ref minSuspectScore, ref developerTools, ref locationSpoofing, ref mitmAttack, ref rareDevice, ref rareDevicePercentileBucket, ref proxy, ref sdkVersion, ref sdkPlatform, environment, ref proximityId, ref totalHits, ref torNode, ref incrementalIdentificationStatus, ref simulator);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {

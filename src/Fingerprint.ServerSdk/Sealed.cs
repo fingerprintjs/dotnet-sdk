@@ -214,12 +214,14 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new SDKJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());
+            jsonOptions.Converters.Add(new SearchEventsEndParameterJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketNullableJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsSdkPlatformJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsSdkPlatformNullableJsonConverter());
+            jsonOptions.Converters.Add(new SearchEventsStartParameterJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsVpnConfidenceJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsVpnConfidenceNullableJsonConverter());
             jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
