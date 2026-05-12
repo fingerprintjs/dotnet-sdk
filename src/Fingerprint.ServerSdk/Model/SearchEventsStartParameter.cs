@@ -90,7 +90,7 @@ namespace Fingerprint.ServerSdk.Model
             {
                 return ClientUtils.ParameterToString(DateTime.Value);
             }
-            throw new NotImplementedException("Value not set");
+            throw new InvalidOperationException("Value not set");
         }
 
         /// <summary>
@@ -119,55 +119,12 @@ namespace Fingerprint.ServerSdk.Model
         /// <exception cref="JsonException"></exception>
         public override SearchEventsStartParameter Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
-            int currentDepth = utf8JsonReader.CurrentDepth;
-
-            if (utf8JsonReader.TokenType != JsonTokenType.StartObject && utf8JsonReader.TokenType != JsonTokenType.StartArray)
-                throw new JsonException();
-
-            JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             long? varLong = default;
             DateTime? dateTime = default;
 
-            Utf8JsonReader utf8JsonReaderOneOf = utf8JsonReader;
-            while (utf8JsonReaderOneOf.Read())
-            {
-                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReaderOneOf.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReaderOneOf.CurrentDepth)
-                    break;
-
-                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReaderOneOf.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReaderOneOf.CurrentDepth)
-                    break;
-
-                if (utf8JsonReaderOneOf.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReaderOneOf.CurrentDepth - 1)
-                {
-                    Utf8JsonReader utf8JsonReaderLong = utf8JsonReader;
-                    ClientUtils.TryDeserialize<long?>(ref utf8JsonReaderLong, jsonSerializerOptions, out varLong);
-
-                    Utf8JsonReader utf8JsonReaderDateTime = utf8JsonReader;
-                    ClientUtils.TryDeserialize<DateTime?>(ref utf8JsonReaderDateTime, jsonSerializerOptions, out dateTime);
-                }
-            }
-
-            while (utf8JsonReader.Read())
-            {
-                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReader.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReader.CurrentDepth)
-                    break;
-
-                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReader.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReader.CurrentDepth)
-                    break;
-
-                if (utf8JsonReader.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReader.CurrentDepth - 1)
-                {
-                    string localVarJsonPropertyName = utf8JsonReader.GetString();
-                    utf8JsonReader.Read();
-
-                    switch (localVarJsonPropertyName)
-                    {
-                        default:
-                            break;
-                    }
-                }
-            }
+            ClientUtils.TryDeserialize<long?>(ref utf8JsonReader, jsonSerializerOptions, out varLong);
+            ClientUtils.TryDeserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions, out dateTime);
 
             if (varLong != null)
                 return new SearchEventsStartParameter(varLong.Value);
@@ -187,7 +144,6 @@ namespace Fingerprint.ServerSdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public override void Write(Utf8JsonWriter writer, SearchEventsStartParameter searchEventsStartParameter, JsonSerializerOptions jsonSerializerOptions)
         {
-
             if (searchEventsStartParameter.Long.HasValue)
             {
                 writer.WriteNumberValue(searchEventsStartParameter.Long.Value);
@@ -197,18 +153,6 @@ namespace Fingerprint.ServerSdk.Model
                 DateTimeJsonConverter dateTimeJsonConverter = (DateTimeJsonConverter) jsonSerializerOptions.Converters.First(c => c.CanConvert(searchEventsStartParameter.DateTime.Value.GetType()));
                 dateTimeJsonConverter.Write(writer, searchEventsStartParameter.DateTime.Value, jsonSerializerOptions);
             }
-        }
-
-        /// <summary>
-        /// Serializes the properties of <see cref="SearchEventsStartParameter" />
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="searchEventsStartParameter"></param>
-        /// <param name="jsonSerializerOptions"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, SearchEventsStartParameter searchEventsStartParameter, JsonSerializerOptions jsonSerializerOptions)
-        {
-
         }
     }
 }
