@@ -43,7 +43,8 @@
             {{#-last}}
 
             {{#oneOf}}
-            ClientUtils.TryDeserialize<{{{datatypeWithEnum}}}{{nrt?}}{{^nrt}}{{#vendorExtensions.x-is-value-type}}?{{/vendorExtensions.x-is-value-type}}{{/nrt}}>(ref utf8JsonReader, jsonSerializerOptions, out {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}});
+            var utf8JsonReader{{name}} = utf8JsonReader;
+            ClientUtils.TryDeserialize<{{{datatypeWithEnum}}}{{nrt?}}{{^nrt}}{{#vendorExtensions.x-is-value-type}}?{{/vendorExtensions.x-is-value-type}}{{/nrt}}>(ref utf8JsonReader{{name}}, jsonSerializerOptions, out {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}});
             {{/oneOf}}
             {{/-last}}
             {{/vendorExtensions.x-duplicated-data-type}}
@@ -76,10 +77,10 @@
             {{#composedSchemas}}
             {{#oneOf}}
             {{#-first}}
-            if ({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}.HasValue)
+            if ({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.HasValue{{/vendorExtensions.x-is-value-type}}{{^vendorExtensions.x-is-value-type}} != null{{/vendorExtensions.x-is-value-type}})
             {{/-first}}
             {{^-first}}
-            else if ({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}.HasValue)
+            else if ({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.HasValue{{/vendorExtensions.x-is-value-type}}{{^vendorExtensions.x-is-value-type}} != null{{/vendorExtensions.x-is-value-type}})
             {{/-first}}
             {
                 {{#isPrimitiveType}}
@@ -107,6 +108,10 @@
                 {{/isPrimitiveType}}
             }
             {{/oneOf}}
+            else
+            {
+                throw new JsonException("Cannot serialize {{classname}} because no oneOf variant is set.");
+            }
             {{/composedSchemas}}
         }
     }
