@@ -107,6 +107,10 @@
                 {{/isPrimitiveType}}
             }
             {{/oneOf}}
+            else
+            {
+                throw new JsonException("Cannot serialize {{classname}} because no oneOf variant is set.");
+            }
             {{/composedSchemas}}
         }
     }
