@@ -21,5 +21,22 @@ Name | Type | Description | Notes
 [[Back to Model list]](../{{#useGenericHost}}../{{/useGenericHost}}README.md#documentation-for-models) [[Back to API list]](../{{#useGenericHost}}../{{/useGenericHost}}README.md#documentation-for-api-endpoints) [[Back to README]](../{{#useGenericHost}}../{{/useGenericHost}}README.md)
 
 {{/hasVars}}
+{{^model.discriminator}}
+{{#composedSchemas.oneOf}}
+{{#-first}}
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+{{/-first}}
+**{{name}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}[**{{dataType}}**]({{complexType}}.md){{/isPrimitiveType}} | {{{description}}} | {{^required}}[optional] {{/required}}{{#isReadOnly}}[readonly] {{/isReadOnly}}{{#defaultValue}}[default to {{{.}}}]{{/defaultValue}}
+{{#-last}}
+
+[[Back to Model list]](../{{#useGenericHost}}../{{/useGenericHost}}README.md#documentation-for-models) [[Back to API list]](../{{#useGenericHost}}../{{/useGenericHost}}README.md#documentation-for-api-endpoints) [[Back to README]](../{{#useGenericHost}}../{{/useGenericHost}}README.md)
+
+{{/-last}}
+{{/composedSchemas.oneOf}}
+{{/model.discriminator}}
 {{/model}}
 {{/models}}
