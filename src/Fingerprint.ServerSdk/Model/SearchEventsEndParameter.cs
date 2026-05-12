@@ -123,8 +123,10 @@ namespace Fingerprint.ServerSdk.Model
             long? varLong = default;
             DateTime? dateTime = default;
 
-            ClientUtils.TryDeserialize<long?>(ref utf8JsonReader, jsonSerializerOptions, out varLong);
-            ClientUtils.TryDeserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions, out dateTime);
+            var utf8JsonReaderLong = utf8JsonReader;
+            ClientUtils.TryDeserialize<long?>(ref utf8JsonReaderLong, jsonSerializerOptions, out varLong);
+            var utf8JsonReaderDateTime = utf8JsonReader;
+            ClientUtils.TryDeserialize<DateTime?>(ref utf8JsonReaderDateTime, jsonSerializerOptions, out dateTime);
 
             if (varLong != null)
                 return new SearchEventsEndParameter(varLong.Value);
@@ -152,6 +154,10 @@ namespace Fingerprint.ServerSdk.Model
             {
                 DateTimeJsonConverter dateTimeJsonConverter = (DateTimeJsonConverter) jsonSerializerOptions.Converters.First(c => c.CanConvert(searchEventsEndParameter.DateTime.Value.GetType()));
                 dateTimeJsonConverter.Write(writer, searchEventsEndParameter.DateTime.Value, jsonSerializerOptions);
+            }
+            else
+            {
+                throw new JsonException("Cannot serialize SearchEventsEndParameter because no oneOf variant is set.");
             }
         }
     }
