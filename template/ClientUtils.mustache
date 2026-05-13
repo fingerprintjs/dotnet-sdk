@@ -205,6 +205,14 @@ using System.Runtime.CompilerServices;
             {{/isEnum}}
             {{/vars}}
             {{/isEnum}}
+            {{^discriminator}}
+            {{#composedSchemas.oneOf}}
+            {{#-first}}
+            if (obj is {{classname}} {{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}})
+                return {{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.ToParameterString();
+            {{/-first}}
+            {{/composedSchemas.oneOf}}
+            {{/discriminator}}
             {{/model}}
             {{/models}}
             if (obj is ICollection collection)

@@ -1,0 +1,117 @@
+    /// <summary>
+    /// A Json converter for type <see cref="{{classname}}" />
+    /// </summary>
+    {{>visibility}} class {{classname}}JsonConverter : JsonConverter<{{classname}}>
+    {
+        {{#allVars}}
+        {{#isDateTime}}
+        /// <summary>
+        /// The format to use to serialize {{name}}
+        /// </summary>
+        public static string {{name}}Format { get; set; } = "{{{dateTimeFormat}}}";
+
+        {{/isDateTime}}
+        {{#isDate}}
+        /// <summary>
+        /// The format to use to serialize {{name}}
+        /// </summary>
+        public static string {{name}}Format { get; set; } = "{{{dateFormat}}}";
+
+        {{/isDate}}
+        {{/allVars}}
+        /// <summary>
+        /// Deserializes json to <see cref="{{classname}}" />
+        /// </summary>
+        /// <param name="utf8JsonReader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="jsonSerializerOptions"></param>
+        /// <returns></returns>
+        /// <exception cref="JsonException"></exception>
+        public override {{classname}} Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        {
+            {{#allVars}}
+            Option<{{#isInnerEnum}}{{^isMap}}{{classname}}.{{/isMap}}{{/isInnerEnum}}{{{datatypeWithEnum}}}{{nrt?}}{{^nrt}}{{#vendorExtensions.x-is-value-type}}?{{/vendorExtensions.x-is-value-type}}{{/nrt}}> {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}} = default;
+            {{#-last}}
+
+            {{/-last}}
+            {{/allVars}}
+
+            {{#composedSchemas}}
+            {{#oneOf}}
+            {{^vendorExtensions.x-duplicated-data-type}}
+            {{{datatypeWithEnum}}}{{nrt?}}{{^nrt}}{{#vendorExtensions.x-is-value-type}}?{{/vendorExtensions.x-is-value-type}}{{/nrt}} {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}} = default;
+            {{#-last}}
+
+            {{#oneOf}}
+            var utf8JsonReader{{name}} = utf8JsonReader;
+            ClientUtils.TryDeserialize<{{{datatypeWithEnum}}}{{nrt?}}{{^nrt}}{{#vendorExtensions.x-is-value-type}}?{{/vendorExtensions.x-is-value-type}}{{/nrt}}>(ref utf8JsonReader{{name}}, jsonSerializerOptions, out {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}});
+            {{/oneOf}}
+            {{/-last}}
+            {{/vendorExtensions.x-duplicated-data-type}}
+            {{/oneOf}}
+            {{/composedSchemas}}
+
+            {{#composedSchemas}}
+            {{#oneOf}}
+            {{^vendorExtensions.x-duplicated-data-type}}
+            if ({{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}} != null)
+                return new {{classname}}({{#lambda.joinWithComma}}{{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}{{/lambda.joinWithComma}});
+
+            {{/vendorExtensions.x-duplicated-data-type}}
+            {{#-last}}
+            throw new JsonException();
+            {{/-last}}
+            {{/oneOf}}
+            {{/composedSchemas}}
+        }
+
+        /// <summary>
+        /// Serializes a <see cref="{{classname}}" />
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="{{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}"></param>
+        /// <param name="jsonSerializerOptions"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public override void Write(Utf8JsonWriter writer, {{classname}} {{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}, JsonSerializerOptions jsonSerializerOptions)
+        {
+            {{#composedSchemas}}
+            {{#oneOf}}
+            {{#-first}}
+            if ({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.HasValue{{/vendorExtensions.x-is-value-type}}{{^vendorExtensions.x-is-value-type}} != null{{/vendorExtensions.x-is-value-type}})
+            {{/-first}}
+            {{^-first}}
+            else if ({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.HasValue{{/vendorExtensions.x-is-value-type}}{{^vendorExtensions.x-is-value-type}} != null{{/vendorExtensions.x-is-value-type}})
+            {{/-first}}
+            {
+                {{#isPrimitiveType}}
+                {{#isString}}
+                writer.WriteStringValue({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}});
+                {{/isString}}
+                {{#isBoolean}}
+                writer.WriteBooleanValue({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}});
+                {{/isBoolean}}
+                {{#isNumeric}}
+                writer.WriteNumberValue({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}});
+                {{/isNumeric}}
+                {{#isEnum}}
+                {{datatypeWithEnum}}JsonConverter {{#lambda.camelcase}}{{datatypeWithEnum}}{{/lambda.camelcase}}JsonConverter = ({{datatypeWithEnum}}JsonConverter) jsonSerializerOptions.Converters.First(c => c.CanConvert({{#lambda.camelcase_sanitize_param}}{{model.classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}.GetType()));
+                {{#lambda.camelcase}}{{datatypeWithEnum}}{{/lambda.camelcase}}JsonConverter.Write{{^isEnumRef}}Properties{{/isEnumRef}}(writer, {{#lambda.camelcase_sanitize_param}}{{model.classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}, jsonSerializerOptions);
+                {{/isEnum}}
+                {{#isDateTime}}
+                {{datatypeWithEnum}}JsonConverter {{#lambda.camelcase}}{{datatypeWithEnum}}{{/lambda.camelcase}}JsonConverter = ({{datatypeWithEnum}}JsonConverter) jsonSerializerOptions.Converters.First(c => c.CanConvert({{#lambda.camelcase_sanitize_param}}{{model.classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}.GetType()));
+                {{#lambda.camelcase}}{{datatypeWithEnum}}{{/lambda.camelcase}}JsonConverter.Write(writer, {{#lambda.camelcase_sanitize_param}}{{model.classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}, jsonSerializerOptions);
+                {{/isDateTime}}
+                {{/isPrimitiveType}}
+                {{^isPrimitiveType}}
+                {{datatypeWithEnum}}JsonConverter {{#lambda.camelcase}}{{datatypeWithEnum}}{{/lambda.camelcase}}JsonConverter = ({{datatypeWithEnum}}JsonConverter) jsonSerializerOptions.Converters.First(c => c.CanConvert({{#lambda.camelcase_sanitize_param}}{{model.classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}.GetType()));
+                {{#lambda.camelcase}}{{datatypeWithEnum}}{{/lambda.camelcase}}JsonConverter.Write{{^isEnumRef}}Properties{{/isEnumRef}}(writer, {{#lambda.camelcase_sanitize_param}}{{model.classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{#vendorExtensions.x-is-value-type}}.Value{{/vendorExtensions.x-is-value-type}}, jsonSerializerOptions);
+                {{/isPrimitiveType}}
+            }
+            {{/oneOf}}
+            else
+            {
+                throw new JsonException("Cannot serialize {{classname}} because no oneOf variant is set.");
+            }
+            {{/composedSchemas}}
+        }
+    }

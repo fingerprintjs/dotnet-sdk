@@ -104,15 +104,73 @@ namespace {{packageName}}.{{apiPackage}}
     {{>visibility}} class {{#lambda.pascalcase}}{{operationId}}{{/lambda.pascalcase}}Request
     {
         {{#allParams}}
+        {{#vendorExtensions.x-aliased-parameter-name}}
+        private {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} _{{#lambda.camelcase}}{{paramName}}{{/lambda.camelcase}};
+
+        /// <summary>
+        /// {{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}
+        ///
+        /// {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} is an alias for {{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}. Setting {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} will clear an existing value for {{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}.
+        /// </summary>
+        /// <seealso cref="{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}"/>
+        public {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}
+        {
+            get
+            {
+                return _{{#lambda.camelcase}}{{paramName}}{{/lambda.camelcase}};
+            }
+
+            set
+            {
+                _{{#lambda.camelcase}}{{paramName}}{{/lambda.camelcase}} = value;
+                _{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}} = default;
+            }
+        }
+        {{/vendorExtensions.x-aliased-parameter-name}}
+        {{#vendorExtensions.x-parameter-alias}}
+        private {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} _{{#lambda.camelcase}}{{paramName}}{{/lambda.camelcase}};
+
+        /// <summary>
+        /// {{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}
+        ///
+        /// {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} is an alias for {{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}. Setting {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} will clear an existing value for {{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}.
+        /// </summary>
+        /// <seealso cref="{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}"/>
+        public {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}
+        {
+            get
+            {
+                return _{{#lambda.camelcase}}{{paramName}}{{/lambda.camelcase}};
+            }
+
+            set
+            {
+                _{{#lambda.camelcase}}{{paramName}}{{/lambda.camelcase}} = value;
+                _{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}} = default;
+            }
+        }
+        {{/vendorExtensions.x-parameter-alias}}
+        {{^vendorExtensions.x-aliased-parameter-name}}
+        {{^vendorExtensions.x-parameter-alias}}
         /// <summary>
         /// {{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}
         /// </summary>
         public {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} { get; set; }{{^required}} = default;{{/required}}
+        {{/vendorExtensions.x-parameter-alias}}
+        {{/vendorExtensions.x-aliased-parameter-name}}
 
         {{/allParams}}
         {{#allParams}}
         /// <summary>
         /// Sets the {{paramName}} parameter.
+        {{#vendorExtensions.x-aliased-parameter-name}}
+        ///
+        /// {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} is an alias for {{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}. Setting {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} will clear an existing value for {{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}.
+        {{/vendorExtensions.x-aliased-parameter-name}}
+        {{#vendorExtensions.x-parameter-alias}}
+        ///
+        /// {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} is an alias for {{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}. Setting {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} will clear an existing value for {{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}.
+        {{/vendorExtensions.x-parameter-alias}}
         /// </summary>
         /// <param name="value">{{{description}}}</param>
         /// <returns>This request instance for fluent chaining.</returns>
@@ -512,7 +570,7 @@ namespace {{packageName}}.{{apiPackage}}
                     {{/isArray}}
                     {{^isArray}}
                     if ({{paramName}}.IsSet)
-                        parseQueryStringLocalVar["{{baseName}}"] = ClientUtils.ParameterToString({{paramName}}.Value);
+                        parseQueryStringLocalVar["{{#vendorExtensions.x-aliased-parameter-name}}{{vendorExtensions.x-aliased-parameter-name}}{{/vendorExtensions.x-aliased-parameter-name}}{{^vendorExtensions.x-aliased-parameter-name}}{{baseName}}{{/vendorExtensions.x-aliased-parameter-name}}"] = ClientUtils.ParameterToString({{paramName}}.Value);
                     {{/isArray}}
 
                     {{/required}}

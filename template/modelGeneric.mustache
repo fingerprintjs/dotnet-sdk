@@ -388,6 +388,35 @@
         {{/-first}}
         {{/readOnlyVars}}
         {{/equatable}}
+        {{^model.discriminator}}
+        {{#composedSchemas.oneOf}}
+        {{#-first}}
+
+        /// <summary>
+        /// Formats the value contained by {{classname}} as a parameter
+        /// </summary>
+        /// <returns>Formatted string.</returns>
+        public string ToParameterString()
+        {
+        {{/-first}}
+        {{#vendorExtensions.x-is-value-type}}
+            if ({{name}}.HasValue)
+            {
+                return ClientUtils.ParameterToString({{name}}.Value);
+            }
+        {{/vendorExtensions.x-is-value-type}}
+        {{^vendorExtensions.x-is-value-type}}
+            if ({{name}} != null)
+            {
+                return ClientUtils.ParameterToString({{name}});
+            }
+        {{/vendorExtensions.x-is-value-type}}
+        {{#-last}}
+            throw new InvalidOperationException("Value not set");
+        }
+        {{/-last}}
+        {{/composedSchemas.oneOf}}
+        {{/model.discriminator}}
 {{#validatable}}
 {{^parentModel}}
 
