@@ -33,10 +33,10 @@ namespace Fingerprint.ServerSdk.Api
         FingerprintApiEvents Events { get; }
 
         /// <summary>
-        /// Delete data by visitor ID
+        /// Delete a visitor ID
         /// </summary>
         /// <remarks>
-        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+        /// Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
@@ -45,10 +45,10 @@ namespace Fingerprint.ServerSdk.Api
         Task<IDeleteVisitorDataApiResponse> DeleteVisitorDataAsync(string visitorId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete data by visitor ID
+        /// Delete a visitor ID
         /// </summary>
         /// <remarks>
-        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+        /// Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </remarks>
         /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -218,7 +218,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<int> Limit { get; set; } = default;
 
         /// <summary>
-        /// Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  (optional)
+        /// Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  (optional)
         /// </summary>
         public Option<string> PaginationKey { get; set; } = default;
 
@@ -236,6 +236,36 @@ namespace Fingerprint.ServerSdk.Api
         /// Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `bot` property set to a valid value are returned. Events without a `bot` Smart Signal result are left out of the response.  (optional)
         /// </summary>
         public Option<SearchEventsBot> Bot { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.  (optional)
+        /// </summary>
+        public Option<SearchEventsBotInfo> BotInfo { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by their Bot Info Category.  Multiple categories can be provided using the repeated keys syntax. For example, `bot_info_category=ai_agent&bot_info_category=ai_assistant`, will match events with a Bot Info Category of `ai_agent` or `ai_assistant`. Other notations like comma-separated or bracket notation are not supported.  (optional)
+        /// </summary>
+        public Option<List<BotInfoCategory>> BotInfoCategory { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by their Bot Info Identity type.  Multiple identity types can be provided using the repeated keys syntax. For example, `bot_info_identity=verified&bot_info_identity=signed`, will match events with a Bot Info Identity of `verified` or `signed`. Other notations like comma-separated or bracket notation are not supported.  (optional)
+        /// </summary>
+        public Option<List<BotInfoIdentity>> BotInfoIdentity { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by their Bot Info Confidence.  Multiple confidences can be provided using the repeated keys syntax. For example, `bot_info_confidence=high&bot_info_confidence=medium`, will match events with a Bot Info Confidence of `high` or `medium`. Other notations like comma-separated or bracket notation are not supported.  (optional)
+        /// </summary>
+        public Option<List<BotInfoConfidence>> BotInfoConfidence { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by their Bot Info Provider. The provider must match exactly, partial or wildcard matching is not supported.  Multiple Providers can be provided using the repeated keys syntax. For example, `bot_info_provider=OpenAI&bot_info_provider=AWS`, will match events with a Bot Info Provider of `OpenAI` or `AWS`. Other notations like comma-separated or bracket notation are not supported.  (optional)
+        /// </summary>
+        public Option<List<string>> BotInfoProvider { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by their Bot Info Name. The name must match exactly, partial or wildcard matching is not supported.  Multiple Names can be provided using the repeated keys syntax. For example, `bot_info_name=ChatGPT%20Agent&bot_info_name=Bedrock%20AgentCore`, will match events with a Bot Info Name of `ChatGPT Agent` or `Bedrock AgentCore`. Other notations like comma-separated or bracket notation are not supported.  (optional)
+        /// </summary>
+        public Option<List<string>> BotInfoName { get; set; } = default;
 
         /// <summary>
         /// Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)
@@ -272,18 +302,96 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         public Option<string> Origin { get; set; } = default;
 
-        /// <summary>
-        /// Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.  (optional)
-        /// </summary>
-        public Option<long> Start { get; set; } = default;
+        private Option<long> _start;
 
         /// <summary>
-        /// Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.  (optional)
+        /// Include events that happened after this point (with timestamp greater than or equal to the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change the default of `now` for `end`/`end_date_time` — adjust it separately if needed. (optional)
+        ///
+        /// Start is an alias for StartDateTime. Setting Start will clear an existing value for StartDateTime.
         /// </summary>
-        public Option<long> End { get; set; } = default;
+        /// <seealso cref="StartDateTime"/>
+        public Option<long> Start
+        {
+            get
+            {
+                return _start;
+            }
+
+            set
+            {
+                _start = value;
+                _startDateTime = default;
+            }
+        }
+
+        private Option<DateTime> _startDateTime;
 
         /// <summary>
-        /// When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).  (optional)
+        /// Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`. (optional)
+        ///
+        /// StartDateTime is an alias for Start. Setting StartDateTime will clear an existing value for Start.
+        /// </summary>
+        /// <seealso cref="Start"/>
+        public Option<DateTime> StartDateTime
+        {
+            get
+            {
+                return _startDateTime;
+            }
+
+            set
+            {
+                _startDateTime = value;
+                _start = default;
+            }
+        }
+
+        private Option<long> _end;
+
+        /// <summary>
+        /// Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. (optional)
+        ///
+        /// End is an alias for EndDateTime. Setting End will clear an existing value for EndDateTime.
+        /// </summary>
+        /// <seealso cref="EndDateTime"/>
+        public Option<long> End
+        {
+            get
+            {
+                return _end;
+            }
+
+            set
+            {
+                _end = value;
+                _endDateTime = default;
+            }
+        }
+
+        private Option<DateTime> _endDateTime;
+
+        /// <summary>
+        /// Include events that happened before this point (with timestamp less than or equal the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`. (optional)
+        ///
+        /// EndDateTime is an alias for End. Setting EndDateTime will clear an existing value for End.
+        /// </summary>
+        /// <seealso cref="End"/>
+        public Option<DateTime> EndDateTime
+        {
+            get
+            {
+                return _endDateTime;
+            }
+
+            set
+            {
+                _endDateTime = value;
+                _end = default;
+            }
+        }
+
+        /// <summary>
+        /// When `true`, sort events oldest first (ascending timestamp order). Defaults to `false` (newest first, descending timestamp order).  (optional)
         /// </summary>
         public Option<bool> Reverse { get; set; } = default;
 
@@ -378,12 +486,12 @@ namespace Fingerprint.ServerSdk.Api
         public Option<bool> MitmAttack { get; set; } = default;
 
         /// <summary>
-        /// Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.  (optional)
+        /// Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  (optional)
         /// </summary>
         public Option<bool> RareDevice { get; set; } = default;
 
         /// <summary>
-        /// Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  (optional)
+        /// Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  (optional)
         /// </summary>
         public Option<SearchEventsRareDevicePercentileBucket> RareDevicePercentileBucket { get; set; } = default;
 
@@ -446,7 +554,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the paginationKey parameter.
         /// </summary>
-        /// <param name="value">Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` </param>
+        /// <param name="value">Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithPaginationKey(string value)
         {
@@ -484,6 +592,72 @@ namespace Fingerprint.ServerSdk.Api
         public SearchEventsRequest WithBot(SearchEventsBot value)
         {
             Bot = new Option<SearchEventsBot>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the botInfo parameter.
+        /// </summary>
+        /// <param name="value">Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBotInfo(SearchEventsBotInfo value)
+        {
+            BotInfo = new Option<SearchEventsBotInfo>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the botInfoCategory parameter.
+        /// </summary>
+        /// <param name="value">Filter events by their Bot Info Category.  Multiple categories can be provided using the repeated keys syntax. For example, `bot_info_category=ai_agent&bot_info_category=ai_assistant`, will match events with a Bot Info Category of `ai_agent` or `ai_assistant`. Other notations like comma-separated or bracket notation are not supported. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBotInfoCategory(List<BotInfoCategory> value)
+        {
+            BotInfoCategory = new Option<List<BotInfoCategory>>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the botInfoIdentity parameter.
+        /// </summary>
+        /// <param name="value">Filter events by their Bot Info Identity type.  Multiple identity types can be provided using the repeated keys syntax. For example, `bot_info_identity=verified&bot_info_identity=signed`, will match events with a Bot Info Identity of `verified` or `signed`. Other notations like comma-separated or bracket notation are not supported. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBotInfoIdentity(List<BotInfoIdentity> value)
+        {
+            BotInfoIdentity = new Option<List<BotInfoIdentity>>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the botInfoConfidence parameter.
+        /// </summary>
+        /// <param name="value">Filter events by their Bot Info Confidence.  Multiple confidences can be provided using the repeated keys syntax. For example, `bot_info_confidence=high&bot_info_confidence=medium`, will match events with a Bot Info Confidence of `high` or `medium`. Other notations like comma-separated or bracket notation are not supported. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBotInfoConfidence(List<BotInfoConfidence> value)
+        {
+            BotInfoConfidence = new Option<List<BotInfoConfidence>>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the botInfoProvider parameter.
+        /// </summary>
+        /// <param name="value">Filter events by their Bot Info Provider. The provider must match exactly, partial or wildcard matching is not supported.  Multiple Providers can be provided using the repeated keys syntax. For example, `bot_info_provider=OpenAI&bot_info_provider=AWS`, will match events with a Bot Info Provider of `OpenAI` or `AWS`. Other notations like comma-separated or bracket notation are not supported. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBotInfoProvider(List<string> value)
+        {
+            BotInfoProvider = new Option<List<string>>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the botInfoName parameter.
+        /// </summary>
+        /// <param name="value">Filter events by their Bot Info Name. The name must match exactly, partial or wildcard matching is not supported.  Multiple Names can be provided using the repeated keys syntax. For example, `bot_info_name=ChatGPT%20Agent&bot_info_name=Bedrock%20AgentCore`, will match events with a Bot Info Name of `ChatGPT Agent` or `Bedrock AgentCore`. Other notations like comma-separated or bracket notation are not supported. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBotInfoName(List<string> value)
+        {
+            BotInfoName = new Option<List<string>>(value);
             return this;
         }
 
@@ -566,8 +740,10 @@ namespace Fingerprint.ServerSdk.Api
 
         /// <summary>
         /// Sets the start parameter.
+        ///
+        /// Start is an alias for StartDateTime. Setting Start will clear an existing value for StartDateTime.
         /// </summary>
-        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed. </param>
+        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal to the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change the default of `now` for `end`/`end_date_time` — adjust it separately if needed.</param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithStart(long value)
         {
@@ -576,9 +752,24 @@ namespace Fingerprint.ServerSdk.Api
         }
 
         /// <summary>
-        /// Sets the end parameter.
+        /// Sets the startDateTime parameter.
+        ///
+        /// StartDateTime is an alias for Start. Setting StartDateTime will clear an existing value for Start.
         /// </summary>
-        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed. </param>
+        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`.</param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithStartDateTime(DateTime value)
+        {
+            StartDateTime = new Option<DateTime>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the end parameter.
+        ///
+        /// End is an alias for EndDateTime. Setting End will clear an existing value for EndDateTime.
+        /// </summary>
+        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed.</param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithEnd(long value)
         {
@@ -587,9 +778,22 @@ namespace Fingerprint.ServerSdk.Api
         }
 
         /// <summary>
+        /// Sets the endDateTime parameter.
+        ///
+        /// EndDateTime is an alias for End. Setting EndDateTime will clear an existing value for End.
+        /// </summary>
+        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`.</param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithEndDateTime(DateTime value)
+        {
+            EndDateTime = new Option<DateTime>(value);
+            return this;
+        }
+
+        /// <summary>
         /// Sets the reverse parameter.
         /// </summary>
-        /// <param name="value">When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order). </param>
+        /// <param name="value">When `true`, sort events oldest first (ascending timestamp order). Defaults to `false` (newest first, descending timestamp order). </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithReverse(bool value)
         {
@@ -798,7 +1002,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the rareDevice parameter.
         /// </summary>
-        /// <param name="value">Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response. </param>
+        /// <param name="value">Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithRareDevice(bool value)
         {
@@ -809,7 +1013,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the rareDevicePercentileBucket parameter.
         /// </summary>
-        /// <param name="value">Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before. </param>
+        /// <param name="value">Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithRareDevicePercentileBucket(SearchEventsRareDevicePercentileBucket value)
         {
@@ -1177,7 +1381,7 @@ namespace Fingerprint.ServerSdk.Api
         partial void OnErrorDeleteVisitorData(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string visitorId);
 
         /// <summary>
-        /// Delete data by visitor ID Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+        /// Delete a visitor ID Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </summary>
         /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1195,10 +1399,10 @@ namespace Fingerprint.ServerSdk.Api
         }
 
         /// <summary>
-        /// Delete data by visitor ID
+        /// Delete a visitor ID
         /// </summary>
         /// <remarks>
-        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+        /// Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
@@ -1972,7 +2176,7 @@ namespace Fingerprint.ServerSdk.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<string> highRecallId, ref Option<SearchEventsBot> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> bundleId, ref Option<string> packageName, ref Option<string> origin, ref Option<long> start, ref Option<long> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<SearchEventsVpnConfidence> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> rareDevice, ref Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode, ref Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, ref Option<bool> simulator);
+        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<string> highRecallId, ref Option<SearchEventsBot> bot, ref Option<SearchEventsBotInfo> botInfo, Option<List<BotInfoCategory>> botInfoCategory, Option<List<BotInfoIdentity>> botInfoIdentity, Option<List<BotInfoConfidence>> botInfoConfidence, Option<List<string>> botInfoProvider, Option<List<string>> botInfoName, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> bundleId, ref Option<string> packageName, ref Option<string> origin, ref Option<long> start, ref Option<DateTime> startDateTime, ref Option<long> end, ref Option<DateTime> endDateTime, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<SearchEventsVpnConfidence> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> rareDevice, ref Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode, ref Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, ref Option<bool> simulator);
 
         /// <summary>
         /// Validates the request parameters
@@ -1980,6 +2184,11 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="paginationKey"></param>
         /// <param name="visitorId"></param>
         /// <param name="highRecallId"></param>
+        /// <param name="botInfoCategory"></param>
+        /// <param name="botInfoIdentity"></param>
+        /// <param name="botInfoConfidence"></param>
+        /// <param name="botInfoProvider"></param>
+        /// <param name="botInfoName"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
@@ -1991,7 +2200,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="environment"></param>
         /// <param name="proximityId"></param>
         /// <returns></returns>
-        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<string> sdkVersion, Option<List<string>> environment, Option<string> proximityId)
+        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<List<BotInfoCategory>> botInfoCategory, Option<List<BotInfoIdentity>> botInfoIdentity, Option<List<BotInfoConfidence>> botInfoConfidence, Option<List<string>> botInfoProvider, Option<List<string>> botInfoName, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<string> sdkVersion, Option<List<string>> environment, Option<string> proximityId)
         {
             if (paginationKey.IsSet && paginationKey.Value == null)
                 throw new ArgumentNullException(nameof(paginationKey));
@@ -2001,6 +2210,21 @@ namespace Fingerprint.ServerSdk.Api
 
             if (highRecallId.IsSet && highRecallId.Value == null)
                 throw new ArgumentNullException(nameof(highRecallId));
+
+            if (botInfoCategory.IsSet && botInfoCategory.Value == null)
+                throw new ArgumentNullException(nameof(botInfoCategory));
+
+            if (botInfoIdentity.IsSet && botInfoIdentity.Value == null)
+                throw new ArgumentNullException(nameof(botInfoIdentity));
+
+            if (botInfoConfidence.IsSet && botInfoConfidence.Value == null)
+                throw new ArgumentNullException(nameof(botInfoConfidence));
+
+            if (botInfoProvider.IsSet && botInfoProvider.Value == null)
+                throw new ArgumentNullException(nameof(botInfoProvider));
+
+            if (botInfoName.IsSet && botInfoName.Value == null)
+                throw new ArgumentNullException(nameof(botInfoName));
 
             if (ipAddress.IsSet && ipAddress.Value == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -2042,6 +2266,12 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="visitorId"></param>
         /// <param name="highRecallId"></param>
         /// <param name="bot"></param>
+        /// <param name="botInfo"></param>
+        /// <param name="botInfoCategory"></param>
+        /// <param name="botInfoIdentity"></param>
+        /// <param name="botInfoConfidence"></param>
+        /// <param name="botInfoProvider"></param>
+        /// <param name="botInfoName"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
@@ -2050,7 +2280,9 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="packageName"></param>
         /// <param name="origin"></param>
         /// <param name="start"></param>
+        /// <param name="startDateTime"></param>
         /// <param name="end"></param>
+        /// <param name="endDateTime"></param>
         /// <param name="reverse"></param>
         /// <param name="suspect"></param>
         /// <param name="vpn"></param>
@@ -2081,10 +2313,10 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
+        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<SearchEventsBotInfo> botInfo, Option<List<BotInfoCategory>> botInfoCategory, Option<List<BotInfoIdentity>> botInfoIdentity, Option<List<BotInfoConfidence>> botInfoConfidence, Option<List<string>> botInfoProvider, Option<List<string>> botInfoName, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<DateTime> startDateTime, Option<long> end, Option<DateTime> endDateTime, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
         {
             bool suppressDefaultLog = false;
-            AfterSearchEvents(ref suppressDefaultLog, apiResponseLocalVar, limit, paginationKey, visitorId, highRecallId, bot, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
+            AfterSearchEvents(ref suppressDefaultLog, apiResponseLocalVar, limit, paginationKey, visitorId, highRecallId, bot, botInfo, botInfoCategory, botInfoIdentity, botInfoConfidence, botInfoProvider, botInfoName, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, startDateTime, end, endDateTime, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2099,6 +2331,12 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="visitorId"></param>
         /// <param name="highRecallId"></param>
         /// <param name="bot"></param>
+        /// <param name="botInfo"></param>
+        /// <param name="botInfoCategory"></param>
+        /// <param name="botInfoIdentity"></param>
+        /// <param name="botInfoConfidence"></param>
+        /// <param name="botInfoProvider"></param>
+        /// <param name="botInfoName"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
@@ -2107,7 +2345,9 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="packageName"></param>
         /// <param name="origin"></param>
         /// <param name="start"></param>
+        /// <param name="startDateTime"></param>
         /// <param name="end"></param>
+        /// <param name="endDateTime"></param>
         /// <param name="reverse"></param>
         /// <param name="suspect"></param>
         /// <param name="vpn"></param>
@@ -2138,7 +2378,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
+        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<SearchEventsBotInfo> botInfo, Option<List<BotInfoCategory>> botInfoCategory, Option<List<BotInfoIdentity>> botInfoIdentity, Option<List<BotInfoConfidence>> botInfoConfidence, Option<List<string>> botInfoProvider, Option<List<string>> botInfoName, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<DateTime> startDateTime, Option<long> end, Option<DateTime> endDateTime, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2151,6 +2391,12 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="visitorId"></param>
         /// <param name="highRecallId"></param>
         /// <param name="bot"></param>
+        /// <param name="botInfo"></param>
+        /// <param name="botInfoCategory"></param>
+        /// <param name="botInfoIdentity"></param>
+        /// <param name="botInfoConfidence"></param>
+        /// <param name="botInfoProvider"></param>
+        /// <param name="botInfoName"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
@@ -2159,7 +2405,9 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="packageName"></param>
         /// <param name="origin"></param>
         /// <param name="start"></param>
+        /// <param name="startDateTime"></param>
         /// <param name="end"></param>
+        /// <param name="endDateTime"></param>
         /// <param name="reverse"></param>
         /// <param name="suspect"></param>
         /// <param name="vpn"></param>
@@ -2190,10 +2438,10 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
+        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<SearchEventsBotInfo> botInfo, Option<List<BotInfoCategory>> botInfoCategory, Option<List<BotInfoIdentity>> botInfoIdentity, Option<List<BotInfoConfidence>> botInfoConfidence, Option<List<string>> botInfoProvider, Option<List<string>> botInfoName, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<DateTime> startDateTime, Option<long> end, Option<DateTime> endDateTime, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSearchEvents(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, limit, paginationKey, visitorId, highRecallId, bot, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
+            OnErrorSearchEvents(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, limit, paginationKey, visitorId, highRecallId, bot, botInfo, botInfoCategory, botInfoIdentity, botInfoConfidence, botInfoProvider, botInfoName, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, startDateTime, end, endDateTime, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2210,6 +2458,12 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="visitorId"></param>
         /// <param name="highRecallId"></param>
         /// <param name="bot"></param>
+        /// <param name="botInfo"></param>
+        /// <param name="botInfoCategory"></param>
+        /// <param name="botInfoIdentity"></param>
+        /// <param name="botInfoConfidence"></param>
+        /// <param name="botInfoProvider"></param>
+        /// <param name="botInfoName"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
@@ -2218,7 +2472,9 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="packageName"></param>
         /// <param name="origin"></param>
         /// <param name="start"></param>
+        /// <param name="startDateTime"></param>
         /// <param name="end"></param>
+        /// <param name="endDateTime"></param>
         /// <param name="reverse"></param>
         /// <param name="suspect"></param>
         /// <param name="vpn"></param>
@@ -2249,7 +2505,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="torNode"></param>
         /// <param name="incrementalIdentificationStatus"></param>
         /// <param name="simulator"></param>
-        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
+        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> highRecallId, Option<SearchEventsBot> bot, Option<SearchEventsBotInfo> botInfo, Option<List<BotInfoCategory>> botInfoCategory, Option<List<BotInfoIdentity>> botInfoIdentity, Option<List<BotInfoConfidence>> botInfoConfidence, Option<List<string>> botInfoProvider, Option<List<string>> botInfoName, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> bundleId, Option<string> packageName, Option<string> origin, Option<long> start, Option<DateTime> startDateTime, Option<long> end, Option<DateTime> endDateTime, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<SearchEventsVpnConfidence> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> rareDevice, Option<SearchEventsRareDevicePercentileBucket> rareDevicePercentileBucket, Option<bool> proxy, Option<string> sdkVersion, Option<SearchEventsSdkPlatform> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode, Option<SearchEventsIncrementalIdentificationStatus> incrementalIdentificationStatus, Option<bool> simulator);
 
         /// <summary>
         /// Search events ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  By default, the API searches events from the last 7 days, sorts them by newest first and returns the last 10 events.  - Use `start` and `end` to specify the time range of the search. - Use `reverse=true` to sort the results oldest first. - Use `limit` to specify the number of events to return. - Use `pagination_key` to get the next page of results if there are more than `limit` events.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
@@ -2289,6 +2545,12 @@ namespace Fingerprint.ServerSdk.Api
             Option<string> visitorId = request.VisitorId;
             Option<string> highRecallId = request.HighRecallId;
             Option<SearchEventsBot> bot = request.Bot;
+            Option<SearchEventsBotInfo> botInfo = request.BotInfo;
+            Option<List<BotInfoCategory>> botInfoCategory = request.BotInfoCategory;
+            Option<List<BotInfoIdentity>> botInfoIdentity = request.BotInfoIdentity;
+            Option<List<BotInfoConfidence>> botInfoConfidence = request.BotInfoConfidence;
+            Option<List<string>> botInfoProvider = request.BotInfoProvider;
+            Option<List<string>> botInfoName = request.BotInfoName;
             Option<string> ipAddress = request.IpAddress;
             Option<string> asn = request.Asn;
             Option<string> linkedId = request.LinkedId;
@@ -2297,7 +2559,9 @@ namespace Fingerprint.ServerSdk.Api
             Option<string> packageName = request.PackageName;
             Option<string> origin = request.Origin;
             Option<long> start = request.Start;
+            Option<DateTime> startDateTime = request.StartDateTime;
             Option<long> end = request.End;
+            Option<DateTime> endDateTime = request.EndDateTime;
             Option<bool> reverse = request.Reverse;
             Option<bool> suspect = request.Suspect;
             Option<bool> vpn = request.Vpn;
@@ -2331,9 +2595,9 @@ namespace Fingerprint.ServerSdk.Api
 
             try
             {
-                ValidateSearchEvents(paginationKey, visitorId, highRecallId, ipAddress, asn, linkedId, url, bundleId, packageName, origin, sdkVersion, environment, proximityId);
+                ValidateSearchEvents(paginationKey, visitorId, highRecallId, botInfoCategory, botInfoIdentity, botInfoConfidence, botInfoProvider, botInfoName, ipAddress, asn, linkedId, url, bundleId, packageName, origin, sdkVersion, environment, proximityId);
 
-                FormatSearchEvents(ref limit, ref paginationKey, ref visitorId, ref highRecallId, ref bot, ref ipAddress, ref asn, ref linkedId, ref url, ref bundleId, ref packageName, ref origin, ref start, ref end, ref reverse, ref suspect, ref vpn, ref virtualMachine, ref tampering, ref antiDetectBrowser, ref incognito, ref privacySettings, ref jailbroken, ref frida, ref factoryReset, ref clonedApp, ref emulator, ref rootApps, ref vpnConfidence, ref minSuspectScore, ref developerTools, ref locationSpoofing, ref mitmAttack, ref rareDevice, ref rareDevicePercentileBucket, ref proxy, ref sdkVersion, ref sdkPlatform, environment, ref proximityId, ref totalHits, ref torNode, ref incrementalIdentificationStatus, ref simulator);
+                FormatSearchEvents(ref limit, ref paginationKey, ref visitorId, ref highRecallId, ref bot, ref botInfo, botInfoCategory, botInfoIdentity, botInfoConfidence, botInfoProvider, botInfoName, ref ipAddress, ref asn, ref linkedId, ref url, ref bundleId, ref packageName, ref origin, ref start, ref startDateTime, ref end, ref endDateTime, ref reverse, ref suspect, ref vpn, ref virtualMachine, ref tampering, ref antiDetectBrowser, ref incognito, ref privacySettings, ref jailbroken, ref frida, ref factoryReset, ref clonedApp, ref emulator, ref rootApps, ref vpnConfidence, ref minSuspectScore, ref developerTools, ref locationSpoofing, ref mitmAttack, ref rareDevice, ref rareDevicePercentileBucket, ref proxy, ref sdkVersion, ref sdkPlatform, environment, ref proximityId, ref totalHits, ref torNode, ref incrementalIdentificationStatus, ref simulator);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2362,6 +2626,49 @@ namespace Fingerprint.ServerSdk.Api
                     if (bot.IsSet)
                         parseQueryStringLocalVar["bot"] = ClientUtils.ParameterToString(bot.Value);
 
+                    if (botInfo.IsSet)
+                        parseQueryStringLocalVar["bot_info"] = ClientUtils.ParameterToString(botInfo.Value);
+
+                    if (botInfoCategory.IsSet)
+                    {
+                        foreach (var item in botInfoCategory.Value)
+                        {
+                            parseQueryStringLocalVar.Add("bot_info_category", ClientUtils.ParameterToString(item));
+                        }
+                    }
+
+                    if (botInfoIdentity.IsSet)
+                    {
+                        foreach (var item in botInfoIdentity.Value)
+                        {
+                            parseQueryStringLocalVar.Add("bot_info_identity", ClientUtils.ParameterToString(item));
+                        }
+                    }
+
+                    if (botInfoConfidence.IsSet)
+                    {
+                        foreach (var item in botInfoConfidence.Value)
+                        {
+                            parseQueryStringLocalVar.Add("bot_info_confidence", ClientUtils.ParameterToString(item));
+                        }
+                    }
+
+                    if (botInfoProvider.IsSet)
+                    {
+                        foreach (var item in botInfoProvider.Value)
+                        {
+                            parseQueryStringLocalVar.Add("bot_info_provider", ClientUtils.ParameterToString(item));
+                        }
+                    }
+
+                    if (botInfoName.IsSet)
+                    {
+                        foreach (var item in botInfoName.Value)
+                        {
+                            parseQueryStringLocalVar.Add("bot_info_name", ClientUtils.ParameterToString(item));
+                        }
+                    }
+
                     if (ipAddress.IsSet)
                         parseQueryStringLocalVar["ip_address"] = ClientUtils.ParameterToString(ipAddress.Value);
 
@@ -2386,8 +2693,14 @@ namespace Fingerprint.ServerSdk.Api
                     if (start.IsSet)
                         parseQueryStringLocalVar["start"] = ClientUtils.ParameterToString(start.Value);
 
+                    if (startDateTime.IsSet)
+                        parseQueryStringLocalVar["start"] = ClientUtils.ParameterToString(startDateTime.Value);
+
                     if (end.IsSet)
                         parseQueryStringLocalVar["end"] = ClientUtils.ParameterToString(end.Value);
+
+                    if (endDateTime.IsSet)
+                        parseQueryStringLocalVar["end"] = ClientUtils.ParameterToString(endDateTime.Value);
 
                     if (reverse.IsSet)
                         parseQueryStringLocalVar["reverse"] = ClientUtils.ParameterToString(reverse.Value);
@@ -2522,7 +2835,7 @@ namespace Fingerprint.ServerSdk.Api
                                 }
                         }
 
-                        AfterSearchEventsDefaultImplementation(apiResponseLocalVar, limit, paginationKey, visitorId, highRecallId, bot, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
+                        AfterSearchEventsDefaultImplementation(apiResponseLocalVar, limit, paginationKey, visitorId, highRecallId, bot, botInfo, botInfoCategory, botInfoIdentity, botInfoConfidence, botInfoProvider, botInfoName, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, startDateTime, end, endDateTime, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
 
                         Events.ExecuteOnSearchEvents(apiResponseLocalVar);
 
@@ -2536,7 +2849,7 @@ namespace Fingerprint.ServerSdk.Api
             }
             catch (Exception e)
             {
-                OnErrorSearchEventsDefaultImplementation(e, "/events", uriBuilderLocalVar.Path, limit, paginationKey, visitorId, highRecallId, bot, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
+                OnErrorSearchEventsDefaultImplementation(e, "/events", uriBuilderLocalVar.Path, limit, paginationKey, visitorId, highRecallId, bot, botInfo, botInfoCategory, botInfoIdentity, botInfoConfidence, botInfoProvider, botInfoName, ipAddress, asn, linkedId, url, bundleId, packageName, origin, start, startDateTime, end, endDateTime, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, incrementalIdentificationStatus, simulator);
                 Events.ExecuteOnErrorSearchEvents(e);
                 throw;
             }

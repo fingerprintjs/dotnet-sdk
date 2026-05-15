@@ -116,6 +116,12 @@ namespace Fingerprint.ServerSdk.Client
                 return BotInfo.IdentityEnumToJsonValue(botInfoIdentityEnum);
             if (obj is BotInfo.ConfidenceEnum botInfoConfidenceEnum)
                 return BotInfo.ConfidenceEnumToJsonValue(botInfoConfidenceEnum);
+            if (obj is BotInfoCategory botInfoCategory)
+                return BotInfoCategoryValueConverter.ToJsonValue(botInfoCategory);
+            if (obj is BotInfoConfidence botInfoConfidence)
+                return BotInfoConfidenceValueConverter.ToJsonValue(botInfoConfidence);
+            if (obj is BotInfoIdentity botInfoIdentity)
+                return BotInfoIdentityValueConverter.ToJsonValue(botInfoIdentity);
             if (obj is BotResult botResult)
                 return BotResultValueConverter.ToJsonValue(botResult);
             if (obj is ErrorCode errorCode)
@@ -136,6 +142,8 @@ namespace Fingerprint.ServerSdk.Client
                 return SDK.PlatformEnumToJsonValue(sDKPlatformEnum);
             if (obj is SearchEventsBot searchEventsBot)
                 return SearchEventsBotValueConverter.ToJsonValue(searchEventsBot);
+            if (obj is SearchEventsBotInfo searchEventsBotInfo)
+                return SearchEventsBotInfoValueConverter.ToJsonValue(searchEventsBotInfo);
             if (obj is SearchEventsIncrementalIdentificationStatus searchEventsIncrementalIdentificationStatus)
                 return SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(searchEventsIncrementalIdentificationStatus);
             if (obj is SearchEventsRareDevicePercentileBucket searchEventsRareDevicePercentileBucket)

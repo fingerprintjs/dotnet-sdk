@@ -255,7 +255,7 @@ All URIs are relative to *https://api.fpjs.io/v4*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FingerprintApi* | [**DeleteVisitorDataAsync**](docs/FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
+*FingerprintApi* | [**DeleteVisitorDataAsync**](docs/FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete a visitor ID
 *FingerprintApi* | [**GetEventAsync**](docs/FingerprintApi.md#getevent) | **GET** /events/{event_id} | Get an event by event ID
 *FingerprintApi* | [**SearchEventsAsync**](docs/FingerprintApi.md#searchevents) | **GET** /events | Search events
 *FingerprintApi* | [**UpdateEventAsync**](docs/FingerprintApi.md#updateevent) | **PATCH** /events/{event_id} | Update an event
@@ -265,6 +265,9 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Model.BotInfo](docs/models/BotInfo.md)
+ - [Model.BotInfoCategory](docs/models/BotInfoCategory.md)
+ - [Model.BotInfoConfidence](docs/models/BotInfoConfidence.md)
+ - [Model.BotInfoIdentity](docs/models/BotInfoIdentity.md)
  - [Model.BotResult](docs/models/BotResult.md)
  - [Model.BrowserDetails](docs/models/BrowserDetails.md)
  - [Model.Canvas](docs/models/Canvas.md)
@@ -290,6 +293,7 @@ Class | Method | HTTP request | Description
  - [Model.IncrementalIdentificationStatus](docs/models/IncrementalIdentificationStatus.md)
  - [Model.Integration](docs/models/Integration.md)
  - [Model.IntegrationSubintegration](docs/models/IntegrationSubintegration.md)
+ - [Model.LabelsInner](docs/models/LabelsInner.md)
  - [Model.PluginsInner](docs/models/PluginsInner.md)
  - [Model.PluginsInnerMimeTypesInner](docs/models/PluginsInnerMimeTypesInner.md)
  - [Model.Proximity](docs/models/Proximity.md)
@@ -302,6 +306,7 @@ Class | Method | HTTP request | Description
  - [Model.RuleActionType](docs/models/RuleActionType.md)
  - [Model.SDK](docs/models/SDK.md)
  - [Model.SearchEventsBot](docs/models/SearchEventsBot.md)
+ - [Model.SearchEventsBotInfo](docs/models/SearchEventsBotInfo.md)
  - [Model.SearchEventsIncrementalIdentificationStatus](docs/models/SearchEventsIncrementalIdentificationStatus.md)
  - [Model.SearchEventsRareDevicePercentileBucket](docs/models/SearchEventsRareDevicePercentileBucket.md)
  - [Model.SearchEventsSdkPlatform](docs/models/SearchEventsSdkPlatform.md)
