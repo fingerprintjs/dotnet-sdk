@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,12 @@ namespace Fingerprint.ServerSdk.Test.Api
         {
             _instance = Host.Services.GetRequiredService<IFingerprintApi>();
         }
+        
+        private static string EncodeLower(string value) =>
+            Regex.Replace(
+                WebUtility.UrlEncode(value),
+                "%[0-9A-F]{2}",
+                m => m.Value.ToLowerInvariant());
 
         /// <summary>
         /// Test DeleteVisitorData
@@ -421,9 +428,9 @@ namespace Fingerprint.ServerSdk.Test.Api
             const string iso8601DatetimeFormat = "o";
 
             var expectedUrl = $"{ServerUrl}events?"
-                              + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
-                              + $"&start={System.Web.HttpUtility.UrlEncode(startDate.ToString(iso8601DatetimeFormat))}"
-                              + $"&end={System.Web.HttpUtility.UrlEncode(endDate.ToString(iso8601DatetimeFormat))}";
+                                  + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                                  + $"&start={EncodeLower(startDate.ToString(iso8601DatetimeFormat))}"
+                                  + $"&end={EncodeLower(endDate.ToString(iso8601DatetimeFormat))}";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithStartDateTime(startDate)
