@@ -6,7 +6,6 @@ using Fingerprint.ServerSdk.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
-using dotenv.net;
 
 namespace Fingerprint.ServerSdk.FunctionalTest;
 
@@ -39,8 +38,6 @@ public class ApiTests : IAsyncLifetime
 
     public ApiTests()
     {
-        DotEnv.Load(options: new DotEnvOptions(envFilePaths: [Path.Combine(AppContext.BaseDirectory, ".env")]));
-
         _host = CreateHostBuilder().Build();
         _api = _host.Services.GetRequiredService<IFingerprintApi>();
 
