@@ -43,7 +43,7 @@ public class ApiTests : IAsyncLifetime
 
         var now = DateTimeOffset.UtcNow;
         _end = now.ToUnixTimeMilliseconds();
-        _start = now.AddDays(-90).ToUnixTimeMilliseconds();
+        _start = now.AddDays(-89).ToUnixTimeMilliseconds();
     }
 
     private static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder()
