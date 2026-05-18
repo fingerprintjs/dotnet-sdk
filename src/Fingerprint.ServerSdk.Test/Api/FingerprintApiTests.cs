@@ -257,7 +257,11 @@ namespace Fingerprint.ServerSdk.Test.Api
             const string paginationKey = "pagination";
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
             const SearchEventsBot bot = SearchEventsBot.Good;
+            const SearchEventsBotInfo botInfo = SearchEventsBotInfo.All;
             List<BotInfoIdentity> botIdentity = [BotInfoIdentity.Signed, BotInfoIdentity.Verified];
+            List<BotInfoConfidence> botConfidence = [BotInfoConfidence.High, BotInfoConfidence.Medium];
+            List<string> botInfoProvider = ["google", "openai"];
+            List<string> botInfoName = ["gemini", "chatgpt"];
             const string ipAddress = "10.0.0.0/24";
             const string asn = "asn";
             const string linkedId = "some_linked_id";
@@ -303,8 +307,15 @@ namespace Fingerprint.ServerSdk.Test.Api
                               + $"&visitor_id={visitorId}"
                               + $"&high_recall_id={highRecallId}"
                               + $"&bot={SearchEventsBotValueConverter.ToJsonValue(bot)}"
+                              + $"&bot_info=all"
                               + $"&bot_info_identity=signed"
                               + $"&bot_info_identity=verified"
+                              + $"&bot_info_confidence=high"
+                              + $"&bot_info_confidence=medium"
+                              + $"&bot_info_provider=google"
+                              + $"&bot_info_provider=openai"
+                              + $"&bot_info_name=gemini"
+                              + $"&bot_info_name=chatgpt"
                               + $"&ip_address={System.Web.HttpUtility.UrlEncode(ipAddress)}"
                               + $"&asn={asn}"
                               + $"&linked_id={linkedId}"
@@ -348,6 +359,10 @@ namespace Fingerprint.ServerSdk.Test.Api
                 .WithVisitorId(visitorId)
                 .WithBot(bot)
                 .WithBotInfoIdentity(botIdentity)
+                .WithBotInfoConfidence(botConfidence)
+                .WithBotInfoProvider(botInfoProvider)
+                .WithBotInfoName(botInfoName)
+                .WithBotInfo(botInfo)
                 .WithIpAddress(ipAddress)
                 .WithAsn(asn)
                 .WithLinkedId(linkedId)
