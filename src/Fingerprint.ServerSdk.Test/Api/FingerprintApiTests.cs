@@ -409,6 +409,70 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(), firstEvent.FactoryResetTimestamp);
             });
         }
+        
+                [Fact]
+        public async Task SearchEventsAsyncDateTimeParamsTest()
+        {
+            SetupMockResponse("events/search/get_event_search_200.json");
+
+            const double limit = 10;
+            var startDate = new DateTime(2020, 2, 18, 10, 26, 16, 511);
+            var endDate = new DateTime(2020, 2, 18, 10, 26, 16, 513);
+            const string iso8601DatetimeFormat = "o";
+
+            var expectedUrl = $"{ServerUrl}events?"
+                              + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                              + $"&start={System.Web.HttpUtility.UrlEncode(startDate.ToString(iso8601DatetimeFormat))}"
+                              + $"&end={System.Web.HttpUtility.UrlEncode(endDate.ToString(iso8601DatetimeFormat))}";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithStartDateTime(startDate)
+                .WithEndDateTime(endDate)
+            );
+
+            Assert.Multiple(() =>
+            {
+                Assert.Single(Requests);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+                var request = Requests.First().Request;
+                Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
+
+                Assert.Equal(expectedUrl, request.Url.ToString());
+                Assert.Equal("GET", request.HttpMethod);
+
+                var eventSearch = response.Ok();
+                Assert.IsType<EventSearch>(eventSearch);
+                Assert.Single(eventSearch.Events);
+                var firstEvent = eventSearch.Events.First();
+
+                Assert.IsType<Event>(firstEvent);
+                Assert.Equal("1708102555327.NLOjmg", firstEvent.EventId);
+                Assert.Equal("94.142.239.124", firstEvent.IpInfo.V4.Address);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.False(firstEvent.Emulator);
+                Assert.Equal(0, firstEvent.FactoryResetTimestamp);
+                Assert.False(firstEvent.Frida);
+                Assert.False(firstEvent.Incognito);
+                Assert.False(firstEvent.IpBlocklist.TorNode);
+                Assert.False(firstEvent.IpBlocklist.AttackSource);
+                Assert.False(firstEvent.IpBlocklist.EmailSpam);
+                Assert.False(firstEvent.Jailbroken);
+                Assert.False(firstEvent.PrivacySettings);
+                Assert.True(firstEvent.Proxy);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.Residential, firstEvent.ProxyDetails.ProxyType);
+                Assert.IsType<long>(firstEvent.ProxyDetails.LastSeenAt);
+                Assert.False(firstEvent.RootApps);
+                Assert.False(firstEvent.Tampering);
+                Assert.False(firstEvent.VirtualMachine);
+                Assert.False(firstEvent.Vpn);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
+                var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(), firstEvent.FactoryResetTimestamp);
+            });
+        }
 
         [Fact]
         public async Task SearchEventsAsync400ErrorTest()

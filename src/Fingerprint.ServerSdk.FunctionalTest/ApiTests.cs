@@ -110,6 +110,22 @@ public class ApiTests : IAsyncLifetime
         Assert.True(response.IsOk);
         Assert.NotEmpty(response.Ok().Events);
     }
+    
+    [Fact]
+    public async Task SearchEvents_DateTime_Returns()
+    {
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
+        var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
+
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStartDateTime(start)
+            .WithEndDateTime(end)
+        );
+
+        Assert.True(response.IsOk);
+        Assert.NotEmpty(response.Ok().Events);
+    }
 
     [Fact]
     public async Task SearchEvents_Pagination()
