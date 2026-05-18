@@ -6,6 +6,7 @@ using Fingerprint.ServerSdk.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
+using dotenv.net;
 
 namespace Fingerprint.ServerSdk.FunctionalTest;
 
@@ -38,6 +39,8 @@ public class ApiTests : IAsyncLifetime
 
     public ApiTests()
     {
+        DotEnv.Load(options: new DotEnvOptions(envFilePaths: [Path.Combine(AppContext.BaseDirectory, ".env")]));
+
         _host = CreateHostBuilder().Build();
         _api = _host.Services.GetRequiredService<IFingerprintApi>();
 
@@ -114,8 +117,8 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_DateTime_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
-        var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTime.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
             .WithLimit(2)
