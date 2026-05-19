@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "test",
+  "initialVersions": {
+    "fingerprint-server-dotnet-sdk": "8.2.0"
+  },
+  "changesets": []
+}
