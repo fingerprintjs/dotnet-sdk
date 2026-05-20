@@ -450,7 +450,6 @@ namespace Fingerprint.ServerSdk.Test.Api
         {
             SetupMockResponse("events/search/get_event_search_200.json");
 
-            const double limit = 10;
             var startDate = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(24));
             var endDate = DateTimeOffset.UtcNow;
             const string iso8601DatetimeFormat = "o";
