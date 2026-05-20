@@ -451,8 +451,8 @@ namespace Fingerprint.ServerSdk.Test.Api
             SetupMockResponse("events/search/get_event_search_200.json");
 
             const double limit = 10;
-            var startDate = new DateTime(2020, 2, 18, 10, 26, 16, 511);
-            var endDate = new DateTime(2020, 2, 18, 10, 26, 16, 513);
+            var startDate = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(24));
+            var endDate = DateTimeOffset.UtcNow;
             const string iso8601DatetimeFormat = "o";
 
             var expectedUrl = $"{ServerUrl}events?"
@@ -515,7 +515,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         {
             SetupMockResponse("events/search/get_event_search_200.json");
             
-            var startDate = new DateTime(2020, 2, 18, 10, 26, 16, 511);
+            var startDate = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(24));
             const long end = 1582299576513;
             const string iso8601DatetimeFormat = "o";
 
@@ -580,7 +580,7 @@ namespace Fingerprint.ServerSdk.Test.Api
             SetupMockResponse("events/search/get_event_search_200.json");
             
             const long start = 1582299576513;
-            var endDate = new DateTime(2020, 2, 18, 10, 26, 16, 513);
+            var endDate = DateTimeOffset.UtcNow;
             const string iso8601DatetimeFormat = "o";
 
             var expectedUrl = $"{ServerUrl}events?"

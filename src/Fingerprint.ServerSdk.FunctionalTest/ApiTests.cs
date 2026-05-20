@@ -114,8 +114,8 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_DateTime_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
-        var end = DateTime.UtcNow;
+        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTimeOffset.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
             .WithLimit(2)
@@ -130,13 +130,13 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_StartDateTime_EndTimestamp_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
-        var end = DateTime.UtcNow;
+        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTimeOffset.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
             .WithLimit(2)
             .WithStartDateTime(start)
-            .WithEnd(new DateTimeOffset(end, TimeSpan.Zero).ToUnixTimeMilliseconds())
+            .WithEnd(end.ToUnixTimeMilliseconds())
         );
 
         Assert.True(response.IsOk);

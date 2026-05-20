@@ -28,6 +28,9 @@
     "sealedResultExamplePackageGuid": "{52C20793-185A-4912-9882-74C0E06366A4}",
     "webhookExamplePackageName": "Fingerprint.ServerSdk.WebhookExample",
     "webhookExamplePackageGuid": "{4595C75E-BAC1-453F-B14A-25C670B93589}",
+    "typeMappings": {
+        "DateTime": "DateTimeOffset"
+    },
     "files": {
         "DecryptionKey.md.mustache": {
             "folder": "docs/models",
