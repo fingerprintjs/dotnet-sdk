@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.3.0-test.1
+
+### Patch Changes
+
+- **events**: Require `label` on smart signal `Labels` items ([3e1a5a8](https://github.com/fingerprintjs/dotnet-sdk/commit/3e1a5a86172910520359b06d789995f4b18ae21d))
+
 ## 8.3.0-test.0
 
 ### Minor Changes
