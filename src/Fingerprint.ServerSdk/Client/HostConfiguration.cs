@@ -66,6 +66,12 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             _jsonOptions.Converters.Add(new BotInfoJsonConverter());
+            _jsonOptions.Converters.Add(new BotInfoCategoryJsonConverter());
+            _jsonOptions.Converters.Add(new BotInfoCategoryNullableJsonConverter());
+            _jsonOptions.Converters.Add(new BotInfoConfidenceJsonConverter());
+            _jsonOptions.Converters.Add(new BotInfoConfidenceNullableJsonConverter());
+            _jsonOptions.Converters.Add(new BotInfoIdentityJsonConverter());
+            _jsonOptions.Converters.Add(new BotInfoIdentityNullableJsonConverter());
             _jsonOptions.Converters.Add(new BotResultJsonConverter());
             _jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
             _jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
@@ -94,6 +100,7 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new IncrementalIdentificationStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new IntegrationJsonConverter());
             _jsonOptions.Converters.Add(new IntegrationSubintegrationJsonConverter());
+            _jsonOptions.Converters.Add(new LabelsInnerJsonConverter());
             _jsonOptions.Converters.Add(new PluginsInnerJsonConverter());
             _jsonOptions.Converters.Add(new PluginsInnerMimeTypesInnerJsonConverter());
             _jsonOptions.Converters.Add(new ProximityJsonConverter());
@@ -110,6 +117,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new SDKJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsBotInfoJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsBotInfoNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketJsonConverter());

@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,12 @@ namespace Fingerprint.ServerSdk.Test.Api
             _instance = Host.Services.GetRequiredService<IFingerprintApi>();
         }
 
+        private static string EncodeLower(string value) =>
+            Regex.Replace(
+                WebUtility.UrlEncode(value),
+                "%[0-9A-F]{2}",
+                m => m.Value.ToLowerInvariant());
+
         /// <summary>
         /// Test DeleteVisitorData
         /// </summary>
@@ -52,7 +59,9 @@ namespace Fingerprint.ServerSdk.Test.Api
 
                 var request = Requests.First().Request;
                 Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
-                Assert.Equal($"{ServerUrl}visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}", request.Url.ToString());
+                Assert.Equal(
+                    $"{ServerUrl}visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}",
+                    request.Url.ToString());
                 Assert.Equal("DELETE", request.HttpMethod);
             });
         }
@@ -147,7 +156,9 @@ namespace Fingerprint.ServerSdk.Test.Api
 
                 var request = Requests.First().Request;
                 Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
-                Assert.Equal($"{ServerUrl}events/{eventId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}", request.Url.ToString());
+                Assert.Equal(
+                    $"{ServerUrl}events/{eventId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}",
+                    request.Url.ToString());
                 Assert.Equal("GET", request.HttpMethod);
 
                 var model = response.Ok();
@@ -174,9 +185,9 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.IsType<long>(model.FactoryResetTimestamp);
                 var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
                     DateTimeStyles.AdjustToUniversal);
-                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(), model.FactoryResetTimestamp);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
+                    model.FactoryResetTimestamp);
             });
-
         }
 
         [Fact]
@@ -195,7 +206,9 @@ namespace Fingerprint.ServerSdk.Test.Api
 
                 var request = Requests.First().Request;
                 Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
-                Assert.Equal($"{ServerUrl}events?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}&limit={limit}", request.Url.ToString());
+                Assert.Equal(
+                    $"{ServerUrl}events?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}&limit={limit}",
+                    request.Url.ToString());
                 Assert.Equal("GET", request.HttpMethod);
 
                 var eventSearch = response.Ok();
@@ -227,7 +240,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
                 var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
                     DateTimeStyles.AdjustToUniversal);
-                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(), firstEvent.FactoryResetTimestamp);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
+                    firstEvent.FactoryResetTimestamp);
             });
         }
 
@@ -243,6 +257,11 @@ namespace Fingerprint.ServerSdk.Test.Api
             const string paginationKey = "pagination";
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
             const SearchEventsBot bot = SearchEventsBot.Good;
+            const SearchEventsBotInfo botInfo = SearchEventsBotInfo.All;
+            List<BotInfoIdentity> botIdentity = [BotInfoIdentity.Signed, BotInfoIdentity.Verified];
+            List<BotInfoConfidence> botConfidence = [BotInfoConfidence.High, BotInfoConfidence.Medium];
+            List<string> botInfoProvider = ["google", "openai"];
+            List<string> botInfoName = ["gemini", "chatgpt"];
             const string ipAddress = "10.0.0.0/24";
             const string asn = "asn";
             const string linkedId = "some_linked_id";
@@ -277,58 +296,73 @@ namespace Fingerprint.ServerSdk.Test.Api
             const long totalHits = 1;
             const bool torNode = false;
             const string highRecallId = "testHighRecallID";
-            const SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus = SearchEventsIncrementalIdentificationStatus.PartiallyCompleted;
+            const SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus =
+                SearchEventsIncrementalIdentificationStatus.PartiallyCompleted;
             const bool simulator = true;
 
             var expectedUrl = $"{ServerUrl}events?"
-                + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
-                + $"&limit={limit}"
-                + $"&pagination_key={paginationKey}"
-                + $"&visitor_id={visitorId}"
-                + $"&high_recall_id={highRecallId}"
-                + $"&bot={SearchEventsBotValueConverter.ToJsonValue(bot)}"
-                + $"&ip_address={System.Web.HttpUtility.UrlEncode(ipAddress)}"
-                + $"&asn={asn}"
-                + $"&linked_id={linkedId}"
-                + $"&url=https%3a%2f%2fwww.example.com%2flogin%3fhope{{this{{works%5b!"
-                + $"&origin={origin}"
-                + $"&start={start}"
-                + $"&end={end}"
-                + $"&reverse={reverse.ToString().ToLower()}"
-                + $"&suspect={suspect.ToString().ToLower()}"
-                + $"&vpn={vpn.ToString().ToLower()}"
-                + $"&virtual_machine={virtualMachine.ToString().ToLower()}"
-                + $"&tampering={tampering.ToString().ToLower()}"
-                + $"&anti_detect_browser={antiDetectBrowser.ToString().ToLower()}"
-                + $"&incognito={incognito.ToString().ToLower()}"
-                + $"&privacy_settings={privacySettings.ToString().ToLower()}"
-                + $"&jailbroken={jailbroken.ToString().ToLower()}"
-                + $"&frida={frida.ToString().ToLower()}"
-                + $"&factory_reset={factoryReset.ToString().ToLower()}"
-                + $"&cloned_app={clonedApp.ToString().ToLower()}"
-                + $"&emulator={emulator.ToString().ToLower()}"
-                + $"&root_apps={rootApps.ToString().ToLower()}"
-                + $"&vpn_confidence={SearchEventsVpnConfidenceValueConverter.ToJsonValue(vpnConfidence)}"
-                + $"&min_suspect_score={minSuspectScore.ToString(CultureInfo.InvariantCulture)}"
-                + $"&developer_tools={developerTools.ToString().ToLower()}"
-                + $"&location_spoofing={locationSpoofing.ToString().ToLower()}"
-                + $"&mitm_attack={mitmAttack.ToString().ToLower()}"
-                + $"&proxy={proxy.ToString().ToLower()}"
-                + $"&sdk_version={sdkVersion}"
-                + $"&sdk_platform={SearchEventsSdkPlatformValueConverter.ToJsonValue(sdkPlatform)}"
-                + $"&environment={environment[0]}"
-                + $"&environment={environment[1]}"
-                + $"&proximity_id={proximityId}"
-                + $"&total_hits={totalHits}"
-                + $"&tor_node={torNode.ToString().ToLower()}"
-                + $"&incremental_identification_status={SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus)}"
-                + $"&simulator={simulator.ToString().ToLower()}";
+                              + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                              + $"&limit={limit}"
+                              + $"&pagination_key={paginationKey}"
+                              + $"&visitor_id={visitorId}"
+                              + $"&high_recall_id={highRecallId}"
+                              + $"&bot={SearchEventsBotValueConverter.ToJsonValue(bot)}"
+                              + $"&bot_info=all"
+                              + $"&bot_info_identity=signed"
+                              + $"&bot_info_identity=verified"
+                              + $"&bot_info_confidence=high"
+                              + $"&bot_info_confidence=medium"
+                              + $"&bot_info_provider=google"
+                              + $"&bot_info_provider=openai"
+                              + $"&bot_info_name=gemini"
+                              + $"&bot_info_name=chatgpt"
+                              + $"&ip_address={System.Web.HttpUtility.UrlEncode(ipAddress)}"
+                              + $"&asn={asn}"
+                              + $"&linked_id={linkedId}"
+                              + $"&url=https%3a%2f%2fwww.example.com%2flogin%3fhope{{this{{works%5b!"
+                              + $"&origin={origin}"
+                              + $"&start={start}"
+                              + $"&end={end}"
+                              + $"&reverse={reverse.ToString().ToLower()}"
+                              + $"&suspect={suspect.ToString().ToLower()}"
+                              + $"&vpn={vpn.ToString().ToLower()}"
+                              + $"&virtual_machine={virtualMachine.ToString().ToLower()}"
+                              + $"&tampering={tampering.ToString().ToLower()}"
+                              + $"&anti_detect_browser={antiDetectBrowser.ToString().ToLower()}"
+                              + $"&incognito={incognito.ToString().ToLower()}"
+                              + $"&privacy_settings={privacySettings.ToString().ToLower()}"
+                              + $"&jailbroken={jailbroken.ToString().ToLower()}"
+                              + $"&frida={frida.ToString().ToLower()}"
+                              + $"&factory_reset={factoryReset.ToString().ToLower()}"
+                              + $"&cloned_app={clonedApp.ToString().ToLower()}"
+                              + $"&emulator={emulator.ToString().ToLower()}"
+                              + $"&root_apps={rootApps.ToString().ToLower()}"
+                              + $"&vpn_confidence={SearchEventsVpnConfidenceValueConverter.ToJsonValue(vpnConfidence)}"
+                              + $"&min_suspect_score={minSuspectScore.ToString(CultureInfo.InvariantCulture)}"
+                              + $"&developer_tools={developerTools.ToString().ToLower()}"
+                              + $"&location_spoofing={locationSpoofing.ToString().ToLower()}"
+                              + $"&mitm_attack={mitmAttack.ToString().ToLower()}"
+                              + $"&proxy={proxy.ToString().ToLower()}"
+                              + $"&sdk_version={sdkVersion}"
+                              + $"&sdk_platform={SearchEventsSdkPlatformValueConverter.ToJsonValue(sdkPlatform)}"
+                              + $"&environment={environment[0]}"
+                              + $"&environment={environment[1]}"
+                              + $"&proximity_id={proximityId}"
+                              + $"&total_hits={totalHits}"
+                              + $"&tor_node={torNode.ToString().ToLower()}"
+                              + $"&incremental_identification_status={SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus)}"
+                              + $"&simulator={simulator.ToString().ToLower()}";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithLimit(limit)
                 .WithPaginationKey(paginationKey)
                 .WithVisitorId(visitorId)
                 .WithBot(bot)
+                .WithBotInfoIdentity(botIdentity)
+                .WithBotInfoConfidence(botConfidence)
+                .WithBotInfoProvider(botInfoProvider)
+                .WithBotInfoName(botInfoName)
+                .WithBotInfo(botInfo)
                 .WithIpAddress(ipAddress)
                 .WithAsn(asn)
                 .WithLinkedId(linkedId)
@@ -406,7 +440,200 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
                 var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
                     DateTimeStyles.AdjustToUniversal);
-                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(), firstEvent.FactoryResetTimestamp);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
+                    firstEvent.FactoryResetTimestamp);
+            });
+        }
+
+        [Fact]
+        public async Task SearchEventsAsyncDateTimeParamsTest()
+        {
+            SetupMockResponse("events/search/get_event_search_200.json");
+
+            var startDate = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(24));
+            var endDate = DateTimeOffset.UtcNow;
+            const string iso8601DatetimeFormat = "o";
+
+            var expectedUrl = $"{ServerUrl}events?"
+                              + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                              + $"&start={EncodeLower(startDate.ToString(iso8601DatetimeFormat))}"
+                              + $"&end={EncodeLower(endDate.ToString(iso8601DatetimeFormat))}";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithStartDateTime(startDate)
+                .WithEndDateTime(endDate)
+            );
+
+            Assert.Multiple(() =>
+            {
+                Assert.Single(Requests);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+                var request = Requests.First().Request;
+                Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
+
+                Assert.Equal(expectedUrl, request.Url.ToString());
+                Assert.Equal("GET", request.HttpMethod);
+
+                var eventSearch = response.Ok();
+                Assert.IsType<EventSearch>(eventSearch);
+                Assert.Single(eventSearch.Events);
+                var firstEvent = eventSearch.Events.First();
+
+                Assert.IsType<Event>(firstEvent);
+                Assert.Equal("1708102555327.NLOjmg", firstEvent.EventId);
+                Assert.Equal("94.142.239.124", firstEvent.IpInfo.V4.Address);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.False(firstEvent.Emulator);
+                Assert.Equal(0, firstEvent.FactoryResetTimestamp);
+                Assert.False(firstEvent.Frida);
+                Assert.False(firstEvent.Incognito);
+                Assert.False(firstEvent.IpBlocklist.TorNode);
+                Assert.False(firstEvent.IpBlocklist.AttackSource);
+                Assert.False(firstEvent.IpBlocklist.EmailSpam);
+                Assert.False(firstEvent.Jailbroken);
+                Assert.False(firstEvent.PrivacySettings);
+                Assert.True(firstEvent.Proxy);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.Residential, firstEvent.ProxyDetails.ProxyType);
+                Assert.IsType<long>(firstEvent.ProxyDetails.LastSeenAt);
+                Assert.False(firstEvent.RootApps);
+                Assert.False(firstEvent.Tampering);
+                Assert.False(firstEvent.VirtualMachine);
+                Assert.False(firstEvent.Vpn);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
+                var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
+                    firstEvent.FactoryResetTimestamp);
+            });
+        }
+
+        [Fact]
+        public async Task SearchEventsAsyncStartDateTimeEndTimestampParamsTest()
+        {
+            SetupMockResponse("events/search/get_event_search_200.json");
+
+            var startDate = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(24));
+            const long end = 1582299576513;
+            const string iso8601DatetimeFormat = "o";
+
+            var expectedUrl = $"{ServerUrl}events?"
+                              + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                              + $"&start={EncodeLower(startDate.ToString(iso8601DatetimeFormat))}"
+                              + $"&end={end}";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithStartDateTime(startDate)
+                .WithEnd(end)
+            );
+
+            Assert.Multiple(() =>
+            {
+                Assert.Single(Requests);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+                var request = Requests.First().Request;
+                Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
+
+                Assert.Equal(expectedUrl, request.Url.ToString());
+                Assert.Equal("GET", request.HttpMethod);
+
+                var eventSearch = response.Ok();
+                Assert.IsType<EventSearch>(eventSearch);
+                Assert.Single(eventSearch.Events);
+                var firstEvent = eventSearch.Events.First();
+
+                Assert.IsType<Event>(firstEvent);
+                Assert.Equal("1708102555327.NLOjmg", firstEvent.EventId);
+                Assert.Equal("94.142.239.124", firstEvent.IpInfo.V4.Address);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.False(firstEvent.Emulator);
+                Assert.Equal(0, firstEvent.FactoryResetTimestamp);
+                Assert.False(firstEvent.Frida);
+                Assert.False(firstEvent.Incognito);
+                Assert.False(firstEvent.IpBlocklist.TorNode);
+                Assert.False(firstEvent.IpBlocklist.AttackSource);
+                Assert.False(firstEvent.IpBlocklist.EmailSpam);
+                Assert.False(firstEvent.Jailbroken);
+                Assert.False(firstEvent.PrivacySettings);
+                Assert.True(firstEvent.Proxy);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.Residential, firstEvent.ProxyDetails.ProxyType);
+                Assert.IsType<long>(firstEvent.ProxyDetails.LastSeenAt);
+                Assert.False(firstEvent.RootApps);
+                Assert.False(firstEvent.Tampering);
+                Assert.False(firstEvent.VirtualMachine);
+                Assert.False(firstEvent.Vpn);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
+                var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
+                    firstEvent.FactoryResetTimestamp);
+            });
+        }
+
+        [Fact]
+        public async Task SearchEventsAsyncStartTimestampEndDateTimeParamsTest()
+        {
+            SetupMockResponse("events/search/get_event_search_200.json");
+
+            const long start = 1582299576513;
+            var endDate = DateTimeOffset.UtcNow;
+            const string iso8601DatetimeFormat = "o";
+
+            var expectedUrl = $"{ServerUrl}events?"
+                              + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
+                              + $"&start={start}"
+                              + $"&end={EncodeLower(endDate.ToString(iso8601DatetimeFormat))}";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithStart(start)
+                .WithEndDateTime(endDate)
+            );
+
+            Assert.Multiple(() =>
+            {
+                Assert.Single(Requests);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+                var request = Requests.First().Request;
+                Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
+
+                Assert.Equal(expectedUrl, request.Url.ToString());
+                Assert.Equal("GET", request.HttpMethod);
+
+                var eventSearch = response.Ok();
+                Assert.IsType<EventSearch>(eventSearch);
+                Assert.Single(eventSearch.Events);
+                var firstEvent = eventSearch.Events.First();
+
+                Assert.IsType<Event>(firstEvent);
+                Assert.Equal("1708102555327.NLOjmg", firstEvent.EventId);
+                Assert.Equal("94.142.239.124", firstEvent.IpInfo.V4.Address);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.False(firstEvent.Emulator);
+                Assert.Equal(0, firstEvent.FactoryResetTimestamp);
+                Assert.False(firstEvent.Frida);
+                Assert.False(firstEvent.Incognito);
+                Assert.False(firstEvent.IpBlocklist.TorNode);
+                Assert.False(firstEvent.IpBlocklist.AttackSource);
+                Assert.False(firstEvent.IpBlocklist.EmailSpam);
+                Assert.False(firstEvent.Jailbroken);
+                Assert.False(firstEvent.PrivacySettings);
+                Assert.True(firstEvent.Proxy);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.Residential, firstEvent.ProxyDetails.ProxyType);
+                Assert.IsType<long>(firstEvent.ProxyDetails.LastSeenAt);
+                Assert.False(firstEvent.RootApps);
+                Assert.False(firstEvent.Tampering);
+                Assert.False(firstEvent.VirtualMachine);
+                Assert.False(firstEvent.Vpn);
+                Assert.False(firstEvent.ClonedApp);
+                Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
+                var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal);
+                Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
+                    firstEvent.FactoryResetTimestamp);
             });
         }
 
@@ -478,10 +705,13 @@ namespace Fingerprint.ServerSdk.Test.Api
                 var body = firstRequest.Body;
 
                 Assert.Equal($"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}", request.Headers.Get("User-Agent"));
-                Assert.Equal($"{ServerUrl}events/{eventId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}", request.Url.ToString());
+                Assert.Equal(
+                    $"{ServerUrl}events/{eventId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}",
+                    request.Url.ToString());
                 Assert.Equal("PATCH", request.HttpMethod);
                 Assert.Equal("application/json", request.ContentType);
-                Assert.Equal(JsonSerializer.Serialize(eventUpdate, Host.Services.GetService<JsonSerializerOptions>()), body);
+                Assert.Equal(JsonSerializer.Serialize(eventUpdate, Host.Services.GetService<JsonSerializerOptions>()),
+                    body);
             });
         }
 

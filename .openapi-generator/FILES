@@ -2,6 +2,9 @@ Fingerprint.ServerSdk.sln
 README.md
 docs/apis/FingerprintApi.md
 docs/models/BotInfo.md
+docs/models/BotInfoCategory.md
+docs/models/BotInfoConfidence.md
+docs/models/BotInfoIdentity.md
 docs/models/BotResult.md
 docs/models/BrowserDetails.md
 docs/models/Canvas.md
@@ -28,6 +31,7 @@ docs/models/IdentificationConfidence.md
 docs/models/IncrementalIdentificationStatus.md
 docs/models/Integration.md
 docs/models/IntegrationSubintegration.md
+docs/models/LabelsInner.md
 docs/models/PluginsInner.md
 docs/models/PluginsInnerMimeTypesInner.md
 docs/models/Proximity.md
@@ -41,6 +45,7 @@ docs/models/RuleActionType.md
 docs/models/SDK.md
 docs/models/Sealed.md
 docs/models/SearchEventsBot.md
+docs/models/SearchEventsBotInfo.md
 docs/models/SearchEventsIncrementalIdentificationStatus.md
 docs/models/SearchEventsRareDevicePercentileBucket.md
 docs/models/SearchEventsSdkPlatform.md
@@ -83,6 +88,9 @@ src/Fingerprint.ServerSdk/Extensions/IHttpClientBuilderExtensions.cs
 src/Fingerprint.ServerSdk/Extensions/IServiceCollectionExtensions.cs
 src/Fingerprint.ServerSdk/Fingerprint.ServerSdk.csproj
 src/Fingerprint.ServerSdk/Model/BotInfo.cs
+src/Fingerprint.ServerSdk/Model/BotInfoCategory.cs
+src/Fingerprint.ServerSdk/Model/BotInfoConfidence.cs
+src/Fingerprint.ServerSdk/Model/BotInfoIdentity.cs
 src/Fingerprint.ServerSdk/Model/BotResult.cs
 src/Fingerprint.ServerSdk/Model/BrowserDetails.cs
 src/Fingerprint.ServerSdk/Model/Canvas.cs
@@ -108,6 +116,7 @@ src/Fingerprint.ServerSdk/Model/IdentificationConfidence.cs
 src/Fingerprint.ServerSdk/Model/IncrementalIdentificationStatus.cs
 src/Fingerprint.ServerSdk/Model/Integration.cs
 src/Fingerprint.ServerSdk/Model/IntegrationSubintegration.cs
+src/Fingerprint.ServerSdk/Model/LabelsInner.cs
 src/Fingerprint.ServerSdk/Model/PluginsInner.cs
 src/Fingerprint.ServerSdk/Model/PluginsInnerMimeTypesInner.cs
 src/Fingerprint.ServerSdk/Model/Proximity.cs
@@ -120,6 +129,7 @@ src/Fingerprint.ServerSdk/Model/RuleActionHeaderField.cs
 src/Fingerprint.ServerSdk/Model/RuleActionType.cs
 src/Fingerprint.ServerSdk/Model/SDK.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsBot.cs
+src/Fingerprint.ServerSdk/Model/SearchEventsBotInfo.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsIncrementalIdentificationStatus.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsRareDevicePercentileBucket.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsSdkPlatform.cs

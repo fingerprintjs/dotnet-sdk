@@ -33,10 +33,10 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BotInfo" /> class.
         /// </summary>
-        /// <param name="category">The type and purpose of the bot. (required).</param>
+        /// <param name="category">The type and purpose of the bot.  (required).</param>
         /// <param name="provider">The organization or company operating the bot. (required).</param>
         /// <param name="name">The specific name or identifier of the bot. (required).</param>
-        /// <param name="identity">The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity.  (required).</param>
+        /// <param name="identity">The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider's customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity.  (required).</param>
         /// <param name="confidence">Confidence level of the bot identification. (required).</param>
         /// <param name="providerUrl">The URL of the bot provider's website..</param>
         [JsonConstructor]
@@ -54,9 +54,9 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
+        /// The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider's customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
         /// </summary>
-        /// <value>The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. </value>
+        /// <value>The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider's customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. </value>
         public enum IdentityEnum
         {
             /// <summary>
@@ -153,9 +153,9 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         /// <summary>
-        /// The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
+        /// The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider's customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
         /// </summary>
-        /// <value>The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. </value>
+        /// <value>The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider's customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. </value>
         [JsonPropertyName("identity")]
         public IdentityEnum Identity { get; set; }
 
@@ -251,9 +251,9 @@ namespace Fingerprint.ServerSdk.Model
         public ConfidenceEnum Confidence { get; set; }
 
         /// <summary>
-        /// The type and purpose of the bot.
+        /// The type and purpose of the bot. 
         /// </summary>
-        /// <value>The type and purpose of the bot.</value>
+        /// <value>The type and purpose of the bot. </value>
         [JsonPropertyName("category")]
         public string Category { get; set; }
 

@@ -43,7 +43,7 @@ public class ApiTests : IAsyncLifetime
 
         var now = DateTimeOffset.UtcNow;
         _end = now.ToUnixTimeMilliseconds();
-        _start = now.AddDays(-90).ToUnixTimeMilliseconds();
+        _start = now.AddDays(-89).ToUnixTimeMilliseconds();
     }
 
     private static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder()
@@ -99,13 +99,61 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
-        var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTime.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
             .WithLimit(2)
             .WithStart(new DateTimeOffset(start, TimeSpan.Zero).ToUnixTimeMilliseconds())
             .WithEnd(new DateTimeOffset(end, TimeSpan.Zero).ToUnixTimeMilliseconds()));
+
+        Assert.True(response.IsOk);
+        Assert.NotEmpty(response.Ok().Events);
+    }
+    
+    [Fact]
+    public async Task SearchEvents_DateTime_Returns()
+    {
+        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTimeOffset.UtcNow;
+
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStartDateTime(start)
+            .WithEndDateTime(end)
+        );
+
+        Assert.True(response.IsOk);
+        Assert.NotEmpty(response.Ok().Events);
+    }
+    
+    [Fact]
+    public async Task SearchEvents_StartDateTime_EndTimestamp_Returns()
+    {
+        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTimeOffset.UtcNow;
+
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStartDateTime(start)
+            .WithEnd(end.ToUnixTimeMilliseconds())
+        );
+
+        Assert.True(response.IsOk);
+        Assert.NotEmpty(response.Ok().Events);
+    }
+    
+    [Fact]
+    public async Task SearchEvents_StartTimestamp_EndDateTime_Returns()
+    {
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var end = DateTime.UtcNow;
+
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStart(new DateTimeOffset(start, TimeSpan.Zero).ToUnixTimeMilliseconds())
+            .WithEndDateTime(end)
+        );
 
         Assert.True(response.IsOk);
         Assert.NotEmpty(response.Ok().Events);

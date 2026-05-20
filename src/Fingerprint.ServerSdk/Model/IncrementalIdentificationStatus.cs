@@ -24,9 +24,9 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// Only included for requests using incremental identification. - `partially_completed` - the event did not receive the second \"update\" request. - `completed` - the event was updated and all information is available. 
+    /// Only included for requests using incremental identification. - `partially_completed` - Indicates this event corresponds to a 'minimal' request. Smart Signals, even if included in your plan, are not computed; hence, their values must be ignored. - `completed` - Indicates this event corresponds to a 'complete' request. Smart Signals, if included in your plan, are computed; hence, their values are valid and relevant.  
     /// </summary>
-    /// <value>Only included for requests using incremental identification. - `partially_completed` - the event did not receive the second \"update\" request. - `completed` - the event was updated and all information is available. </value>
+    /// <value>Only included for requests using incremental identification. - `partially_completed` - Indicates this event corresponds to a 'minimal' request. Smart Signals, even if included in your plan, are not computed; hence, their values must be ignored. - `completed` - Indicates this event corresponds to a 'complete' request. Smart Signals, if included in your plan, are computed; hence, their values are valid and relevant.  </value>
     public enum IncrementalIdentificationStatus
     {
         /// <summary>
