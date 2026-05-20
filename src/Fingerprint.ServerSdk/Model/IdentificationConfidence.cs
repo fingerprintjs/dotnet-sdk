@@ -24,7 +24,7 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// IdentificationConfidence
+    /// The confidence score represents the probability of a false-positive identification. To learn more, visit [Confidence Score](https://docs.fingerprint.com/docs/identification-accuracy-and-confidence#confidence-score). Please note that the confidence score is not yet supported for [High Recall ID](https://docs.fingerprint.com/docs/supplementary-identifiers-highrecall). 
     /// </summary>
     public partial class IdentificationConfidence : IValidatableObject
     {
@@ -33,8 +33,8 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentificationConfidence" /> class.
         /// </summary>
-        /// <param name="score">The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification. (required).</param>
-        /// <param name="varVersion">The version name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method..</param>
+        /// <param name="score">A floating-point number between 0 and 1 that represents the probability of a false-positive identification. For High Recall ID, this value is 0.  (required).</param>
+        /// <param name="varVersion">The version name of the method used to calculate the confidence score. For High Recall ID, this value is \"Not Supported\". .</param>
         /// <param name="comment">comment.</param>
         [JsonConstructor]
         public IdentificationConfidence(double score, Option<string> varVersion = default, Option<string> comment = default)
@@ -48,9 +48,9 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification.
+        /// A floating-point number between 0 and 1 that represents the probability of a false-positive identification. For High Recall ID, this value is 0. 
         /// </summary>
-        /// <value>The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification.</value>
+        /// <value>A floating-point number between 0 and 1 that represents the probability of a false-positive identification. For High Recall ID, this value is 0. </value>
         [JsonPropertyName("score")]
         public double Score { get; set; }
 
@@ -62,9 +62,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> VarVersionOption { get; private set; }
 
         /// <summary>
-        /// The version name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method.
+        /// The version name of the method used to calculate the confidence score. For High Recall ID, this value is \"Not Supported\". 
         /// </summary>
-        /// <value>The version name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method.</value>
+        /// <value>The version name of the method used to calculate the confidence score. For High Recall ID, this value is \"Not Supported\". </value>
         [JsonPropertyName("version")]
         public string VarVersion { get { return this.VarVersionOption; } set { this.VarVersionOption = new Option<string>(value); } }
 

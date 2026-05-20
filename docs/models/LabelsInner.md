@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Label** | **string** |  | [optional] 
+**Label** | **string** |  | 
 **Prediction** | **bool** |  | [optional] 
 **MlScore** | **double** |  | [optional] 
 
