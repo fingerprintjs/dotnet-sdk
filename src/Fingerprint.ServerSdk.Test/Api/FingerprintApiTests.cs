@@ -514,7 +514,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         public async Task SearchEventsAsyncStartDateTimeEndTimestampParamsTest()
         {
             SetupMockResponse("events/search/get_event_search_200.json");
-            
+
             var startDate = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(24));
             const long end = 1582299576513;
             const string iso8601DatetimeFormat = "o";
@@ -573,12 +573,12 @@ namespace Fingerprint.ServerSdk.Test.Api
                     firstEvent.FactoryResetTimestamp);
             });
         }
-        
-                [Fact]
+
+        [Fact]
         public async Task SearchEventsAsyncStartTimestampEndDateTimeParamsTest()
         {
             SetupMockResponse("events/search/get_event_search_200.json");
-            
+
             const long start = 1582299576513;
             var endDate = DateTimeOffset.UtcNow;
             const string iso8601DatetimeFormat = "o";
