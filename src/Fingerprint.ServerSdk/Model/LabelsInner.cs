@@ -33,13 +33,13 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelsInner" /> class.
         /// </summary>
-        /// <param name="label">label.</param>
+        /// <param name="label">label (required).</param>
         /// <param name="prediction">prediction.</param>
         /// <param name="mlScore">mlScore.</param>
         [JsonConstructor]
-        public LabelsInner(Option<string> label = default, Option<bool?> prediction = default, Option<double?> mlScore = default)
+        public LabelsInner(string label, Option<bool?> prediction = default, Option<double?> mlScore = default)
         {
-            LabelOption = label;
+            Label = label;
             PredictionOption = prediction;
             MlScoreOption = mlScore;
             OnCreated();
@@ -48,17 +48,10 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of Label
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string> LabelOption { get; private set; }
-
-        /// <summary>
         /// Gets or Sets Label
         /// </summary>
         [JsonPropertyName("label")]
-        public string Label { get { return this.LabelOption; } set { this.LabelOption = new Option<string>(value); } }
+        public string Label { get; set; }
 
         /// <summary>
         /// Used to track the state of Prediction
@@ -180,6 +173,9 @@ namespace Fingerprint.ServerSdk.Model
                 }
             }
 
+            if (!label.IsSet)
+                throw new ArgumentException("Property is required for class LabelsInner.", nameof(label));
+
             if (label.IsSet && label.Value == null)
                 throw new ArgumentNullException(nameof(label), "Property is not nullable for class LabelsInner.");
 
@@ -189,7 +185,7 @@ namespace Fingerprint.ServerSdk.Model
             if (mlScore.IsSet && mlScore.Value == null)
                 throw new ArgumentNullException(nameof(mlScore), "Property is not nullable for class LabelsInner.");
 
-            return new LabelsInner(label, prediction, mlScore);
+            return new LabelsInner(label.Value, prediction, mlScore);
         }
 
         /// <summary>
@@ -216,11 +212,10 @@ namespace Fingerprint.ServerSdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, LabelsInner labelsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (labelsInner.LabelOption.IsSet && labelsInner.Label == null)
+            if (labelsInner.Label == null)
                 throw new ArgumentNullException(nameof(labelsInner.Label), "Property is required for class LabelsInner.");
 
-            if (labelsInner.LabelOption.IsSet)
-                writer.WriteString("label", labelsInner.Label);
+            writer.WriteString("label", labelsInner.Label);
 
             if (labelsInner.PredictionOption.IsSet)
                 writer.WriteBoolean("prediction", labelsInner.PredictionOption.Value.Value);
