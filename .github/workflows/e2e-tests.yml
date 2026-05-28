@@ -21,6 +21,7 @@ jobs:
     with:
       sdk: dotnet
       sdkVersion: ${{ needs.read-version.outputs.version }}
+      sdkPackageName: 'FingerprintPro.ServerSdk'
       appId: ${{ vars.RUNNER_APP_ID }}
       commitSha: ${{ github.event.pull_request.head.sha || github.sha }}
     secrets:
