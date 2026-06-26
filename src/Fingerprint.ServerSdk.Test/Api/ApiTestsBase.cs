@@ -80,9 +80,18 @@ namespace Fingerprint.ServerSdk.Test.Api
 
         protected void SetupMockResponse(string fileName)
         {
+            _mockResponseBytes = Encoding.UTF8.GetBytes(ReadMockFile(fileName));
+        }
+
+        protected void SetupMockResponseFromString(string body)
+        {
+            _mockResponseBytes = Encoding.UTF8.GetBytes(body);
+        }
+
+        protected static string ReadMockFile(string fileName)
+        {
             var path = Path.Combine(AppContext.BaseDirectory, "mocks", fileName);
-            var mockResponse = File.ReadAllText(path);
-            _mockResponseBytes = Encoding.UTF8.GetBytes(mockResponse);
+            return File.ReadAllText(path);
         }
 
         private async Task HandleConnection()
