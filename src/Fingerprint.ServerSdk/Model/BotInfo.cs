@@ -154,6 +154,9 @@ namespace Fingerprint.ServerSdk.Model
             if (value == IdentityEnum.Unknown)
                 return "unknown";
 
+            if (value == IdentityEnum.UnsupportedValueSdkUpgradeRequired)
+                throw new NotImplementedException("Cannot serialize IdentityEnum.UnsupportedValueSdkUpgradeRequired: it represents an enum value returned by the API that this version of the SDK does not support. Upgrade the SDK to a version that supports the value.");
+
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
 
@@ -249,6 +252,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (value == ConfidenceEnum.High)
                 return "high";
+
+            if (value == ConfidenceEnum.UnsupportedValueSdkUpgradeRequired)
+                throw new NotImplementedException("Cannot serialize ConfidenceEnum.UnsupportedValueSdkUpgradeRequired: it represents an enum value returned by the API that this version of the SDK does not support. Upgrade the SDK to a version that supports the value.");
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

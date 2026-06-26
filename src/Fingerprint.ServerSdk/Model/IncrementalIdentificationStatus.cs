@@ -96,6 +96,9 @@ namespace Fingerprint.ServerSdk.Model
             if (value == IncrementalIdentificationStatus.Completed)
                 return "completed";
 
+            if (value == IncrementalIdentificationStatus.UnsupportedValueSdkUpgradeRequired)
+                throw new NotImplementedException("Cannot serialize IncrementalIdentificationStatus.UnsupportedValueSdkUpgradeRequired: it represents an enum value returned by the API that this version of the SDK does not support. Upgrade the SDK to a version that supports the value.");
+
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
     }

@@ -124,6 +124,9 @@ namespace Fingerprint.ServerSdk.Model
             if (value == SearchEventsBot.None)
                 return "none";
 
+            if (value == SearchEventsBot.UnsupportedValueSdkUpgradeRequired)
+                throw new NotImplementedException("Cannot serialize SearchEventsBot.UnsupportedValueSdkUpgradeRequired: it represents an enum value returned by the API that this version of the SDK does not support. Upgrade the SDK to a version that supports the value.");
+
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
     }

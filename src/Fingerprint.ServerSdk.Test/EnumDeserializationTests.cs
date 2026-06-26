@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json;
 using Fingerprint.ServerSdk.Model;
 using Xunit;
@@ -55,5 +56,21 @@ public class EnumDeserializationTests
         var confidence = JsonSerializer.Deserialize<ProxyConfidence>("\"some_future_value\"", options);
 
         Assert.Equal(ProxyConfidence.UnsupportedValueSdkUpgradeRequired, confidence);
+    }
+
+    [Fact]
+    public void SerializeInnerEnumCatchAll_Throws()
+    {
+        Assert.Throws<NotImplementedException>(() =>
+            ProxyDetails.ProxyTypeEnumToJsonValue(
+                ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired));
+    }
+
+    [Fact]
+    public void SerializeStandaloneEnumCatchAll_Throws()
+    {
+        Assert.Throws<NotImplementedException>(() =>
+            ProxyConfidenceValueConverter.ToJsonValue(
+                ProxyConfidence.UnsupportedValueSdkUpgradeRequired));
     }
 }
