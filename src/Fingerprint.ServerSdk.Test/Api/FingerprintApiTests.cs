@@ -208,6 +208,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 // Before the fix, Ok() threw and TryOk() returned false with a null result.
                 Assert.True(response.TryOk(out var tryModel));
                 Assert.NotNull(tryModel);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired,
+                    tryModel.ProxyDetails.ProxyType);
 
                 var model = response.Ok();
                 Assert.NotNull(model);
