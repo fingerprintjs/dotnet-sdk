@@ -292,8 +292,11 @@ namespace Fingerprint.ServerSdk.Model
             if (value == BotInfoCategory.Unknown)
                 return "unknown";
 
+            // Serialize the catch-all value rather than throwing, so models holding an enum value
+            // this SDK version does not support can still be re-serialized. The original (unsupported)
+            // value is not preserved.
             if (value == BotInfoCategory.UnsupportedValueSdkUpgradeRequired)
-                throw new NotImplementedException("Cannot serialize BotInfoCategory.UnsupportedValueSdkUpgradeRequired: it represents an enum value returned by the API that this version of the SDK does not support. Upgrade the SDK to a version that supports the value.");
+                return "unsupported_value_sdk_upgrade_required";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Text.Json;
 using Fingerprint.ServerSdk.Model;
 using Xunit;
@@ -59,18 +58,29 @@ public class EnumDeserializationTests
     }
 
     [Fact]
-    public void SerializeInnerEnumCatchAll_Throws()
+    public void SerializeInnerEnumCatchAll_WritesUnknownValue()
     {
-        Assert.Throws<NotImplementedException>(() =>
+        Assert.Equal(
+            "unsupported_value_sdk_upgrade_required",
             ProxyDetails.ProxyTypeEnumToJsonValue(
                 ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired));
     }
 
     [Fact]
-    public void SerializeStandaloneEnumCatchAll_Throws()
+    public void SerializeStandaloneEnumCatchAll_WritesUnknownValue()
     {
-        Assert.Throws<NotImplementedException>(() =>
+        Assert.Equal(
+            "unsupported_value_sdk_upgrade_required",
             ProxyConfidenceValueConverter.ToJsonValue(
                 ProxyConfidence.UnsupportedValueSdkUpgradeRequired));
+    }
+
+    [Fact]
+    public void RoundTripCatchAll_DeserializesBackToCatchAll()
+    {
+        // Re-deserializing the Unknown string maps back to the catch-all member.
+        Assert.Equal(
+            ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired,
+            ProxyDetails.ProxyTypeEnumFromStringOrDefault("unsupported_value_sdk_upgrade_required"));
     }
 }
