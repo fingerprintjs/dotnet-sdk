@@ -63,7 +63,12 @@ namespace Fingerprint.ServerSdk.Model
             /// Enum DataCenter for value: data_center
             /// </summary>
 
-            DataCenter = 2
+            DataCenter = 2,
+
+            /// <summary>
+            /// Catch-all value used when the API returns an enum value that this version of the SDK does not recognize. Upgrade the SDK to a version that supports the value.
+            /// </summary>
+            UnsupportedValueSdkUpgradeRequired = -1
         }
 
         /// <summary>
@@ -96,7 +101,7 @@ namespace Fingerprint.ServerSdk.Model
             if (value.Equals("data_center"))
                 return ProxyTypeEnum.DataCenter;
 
-            return null;
+            return ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired;
         }
 
         /// <summary>

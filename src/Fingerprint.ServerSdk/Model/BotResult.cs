@@ -42,7 +42,12 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Enum NotDetected for value: not_detected
         /// </summary>
-        NotDetected = 3
+        NotDetected = 3,
+
+        /// <summary>
+        /// Catch-all value used when the API returns an enum value that this version of the SDK does not recognize. Upgrade the SDK to a version that supports the value.
+        /// </summary>
+        UnsupportedValueSdkUpgradeRequired = -1
     }
 
     /// <summary>
@@ -85,7 +90,7 @@ namespace Fingerprint.ServerSdk.Model
             if (value.Equals("not_detected"))
                 return BotResult.NotDetected;
 
-            return null;
+            return BotResult.UnsupportedValueSdkUpgradeRequired;
         }
 
         /// <summary>

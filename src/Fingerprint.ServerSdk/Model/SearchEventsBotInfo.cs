@@ -37,7 +37,12 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Enum None for value: none
         /// </summary>
-        None = 2
+        None = 2,
+
+        /// <summary>
+        /// Catch-all value used when the API returns an enum value that this version of the SDK does not recognize. Upgrade the SDK to a version that supports the value.
+        /// </summary>
+        UnsupportedValueSdkUpgradeRequired = -1
     }
 
     /// <summary>
@@ -74,7 +79,7 @@ namespace Fingerprint.ServerSdk.Model
             if (value.Equals("none"))
                 return SearchEventsBotInfo.None;
 
-            return null;
+            return SearchEventsBotInfo.UnsupportedValueSdkUpgradeRequired;
         }
 
         /// <summary>

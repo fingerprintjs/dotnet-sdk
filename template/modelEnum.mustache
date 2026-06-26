@@ -34,12 +34,19 @@
         [EnumMember(Value = "{{{value}}}")]
         {{/useGenericHost}}
         {{/isString}}
-        {{name}}{{^isString}} = {{{value}}}{{/isString}}{{#isString}}{{^vendorExtensions.x-zero-based-enum}} = {{-index}}{{/vendorExtensions.x-zero-based-enum}}{{/isString}}{{^-last}},{{/-last}}
+        {{name}}{{^isString}} = {{{value}}}{{/isString}}{{#isString}}{{^vendorExtensions.x-zero-based-enum}} = {{-index}}{{/vendorExtensions.x-zero-based-enum}}{{/isString}}{{^-last}},{{/-last}}{{#-last}}{{#isString}},{{/isString}}{{/-last}}
         {{^-last}}
 
         {{/-last}}
         {{/enumVars}}
         {{/allowableValues}}
+        {{#isString}}
+
+        /// <summary>
+        /// Catch-all value used when the API returns an enum value that this version of the SDK does not recognize. Upgrade the SDK to a version that supports the value.
+        /// </summary>
+        UnsupportedValueSdkUpgradeRequired = -1
+        {{/isString}}
     }
     {{#useGenericHost}}
 
@@ -79,7 +86,12 @@
 
             {{/enumVars}}
             {{/allowableValues}}
+            {{#isString}}
+            return {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.UnsupportedValueSdkUpgradeRequired;
+            {{/isString}}
+            {{^isString}}
             return null;
+            {{/isString}}
         }
 
         /// <summary>
