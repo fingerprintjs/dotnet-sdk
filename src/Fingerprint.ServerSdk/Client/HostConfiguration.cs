@@ -121,6 +121,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new SearchEventsBotInfoNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsIncrementalIdentificationStatusNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsInlineJsonConverter());
+            _jsonOptions.Converters.Add(new SearchEventsInlineNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsRareDevicePercentileBucketNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchEventsSdkPlatformJsonConverter());

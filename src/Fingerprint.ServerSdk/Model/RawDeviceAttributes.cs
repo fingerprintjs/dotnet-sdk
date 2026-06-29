@@ -36,10 +36,10 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="fontPreferences">fontPreferences.</param>
         /// <param name="emoji">emoji.</param>
         /// <param name="fonts">List of fonts detected on the device..</param>
-        /// <param name="deviceMemory">Rounded amount of RAM (in gigabytes) reported by the browser..</param>
+        /// <param name="deviceMemory">Rounded amount of RAM in gigabytes..</param>
         /// <param name="timezone">Timezone identifier detected on the client..</param>
         /// <param name="canvas">canvas.</param>
-        /// <param name="languages">Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices .</param>
+        /// <param name="languages">Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for browsers, iOS, and Android devices. .</param>
         /// <param name="webglExtensions">webglExtensions.</param>
         /// <param name="webglBasics">webglBasics.</param>
         /// <param name="screenResolution">Current screen resolution. Available for both browsers and iOS devices.</param>
@@ -62,8 +62,10 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="deviceManufacturer">Device manufacturer string. Available only for Android and iOS devices..</param>
         /// <param name="fontHash">Unique identifier for the user’s installed fonts..</param>
         /// <param name="timezoneOffset">UTC offset in \"±HH:MM\" format derived from the detected IANA timezone..</param>
+        /// <param name="batteryLevel">Battery charge level as a percentage (0-100). Available only for Android and iOS devices..</param>
+        /// <param name="batteryLowPowerMode">Whether the device's low power mode is enabled. Available only for Android and iOS devices..</param>
         [JsonConstructor]
-        public RawDeviceAttributes(Option<FontPreferences> fontPreferences = default, Option<Emoji> emoji = default, Option<List<string>> fonts = default, Option<int?> deviceMemory = default, Option<string> timezone = default, Option<Canvas> canvas = default, Option<List<List<string>>> languages = default, Option<WebGlExtensions> webglExtensions = default, Option<WebGlBasics> webglBasics = default, Option<List<int>> screenResolution = default, Option<TouchSupport> touchSupport = default, Option<string> oscpu = default, Option<int?> architecture = default, Option<bool?> cookiesEnabled = default, Option<int?> hardwareConcurrency = default, Option<string> dateTimeLocale = default, Option<string> vendor = default, Option<int?> colorDepth = default, Option<string> platform = default, Option<bool?> sessionStorage = default, Option<bool?> localStorage = default, Option<double?> audio = default, Option<List<PluginsInner>> plugins = default, Option<bool?> indexedDb = default, Option<string> math = default, Option<string> deviceModel = default, Option<string> deviceManufacturer = default, Option<string> fontHash = default, Option<string> timezoneOffset = default)
+        public RawDeviceAttributes(Option<FontPreferences> fontPreferences = default, Option<Emoji> emoji = default, Option<List<string>> fonts = default, Option<int?> deviceMemory = default, Option<string> timezone = default, Option<Canvas> canvas = default, Option<List<List<string>>> languages = default, Option<WebGlExtensions> webglExtensions = default, Option<WebGlBasics> webglBasics = default, Option<List<int>> screenResolution = default, Option<TouchSupport> touchSupport = default, Option<string> oscpu = default, Option<int?> architecture = default, Option<bool?> cookiesEnabled = default, Option<int?> hardwareConcurrency = default, Option<string> dateTimeLocale = default, Option<string> vendor = default, Option<int?> colorDepth = default, Option<string> platform = default, Option<bool?> sessionStorage = default, Option<bool?> localStorage = default, Option<double?> audio = default, Option<List<PluginsInner>> plugins = default, Option<bool?> indexedDb = default, Option<string> math = default, Option<string> deviceModel = default, Option<string> deviceManufacturer = default, Option<string> fontHash = default, Option<string> timezoneOffset = default, Option<int?> batteryLevel = default, Option<bool?> batteryLowPowerMode = default)
         {
             FontPreferencesOption = fontPreferences;
             EmojiOption = emoji;
@@ -94,6 +96,8 @@ namespace Fingerprint.ServerSdk.Model
             DeviceManufacturerOption = deviceManufacturer;
             FontHashOption = fontHash;
             TimezoneOffsetOption = timezoneOffset;
+            BatteryLevelOption = batteryLevel;
+            BatteryLowPowerModeOption = batteryLowPowerMode;
             OnCreated();
         }
 
@@ -136,7 +140,6 @@ namespace Fingerprint.ServerSdk.Model
         /// List of fonts detected on the device.
         /// </summary>
         /// <value>List of fonts detected on the device.</value>
-        /* <example>[Arial Unicode MS, Gill Sans, Helvetica Neue, Menlo]</example> */
         [JsonPropertyName("fonts")]
         public List<string> Fonts { get { return this.FontsOption; } set { this.FontsOption = new Option<List<string>>(value); } }
 
@@ -148,10 +151,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<int?> DeviceMemoryOption { get; private set; }
 
         /// <summary>
-        /// Rounded amount of RAM (in gigabytes) reported by the browser.
+        /// Rounded amount of RAM in gigabytes.
         /// </summary>
-        /// <value>Rounded amount of RAM (in gigabytes) reported by the browser.</value>
-        /* <example>8</example> */
+        /// <value>Rounded amount of RAM in gigabytes.</value>
         [JsonPropertyName("device_memory")]
         public int? DeviceMemory { get { return this.DeviceMemoryOption; } set { this.DeviceMemoryOption = new Option<int?>(value); } }
 
@@ -190,9 +192,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<List<List<string>>> LanguagesOption { get; private set; }
 
         /// <summary>
-        /// Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices 
+        /// Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for browsers, iOS, and Android devices. 
         /// </summary>
-        /// <value>Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices </value>
+        /// <value>Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for browsers, iOS, and Android devices. </value>
         [JsonPropertyName("languages")]
         public List<List<string>> Languages { get { return this.LanguagesOption; } set { this.LanguagesOption = new Option<List<List<string>>>(value); } }
 
@@ -502,6 +504,34 @@ namespace Fingerprint.ServerSdk.Model
         public string TimezoneOffset { get { return this.TimezoneOffsetOption; } set { this.TimezoneOffsetOption = new Option<string>(value); } }
 
         /// <summary>
+        /// Used to track the state of BatteryLevel
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> BatteryLevelOption { get; private set; }
+
+        /// <summary>
+        /// Battery charge level as a percentage (0-100). Available only for Android and iOS devices.
+        /// </summary>
+        /// <value>Battery charge level as a percentage (0-100). Available only for Android and iOS devices.</value>
+        [JsonPropertyName("battery_level")]
+        public int? BatteryLevel { get { return this.BatteryLevelOption; } set { this.BatteryLevelOption = new Option<int?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of BatteryLowPowerMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> BatteryLowPowerModeOption { get; private set; }
+
+        /// <summary>
+        /// Whether the device's low power mode is enabled. Available only for Android and iOS devices.
+        /// </summary>
+        /// <value>Whether the device's low power mode is enabled. Available only for Android and iOS devices.</value>
+        [JsonPropertyName("battery_low_power_mode")]
+        public bool? BatteryLowPowerMode { get { return this.BatteryLowPowerModeOption; } set { this.BatteryLowPowerModeOption = new Option<bool?>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -538,6 +568,8 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  DeviceManufacturer: ").Append(DeviceManufacturer).Append("\n");
             sb.Append("  FontHash: ").Append(FontHash).Append("\n");
             sb.Append("  TimezoneOffset: ").Append(TimezoneOffset).Append("\n");
+            sb.Append("  BatteryLevel: ").Append(BatteryLevel).Append("\n");
+            sb.Append("  BatteryLowPowerMode: ").Append(BatteryLowPowerMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -553,6 +585,18 @@ namespace Fingerprint.ServerSdk.Model
             if (this.DeviceMemoryOption.IsSet && this.DeviceMemoryOption.Value < (int)0)
             {
                 yield return new ValidationResult("Invalid value for DeviceMemory, must be a value greater than or equal to 0.", new [] { "DeviceMemory" });
+            }
+
+            // BatteryLevel (int) maximum
+            if (this.BatteryLevelOption.IsSet && this.BatteryLevelOption.Value > (int)100)
+            {
+                yield return new ValidationResult("Invalid value for BatteryLevel, must be a value less than or equal to 100.", new [] { "BatteryLevel" });
+            }
+
+            // BatteryLevel (int) minimum
+            if (this.BatteryLevelOption.IsSet && this.BatteryLevelOption.Value < (int)0)
+            {
+                yield return new ValidationResult("Invalid value for BatteryLevel, must be a value greater than or equal to 0.", new [] { "BatteryLevel" });
             }
 
             yield break;
@@ -610,6 +654,8 @@ namespace Fingerprint.ServerSdk.Model
             Option<string> deviceManufacturer = default;
             Option<string> fontHash = default;
             Option<string> timezoneOffset = default;
+            Option<int?> batteryLevel = default;
+            Option<bool?> batteryLowPowerMode = default;
 
             while (utf8JsonReader.Read())
             {
@@ -713,6 +759,12 @@ namespace Fingerprint.ServerSdk.Model
                         case "timezone_offset":
                             timezoneOffset = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "battery_level":
+                            batteryLevel = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "battery_low_power_mode":
+                            batteryLowPowerMode = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         default:
                             break;
                     }
@@ -806,7 +858,13 @@ namespace Fingerprint.ServerSdk.Model
             if (timezoneOffset.IsSet && timezoneOffset.Value == null)
                 throw new ArgumentNullException(nameof(timezoneOffset), "Property is not nullable for class RawDeviceAttributes.");
 
-            return new RawDeviceAttributes(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math, deviceModel, deviceManufacturer, fontHash, timezoneOffset);
+            if (batteryLevel.IsSet && batteryLevel.Value == null)
+                throw new ArgumentNullException(nameof(batteryLevel), "Property is not nullable for class RawDeviceAttributes.");
+
+            if (batteryLowPowerMode.IsSet && batteryLowPowerMode.Value == null)
+                throw new ArgumentNullException(nameof(batteryLowPowerMode), "Property is not nullable for class RawDeviceAttributes.");
+
+            return new RawDeviceAttributes(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math, deviceModel, deviceManufacturer, fontHash, timezoneOffset, batteryLevel, batteryLowPowerMode);
         }
 
         /// <summary>
@@ -999,6 +1057,12 @@ namespace Fingerprint.ServerSdk.Model
 
             if (rawDeviceAttributes.TimezoneOffsetOption.IsSet)
                 writer.WriteString("timezone_offset", rawDeviceAttributes.TimezoneOffset);
+
+            if (rawDeviceAttributes.BatteryLevelOption.IsSet)
+                writer.WriteNumber("battery_level", rawDeviceAttributes.BatteryLevelOption.Value.Value);
+
+            if (rawDeviceAttributes.BatteryLowPowerModeOption.IsSet)
+                writer.WriteBoolean("battery_low_power_mode", rawDeviceAttributes.BatteryLowPowerModeOption.Value.Value);
         }
     }
 }
