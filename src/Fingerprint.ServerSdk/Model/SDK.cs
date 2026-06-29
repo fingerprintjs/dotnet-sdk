@@ -75,7 +75,12 @@ namespace Fingerprint.ServerSdk.Model
             /// Enum Unknown for value: unknown
             /// </summary>
 
-            Unknown = 4
+            Unknown = 4,
+
+            /// <summary>
+            /// Catch-all value used when the API returns an enum value that this version of the SDK does not recognize. Upgrade the SDK to a version that supports the value.
+            /// </summary>
+            UnsupportedValueSdkUpgradeRequired = -1
         }
 
         /// <summary>
@@ -120,7 +125,7 @@ namespace Fingerprint.ServerSdk.Model
             if (value.Equals("unknown"))
                 return PlatformEnum.Unknown;
 
-            return null;
+            return PlatformEnum.UnsupportedValueSdkUpgradeRequired;
         }
 
         /// <summary>
@@ -142,6 +147,12 @@ namespace Fingerprint.ServerSdk.Model
 
             if (value == PlatformEnum.Unknown)
                 return "unknown";
+
+            // Serialize the catch-all value rather than throwing, so models holding an enum value
+            // this SDK version does not support can still be re-serialized. The original (unsupported)
+            // value is not preserved.
+            if (value == PlatformEnum.UnsupportedValueSdkUpgradeRequired)
+                return "unsupported_value_sdk_upgrade_required";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

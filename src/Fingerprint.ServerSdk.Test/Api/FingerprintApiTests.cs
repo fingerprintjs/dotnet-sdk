@@ -189,6 +189,36 @@ namespace Fingerprint.ServerSdk.Test.Api
                     model.FactoryResetTimestamp);
             });
         }
+        
+        [Fact]
+        public async Task GetEventWithUnsupportedProxyTypeAsyncTest()
+        {
+            var json = ReadMockFile("events/get_event_200.json")
+                .Replace("\"proxy_type\": \"residential\"", "\"proxy_type\": \"unknown\"");
+            SetupMockResponseFromString(json);
+
+            const string eventId = "1708102555327.NLOjmg";
+            var response = await _instance.GetEventAsync(eventId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.True(response.IsOk);
+
+                // Before the fix, Ok() threw and TryOk() returned false with a null result.
+                Assert.True(response.TryOk(out var tryModel));
+                Assert.NotNull(tryModel);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired,
+                    tryModel.ProxyDetails.ProxyType);
+
+                var model = response.Ok();
+                Assert.NotNull(model);
+                Assert.IsType<Event>(model);
+                Assert.Equal(eventId, model.EventId);
+                Assert.Equal(ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired,
+                    model.ProxyDetails.ProxyType);
+            });
+        }
 
         [Fact]
         public async Task SearchEventsAsyncTest()
