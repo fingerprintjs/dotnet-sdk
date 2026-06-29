@@ -308,6 +308,7 @@ Class | Method | HTTP request | Description
  - [Model.SearchEventsBot](docs/models/SearchEventsBot.md)
  - [Model.SearchEventsBotInfo](docs/models/SearchEventsBotInfo.md)
  - [Model.SearchEventsIncrementalIdentificationStatus](docs/models/SearchEventsIncrementalIdentificationStatus.md)
+ - [Model.SearchEventsInline](docs/models/SearchEventsInline.md)
  - [Model.SearchEventsRareDevicePercentileBucket](docs/models/SearchEventsRareDevicePercentileBucket.md)
  - [Model.SearchEventsSdkPlatform](docs/models/SearchEventsSdkPlatform.md)
  - [Model.SearchEventsVpnConfidence](docs/models/SearchEventsVpnConfidence.md)

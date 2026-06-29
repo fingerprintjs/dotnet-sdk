@@ -39,7 +39,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="asnName">asnName.</param>
         /// <param name="asnNetwork">asnNetwork.</param>
         /// <param name="asnType">asnType.</param>
-        /// <param name="datacenterResult">datacenterResult.</param>
+        /// <param name="datacenterResult">When true, the request originated from a datacenter..</param>
         /// <param name="datacenterName">datacenterName.</param>
         [JsonConstructor]
         public IPInfoV6(string address, Option<Geolocation> geolocation = default, Option<string> asn = default, Option<string> asnName = default, Option<string> asnNetwork = default, Option<string> asnType = default, Option<bool?> datacenterResult = default, Option<string> datacenterName = default)
@@ -136,8 +136,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<bool?> DatacenterResultOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets DatacenterResult
+        /// When true, the request originated from a datacenter.
         /// </summary>
+        /// <value>When true, the request originated from a datacenter.</value>
         [JsonPropertyName("datacenter_result")]
         public bool? DatacenterResult { get { return this.DatacenterResultOption; } set { this.DatacenterResultOption = new Option<bool?>(value); } }
 

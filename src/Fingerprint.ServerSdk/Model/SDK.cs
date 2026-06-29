@@ -34,7 +34,7 @@ namespace Fingerprint.ServerSdk.Model
         /// Initializes a new instance of the <see cref="SDK" /> class.
         /// </summary>
         /// <param name="platform">Platform of the SDK used for the identification request. (required).</param>
-        /// <param name="varVersion">Version string of the SDK used for the identification request. For example: `\"3.12.1\"`  (required).</param>
+        /// <param name="varVersion">Version string of the SDK used for the identification request. (required).</param>
         /// <param name="integrations">integrations.</param>
         [JsonConstructor]
         public SDK(PlatformEnum platform, string varVersion, Option<List<Integration>> integrations = default)
@@ -154,9 +154,9 @@ namespace Fingerprint.ServerSdk.Model
         public PlatformEnum Platform { get; set; }
 
         /// <summary>
-        /// Version string of the SDK used for the identification request. For example: `\"3.12.1\"` 
+        /// Version string of the SDK used for the identification request.
         /// </summary>
-        /// <value>Version string of the SDK used for the identification request. For example: `\"3.12.1\"` </value>
+        /// <value>Version string of the SDK used for the identification request.</value>
         [JsonPropertyName("version")]
         public string VarVersion { get; set; }
 

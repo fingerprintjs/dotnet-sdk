@@ -47,6 +47,7 @@ docs/models/Sealed.md
 docs/models/SearchEventsBot.md
 docs/models/SearchEventsBotInfo.md
 docs/models/SearchEventsIncrementalIdentificationStatus.md
+docs/models/SearchEventsInline.md
 docs/models/SearchEventsRareDevicePercentileBucket.md
 docs/models/SearchEventsSdkPlatform.md
 docs/models/SearchEventsVpnConfidence.md
@@ -131,6 +132,7 @@ src/Fingerprint.ServerSdk/Model/SDK.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsBot.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsBotInfo.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsIncrementalIdentificationStatus.cs
+src/Fingerprint.ServerSdk/Model/SearchEventsInline.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsRareDevicePercentileBucket.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsSdkPlatform.cs
 src/Fingerprint.ServerSdk/Model/SearchEventsVpnConfidence.cs

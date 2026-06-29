@@ -146,6 +146,8 @@ namespace Fingerprint.ServerSdk.Client
                 return SearchEventsBotInfoValueConverter.ToJsonValue(searchEventsBotInfo);
             if (obj is SearchEventsIncrementalIdentificationStatus searchEventsIncrementalIdentificationStatus)
                 return SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(searchEventsIncrementalIdentificationStatus);
+            if (obj is SearchEventsInline searchEventsInline)
+                return SearchEventsInlineValueConverter.ToJsonValue(searchEventsInline);
             if (obj is SearchEventsRareDevicePercentileBucket searchEventsRareDevicePercentileBucket)
                 return SearchEventsRareDevicePercentileBucketValueConverter.ToJsonValue(searchEventsRareDevicePercentileBucket);
             if (obj is SearchEventsSdkPlatform searchEventsSdkPlatform)
