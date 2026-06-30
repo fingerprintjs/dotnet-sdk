@@ -33,7 +33,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ProxyDetails" /> class.
         /// </summary>
-        /// <param name="proxyType">Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers  (required).</param>
+        /// <param name="proxyType">Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type  (required).</param>
         /// <param name="lastSeenAt">Unix millisecond timestamp with hourly resolution of when this IP was last seen as a proxy .</param>
         /// <param name="provider">String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers. .</param>
         [JsonConstructor]
@@ -48,9 +48,9 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers 
+        /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
         /// </summary>
-        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers </value>
+        /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
         public enum ProxyTypeEnum
         {
             /// <summary>
@@ -64,6 +64,12 @@ namespace Fingerprint.ServerSdk.Model
             /// </summary>
 
             DataCenter = 2,
+
+            /// <summary>
+            /// Enum Unknown for value: unknown
+            /// </summary>
+
+            Unknown = 3,
 
             /// <summary>
             /// Catch-all value used when the API returns an enum value that this version of the SDK does not recognize. Upgrade the SDK to a version that supports the value.
@@ -85,6 +91,9 @@ namespace Fingerprint.ServerSdk.Model
             if (value.Equals("data_center"))
                 return ProxyTypeEnum.DataCenter;
 
+            if (value.Equals("unknown"))
+                return ProxyTypeEnum.Unknown;
+
             throw new NotImplementedException($"Could not convert value to type ProxyTypeEnum: '{value}'");
         }
 
@@ -100,6 +109,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (value.Equals("data_center"))
                 return ProxyTypeEnum.DataCenter;
+
+            if (value.Equals("unknown"))
+                return ProxyTypeEnum.Unknown;
 
             return ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired;
         }
@@ -118,6 +130,9 @@ namespace Fingerprint.ServerSdk.Model
             if (value == ProxyTypeEnum.DataCenter)
                 return "data_center";
 
+            if (value == ProxyTypeEnum.Unknown)
+                return "unknown";
+
             // Serialize the catch-all value rather than throwing, so models holding an enum value
             // this SDK version does not support can still be re-serialized. The original (unsupported)
             // value is not preserved.
@@ -128,9 +143,9 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         /// <summary>
-        /// Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers 
+        /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
         /// </summary>
-        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers </value>
+        /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
         [JsonPropertyName("proxy_type")]
         public ProxyTypeEnum ProxyType { get; set; }
 

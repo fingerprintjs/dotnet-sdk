@@ -33,23 +33,26 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Event" /> class.
         /// </summary>
-        /// <param name="eventId">Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH`  (required).</param>
+        /// <param name="eventId">Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp.  (required).</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="incrementalIdentificationStatus">incrementalIdentificationStatus.</param>
         /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
-        /// <param name="environmentId">Environment Id of the event. For example: `ae_47abaca3db2c7c43` .</param>
+        /// <param name="environmentId">Environment Id of the event..</param>
         /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event)..</param>
         /// <param name="sdk">sdk.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
         /// <param name="identification">identification.</param>
         /// <param name="supplementaryIdHighRecall">supplementaryIdHighRecall.</param>
         /// <param name="tags">A customer-provided value or an object that was sent with the identification request or updated later..</param>
-        /// <param name="url">Page URL from which the request was sent. For example `https://example.com/` .</param>
-        /// <param name="bundleId">Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` .</param>
-        /// <param name="packageName">Package name of the Android application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` .</param>
+        /// <param name="url">Page URL from which the request was sent..</param>
+        /// <param name="bundleId">Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. .</param>
+        /// <param name="packageName">Package name of the Android application integrated with the Fingerprint SDK for the event. .</param>
         /// <param name="ipAddress">IP address of the requesting browser or bot..</param>
-        /// <param name="userAgent">User Agent of the client, for example: `Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....` .</param>
-        /// <param name="clientReferrer">Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: `https://example.com/blog/my-article` .</param>
+        /// <param name="userAgent">User Agent of the client..</param>
+        /// <param name="device">Device model or family extracted from the user agent string. On web, this field is also present inside `browser_details`. .</param>
+        /// <param name="os">Operating system family extracted from the user agent string. On web, this field is also present inside `browser_details`. .</param>
+        /// <param name="osVersion">Operating system version string extracted from the user agent string. On web, this field is also present inside `browser_details`. .</param>
+        /// <param name="clientReferrer">Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark). .</param>
         /// <param name="browserDetails">browserDetails.</param>
         /// <param name="proximity">proximity.</param>
         /// <param name="bot">bot.</param>
@@ -84,6 +87,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="virtualMachineMlScore">Machine learning–based virtual machine score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="vpn">VPN or other anonymizing service has been used when sending the request. .</param>
         /// <param name="vpnConfidence">vpnConfidence.</param>
+        /// <param name="vpnMlScore">Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="vpnOriginTimezone">Local timezone which is used in timezone_mismatch method. .</param>
         /// <param name="vpnOriginCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). .</param>
         /// <param name="vpnMethods">vpnMethods.</param>
@@ -93,7 +97,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="labels">Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
+        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
@@ -111,6 +115,9 @@ namespace Fingerprint.ServerSdk.Model
             PackageNameOption = packageName;
             IpAddressOption = ipAddress;
             UserAgentOption = userAgent;
+            DeviceOption = device;
+            OsOption = os;
+            OsVersionOption = osVersion;
             ClientReferrerOption = clientReferrer;
             BrowserDetailsOption = browserDetails;
             ProximityOption = proximity;
@@ -146,6 +153,7 @@ namespace Fingerprint.ServerSdk.Model
             VirtualMachineMlScoreOption = virtualMachineMlScore;
             VpnOption = vpn;
             VpnConfidenceOption = vpnConfidence;
+            VpnMlScoreOption = vpnMlScore;
             VpnOriginTimezoneOption = vpnOriginTimezone;
             VpnOriginCountryOption = vpnOriginCountry;
             VpnMethodsOption = vpnMethods;
@@ -238,9 +246,9 @@ namespace Fingerprint.ServerSdk.Model
         public RareDevicePercentileBucket? RareDevicePercentileBucket { get { return this.RareDevicePercentileBucketOption; } set { this.RareDevicePercentileBucketOption = new Option<RareDevicePercentileBucket?>(value); } }
 
         /// <summary>
-        /// Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH` 
+        /// Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp. 
         /// </summary>
-        /// <value>Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH` </value>
+        /// <value>Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp. </value>
         [JsonPropertyName("event_id")]
         public string EventId { get; set; }
 
@@ -273,9 +281,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> EnvironmentIdOption { get; private set; }
 
         /// <summary>
-        /// Environment Id of the event. For example: `ae_47abaca3db2c7c43` 
+        /// Environment Id of the event.
         /// </summary>
-        /// <value>Environment Id of the event. For example: `ae_47abaca3db2c7c43` </value>
+        /// <value>Environment Id of the event.</value>
         [JsonPropertyName("environment_id")]
         public string EnvironmentId { get { return this.EnvironmentIdOption; } set { this.EnvironmentIdOption = new Option<string>(value); } }
 
@@ -368,9 +376,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> UrlOption { get; private set; }
 
         /// <summary>
-        /// Page URL from which the request was sent. For example `https://example.com/` 
+        /// Page URL from which the request was sent.
         /// </summary>
-        /// <value>Page URL from which the request was sent. For example `https://example.com/` </value>
+        /// <value>Page URL from which the request was sent.</value>
         [JsonPropertyName("url")]
         public string Url { get { return this.UrlOption; } set { this.UrlOption = new Option<string>(value); } }
 
@@ -382,9 +390,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> BundleIdOption { get; private set; }
 
         /// <summary>
-        /// Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` 
+        /// Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. 
         /// </summary>
-        /// <value>Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` </value>
+        /// <value>Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. </value>
         [JsonPropertyName("bundle_id")]
         public string BundleId { get { return this.BundleIdOption; } set { this.BundleIdOption = new Option<string>(value); } }
 
@@ -396,9 +404,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> PackageNameOption { get; private set; }
 
         /// <summary>
-        /// Package name of the Android application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` 
+        /// Package name of the Android application integrated with the Fingerprint SDK for the event. 
         /// </summary>
-        /// <value>Package name of the Android application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` </value>
+        /// <value>Package name of the Android application integrated with the Fingerprint SDK for the event. </value>
         [JsonPropertyName("package_name")]
         public string PackageName { get { return this.PackageNameOption; } set { this.PackageNameOption = new Option<string>(value); } }
 
@@ -424,11 +432,53 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> UserAgentOption { get; private set; }
 
         /// <summary>
-        /// User Agent of the client, for example: `Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....` 
+        /// User Agent of the client.
         /// </summary>
-        /// <value>User Agent of the client, for example: `Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....` </value>
+        /// <value>User Agent of the client.</value>
         [JsonPropertyName("user_agent")]
         public string UserAgent { get { return this.UserAgentOption; } set { this.UserAgentOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of Device
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DeviceOption { get; private set; }
+
+        /// <summary>
+        /// Device model or family extracted from the user agent string. On web, this field is also present inside `browser_details`. 
+        /// </summary>
+        /// <value>Device model or family extracted from the user agent string. On web, this field is also present inside `browser_details`. </value>
+        [JsonPropertyName("device")]
+        public string Device { get { return this.DeviceOption; } set { this.DeviceOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of Os
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> OsOption { get; private set; }
+
+        /// <summary>
+        /// Operating system family extracted from the user agent string. On web, this field is also present inside `browser_details`. 
+        /// </summary>
+        /// <value>Operating system family extracted from the user agent string. On web, this field is also present inside `browser_details`. </value>
+        [JsonPropertyName("os")]
+        public string Os { get { return this.OsOption; } set { this.OsOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of OsVersion
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> OsVersionOption { get; private set; }
+
+        /// <summary>
+        /// Operating system version string extracted from the user agent string. On web, this field is also present inside `browser_details`. 
+        /// </summary>
+        /// <value>Operating system version string extracted from the user agent string. On web, this field is also present inside `browser_details`. </value>
+        [JsonPropertyName("os_version")]
+        public string OsVersion { get { return this.OsVersionOption; } set { this.OsVersionOption = new Option<string>(value); } }
 
         /// <summary>
         /// Used to track the state of ClientReferrer
@@ -438,9 +488,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> ClientReferrerOption { get; private set; }
 
         /// <summary>
-        /// Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: `https://example.com/blog/my-article` 
+        /// Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark). 
         /// </summary>
-        /// <value>Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: `https://example.com/blog/my-article` </value>
+        /// <value>Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark). </value>
         [JsonPropertyName("client_referrer")]
         public string ClientReferrer { get { return this.ClientReferrerOption; } set { this.ClientReferrerOption = new Option<string>(value); } }
 
@@ -856,6 +906,20 @@ namespace Fingerprint.ServerSdk.Model
         public bool? Vpn { get { return this.VpnOption; } set { this.VpnOption = new Option<bool?>(value); } }
 
         /// <summary>
+        /// Used to track the state of VpnMlScore
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<double?> VpnMlScoreOption { get; private set; }
+
+        /// <summary>
+        /// Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+        /// </summary>
+        /// <value>Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+        [JsonPropertyName("vpn_ml_score")]
+        public double? VpnMlScore { get { return this.VpnMlScoreOption; } set { this.VpnMlScoreOption = new Option<double?>(value); } }
+
+        /// <summary>
         /// Used to track the state of VpnOriginTimezone
         /// </summary>
         [JsonIgnore]
@@ -975,6 +1039,9 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  PackageName: ").Append(PackageName).Append("\n");
             sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
             sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
+            sb.Append("  Device: ").Append(Device).Append("\n");
+            sb.Append("  Os: ").Append(Os).Append("\n");
+            sb.Append("  OsVersion: ").Append(OsVersion).Append("\n");
             sb.Append("  ClientReferrer: ").Append(ClientReferrer).Append("\n");
             sb.Append("  BrowserDetails: ").Append(BrowserDetails).Append("\n");
             sb.Append("  Proximity: ").Append(Proximity).Append("\n");
@@ -1010,6 +1077,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  VirtualMachineMlScore: ").Append(VirtualMachineMlScore).Append("\n");
             sb.Append("  Vpn: ").Append(Vpn).Append("\n");
             sb.Append("  VpnConfidence: ").Append(VpnConfidence).Append("\n");
+            sb.Append("  VpnMlScore: ").Append(VpnMlScore).Append("\n");
             sb.Append("  VpnOriginTimezone: ").Append(VpnOriginTimezone).Append("\n");
             sb.Append("  VpnOriginCountry: ").Append(VpnOriginCountry).Append("\n");
             sb.Append("  VpnMethods: ").Append(VpnMethods).Append("\n");
@@ -1065,6 +1133,18 @@ namespace Fingerprint.ServerSdk.Model
                 yield return new ValidationResult("Invalid value for VirtualMachineMlScore, must be a value greater than or equal to 0.", new [] { "VirtualMachineMlScore" });
             }
 
+            // VpnMlScore (double) maximum
+            if (this.VpnMlScoreOption.IsSet && this.VpnMlScoreOption.Value > (double)1)
+            {
+                yield return new ValidationResult("Invalid value for VpnMlScore, must be a value less than or equal to 1.", new [] { "VpnMlScore" });
+            }
+
+            // VpnMlScore (double) minimum
+            if (this.VpnMlScoreOption.IsSet && this.VpnMlScoreOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for VpnMlScore, must be a value greater than or equal to 0.", new [] { "VpnMlScore" });
+            }
+
             yield break;
         }
     }
@@ -1107,6 +1187,9 @@ namespace Fingerprint.ServerSdk.Model
             Option<string> packageName = default;
             Option<string> ipAddress = default;
             Option<string> userAgent = default;
+            Option<string> device = default;
+            Option<string> os = default;
+            Option<string> osVersion = default;
             Option<string> clientReferrer = default;
             Option<BrowserDetails> browserDetails = default;
             Option<Proximity> proximity = default;
@@ -1142,6 +1225,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<double?> virtualMachineMlScore = default;
             Option<bool?> vpn = default;
             Option<VpnConfidence?> vpnConfidence = default;
+            Option<double?> vpnMlScore = default;
             Option<string> vpnOriginTimezone = default;
             Option<string> vpnOriginCountry = default;
             Option<VpnMethods> vpnMethods = default;
@@ -1215,6 +1299,15 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "user_agent":
                             userAgent = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "device":
+                            device = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "os":
+                            os = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "os_version":
+                            osVersion = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "client_referrer":
                             clientReferrer = new Option<string>(utf8JsonReader.GetString());
@@ -1329,6 +1422,9 @@ namespace Fingerprint.ServerSdk.Model
                             if (vpnConfidenceRawValue != null)
                                 vpnConfidence = new Option<VpnConfidence?>(VpnConfidenceValueConverter.FromStringOrDefault(vpnConfidenceRawValue));
                             break;
+                        case "vpn_ml_score":
+                            vpnMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
+                            break;
                         case "vpn_origin_timezone":
                             vpnOriginTimezone = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -1414,6 +1510,15 @@ namespace Fingerprint.ServerSdk.Model
 
             if (userAgent.IsSet && userAgent.Value == null)
                 throw new ArgumentNullException(nameof(userAgent), "Property is not nullable for class Event.");
+
+            if (device.IsSet && device.Value == null)
+                throw new ArgumentNullException(nameof(device), "Property is not nullable for class Event.");
+
+            if (os.IsSet && os.Value == null)
+                throw new ArgumentNullException(nameof(os), "Property is not nullable for class Event.");
+
+            if (osVersion.IsSet && osVersion.Value == null)
+                throw new ArgumentNullException(nameof(osVersion), "Property is not nullable for class Event.");
 
             if (clientReferrer.IsSet && clientReferrer.Value == null)
                 throw new ArgumentNullException(nameof(clientReferrer), "Property is not nullable for class Event.");
@@ -1520,6 +1625,9 @@ namespace Fingerprint.ServerSdk.Model
             if (vpnConfidence.IsSet && vpnConfidence.Value == null)
                 throw new ArgumentNullException(nameof(vpnConfidence), "Property is not nullable for class Event.");
 
+            if (vpnMlScore.IsSet && vpnMlScore.Value == null)
+                throw new ArgumentNullException(nameof(vpnMlScore), "Property is not nullable for class Event.");
+
             if (vpnOriginTimezone.IsSet && vpnOriginTimezone.Value == null)
                 throw new ArgumentNullException(nameof(vpnOriginTimezone), "Property is not nullable for class Event.");
 
@@ -1544,7 +1652,7 @@ namespace Fingerprint.ServerSdk.Model
             if (labels.IsSet && labels.Value == null)
                 throw new ArgumentNullException(nameof(labels), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
+            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
         }
 
         /// <summary>
@@ -1606,6 +1714,15 @@ namespace Fingerprint.ServerSdk.Model
 
             if (varEvent.UserAgentOption.IsSet && varEvent.UserAgent == null)
                 throw new ArgumentNullException(nameof(varEvent.UserAgent), "Property is required for class Event.");
+
+            if (varEvent.DeviceOption.IsSet && varEvent.Device == null)
+                throw new ArgumentNullException(nameof(varEvent.Device), "Property is required for class Event.");
+
+            if (varEvent.OsOption.IsSet && varEvent.Os == null)
+                throw new ArgumentNullException(nameof(varEvent.Os), "Property is required for class Event.");
+
+            if (varEvent.OsVersionOption.IsSet && varEvent.OsVersion == null)
+                throw new ArgumentNullException(nameof(varEvent.OsVersion), "Property is required for class Event.");
 
             if (varEvent.ClientReferrerOption.IsSet && varEvent.ClientReferrer == null)
                 throw new ArgumentNullException(nameof(varEvent.ClientReferrer), "Property is required for class Event.");
@@ -1710,6 +1827,15 @@ namespace Fingerprint.ServerSdk.Model
 
             if (varEvent.UserAgentOption.IsSet)
                 writer.WriteString("user_agent", varEvent.UserAgent);
+
+            if (varEvent.DeviceOption.IsSet)
+                writer.WriteString("device", varEvent.Device);
+
+            if (varEvent.OsOption.IsSet)
+                writer.WriteString("os", varEvent.Os);
+
+            if (varEvent.OsVersionOption.IsSet)
+                writer.WriteString("os_version", varEvent.OsVersion);
 
             if (varEvent.ClientReferrerOption.IsSet)
                 writer.WriteString("client_referrer", varEvent.ClientReferrer);
@@ -1842,6 +1968,9 @@ namespace Fingerprint.ServerSdk.Model
                 var vpnConfidenceRawValue = VpnConfidenceValueConverter.ToJsonValue(varEvent.VpnConfidence.Value);
                 writer.WriteString("vpn_confidence", vpnConfidenceRawValue);
             }
+            if (varEvent.VpnMlScoreOption.IsSet)
+                writer.WriteNumber("vpn_ml_score", varEvent.VpnMlScoreOption.Value.Value);
+
             if (varEvent.VpnOriginTimezoneOption.IsSet)
                 writer.WriteString("vpn_origin_timezone", varEvent.VpnOriginTimezone);
 

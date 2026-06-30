@@ -38,14 +38,16 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices..</param>
         /// <param name="osMismatch">The browser runs on a different operating system than the operating system inferred from the request network signature..</param>
         /// <param name="relay">Request IP address belongs to a relay service provider, indicating the use of relay services like [Apple Private relay](https://support.apple.com/en-us/102602) or [Cloudflare Warp](https://developers.cloudflare.com/warp-client/).  * Like VPNs, relay services anonymize the visitor's true IP address. * Unlike traditional VPNs, relay services don't let visitors spoof their location by choosing an exit node in a different country.  This field allows you to differentiate VPN users and relay service users in your fraud prevention logic. .</param>
+        /// <param name="mlPrediction">`true` if the request came from a device running a VPN, `false` otherwise.   .</param>
         [JsonConstructor]
-        public VpnMethods(Option<bool?> timezoneMismatch = default, Option<bool?> publicVpn = default, Option<bool?> auxiliaryMobile = default, Option<bool?> osMismatch = default, Option<bool?> relay = default)
+        public VpnMethods(Option<bool?> timezoneMismatch = default, Option<bool?> publicVpn = default, Option<bool?> auxiliaryMobile = default, Option<bool?> osMismatch = default, Option<bool?> relay = default, Option<bool?> mlPrediction = default)
         {
             TimezoneMismatchOption = timezoneMismatch;
             PublicVpnOption = publicVpn;
             AuxiliaryMobileOption = auxiliaryMobile;
             OsMismatchOption = osMismatch;
             RelayOption = relay;
+            MlPredictionOption = mlPrediction;
             OnCreated();
         }
 
@@ -122,6 +124,20 @@ namespace Fingerprint.ServerSdk.Model
         public bool? Relay { get { return this.RelayOption; } set { this.RelayOption = new Option<bool?>(value); } }
 
         /// <summary>
+        /// Used to track the state of MlPrediction
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> MlPredictionOption { get; private set; }
+
+        /// <summary>
+        /// `true` if the request came from a device running a VPN, `false` otherwise.   
+        /// </summary>
+        /// <value>`true` if the request came from a device running a VPN, `false` otherwise.   </value>
+        [JsonPropertyName("ml_prediction")]
+        public bool? MlPrediction { get { return this.MlPredictionOption; } set { this.MlPredictionOption = new Option<bool?>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -134,6 +150,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  AuxiliaryMobile: ").Append(AuxiliaryMobile).Append("\n");
             sb.Append("  OsMismatch: ").Append(OsMismatch).Append("\n");
             sb.Append("  Relay: ").Append(Relay).Append("\n");
+            sb.Append("  MlPrediction: ").Append(MlPrediction).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -176,6 +193,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<bool?> auxiliaryMobile = default;
             Option<bool?> osMismatch = default;
             Option<bool?> relay = default;
+            Option<bool?> mlPrediction = default;
 
             while (utf8JsonReader.Read())
             {
@@ -207,6 +225,9 @@ namespace Fingerprint.ServerSdk.Model
                         case "relay":
                             relay = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
+                        case "ml_prediction":
+                            mlPrediction = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         default:
                             break;
                     }
@@ -228,7 +249,10 @@ namespace Fingerprint.ServerSdk.Model
             if (relay.IsSet && relay.Value == null)
                 throw new ArgumentNullException(nameof(relay), "Property is not nullable for class VpnMethods.");
 
-            return new VpnMethods(timezoneMismatch, publicVpn, auxiliaryMobile, osMismatch, relay);
+            if (mlPrediction.IsSet && mlPrediction.Value == null)
+                throw new ArgumentNullException(nameof(mlPrediction), "Property is not nullable for class VpnMethods.");
+
+            return new VpnMethods(timezoneMismatch, publicVpn, auxiliaryMobile, osMismatch, relay, mlPrediction);
         }
 
         /// <summary>
@@ -269,6 +293,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (vpnMethods.RelayOption.IsSet)
                 writer.WriteBoolean("relay", vpnMethods.RelayOption.Value.Value);
+
+            if (vpnMethods.MlPredictionOption.IsSet)
+                writer.WriteBoolean("ml_prediction", vpnMethods.MlPredictionOption.Value.Value);
         }
     }
 }
