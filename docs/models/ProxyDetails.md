@@ -5,7 +5,7 @@ Proxy detection details (present if `proxy` is `true`)
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProxyType** | **string** | Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers  | 
+**ProxyType** | **string** | Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type  | 
 **LastSeenAt** | **long** | Unix millisecond timestamp with hourly resolution of when this IP was last seen as a proxy  | [optional] 
 **Provider** | **string** | String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers.  | [optional] 
 
