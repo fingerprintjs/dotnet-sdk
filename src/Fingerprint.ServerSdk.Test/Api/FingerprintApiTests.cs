@@ -194,7 +194,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         public async Task GetEventWithUnsupportedProxyTypeAsyncTest()
         {
             var json = ReadMockFile("events/get_event_200.json")
-                .Replace("\"proxy_type\": \"residential\"", "\"proxy_type\": \"unknown\"");
+                .Replace("\"proxy_type\": \"residential\"", "\"proxy_type\": \"unsupported\"");
             SetupMockResponseFromString(json);
 
             const string eventId = "1708102555327.NLOjmg";
@@ -217,6 +217,29 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.Equal(eventId, model.EventId);
                 Assert.Equal(ProxyDetails.ProxyTypeEnum.UnsupportedValueSdkUpgradeRequired,
                     model.ProxyDetails.ProxyType);
+            });
+        }
+
+        [Fact]
+        public async Task GetEventWithUnknownFieldAsyncTest()
+        {
+            SetupMockResponse("events/get_event_200_with_unknown_field.json");
+
+            const string eventId = "1708102555327.NLOjmg";
+            var response = await _instance.GetEventAsync(eventId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.True(response.IsOk);
+
+                var model = response.Ok();
+                Assert.NotNull(model);
+                Assert.IsType<Event>(model);
+                Assert.Equal(eventId, model.EventId);
+                // Verify that browser_details is also correctly deserialized despite unknown_sub_field
+                Assert.NotNull(model.BrowserDetails);
+                Assert.Equal("Chrome", model.BrowserDetails.BrowserName);
             });
         }
 
