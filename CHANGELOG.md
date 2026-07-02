@@ -1,5 +1,20 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.4.0
+
+### Minor Changes
+
+- **events**: Add `device`, `os`, and `os_version` to `Event` ([ec7713f](https://github.com/fingerprintjs/dotnet-sdk/commit/ec7713f6ef440deaea5f656daf0d5313754eca6a))
+- **events-search**: Add `source` query parameter to filter events by `edge` (Automation Intelligence) source ([ec7713f](https://github.com/fingerprintjs/dotnet-sdk/commit/ec7713f6ef440deaea5f656daf0d5313754eca6a))
+- **events**: Add `battery_level` and `battery_low_power_mode` to `RawDeviceAttributes` ([ec7713f](https://github.com/fingerprintjs/dotnet-sdk/commit/ec7713f6ef440deaea5f656daf0d5313754eca6a))
+- **events**: Add `ml_prediction` to `vpn_methods` ([ec7713f](https://github.com/fingerprintjs/dotnet-sdk/commit/ec7713f6ef440deaea5f656daf0d5313754eca6a))
+- **events**: Add `vpn_ml_score` to `Event` ([ec7713f](https://github.com/fingerprintjs/dotnet-sdk/commit/ec7713f6ef440deaea5f656daf0d5313754eca6a))
+- **events-search**: Document 404 response for `searchEvents` operation ([ec7713f](https://github.com/fingerprintjs/dotnet-sdk/commit/ec7713f6ef440deaea5f656daf0d5313754eca6a))
+
+### Patch Changes
+
+- Support deserializing enum values that are not yet known to the SDK. When the API returns an enum value this SDK version does not recognize (including on required fields such as `proxy_details.proxy_type`), it now deserializes to the catch-all `UnsupportedValueSdkUpgradeRequired` member instead of throwing. ([90c6c23](https://github.com/fingerprintjs/dotnet-sdk/commit/90c6c23c678e309025ff6523ca2f4d3e548edd0b))
+
 ## 8.3.0
 
 ### Minor Changes
