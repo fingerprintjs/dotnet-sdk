@@ -194,7 +194,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         public async Task GetEventWithUnsupportedProxyTypeAsyncTest()
         {
             var json = ReadMockFile("events/get_event_200.json")
-                .Replace("\"proxy_type\": \"residential\"", "\"proxy_type\": \"unknown\"");
+                .Replace("\"proxy_type\": \"residential\"", "\"proxy_type\": \"unsupported\"");
             SetupMockResponseFromString(json);
 
             const string eventId = "1708102555327.NLOjmg";
