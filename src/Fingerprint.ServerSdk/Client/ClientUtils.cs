@@ -150,6 +150,8 @@ namespace Fingerprint.ServerSdk.Client
                 return SearchEventsRareDevicePercentileBucketValueConverter.ToJsonValue(searchEventsRareDevicePercentileBucket);
             if (obj is SearchEventsSdkPlatform searchEventsSdkPlatform)
                 return SearchEventsSdkPlatformValueConverter.ToJsonValue(searchEventsSdkPlatform);
+            if (obj is SearchEventsSource searchEventsSource)
+                return SearchEventsSourceValueConverter.ToJsonValue(searchEventsSource);
             if (obj is SearchEventsVpnConfidence searchEventsVpnConfidence)
                 return SearchEventsVpnConfidenceValueConverter.ToJsonValue(searchEventsVpnConfidence);
             if (obj is TamperingConfidence tamperingConfidence)

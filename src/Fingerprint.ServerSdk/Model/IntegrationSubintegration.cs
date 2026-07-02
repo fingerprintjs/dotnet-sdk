@@ -33,8 +33,8 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegrationSubintegration" /> class.
         /// </summary>
-        /// <param name="name">The name of the specific subintegration, e.g. \"preact\"..</param>
-        /// <param name="varVersion">The version of the specific subintegration, e.g. \"10.21.0\"..</param>
+        /// <param name="name">The name of the specific subintegration..</param>
+        /// <param name="varVersion">The version of the specific subintegration..</param>
         [JsonConstructor]
         public IntegrationSubintegration(Option<string> name = default, Option<string> varVersion = default)
         {
@@ -53,9 +53,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> NameOption { get; private set; }
 
         /// <summary>
-        /// The name of the specific subintegration, e.g. \"preact\".
+        /// The name of the specific subintegration.
         /// </summary>
-        /// <value>The name of the specific subintegration, e.g. \"preact\".</value>
+        /// <value>The name of the specific subintegration.</value>
         [JsonPropertyName("name")]
         public string Name { get { return this.NameOption; } set { this.NameOption = new Option<string>(value); } }
 
@@ -67,9 +67,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> VarVersionOption { get; private set; }
 
         /// <summary>
-        /// The version of the specific subintegration, e.g. \"10.21.0\".
+        /// The version of the specific subintegration.
         /// </summary>
-        /// <value>The version of the specific subintegration, e.g. \"10.21.0\".</value>
+        /// <value>The version of the specific subintegration.</value>
         [JsonPropertyName("version")]
         public string VarVersion { get { return this.VarVersionOption; } set { this.VarVersionOption = new Option<string>(value); } }
 

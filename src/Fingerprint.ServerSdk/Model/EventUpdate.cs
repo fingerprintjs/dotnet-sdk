@@ -33,7 +33,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="EventUpdate" /> class.
         /// </summary>
-        /// <param name="linkedId">Linked Id value to assign to the existing event.</param>
+        /// <param name="linkedId">Linked ID value to assign to the existing event.</param>
         /// <param name="tags">A customer-provided value or an object that was sent with the identification request or updated later..</param>
         /// <param name="suspect">Suspect flag indicating observed suspicious or fraudulent event.</param>
         [JsonConstructor]
@@ -55,9 +55,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> LinkedIdOption { get; private set; }
 
         /// <summary>
-        /// Linked Id value to assign to the existing event
+        /// Linked ID value to assign to the existing event
         /// </summary>
-        /// <value>Linked Id value to assign to the existing event</value>
+        /// <value>Linked ID value to assign to the existing event</value>
         [JsonPropertyName("linked_id")]
         public string LinkedId { get { return this.LinkedIdOption; } set { this.LinkedIdOption = new Option<string>(value); } }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LinkedId** | **string** | Linked Id value to assign to the existing event | [optional] 
+**LinkedId** | **string** | Linked ID value to assign to the existing event | [optional] 
 **Tags** | **Dictionary&lt;string, Object&gt;** | A customer-provided value or an object that was sent with the identification request or updated later. | [optional] 
 **Suspect** | **bool** | Suspect flag indicating observed suspicious or fraudulent event | [optional] 
 

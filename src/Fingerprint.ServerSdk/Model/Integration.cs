@@ -33,8 +33,8 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Integration" /> class.
         /// </summary>
-        /// <param name="name">The name of the specific integration, e.g. \"fingerprint-pro-react\"..</param>
-        /// <param name="varVersion">The version of the specific integration, e.g. \"3.11.10\"..</param>
+        /// <param name="name">The name of the specific integration..</param>
+        /// <param name="varVersion">The version of the specific integration..</param>
         /// <param name="subintegration">subintegration.</param>
         [JsonConstructor]
         public Integration(Option<string> name = default, Option<string> varVersion = default, Option<IntegrationSubintegration> subintegration = default)
@@ -55,9 +55,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> NameOption { get; private set; }
 
         /// <summary>
-        /// The name of the specific integration, e.g. \"fingerprint-pro-react\".
+        /// The name of the specific integration.
         /// </summary>
-        /// <value>The name of the specific integration, e.g. \"fingerprint-pro-react\".</value>
+        /// <value>The name of the specific integration.</value>
         [JsonPropertyName("name")]
         public string Name { get { return this.NameOption; } set { this.NameOption = new Option<string>(value); } }
 
@@ -69,9 +69,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> VarVersionOption { get; private set; }
 
         /// <summary>
-        /// The version of the specific integration, e.g. \"3.11.10\".
+        /// The version of the specific integration.
         /// </summary>
-        /// <value>The version of the specific integration, e.g. \"3.11.10\".</value>
+        /// <value>The version of the specific integration.</value>
         [JsonPropertyName("version")]
         public string VarVersion { get { return this.VarVersionOption; } set { this.VarVersionOption = new Option<string>(value); } }
 
