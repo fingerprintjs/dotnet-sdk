@@ -76,6 +76,7 @@ src/Fingerprint.ServerSdk/Client/CookieContainer.cs
 src/Fingerprint.ServerSdk/Client/DateTimeJsonConverter.cs
 src/Fingerprint.ServerSdk/Client/DateTimeNullableJsonConverter.cs
 src/Fingerprint.ServerSdk/Client/ExceptionEventArgs.cs
+src/Fingerprint.ServerSdk/Client/FileParameter.cs
 src/Fingerprint.ServerSdk/Client/HostConfiguration.cs
 src/Fingerprint.ServerSdk/Client/JsonSerializerOptionsProvider.cs
 src/Fingerprint.ServerSdk/Client/Option.cs
