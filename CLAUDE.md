@@ -17,30 +17,6 @@ Editing `src/Fingerprint.ServerSdk/**` directly is almost always wrong. That dir
 
 `.schema-version` and `.openapi-generator/VERSION` pin the schema and generator versions.
 
-### Regenerating
-
-```shell
-./generate.sh          # runs openapi-generator via Docker, wipes ./docs + ./src/Fingerprint.ServerSdk, regenerates
-./sync.sh              # downloads fresh OpenAPI schema into ./res + refreshes test mocks in src/.../Test/mocks
-```
-
-CI (`check-templates-consistency.yml`) runs `generate.sh` and **fails if the working tree changes**, so after any template/config/schema edit, regenerate and commit the result. Templates must stay consistent with generated output.
-
-## Build & test
-
-```shell
-dotnet build
-dotnet test                                             # all projects
-dotnet test src/Fingerprint.ServerSdk.Test              # unit tests only
-dotnet test --filter FullyQualifiedName~SealedTests     # a single test class/method
-```
-
-- **Unit tests**: `src/Fingerprint.ServerSdk.Test` - use recorded mocks under `mocks/` (kept fresh by `sync.sh`). Covers sealed results, webhook validation, enum deserialization.
-- **Functional tests**: `src/Fingerprint.ServerSdk.FunctionalTest` - hit the real API and need env vars (see `.env.example`: `SECRET_API_KEY`, `VISITOR_ID`, `EVENT_ID`, `RULESET_ID`, `REGION`).
-- Target frameworks: library multi-targets `net8.0;netstandard2.0;netstandard2.1;net48`; tests run on net8. CI matrix runs dotnet 8/9/10. We keep the [Microsoft support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core)
-
-Run the example project locally via Docker: `docker compose run --rm example` (needs an `.env` built from `.env.example`).
-
 ## Architecture of the generated client
 
 - `Api/` - `FingerprintApi` + `IFingerprintApi`, one method per endpoint. Responses are wrapped in an `ApiResponse<T>` exposing `IsOk`/`Ok()`, `TryOk(out …)`, and per-status accessors (`IsNotFound`/`NotFound()`, `TooManyRequests()`, etc.) rather than throwing on non-2xx.
@@ -48,7 +24,3 @@ Run the example project locally via Docker: `docker compose run --rm example` (n
 - `Extensions/` - `IHostBuilderExtensions` (`ConfigureFingerprint`), `IServiceCollectionExtensions`, `IHttpClientBuilderExtensions` (retry/timeout/circuit-breaker policies). Consumers configure everything through `ConfigureFingerprint` on the host builder.
 - `Model/` - generated DTOs, one file per schema.
 - `Sealed.cs` / `WebhookValidation.cs` - hand-authored features (from custom templates), the SDK's value-add beyond raw endpoint bindings.
-
-## Releasing
-
-Uses [changesets](https://github.com/changesets/changesets). Add release notes with `pnpm exec changeset` (run `pnpm install` first). Publishing to NuGet is automated by `.github/workflows/publish.yml` after a release. Commits must follow conventional-commit format (enforced by `commitlint` + the `commit-msg` git hook; install hooks via `./install_hooks.sh`).
