@@ -10,7 +10,7 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Read version from config.json
         id: version
         run: echo version=$(node -p "require('./config.json').packageVersion") >> $GITHUB_OUTPUT
