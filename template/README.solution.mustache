@@ -198,7 +198,50 @@ var event = Sealed.UnsealEventResponse(Convert.FromBase64String(sealedResult), n
 
 To learn more, refer to example located in [src/{{packageName}}.SealedResultExample/Program.cs](src/{{packageName}}.SealedResultExample/Program.cs).
 
-## Webhook signature validation
+## Webhooks
+
+### Deserializing the webhook payload
+
+When handling [webhooks](https://docs.fingerprint.com/reference/webhook) coming from Fingerprint, you can deserialize the request body into the built-in `Event` model. The `JsonSerializerOptionsProvider` registered by `ConfigureFingerprint` carries all the SDK's model converters, so inject it and reuse its `Options`:
+
+```csharp
+namespace FingerprintAspNetCore.Areas.Identity.Pages;
+
+using {{packageName}}.Client;
+using {{packageName}}.Model;
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+[Route("api/[controller]")]
+[ApiController]
+public class WebhookController : ControllerBase
+{
+    private readonly JsonSerializerOptions _jsonOptions;
+
+    public WebhookController(JsonSerializerOptionsProvider jsonSerializerOptionsProvider)
+    {
+        _jsonOptions = jsonSerializerOptionsProvider.Options;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post()
+    {
+        using var reader = new StreamReader(Request.Body);
+        var body = await reader.ReadToEndAsync();
+
+        var webhookEvent = JsonSerializer.Deserialize<Event>(body, _jsonOptions);
+
+        // Access strongly-typed identification and Smart Signals data, e.g.:
+        var visitorId = webhookEvent?.Identification?.VisitorId;
+
+        return Ok(new { message = "Webhook received." });
+    }
+}
+```
+
+### Webhook signature validation
 
 This SDK provides utility method for verifying the HMAC signature of the incoming webhook request.
 
