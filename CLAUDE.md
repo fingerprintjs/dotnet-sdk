@@ -29,7 +29,7 @@ Editing `src/Fingerprint.ServerSdk/**` directly is almost always wrong. That dir
 
 When asked to add changeset, do so in the `.changeset` directory using the following template:
 
-``` markdown 
+```markdown 
 ---
 'fingerprint-server-dotnet-sdk': patch | minor | major
 ---
