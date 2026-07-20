@@ -215,6 +215,7 @@ public class WebhookController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post()
     {
+        // Validate webhook signature first before deserializing (see "Webhook signature validation" section)
         using var reader = new StreamReader(Request.Body);
         var body = await reader.ReadToEndAsync();
 
