@@ -16,7 +16,7 @@ Before reading or editing files in this repo, read [contributing.md](./contribut
 
 When asked to add changeset, do so in the `.changeset` directory using the following template:
 
-``` markdown 
+```markdown 
 ---
 'fingerprint-server-dotnet-sdk': patch | minor | major
 ---
