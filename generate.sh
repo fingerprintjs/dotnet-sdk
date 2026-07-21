@@ -5,7 +5,7 @@ set -euo pipefail
 rm -Rf ./docs
 rm -Rf ./src/Fingerprint.ServerSdk
 
-OPENAPI_GENERATOR_IMAGE_VERSION="v7.19.0"
+OPENAPI_GENERATOR_IMAGE_VERSION="v7.23.0"
 
 docker run --rm -u "$(id -u):$(id -g)" -v "${PWD}:/local" -w /local "openapitools/openapi-generator-cli:${OPENAPI_GENERATOR_IMAGE_VERSION}" generate \
   -i ./res/fingerprint-server-api.yaml \

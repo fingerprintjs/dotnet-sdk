@@ -10,3 +10,6 @@ src/Fingerprint.ServerSdk.Test/Model/*
 
 api/openapi.yaml
 docs/scripts/*
+
+# Introduced in 7.23.0, not relevant since our API doesn't support file upload
+src/Fingerprint.ServerSdk/Client/FileParameter.cs

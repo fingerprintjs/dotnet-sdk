@@ -188,6 +188,12 @@ $RECYCLE.BIN/
 # Visual Studio 2014 CTP
 **/*.sln.ide
 
+# Node
 **/node_modules
+
+# Environment
 .env
 !**/.env.example
+
+# Misc
+*.local.md
