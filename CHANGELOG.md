@@ -1,5 +1,16 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.5.0
+
+### Minor Changes
+
+- Update dependencies: bump `Microsoft.Extensions.Http`/`Microsoft.Extensions.Hosting` to 8.0.1 and `Microsoft.Extensions.Http.Polly` to 8.0.8. This raises the minimum transitive dependency floor (including `System.Text.Json` 8.0.5) for `netstandard2.0` and `net48` consumers. ([fefc324](https://github.com/fingerprintjs/dotnet-sdk/commit/fefc324bdf2d86086c2b9ad32a5f781ec37c8a23))
+- Update the OpenAPI Generator engine to 7.23.0, bringing generated client fixes and improvements (token handling, API response, and rate-limit provider). ([7592c50](https://github.com/fingerprintjs/dotnet-sdk/commit/7592c5004b331491dc5d7ccdef49edce69977ee8))
+
+### Patch Changes
+
+- Document how to deserialize an incoming webhook payload into the built-in `Event` model using the SDK's configured `JsonSerializerOptions`, alongside the existing webhook signature validation guidance. ([1b6de3c](https://github.com/fingerprintjs/dotnet-sdk/commit/1b6de3cb395012d57bea8221acfa783d17bc6b46))
+
 ## 8.4.0
 
 ### Minor Changes
