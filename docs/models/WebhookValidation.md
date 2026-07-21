@@ -6,7 +6,7 @@
 
 Verifies the HMAC signature extracted from the "fpjs-event-signature" header of the incoming request. This is a part of
 the webhook signing process.
-You can enable and configure webhook signatures from your Fingerprint dashboard. To learn more, please refer to our support: https://fingerprint.com/support
+You can enable and configure webhook signatures from your Fingerprint dashboard. To learn more, see https://fingerprint.com/support
 
 ### Required Parameters
 
