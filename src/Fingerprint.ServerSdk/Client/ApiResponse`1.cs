@@ -219,6 +219,26 @@ namespace Fingerprint.ServerSdk.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
+    public interface IGatewayTimeout<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is GatewayTimeout
+        /// </summary>
+        /// <returns></returns>
+        TType GatewayTimeout();
+
+        /// <summary>
+        /// Returns true if the response is GatewayTimeout and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryGatewayTimeout(out TType result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
     public interface IConflict<TType> : IApiResponse
     {
         /// <summary>
