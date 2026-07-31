@@ -25,7 +25,7 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// Contains results from Fingerprint Identification and all active Smart Signals.
+    /// Contains results from Fingerprint Identification and all active Smart Signals. Some Smart Signals are only supported for certain device types, these fields will be omitted for events not generated from the supported devices. Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
     /// </summary>
     public partial class Event : IValidatableObject
     {
@@ -56,6 +56,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="clientReferrer">Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark). .</param>
         /// <param name="browserDetails">browserDetails.</param>
         /// <param name="proximity">proximity.</param>
+        /// <param name="activeCall">Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android. .</param>
         /// <param name="bot">bot.</param>
         /// <param name="botType">Additional classification of the bot type if detected. .</param>
         /// <param name="botInfo">botInfo.</param>
@@ -90,7 +91,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="vpnConfidence">vpnConfidence.</param>
         /// <param name="vpnMlScore">Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="vpnOriginTimezone">Local timezone which is used in timezone_mismatch method. .</param>
-        /// <param name="vpnOriginCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). .</param>
+        /// <param name="vpnOriginCountry">Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown. .</param>
         /// <param name="vpnMethods">vpnMethods.</param>
         /// <param name="highActivityDevice">Flag indicating if the request came from a high-activity visitor..</param>
         /// <param name="rareDevice">`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
@@ -98,7 +99,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="labels">Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
+        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
@@ -122,6 +123,7 @@ namespace Fingerprint.ServerSdk.Model
             ClientReferrerOption = clientReferrer;
             BrowserDetailsOption = browserDetails;
             ProximityOption = proximity;
+            ActiveCallOption = activeCall;
             BotOption = bot;
             BotTypeOption = botType;
             BotInfoOption = botInfo;
@@ -520,6 +522,20 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("proximity")]
         public Proximity Proximity { get { return this.ProximityOption; } set { this.ProximityOption = new Option<Proximity>(value); } }
+
+        /// <summary>
+        /// Used to track the state of ActiveCall
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> ActiveCallOption { get; private set; }
+
+        /// <summary>
+        /// Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android. 
+        /// </summary>
+        /// <value>Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android. </value>
+        [JsonPropertyName("active_call")]
+        public bool? ActiveCall { get { return this.ActiveCallOption; } set { this.ActiveCallOption = new Option<bool?>(value); } }
 
         /// <summary>
         /// Used to track the state of BotType
@@ -942,9 +958,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> VpnOriginCountryOption { get; private set; }
 
         /// <summary>
-        /// Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). 
+        /// Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown. 
         /// </summary>
-        /// <value>Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). </value>
+        /// <value>Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown. </value>
         [JsonPropertyName("vpn_origin_country")]
         public string VpnOriginCountry { get { return this.VpnOriginCountryOption; } set { this.VpnOriginCountryOption = new Option<string>(value); } }
 
@@ -1046,6 +1062,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  ClientReferrer: ").Append(ClientReferrer).Append("\n");
             sb.Append("  BrowserDetails: ").Append(BrowserDetails).Append("\n");
             sb.Append("  Proximity: ").Append(Proximity).Append("\n");
+            sb.Append("  ActiveCall: ").Append(ActiveCall).Append("\n");
             sb.Append("  Bot: ").Append(Bot).Append("\n");
             sb.Append("  BotType: ").Append(BotType).Append("\n");
             sb.Append("  BotInfo: ").Append(BotInfo).Append("\n");
@@ -1194,6 +1211,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<string> clientReferrer = default;
             Option<BrowserDetails> browserDetails = default;
             Option<Proximity> proximity = default;
+            Option<bool?> activeCall = default;
             Option<BotResult?> bot = default;
             Option<string> botType = default;
             Option<BotInfo> botInfo = default;
@@ -1318,6 +1336,9 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "proximity":
                             proximity = new Option<Proximity>(JsonSerializer.Deserialize<Proximity>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "active_call":
+                            activeCall = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "bot":
                             string botRawValue = utf8JsonReader.GetString();
@@ -1530,6 +1551,9 @@ namespace Fingerprint.ServerSdk.Model
             if (proximity.IsSet && proximity.Value == null)
                 throw new ArgumentNullException(nameof(proximity), "Property is not nullable for class Event.");
 
+            if (activeCall.IsSet && activeCall.Value == null)
+                throw new ArgumentNullException(nameof(activeCall), "Property is not nullable for class Event.");
+
             if (bot.IsSet && bot.Value == null)
                 throw new ArgumentNullException(nameof(bot), "Property is not nullable for class Event.");
 
@@ -1653,7 +1677,7 @@ namespace Fingerprint.ServerSdk.Model
             if (labels.IsSet && labels.Value == null)
                 throw new ArgumentNullException(nameof(labels), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
+            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
         }
 
         /// <summary>
@@ -1851,6 +1875,9 @@ namespace Fingerprint.ServerSdk.Model
                 writer.WritePropertyName("proximity");
                 JsonSerializer.Serialize(writer, varEvent.Proximity, jsonSerializerOptions);
             }
+            if (varEvent.ActiveCallOption.IsSet)
+                writer.WriteBoolean("active_call", varEvent.ActiveCallOption.Value.Value);
+
             if (varEvent.BotOption.IsSet)
             {
                 var botRawValue = BotResultValueConverter.ToJsonValue(varEvent.Bot.Value);

@@ -169,7 +169,7 @@ namespace Fingerprint.ServerSdk.Api
     /// <summary>
     /// The <see cref="IGetEventApiResponse"/>
     /// </summary>
-    public interface IGetEventApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.Event>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>
+    public interface IGetEventApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.Event>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>, IGatewayTimeout<Fingerprint.ServerSdk.Model.ErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -206,6 +206,12 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <returns></returns>
         bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 504 GatewayTimeout
+        /// </summary>
+        /// <returns></returns>
+        bool IsGatewayTimeout { get; }
     }
 
     /// <summary>
@@ -239,7 +245,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<SearchEventsBot> Bot { get; set; } = default;
 
         /// <summary>
-        /// Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.  (optional)
+        /// Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected, and no `bot_info` was present.  (optional)
         /// </summary>
         public Option<SearchEventsBotInfo> BotInfo { get; set; } = default;
 
@@ -328,7 +334,7 @@ namespace Fingerprint.ServerSdk.Api
         private Option<DateTimeOffset> _startDateTime;
 
         /// <summary>
-        /// Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`. (optional)
+        /// Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not change the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`. (optional)
         ///
         /// StartDateTime is an alias for Start. Setting StartDateTime will clear an existing value for Start.
         /// </summary>
@@ -350,7 +356,7 @@ namespace Fingerprint.ServerSdk.Api
         private Option<long> _end;
 
         /// <summary>
-        /// Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. (optional)
+        /// Include events that happened before this point (with timestamp less than or equal to the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. (optional)
         ///
         /// End is an alias for EndDateTime. Setting End will clear an existing value for EndDateTime.
         /// </summary>
@@ -372,7 +378,7 @@ namespace Fingerprint.ServerSdk.Api
         private Option<DateTimeOffset> _endDateTime;
 
         /// <summary>
-        /// Include events that happened before this point (with timestamp less than or equal the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`. (optional)
+        /// Include events that happened before this point (with timestamp less than or equal to the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`. (optional)
         ///
         /// EndDateTime is an alias for End. Setting EndDateTime will clear an existing value for End.
         /// </summary>
@@ -412,12 +418,12 @@ namespace Fingerprint.ServerSdk.Api
         public Option<bool> VirtualMachine { get; set; } = default;
 
         /// <summary>
-        /// Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)
+        /// Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)
         /// </summary>
         public Option<bool> Tampering { get; set; } = default;
 
         /// <summary>
-        /// Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)
+        /// Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering_details.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)
         /// </summary>
         public Option<bool> AntiDetectBrowser { get; set; } = default;
 
@@ -442,7 +448,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<bool> Frida { get; set; } = default;
 
         /// <summary>
-        /// Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.  (optional)
+        /// Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset_timestamp` property populated are included. Events without a `factory_reset_timestamp` Smart Signal result are left out of the response.  (optional)
         /// </summary>
         public Option<bool> FactoryReset { get; set; } = default;
 
@@ -542,7 +548,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<bool> Simulator { get; set; } = default;
 
         /// <summary>
-        /// Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.  (optional)
+        /// Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.  (optional)
         /// </summary>
         public Option<List<SearchEventsSource>> Source { get; set; } = default;
 
@@ -604,7 +610,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the botInfo parameter.
         /// </summary>
-        /// <param name="value">Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected. </param>
+        /// <param name="value">Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected, and no `bot_info` was present. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithBotInfo(SearchEventsBotInfo value)
         {
@@ -762,7 +768,7 @@ namespace Fingerprint.ServerSdk.Api
         ///
         /// StartDateTime is an alias for Start. Setting StartDateTime will clear an existing value for Start.
         /// </summary>
-        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`.</param>
+        /// <param name="value">Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not change the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`.</param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithStartDateTime(DateTimeOffset value)
         {
@@ -775,7 +781,7 @@ namespace Fingerprint.ServerSdk.Api
         ///
         /// End is an alias for EndDateTime. Setting End will clear an existing value for EndDateTime.
         /// </summary>
-        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed.</param>
+        /// <param name="value">Include events that happened before this point (with timestamp less than or equal to the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed.</param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithEnd(long value)
         {
@@ -788,7 +794,7 @@ namespace Fingerprint.ServerSdk.Api
         ///
         /// EndDateTime is an alias for End. Setting EndDateTime will clear an existing value for End.
         /// </summary>
-        /// <param name="value">Include events that happened before this point (with timestamp less than or equal the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`.</param>
+        /// <param name="value">Include events that happened before this point (with timestamp less than or equal to the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`.</param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithEndDateTime(DateTimeOffset value)
         {
@@ -843,7 +849,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the tampering parameter.
         /// </summary>
-        /// <param name="value">Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. </param>
+        /// <param name="value">Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithTampering(bool value)
         {
@@ -854,7 +860,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the antiDetectBrowser parameter.
         /// </summary>
-        /// <param name="value">Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. </param>
+        /// <param name="value">Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering_details.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithAntiDetectBrowser(bool value)
         {
@@ -909,7 +915,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the factoryReset parameter.
         /// </summary>
-        /// <param name="value">Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response. </param>
+        /// <param name="value">Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset_timestamp` property populated are included. Events without a `factory_reset_timestamp` Smart Signal result are left out of the response. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithFactoryReset(bool value)
         {
@@ -1129,7 +1135,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the source parameter.
         /// </summary>
-        /// <param name="value">Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team. </param>
+        /// <param name="value">Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithSource(List<SearchEventsSource> value)
         {
@@ -1142,7 +1148,7 @@ namespace Fingerprint.ServerSdk.Api
     /// <summary>
     /// The <see cref="ISearchEventsApiResponse"/>
     /// </summary>
-    public interface ISearchEventsApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.EventSearch>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>
+    public interface ISearchEventsApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.EventSearch>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>, IGatewayTimeout<Fingerprint.ServerSdk.Model.ErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -1169,10 +1175,22 @@ namespace Fingerprint.ServerSdk.Api
         bool IsNotFound { get; }
 
         /// <summary>
+        /// Returns true if the response is 429 TooManyRequests
+        /// </summary>
+        /// <returns></returns>
+        bool IsTooManyRequests { get; }
+
+        /// <summary>
         /// Returns true if the response is 500 InternalServerError
         /// </summary>
         /// <returns></returns>
         bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 504 GatewayTimeout
+        /// </summary>
+        /// <returns></returns>
+        bool IsGatewayTimeout { get; }
     }
 
     /// <summary>
@@ -2188,6 +2206,45 @@ namespace Fingerprint.ServerSdk.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 504 GatewayTimeout
+            /// </summary>
+            /// <returns></returns>
+            public bool IsGatewayTimeout => 504 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 504 GatewayTimeout
+            /// </summary>
+            /// <returns></returns>
+            public Fingerprint.ServerSdk.Model.ErrorResponse GatewayTimeout()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsGatewayTimeout
+                    ? System.Text.Json.JsonSerializer.Deserialize<Fingerprint.ServerSdk.Model.ErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 504 GatewayTimeout and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryGatewayTimeout(out Fingerprint.ServerSdk.Model.ErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = GatewayTimeout();
+                }
+                catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)504);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -3096,6 +3153,45 @@ namespace Fingerprint.ServerSdk.Api
             }
 
             /// <summary>
+            /// Returns true if the response is 429 TooManyRequests
+            /// </summary>
+            /// <returns></returns>
+            public bool IsTooManyRequests => 429 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 429 TooManyRequests
+            /// </summary>
+            /// <returns></returns>
+            public Fingerprint.ServerSdk.Model.ErrorResponse TooManyRequests()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsTooManyRequests
+                    ? System.Text.Json.JsonSerializer.Deserialize<Fingerprint.ServerSdk.Model.ErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 429 TooManyRequests and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryTooManyRequests(out Fingerprint.ServerSdk.Model.ErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = TooManyRequests();
+                }
+                catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)429);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
             /// Returns true if the response is 500 InternalServerError
             /// </summary>
             /// <returns></returns>
@@ -3129,6 +3225,45 @@ namespace Fingerprint.ServerSdk.Api
                 catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)500);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 504 GatewayTimeout
+            /// </summary>
+            /// <returns></returns>
+            public bool IsGatewayTimeout => 504 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 504 GatewayTimeout
+            /// </summary>
+            /// <returns></returns>
+            public Fingerprint.ServerSdk.Model.ErrorResponse GatewayTimeout()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsGatewayTimeout
+                    ? System.Text.Json.JsonSerializer.Deserialize<Fingerprint.ServerSdk.Model.ErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 504 GatewayTimeout and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryGatewayTimeout(out Fingerprint.ServerSdk.Model.ErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = GatewayTimeout();
+                }
+                catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)504);
                 }
 
                 return result != null;

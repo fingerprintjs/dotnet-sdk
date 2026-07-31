@@ -36,7 +36,7 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         /// <param name="var5Minutes">Count for the last 5 minutes of velocity data, from the time of the event.  (required).</param>
         /// <param name="var1Hour">Count for the last 1 hour of velocity data, from the time of the event.  (required).</param>
-        /// <param name="var24Hours">The `24_hours` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted if the number of `events` for the visitor Id in the last 24 hours (`events.['24_hours']`) is higher than 20.000. .</param>
+        /// <param name="var24Hours">Count for the last 24 hours of velocity data, from the time of the event. .</param>
         [JsonConstructor]
         public VelocityData(int var5Minutes, int var1Hour, Option<int?> var24Hours = default)
         {
@@ -70,9 +70,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<int?> Var24HoursOption { get; private set; }
 
         /// <summary>
-        /// The `24_hours` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted if the number of `events` for the visitor Id in the last 24 hours (`events.['24_hours']`) is higher than 20.000. 
+        /// Count for the last 24 hours of velocity data, from the time of the event. 
         /// </summary>
-        /// <value>The `24_hours` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted if the number of `events` for the visitor Id in the last 24 hours (`events.['24_hours']`) is higher than 20.000. </value>
+        /// <value>Count for the last 24 hours of velocity data, from the time of the event. </value>
         [JsonPropertyName("24_hours")]
         public int? Var24Hours { get { return this.Var24HoursOption; } set { this.Var24HoursOption = new Option<int?>(value); } }
 
