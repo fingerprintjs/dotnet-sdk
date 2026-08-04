@@ -242,6 +242,27 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.Equal("Chrome", model.BrowserDetails.BrowserName);
             });
         }
+        
+        [Fact]
+        public async Task GetEventAsyncError504()
+        {
+            SetupMockResponse("errors/504_search_timeout_exceeded.json");
+            MockResponseStatusCode = 504;
+
+            const string eventId = "1708102555327.NLOjmg";
+            var response = await _instance.GetEventAsync(eventId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.Equal(HttpStatusCode.GatewayTimeout, response.StatusCode);
+                Assert.True(response.IsGatewayTimeout);
+
+                var model = response.GatewayTimeout();
+                Assert.NotNull(model);
+                Assert.IsType<ErrorResponse>(model);
+                Assert.Equal(ErrorCode.Failed, model.Error.Code);
+            });
+        }
 
         [Fact]
         public async Task SearchEventsAsyncTest()
@@ -708,6 +729,48 @@ namespace Fingerprint.ServerSdk.Test.Api
                 var errorResponse = response.BadRequest();
                 Assert.IsType<ErrorResponse>(errorResponse);
                 Assert.Equal(ErrorCode.RequestCannotBeParsed, errorResponse.Error.Code);
+            });
+        }
+        
+        [Fact]
+        public async Task SearchEventsAsync429ErrorTest()
+        {
+            SetupMockResponse("errors/429_too_many_search_requests.json");
+            MockResponseStatusCode = 429;
+
+            const int limit = 1;
+            const string ipAddress = "01234";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithIpAddress(ipAddress));
+            Assert.Multiple(() =>
+            {
+                Assert.True(response.IsTooManyRequests);
+                var errorResponse = response.TooManyRequests();
+                Assert.IsType<ErrorResponse>(errorResponse);
+                Assert.Equal(ErrorCode.TooManyRequests, errorResponse.Error.Code);
+            });
+        }
+        
+        [Fact]
+        public async Task SearchEventsAsync504ErrorTest()
+        {
+            SetupMockResponse("errors/504_search_timeout_exceeded.json");
+            MockResponseStatusCode = 504;
+
+            const int limit = 1;
+            const string ipAddress = "01234";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithIpAddress(ipAddress));
+            Assert.Multiple(() =>
+            {
+                Assert.True(response.IsGatewayTimeout);
+                var errorResponse = response.GatewayTimeout();
+                Assert.IsType<ErrorResponse>(errorResponse);
+                Assert.Equal(ErrorCode.Failed, errorResponse.Error.Code);
             });
         }
 
