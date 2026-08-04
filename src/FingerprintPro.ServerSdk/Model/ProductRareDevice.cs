@@ -16,39 +16,37 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// DeveloperTools
+    /// ProductRareDevice
     /// </summary>
     [DataContract]
-    public class DeveloperTools : IEquatable<DeveloperTools>
+    public class ProductRareDevice : IEquatable<ProductRareDevice>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeveloperTools" /> class.
+        /// Initializes a new instance of the <see cref="ProductRareDevice" /> class.
         /// </summary>
-        /// <param name="result">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  (required).</param>
-        public DeveloperTools(bool? result = default(bool?))
+        /// <param name="data">data.</param>
+        /// <param name="error">error.</param>
+        public ProductRareDevice(RareDevice data = default(RareDevice), Error error = default(Error))
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: DeveloperTools Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for DeveloperTools and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
+            this.Data = data;
+            this.Error = error;
         }
 
         /// <summary>
-        /// `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. 
+        /// Gets or Sets Data
         /// </summary>
-        /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
+        [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
+        public RareDevice Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
+        public Error Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +55,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DeveloperTools {\n");
-            sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("class ProductRareDevice {\n");
+            sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,20 +72,25 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if DeveloperTools instances are equal
+        /// Returns true if ProductRareDevice instances are equal
         /// </summary>
-        /// <param name="input">Instance of DeveloperTools to be compared</param>
+        /// <param name="input">Instance of ProductRareDevice to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeveloperTools? input)
+        public bool Equals(ProductRareDevice? input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
+                this.Data == input.Data ||
+                (this.Data != null &&
+                this.Data.Equals(input.Data))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
                 );
         }
 
@@ -99,8 +103,10 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Data != null)
+                    hashCode = hashCode * 59 + this.Data.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;
             }
         }

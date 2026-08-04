@@ -29,11 +29,13 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="result">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
         /// <param name="confidence">confidence.</param>
         /// <param name="details">details.</param>
-        public WebhookProxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence), ProxyDetails details = default(ProxyDetails))
+        /// <param name="mlScore">Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
+        public WebhookProxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence), ProxyDetails details = default(ProxyDetails), double? mlScore = default(double?))
         {
             this.Result = result;
             this.Confidence = confidence;
             this.Details = details;
+            this.MlScore = mlScore;
         }
 
         /// <summary>
@@ -59,6 +61,14 @@ namespace FingerprintPro.ServerSdk.Model
         public ProxyDetails Details { get; set; }
 
         /// <summary>
+        /// Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+        /// </summary>
+        /// <value>Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -69,6 +79,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("  Details: ").Append(Details).Append("\n");
+            sb.Append("  MlScore: ").Append(MlScore).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,6 +118,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Details == input.Details ||
                 (this.Details != null &&
                 this.Details.Equals(input.Details))
+                ) &&
+                (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
                 );
         }
 
@@ -125,6 +141,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Confidence.GetHashCode();
                 if (this.Details != null)
                     hashCode = hashCode * 59 + this.Details.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
                 return hashCode;
             }
         }

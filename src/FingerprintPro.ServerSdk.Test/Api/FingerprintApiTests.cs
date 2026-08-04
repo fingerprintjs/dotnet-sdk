@@ -1040,6 +1040,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const bool developerTools = true;
             const bool locationSpoofing = true;
             const bool mitmAttack = true;
+            const bool rareDevice = true;
+            const string rareDevicePercentileBucket = "not_seen";
             const bool proxy = true;
             const string sdkVersion = "testSdkVersion";
             const string sdkPlatform = "testSdkPlatform";
@@ -1077,6 +1079,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 developerTools: developerTools,
                 locationSpoofing: locationSpoofing,
                 mitmAttack: mitmAttack,
+                rareDevice: rareDevice,
+                rareDevicePercentileBucket: rareDevicePercentileBucket,
                 proxy: proxy,
                 sdkVersion: sdkVersion,
                 sdkPlatform: sdkPlatform,
@@ -1096,7 +1100,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
 
                 var queryParams =
-                    $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}&ip_blocklist={ipBlocklist}&datacenter={datacenter}&developer_tools={developerTools}&location_spoofing={locationSpoofing}&mitm_attack={mitmAttack}&proxy={proxy}&sdk_version={sdkVersion}&sdk_platform={sdkPlatform}&proximity_id={proximityId}&proximity_precision_radius={proximityPrecisionRadius}&environment={environment[0]}&environment={environment[1]}";
+                    $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}&ip_blocklist={ipBlocklist}&datacenter={datacenter}&developer_tools={developerTools}&location_spoofing={locationSpoofing}&mitm_attack={mitmAttack}&rare_device={rareDevice}&rare_device_percentile_bucket={rareDevicePercentileBucket}&proxy={proxy}&sdk_version={sdkVersion}&sdk_platform={sdkPlatform}&proximity_id={proximityId}&proximity_precision_radius={proximityPrecisionRadius}&environment={environment[0]}&environment={environment[1]}";
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
                         $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));

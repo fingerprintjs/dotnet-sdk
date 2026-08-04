@@ -30,7 +30,9 @@ Name | Type | Description | Notes
 **Velocity** | [**ProductVelocity**](ProductVelocity.md) |  | [optional] 
 **DeveloperTools** | [**ProductDeveloperTools**](ProductDeveloperTools.md) |  | [optional] 
 **MitmAttack** | [**ProductMitMAttack**](ProductMitMAttack.md) |  | [optional] 
+**RareDevice** | [**ProductRareDevice**](ProductRareDevice.md) |  | [optional] 
 **Proximity** | [**ProductProximity**](ProductProximity.md) |  | [optional] 
+**Labels** | [**ProductLabels**](ProductLabels.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

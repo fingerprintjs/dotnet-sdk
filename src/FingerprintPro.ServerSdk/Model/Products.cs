@@ -51,8 +51,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="velocity">velocity.</param>
         /// <param name="developerTools">developerTools.</param>
         /// <param name="mitmAttack">mitmAttack.</param>
+        /// <param name="rareDevice">rareDevice.</param>
         /// <param name="proximity">proximity.</param>
-        public Products(ProductIdentification identification = default(ProductIdentification), ProductBotd botd = default(ProductBotd), ProductRootApps rootApps = default(ProductRootApps), ProductEmulator emulator = default(ProductEmulator), ProductIPInfo ipInfo = default(ProductIPInfo), ProductIPBlocklist ipBlocklist = default(ProductIPBlocklist), ProductTor tor = default(ProductTor), ProductVPN vpn = default(ProductVPN), ProductProxy proxy = default(ProductProxy), ProductIncognito incognito = default(ProductIncognito), ProductTampering tampering = default(ProductTampering), ProductClonedApp clonedApp = default(ProductClonedApp), ProductFactoryReset factoryReset = default(ProductFactoryReset), ProductJailbroken jailbroken = default(ProductJailbroken), ProductFrida frida = default(ProductFrida), ProductPrivacySettings privacySettings = default(ProductPrivacySettings), ProductVirtualMachine virtualMachine = default(ProductVirtualMachine), ProductRawDeviceAttributes rawDeviceAttributes = default(ProductRawDeviceAttributes), ProductHighActivity highActivity = default(ProductHighActivity), ProductLocationSpoofing locationSpoofing = default(ProductLocationSpoofing), ProductSuspectScore suspectScore = default(ProductSuspectScore), ProductRemoteControl remoteControl = default(ProductRemoteControl), ProductVelocity velocity = default(ProductVelocity), ProductDeveloperTools developerTools = default(ProductDeveloperTools), ProductMitMAttack mitmAttack = default(ProductMitMAttack), ProductProximity proximity = default(ProductProximity))
+        /// <param name="labels">labels.</param>
+        public Products(ProductIdentification identification = default(ProductIdentification), ProductBotd botd = default(ProductBotd), ProductRootApps rootApps = default(ProductRootApps), ProductEmulator emulator = default(ProductEmulator), ProductIPInfo ipInfo = default(ProductIPInfo), ProductIPBlocklist ipBlocklist = default(ProductIPBlocklist), ProductTor tor = default(ProductTor), ProductVPN vpn = default(ProductVPN), ProductProxy proxy = default(ProductProxy), ProductIncognito incognito = default(ProductIncognito), ProductTampering tampering = default(ProductTampering), ProductClonedApp clonedApp = default(ProductClonedApp), ProductFactoryReset factoryReset = default(ProductFactoryReset), ProductJailbroken jailbroken = default(ProductJailbroken), ProductFrida frida = default(ProductFrida), ProductPrivacySettings privacySettings = default(ProductPrivacySettings), ProductVirtualMachine virtualMachine = default(ProductVirtualMachine), ProductRawDeviceAttributes rawDeviceAttributes = default(ProductRawDeviceAttributes), ProductHighActivity highActivity = default(ProductHighActivity), ProductLocationSpoofing locationSpoofing = default(ProductLocationSpoofing), ProductSuspectScore suspectScore = default(ProductSuspectScore), ProductRemoteControl remoteControl = default(ProductRemoteControl), ProductVelocity velocity = default(ProductVelocity), ProductDeveloperTools developerTools = default(ProductDeveloperTools), ProductMitMAttack mitmAttack = default(ProductMitMAttack), ProductRareDevice rareDevice = default(ProductRareDevice), ProductProximity proximity = default(ProductProximity), ProductLabels labels = default(ProductLabels))
         {
             this.Identification = identification;
             this.Botd = botd;
@@ -79,7 +81,9 @@ namespace FingerprintPro.ServerSdk.Model
             this.Velocity = velocity;
             this.DeveloperTools = developerTools;
             this.MitmAttack = mitmAttack;
+            this.RareDevice = rareDevice;
             this.Proximity = proximity;
+            this.Labels = labels;
         }
 
         /// <summary>
@@ -258,11 +262,25 @@ namespace FingerprintPro.ServerSdk.Model
         public ProductMitMAttack MitmAttack { get; set; }
 
         /// <summary>
+        /// Gets or Sets RareDevice
+        /// </summary>
+        [DataMember(Name = "rareDevice", EmitDefaultValue = false)]
+        [JsonPropertyName("rareDevice")]
+        public ProductRareDevice RareDevice { get; set; }
+
+        /// <summary>
         /// Gets or Sets Proximity
         /// </summary>
         [DataMember(Name = "proximity", EmitDefaultValue = false)]
         [JsonPropertyName("proximity")]
         public ProductProximity Proximity { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Labels
+        /// </summary>
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
+        [JsonPropertyName("labels")]
+        public ProductLabels Labels { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -297,7 +315,9 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Velocity: ").Append(Velocity).Append("\n");
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("  MitmAttack: ").Append(MitmAttack).Append("\n");
+            sb.Append("  RareDevice: ").Append(RareDevice).Append("\n");
             sb.Append("  Proximity: ").Append(Proximity).Append("\n");
+            sb.Append("  Labels: ").Append(Labels).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -448,9 +468,19 @@ namespace FingerprintPro.ServerSdk.Model
                 this.MitmAttack.Equals(input.MitmAttack))
                 ) &&
                 (
+                this.RareDevice == input.RareDevice ||
+                (this.RareDevice != null &&
+                this.RareDevice.Equals(input.RareDevice))
+                ) &&
+                (
                 this.Proximity == input.Proximity ||
                 (this.Proximity != null &&
                 this.Proximity.Equals(input.Proximity))
+                ) &&
+                (
+                this.Labels == input.Labels ||
+                (this.Labels != null &&
+                this.Labels.Equals(input.Labels))
                 );
         }
 
@@ -513,8 +543,12 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.DeveloperTools.GetHashCode();
                 if (this.MitmAttack != null)
                     hashCode = hashCode * 59 + this.MitmAttack.GetHashCode();
+                if (this.RareDevice != null)
+                    hashCode = hashCode * 59 + this.RareDevice.GetHashCode();
                 if (this.Proximity != null)
                     hashCode = hashCode * 59 + this.Proximity.GetHashCode();
+                if (this.Labels != null)
+                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
                 return hashCode;
             }
         }

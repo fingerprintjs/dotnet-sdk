@@ -68,11 +68,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="velocity">velocity.</param>
         /// <param name="developerTools">developerTools.</param>
         /// <param name="mitmAttack">mitmAttack.</param>
+        /// <param name="rareDevice">rareDevice.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
         /// <param name="sdk">sdk (required).</param>
         /// <param name="supplementaryIds">supplementaryIds.</param>
         /// <param name="proximity">proximity.</param>
-        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack), bool? replayed = default(bool?), SDK sdk = default(SDK), WebhookSupplementaryIDs supplementaryIds = default(WebhookSupplementaryIDs), WebhookProximity proximity = default(WebhookProximity))
+        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack), WebhookRareDevice rareDevice = default(WebhookRareDevice), bool? replayed = default(bool?), SDK sdk = default(SDK), WebhookSupplementaryIDs supplementaryIds = default(WebhookSupplementaryIDs), WebhookProximity proximity = default(WebhookProximity))
         {
             // to ensure "requestId" is required (not null)
             // swagger debug: Webhook RequestId
@@ -177,6 +178,7 @@ namespace FingerprintPro.ServerSdk.Model
             this.Velocity = velocity;
             this.DeveloperTools = developerTools;
             this.MitmAttack = mitmAttack;
+            this.RareDevice = rareDevice;
             this.Replayed = replayed;
             this.SupplementaryIds = supplementaryIds;
             this.Proximity = proximity;
@@ -487,6 +489,13 @@ namespace FingerprintPro.ServerSdk.Model
         public WebhookMitMAttack MitmAttack { get; set; }
 
         /// <summary>
+        /// Gets or Sets RareDevice
+        /// </summary>
+        [DataMember(Name = "rareDevice", EmitDefaultValue = false)]
+        [JsonPropertyName("rareDevice")]
+        public WebhookRareDevice RareDevice { get; set; }
+
+        /// <summary>
         /// `true` if we determined that this payload was replayed, `false` otherwise. 
         /// </summary>
         /// <value>`true` if we determined that this payload was replayed, `false` otherwise. </value>
@@ -565,6 +574,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Velocity: ").Append(Velocity).Append("\n");
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("  MitmAttack: ").Append(MitmAttack).Append("\n");
+            sb.Append("  RareDevice: ").Append(RareDevice).Append("\n");
             sb.Append("  Replayed: ").Append(Replayed).Append("\n");
             sb.Append("  Sdk: ").Append(Sdk).Append("\n");
             sb.Append("  SupplementaryIds: ").Append(SupplementaryIds).Append("\n");
@@ -804,6 +814,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.MitmAttack.Equals(input.MitmAttack))
                 ) &&
                 (
+                this.RareDevice == input.RareDevice ||
+                (this.RareDevice != null &&
+                this.RareDevice.Equals(input.RareDevice))
+                ) &&
+                (
                 this.Replayed == input.Replayed ||
                 (this.Replayed != null &&
                 this.Replayed.Equals(input.Replayed))
@@ -918,6 +933,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.DeveloperTools.GetHashCode();
                 if (this.MitmAttack != null)
                     hashCode = hashCode * 59 + this.MitmAttack.GetHashCode();
+                if (this.RareDevice != null)
+                    hashCode = hashCode * 59 + this.RareDevice.GetHashCode();
                 if (this.Replayed != null)
                     hashCode = hashCode * 59 + this.Replayed.GetHashCode();
                 if (this.Sdk != null)
