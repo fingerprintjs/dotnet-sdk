@@ -739,7 +739,7 @@ namespace Fingerprint.ServerSdk.Test.Api
             MockResponseStatusCode = 429;
 
             const int limit = 1;
-            const string ipAddress = "01234";
+            const string ipAddress = "61.127.217.15";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithLimit(limit)
