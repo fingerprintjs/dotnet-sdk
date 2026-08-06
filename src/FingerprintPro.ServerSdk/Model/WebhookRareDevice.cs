@@ -29,7 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         public enum PercentileBucketEnum
         {
             /// <summary>
-            /// Enum P95 for value: <p95
+            /// Enum P95 for value: &lt;p95
             /// </summary>
             [EnumMember(Value = "<p95")]
             P95 = 1,
