@@ -1,5 +1,5 @@
 ---
-'fingerprint-server-dotnet-sdk': minor
+'fingerprint-pro-server-api-dotnet-sdk': minor
 ---
 
 Update Server API schema to v3.5.2:
