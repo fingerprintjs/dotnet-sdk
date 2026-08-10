@@ -36,6 +36,7 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         /// <param name="eventId">Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp.  (required).</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
+        /// <param name="source">source.</param>
         /// <param name="incrementalIdentificationStatus">incrementalIdentificationStatus.</param>
         /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
         /// <param name="environmentId">Environment Id of the event..</param>
@@ -99,10 +100,11 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="labels">Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
+        public Event(string eventId, long timestamp, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
+            SourceOption = source;
             IncrementalIdentificationStatusOption = incrementalIdentificationStatus;
             LinkedIdOption = linkedId;
             EnvironmentIdOption = environmentId;
@@ -169,6 +171,19 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Used to track the state of Source
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<EventSource?> SourceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Source
+        /// </summary>
+        [JsonPropertyName("source")]
+        public EventSource? Source { get { return this.SourceOption; } set { this.SourceOption = new Option<EventSource?>(value); } }
 
         /// <summary>
         /// Used to track the state of IncrementalIdentificationStatus
@@ -1042,6 +1057,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("class Event {\n");
             sb.Append("  EventId: ").Append(EventId).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+            sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  IncrementalIdentificationStatus: ").Append(IncrementalIdentificationStatus).Append("\n");
             sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
             sb.Append("  EnvironmentId: ").Append(EnvironmentId).Append("\n");
@@ -1191,6 +1207,7 @@ namespace Fingerprint.ServerSdk.Model
 
             Option<string> eventId = default;
             Option<long?> timestamp = default;
+            Option<EventSource?> source = default;
             Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default;
             Option<string> linkedId = default;
             Option<string> environmentId = default;
@@ -1274,6 +1291,11 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "timestamp":
                             timestamp = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "source":
+                            string sourceRawValue = utf8JsonReader.GetString();
+                            if (sourceRawValue != null)
+                                source = new Option<EventSource?>(EventSourceValueConverter.FromStringOrDefault(sourceRawValue));
                             break;
                         case "incremental_identification_status":
                             string incrementalIdentificationStatusRawValue = utf8JsonReader.GetString();
@@ -1491,6 +1513,9 @@ namespace Fingerprint.ServerSdk.Model
             if (timestamp.IsSet && timestamp.Value == null)
                 throw new ArgumentNullException(nameof(timestamp), "Property is not nullable for class Event.");
 
+            if (source.IsSet && source.Value == null)
+                throw new ArgumentNullException(nameof(source), "Property is not nullable for class Event.");
+
             if (incrementalIdentificationStatus.IsSet && incrementalIdentificationStatus.Value == null)
                 throw new ArgumentNullException(nameof(incrementalIdentificationStatus), "Property is not nullable for class Event.");
 
@@ -1677,7 +1702,7 @@ namespace Fingerprint.ServerSdk.Model
             if (labels.IsSet && labels.Value == null)
                 throw new ArgumentNullException(nameof(labels), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
+            return new Event(eventId.Value, timestamp.Value.Value, source, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
         }
 
         /// <summary>
@@ -1801,6 +1826,11 @@ namespace Fingerprint.ServerSdk.Model
 
             writer.WriteNumber("timestamp", varEvent.Timestamp);
 
+            if (varEvent.SourceOption.IsSet)
+            {
+                var sourceRawValue = EventSourceValueConverter.ToJsonValue(varEvent.Source.Value);
+                writer.WriteString("source", sourceRawValue);
+            }
             if (varEvent.IncrementalIdentificationStatusOption.IsSet)
             {
                 var incrementalIdentificationStatusRawValue = IncrementalIdentificationStatusValueConverter.ToJsonValue(varEvent.IncrementalIdentificationStatus.Value);

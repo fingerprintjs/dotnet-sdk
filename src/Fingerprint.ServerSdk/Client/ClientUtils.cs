@@ -127,6 +127,8 @@ namespace Fingerprint.ServerSdk.Client
                 return BotResultValueConverter.ToJsonValue(botResult);
             if (obj is ErrorCode errorCode)
                 return ErrorCodeValueConverter.ToJsonValue(errorCode);
+            if (obj is EventSource eventSource)
+                return EventSourceValueConverter.ToJsonValue(eventSource);
             if (obj is IncrementalIdentificationStatus incrementalIdentificationStatus)
                 return IncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus);
             if (obj is Proximity.PrecisionRadiusEnum proximityPrecisionRadiusEnum)

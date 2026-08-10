@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | **string** | Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp.  | 
 **Timestamp** | **long** | Timestamp of the event with millisecond precision in Unix time. | 
+**Source** | **EventSource** |  | [optional] 
 **IncrementalIdentificationStatus** | **IncrementalIdentificationStatus** |  | [optional] 
 **LinkedId** | **string** | A customer-provided id that was sent with the request. | [optional] 
 **EnvironmentId** | **string** | Environment Id of the event. | [optional] 
