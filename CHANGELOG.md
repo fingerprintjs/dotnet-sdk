@@ -1,5 +1,17 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.12.0
+
+### Minor Changes
+
+- Update Server API schema to v3.5.2:
+
+  - **events**: Add `labels` field with machine learning based predictions for specific use cases (beta).
+  - **events**: Add `rareDevice` Smart Signal with `result` and `percentileBucket`.
+  - **events-search**: Add `rare_device` and `rare_device_percentile_bucket` filters.
+  - **events**: Add `mlScore` fields to the `VPN` and `Proxy` signals, and `mlPrediction` to `VPNMethods` (beta).
+  - Clarify the `DeveloperTools` signal description to cover Android/iOS devices. ([3360609](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/33606094c458149b67b011d990b5ff4f3a993015))
+
 ## 7.11.0
 
 ### Minor Changes
