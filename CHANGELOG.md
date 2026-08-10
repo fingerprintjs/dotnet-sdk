@@ -1,5 +1,19 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.6.0
+
+### Minor Changes
+
+- **events**: Add `active_call` smart signal to `Event` ([598b195](https://github.com/fingerprintjs/dotnet-sdk/commit/598b1959f277491fda174b0df637395dcfde5e4b))
+- **events**: Add `keyboard_layout_hash` to `RawDeviceAttributes` ([598b195](https://github.com/fingerprintjs/dotnet-sdk/commit/598b1959f277491fda174b0df637395dcfde5e4b))
+- **events**: Add `battery_charging` field to `RawDeviceAttributes` ([598b195](https://github.com/fingerprintjs/dotnet-sdk/commit/598b1959f277491fda174b0df637395dcfde5e4b))
+- **events-search**: Add 429 and 504 error responses to Search Events endpoint ([598b195](https://github.com/fingerprintjs/dotnet-sdk/commit/598b1959f277491fda174b0df637395dcfde5e4b))
+- **events**: Add 504 error response to Get Event endpoint ([598b195](https://github.com/fingerprintjs/dotnet-sdk/commit/598b1959f277491fda174b0df637395dcfde5e4b))
+
+### Patch Changes
+
+- **events**: Fix types for `start`/`start_date_time` and `end`/`end_date_time` in normalized schema ([598b195](https://github.com/fingerprintjs/dotnet-sdk/commit/598b1959f277491fda174b0df637395dcfde5e4b))
+
 ## 8.5.0
 
 ### Minor Changes
