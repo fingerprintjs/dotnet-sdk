@@ -1,5 +1,5 @@
-import config from './config.json' assert {type: 'json'};
-import pkg from './package.json' assert {type: 'json'};
+import config from './config.json' with {type: 'json'};
+import pkg from './package.json' with {type: 'json'};
 import fs from 'fs'
 import cp from 'child_process'
 import { fileURLToPath } from 'url';
