@@ -16,39 +16,46 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// DeveloperTools
+    /// LabelsInner
     /// </summary>
     [DataContract]
-    public class DeveloperTools : IEquatable<DeveloperTools>
+    public class LabelsInner : IEquatable<LabelsInner>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeveloperTools" /> class.
+        /// Initializes a new instance of the <see cref="LabelsInner" /> class.
         /// </summary>
-        /// <param name="result">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  (required).</param>
-        public DeveloperTools(bool? result = default(bool?))
+        /// <param name="label">label.</param>
+        /// <param name="prediction">prediction.</param>
+        /// <param name="mlScore">mlScore.</param>
+        public LabelsInner(string label = default(string), bool? prediction = default(bool?), double? mlScore = default(double?))
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: DeveloperTools Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for DeveloperTools and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
+            this.Label = label;
+            this.Prediction = prediction;
+            this.MlScore = mlScore;
         }
 
         /// <summary>
-        /// `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. 
+        /// Gets or Sets Label
         /// </summary>
-        /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
+        [DataMember(Name = "label", EmitDefaultValue = false)]
+        [JsonPropertyName("label")]
+        public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Prediction
+        /// </summary>
+        [DataMember(Name = "prediction", EmitDefaultValue = false)]
+        [JsonPropertyName("prediction")]
+        public bool? Prediction { get; set; }
+
+        /// <summary>
+        /// Gets or Sets MlScore
+        /// </summary>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +64,10 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DeveloperTools {\n");
-            sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("class LabelsInner {\n");
+            sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  Prediction: ").Append(Prediction).Append("\n");
+            sb.Append("  MlScore: ").Append(MlScore).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,20 +82,30 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if DeveloperTools instances are equal
+        /// Returns true if LabelsInner instances are equal
         /// </summary>
-        /// <param name="input">Instance of DeveloperTools to be compared</param>
+        /// <param name="input">Instance of LabelsInner to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeveloperTools? input)
+        public bool Equals(LabelsInner? input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
+                this.Label == input.Label ||
+                (this.Label != null &&
+                this.Label.Equals(input.Label))
+                ) &&
+                (
+                this.Prediction == input.Prediction ||
+                (this.Prediction != null &&
+                this.Prediction.Equals(input.Prediction))
+                ) &&
+                (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
                 );
         }
 
@@ -99,8 +118,12 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Label != null)
+                    hashCode = hashCode * 59 + this.Label.GetHashCode();
+                if (this.Prediction != null)
+                    hashCode = hashCode * 59 + this.Prediction.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
                 return hashCode;
             }
         }

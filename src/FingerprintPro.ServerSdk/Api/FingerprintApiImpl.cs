@@ -242,14 +242,15 @@ public class FingerprintApi : IFingerprintApi
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
         float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
-        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
+        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? rareDevice = null!,
+        string? rareDevicePercentileBucket = null!, bool? proxy = null!,
         string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!,
         string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse,
             suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida,
             factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter,
-            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, proximityPrecisionRadius).Data;
+            developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment, proximityId, proximityPrecisionRadius).Data;
     }
 
     public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!,
@@ -259,14 +260,15 @@ public class FingerprintApi : IFingerprintApi
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
         float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
-        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
+        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? rareDevice = null!,
+        string? rareDevicePercentileBucket = null!, bool? proxy = null!,
         string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!,
         string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end,
             reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken,
             frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter,
-            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment,
+            developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment,
             proximityId, proximityPrecisionRadius).Result;
     }
 
@@ -277,14 +279,15 @@ public class FingerprintApi : IFingerprintApi
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
         float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
-        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
+        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? rareDevice = null!,
+        string? rareDevicePercentileBucket = null!, bool? proxy = null!,
         string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!,
         string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId,
             start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings,
             jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist,
-            datacenter, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment,
+            datacenter, developerTools, locationSpoofing, mitmAttack, rareDevice, rareDevicePercentileBucket, proxy, sdkVersion, sdkPlatform, environment,
             proximityId, proximityPrecisionRadius);
         return response.Data;
     }
@@ -299,7 +302,8 @@ public class FingerprintApi : IFingerprintApi
         bool? clonedApp = null!,
         bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!, float? minSuspectScore = null!,
         bool? ipBlocklist = null!, bool? datacenter = null!, bool? developerTools = null!,
-        bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!, string? sdkVersion = null!,
+        bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? rareDevice = null!,
+        string? rareDevicePercentileBucket = null!, bool? proxy = null!, string? sdkVersion = null!,
         string? sdkPlatform = null!, List<string>? environment = null!,
         string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
@@ -336,6 +340,8 @@ public class FingerprintApi : IFingerprintApi
         AddQueryParam(queryParams, "developer_tools", developerTools);
         AddQueryParam(queryParams, "location_spoofing", locationSpoofing);
         AddQueryParam(queryParams, "mitm_attack", mitmAttack);
+        AddQueryParam(queryParams, "rare_device", rareDevice);
+        AddQueryParam(queryParams, "rare_device_percentile_bucket", rareDevicePercentileBucket);
         AddQueryParam(queryParams, "proxy", proxy);
         AddQueryParam(queryParams, "sdk_version", sdkVersion);
         AddQueryParam(queryParams, "sdk_platform", sdkPlatform);

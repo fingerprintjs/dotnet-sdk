@@ -22,7 +22,7 @@ namespace {{packageName}}.{{apiPackage}}
                 /// {{{notes}}}
                 /// </remarks>
             /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-            {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+            {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
             {{/parameters}}/// <returns>{{#returnType}}{{returnType}}{{/returnType}}</returns>
             {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{operationId}} ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null!{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}});
 

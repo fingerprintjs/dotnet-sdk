@@ -22,9 +22,9 @@ namespace FingerprintPro.ServerSdk.Model
     public class ProxyDetails : IEquatable<ProxyDetails>
     {
         /// <summary>
-        /// Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers 
+        /// Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. 
         /// </summary>
-        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers </value>
+        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum ProxyTypeEnum
         {
@@ -37,12 +37,17 @@ namespace FingerprintPro.ServerSdk.Model
             /// Enum Datacenter for value: data_center
             /// </summary>
             [EnumMember(Value = "data_center")]
-            Datacenter = 2
+            Datacenter = 2,
+            /// <summary>
+            /// Enum Unknown for value: unknown
+            /// </summary>
+            [EnumMember(Value = "unknown")]
+            Unknown = 3
         }
         /// <summary>
-        /// Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers 
+        /// Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. 
         /// </summary>
-        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers </value>
+        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. </value>
         [DataMember(Name = "proxyType", EmitDefaultValue = false)]
         [JsonPropertyName("proxyType")]
         public ProxyTypeEnum ProxyType { get; set; }
@@ -51,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ProxyDetails" /> class.
         /// </summary>
-        /// <param name="proxyType">Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers  (required).</param>
+        /// <param name="proxyType">Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type.  (required).</param>
         /// <param name="lastSeenAt">ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. .</param>
         public ProxyDetails(ProxyTypeEnum proxyType = default(ProxyTypeEnum), DateTime? lastSeenAt = default(DateTime?))
         {

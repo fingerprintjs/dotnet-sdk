@@ -31,7 +31,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices. (required).</param>
         /// <param name="osMismatch">The browser runs on a different operating system than the operating system inferred from the request network signature. (required).</param>
         /// <param name="relay">Request IP address belongs to a relay service provider, indicating the use of relay services like [Apple Private relay](https://support.apple.com/en-us/102602) or [Cloudflare Warp](https://developers.cloudflare.com/warp-client/).   * Like VPNs, relay services anonymize the visitor's true IP address. * Unlike traditional VPNs, relay services don't let visitors spoof their location by choosing an exit node in a different country.  This field allows you to differentiate VPN users and relay service users in your fraud prevention logic.  (required).</param>
-        public VPNMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?), bool? osMismatch = default(bool?), bool? relay = default(bool?))
+        /// <param name="mlPrediction">`true` if the request came from a device running a VPN, `false` otherwise.   .</param>
+        public VPNMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?), bool? osMismatch = default(bool?), bool? relay = default(bool?), bool? mlPrediction = default(bool?))
         {
             // to ensure "timezoneMismatch" is required (not null)
             // swagger debug: VPNMethods TimezoneMismatch
@@ -88,6 +89,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Relay = relay;
             }
+            this.MlPrediction = mlPrediction;
         }
 
         /// <summary>
@@ -131,6 +133,14 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? Relay { get; set; }
 
         /// <summary>
+        /// `true` if the request came from a device running a VPN, `false` otherwise.   
+        /// </summary>
+        /// <value>`true` if the request came from a device running a VPN, `false` otherwise.   </value>
+        [DataMember(Name = "mlPrediction", EmitDefaultValue = false)]
+        [JsonPropertyName("mlPrediction")]
+        public bool? MlPrediction { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -143,6 +153,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  AuxiliaryMobile: ").Append(AuxiliaryMobile).Append("\n");
             sb.Append("  OsMismatch: ").Append(OsMismatch).Append("\n");
             sb.Append("  Relay: ").Append(Relay).Append("\n");
+            sb.Append("  MlPrediction: ").Append(MlPrediction).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -191,6 +202,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Relay == input.Relay ||
                 (this.Relay != null &&
                 this.Relay.Equals(input.Relay))
+                ) &&
+                (
+                this.MlPrediction == input.MlPrediction ||
+                (this.MlPrediction != null &&
+                this.MlPrediction.Equals(input.MlPrediction))
                 );
         }
 
@@ -213,6 +229,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.OsMismatch.GetHashCode();
                 if (this.Relay != null)
                     hashCode = hashCode * 59 + this.Relay.GetHashCode();
+                if (this.MlPrediction != null)
+                    hashCode = hashCode * 59 + this.MlPrediction.GetHashCode();
                 return hashCode;
             }
         }

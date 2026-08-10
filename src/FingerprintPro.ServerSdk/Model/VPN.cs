@@ -28,10 +28,11 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="result">VPN or other anonymizing service has been used when sending the request. (required).</param>
         /// <param name="confidence">confidence (required).</param>
+        /// <param name="mlScore">Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method. (required).</param>
         /// <param name="originCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). (required).</param>
         /// <param name="methods">methods (required).</param>
-        public VPN(bool? result = default(bool?), VPNConfidence confidence = default(VPNConfidence), string originTimezone = default(string), string originCountry = default(string), VPNMethods methods = default(VPNMethods))
+        public VPN(bool? result = default(bool?), VPNConfidence confidence = default(VPNConfidence), double? mlScore = default(double?), string originTimezone = default(string), string originCountry = default(string), VPNMethods methods = default(VPNMethods))
         {
             // to ensure "result" is required (not null)
             // swagger debug: VPN Result
@@ -88,6 +89,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Methods = methods;
             }
+            this.MlScore = mlScore;
         }
 
         /// <summary>
@@ -104,6 +106,14 @@ namespace FingerprintPro.ServerSdk.Model
         [DataMember(Name = "confidence", EmitDefaultValue = false)]
         [JsonPropertyName("confidence")]
         public VPNConfidence Confidence { get; set; }
+
+        /// <summary>
+        /// Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+        /// </summary>
+        /// <value>Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
 
         /// <summary>
         /// Local timezone which is used in timezoneMismatch method.
@@ -138,6 +148,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class VPN {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
+            sb.Append("  MlScore: ").Append(MlScore).Append("\n");
             sb.Append("  OriginTimezone: ").Append(OriginTimezone).Append("\n");
             sb.Append("  OriginCountry: ").Append(OriginCountry).Append("\n");
             sb.Append("  Methods: ").Append(Methods).Append("\n");
@@ -176,6 +187,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Confidence.Equals(input.Confidence))
                 ) &&
                 (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
+                ) &&
+                (
                 this.OriginTimezone == input.OriginTimezone ||
                 (this.OriginTimezone != null &&
                 this.OriginTimezone.Equals(input.OriginTimezone))
@@ -205,6 +221,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
                 if (this.Confidence != null)
                     hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
                 if (this.OriginTimezone != null)
                     hashCode = hashCode * 59 + this.OriginTimezone.GetHashCode();
                 if (this.OriginCountry != null)

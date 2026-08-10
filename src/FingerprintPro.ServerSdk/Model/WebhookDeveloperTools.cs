@@ -26,16 +26,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookDeveloperTools" /> class.
         /// </summary>
-        /// <param name="result">`true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise. .</param>
+        /// <param name="result">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. .</param>
         public WebhookDeveloperTools(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// `true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise. 
+        /// `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. 
         /// </summary>
-        /// <value>`true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise. </value>
+        /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         [JsonPropertyName("result")]
         public bool? Result { get; set; }

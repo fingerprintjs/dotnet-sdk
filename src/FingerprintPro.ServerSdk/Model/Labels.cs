@@ -16,39 +16,19 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// DeveloperTools
+    /// Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
     /// </summary>
     [DataContract]
-    public class DeveloperTools : IEquatable<DeveloperTools>
+    public class Labels : List<LabelsInner>, IEquatable<Labels>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeveloperTools" /> class.
+        /// Initializes a new instance of the <see cref="Labels" /> class.
         /// </summary>
-        /// <param name="result">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  (required).</param>
-        public DeveloperTools(bool? result = default(bool?))
+        public Labels() : base()
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: DeveloperTools Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for DeveloperTools and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
         }
-
-        /// <summary>
-        /// `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. 
-        /// </summary>
-        /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +37,8 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DeveloperTools {\n");
-            sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("class Labels {\n");
+            sb.Append("  ").Append(base.ToString()!.Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -67,27 +47,22 @@ namespace FingerprintPro.ServerSdk.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return JsonUtils.Serialize(this);
         }
 
         /// <summary>
-        /// Returns true if DeveloperTools instances are equal
+        /// Returns true if Labels instances are equal
         /// </summary>
-        /// <param name="input">Instance of DeveloperTools to be compared</param>
+        /// <param name="input">Instance of Labels to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeveloperTools? input)
+        public bool Equals(Labels? input)
         {
             if (input == null)
                 return false;
 
-            return
-                (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
-                );
+            return base.Equals(input);
         }
 
         /// <summary>
@@ -98,9 +73,7 @@ namespace FingerprintPro.ServerSdk.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                int hashCode = base.GetHashCode();
                 return hashCode;
             }
         }
