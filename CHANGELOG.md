@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.7.0
+
+### Minor Changes
+
+- Add `source` field to `Event` to identify how the event was generated (`device` or `edge`) ([86128fb](https://github.com/fingerprintjs/dotnet-sdk/commit/86128fb687ad17509ca4c0c03df5239ca807fa93))
+
 ## 8.6.0
 
 ### Minor Changes
