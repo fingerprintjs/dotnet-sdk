@@ -18,6 +18,7 @@ docs/models/EventRuleAction.md
 docs/models/EventRuleActionAllow.md
 docs/models/EventRuleActionBlock.md
 docs/models/EventSearch.md
+docs/models/EventSource.md
 docs/models/EventUpdate.md
 docs/models/FontPreferences.md
 docs/models/Geolocation.md
@@ -104,6 +105,7 @@ src/Fingerprint.ServerSdk/Model/EventRuleAction.cs
 src/Fingerprint.ServerSdk/Model/EventRuleActionAllow.cs
 src/Fingerprint.ServerSdk/Model/EventRuleActionBlock.cs
 src/Fingerprint.ServerSdk/Model/EventSearch.cs
+src/Fingerprint.ServerSdk/Model/EventSource.cs
 src/Fingerprint.ServerSdk/Model/EventUpdate.cs
 src/Fingerprint.ServerSdk/Model/FontPreferences.cs
 src/Fingerprint.ServerSdk/Model/Geolocation.cs
