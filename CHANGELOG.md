@@ -1,5 +1,12 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.8.0
+
+### Minor Changes
+
+- **events-search**: Add `active_call` filter parameter ([3c08b4d](https://github.com/fingerprintjs/dotnet-sdk/commit/3c08b4d7ec40d030987d5d753050261dc28802cc))
+- Add `keyboard_layout_name` to `RawDeviceAttributes` ([3c08b4d](https://github.com/fingerprintjs/dotnet-sdk/commit/3c08b4d7ec40d030987d5d753050261dc28802cc))
+
 ## 8.7.0
 
 ### Minor Changes
