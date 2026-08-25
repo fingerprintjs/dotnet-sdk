@@ -67,8 +67,9 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="batteryCharging">When `true`, the device is currently charging. Available only for web devices on Chromium-based browsers..</param>
         /// <param name="batteryLowPowerMode">Whether the device's low power mode is enabled. Available only for Android and iOS devices..</param>
         /// <param name="keyboardLayoutHash">Unique identifier for the user's keyboard layout..</param>
+        /// <param name="keyboardLayoutName">Name of the user's configured keyboard layout as a BCP 47-style identifier. Only available in Chromium-based browsers, omitted otherwise..</param>
         [JsonConstructor]
-        public RawDeviceAttributes(Option<FontPreferences> fontPreferences = default, Option<Emoji> emoji = default, Option<List<string>> fonts = default, Option<int?> deviceMemory = default, Option<string> timezone = default, Option<Canvas> canvas = default, Option<List<List<string>>> languages = default, Option<WebGlExtensions> webglExtensions = default, Option<WebGlBasics> webglBasics = default, Option<List<int>> screenResolution = default, Option<TouchSupport> touchSupport = default, Option<string> oscpu = default, Option<int?> architecture = default, Option<bool?> cookiesEnabled = default, Option<int?> hardwareConcurrency = default, Option<string> dateTimeLocale = default, Option<string> vendor = default, Option<int?> colorDepth = default, Option<string> platform = default, Option<bool?> sessionStorage = default, Option<bool?> localStorage = default, Option<double?> audio = default, Option<List<PluginsInner>> plugins = default, Option<bool?> indexedDb = default, Option<string> math = default, Option<string> deviceModel = default, Option<string> deviceManufacturer = default, Option<string> fontHash = default, Option<string> timezoneOffset = default, Option<int?> batteryLevel = default, Option<bool?> batteryCharging = default, Option<bool?> batteryLowPowerMode = default, Option<string> keyboardLayoutHash = default)
+        public RawDeviceAttributes(Option<FontPreferences> fontPreferences = default, Option<Emoji> emoji = default, Option<List<string>> fonts = default, Option<int?> deviceMemory = default, Option<string> timezone = default, Option<Canvas> canvas = default, Option<List<List<string>>> languages = default, Option<WebGlExtensions> webglExtensions = default, Option<WebGlBasics> webglBasics = default, Option<List<int>> screenResolution = default, Option<TouchSupport> touchSupport = default, Option<string> oscpu = default, Option<int?> architecture = default, Option<bool?> cookiesEnabled = default, Option<int?> hardwareConcurrency = default, Option<string> dateTimeLocale = default, Option<string> vendor = default, Option<int?> colorDepth = default, Option<string> platform = default, Option<bool?> sessionStorage = default, Option<bool?> localStorage = default, Option<double?> audio = default, Option<List<PluginsInner>> plugins = default, Option<bool?> indexedDb = default, Option<string> math = default, Option<string> deviceModel = default, Option<string> deviceManufacturer = default, Option<string> fontHash = default, Option<string> timezoneOffset = default, Option<int?> batteryLevel = default, Option<bool?> batteryCharging = default, Option<bool?> batteryLowPowerMode = default, Option<string> keyboardLayoutHash = default, Option<string> keyboardLayoutName = default)
         {
             FontPreferencesOption = fontPreferences;
             EmojiOption = emoji;
@@ -103,6 +104,7 @@ namespace Fingerprint.ServerSdk.Model
             BatteryChargingOption = batteryCharging;
             BatteryLowPowerModeOption = batteryLowPowerMode;
             KeyboardLayoutHashOption = keyboardLayoutHash;
+            KeyboardLayoutNameOption = keyboardLayoutName;
             OnCreated();
         }
 
@@ -565,6 +567,20 @@ namespace Fingerprint.ServerSdk.Model
         public string KeyboardLayoutHash { get { return this.KeyboardLayoutHashOption; } set { this.KeyboardLayoutHashOption = new Option<string>(value); } }
 
         /// <summary>
+        /// Used to track the state of KeyboardLayoutName
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> KeyboardLayoutNameOption { get; private set; }
+
+        /// <summary>
+        /// Name of the user's configured keyboard layout as a BCP 47-style identifier. Only available in Chromium-based browsers, omitted otherwise.
+        /// </summary>
+        /// <value>Name of the user's configured keyboard layout as a BCP 47-style identifier. Only available in Chromium-based browsers, omitted otherwise.</value>
+        [JsonPropertyName("keyboard_layout_name")]
+        public string KeyboardLayoutName { get { return this.KeyboardLayoutNameOption; } set { this.KeyboardLayoutNameOption = new Option<string>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -605,6 +621,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  BatteryCharging: ").Append(BatteryCharging).Append("\n");
             sb.Append("  BatteryLowPowerMode: ").Append(BatteryLowPowerMode).Append("\n");
             sb.Append("  KeyboardLayoutHash: ").Append(KeyboardLayoutHash).Append("\n");
+            sb.Append("  KeyboardLayoutName: ").Append(KeyboardLayoutName).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -693,6 +710,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<bool?> batteryCharging = default;
             Option<bool?> batteryLowPowerMode = default;
             Option<string> keyboardLayoutHash = default;
+            Option<string> keyboardLayoutName = default;
 
             while (utf8JsonReader.Read())
             {
@@ -808,6 +826,9 @@ namespace Fingerprint.ServerSdk.Model
                         case "keyboard_layout_hash":
                             keyboardLayoutHash = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "keyboard_layout_name":
+                            keyboardLayoutName = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -913,7 +934,10 @@ namespace Fingerprint.ServerSdk.Model
             if (keyboardLayoutHash.IsSet && keyboardLayoutHash.Value == null)
                 throw new ArgumentNullException(nameof(keyboardLayoutHash), "Property is not nullable for class RawDeviceAttributes.");
 
-            return new RawDeviceAttributes(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math, deviceModel, deviceManufacturer, fontHash, timezoneOffset, batteryLevel, batteryCharging, batteryLowPowerMode, keyboardLayoutHash);
+            if (keyboardLayoutName.IsSet && keyboardLayoutName.Value == null)
+                throw new ArgumentNullException(nameof(keyboardLayoutName), "Property is not nullable for class RawDeviceAttributes.");
+
+            return new RawDeviceAttributes(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math, deviceModel, deviceManufacturer, fontHash, timezoneOffset, batteryLevel, batteryCharging, batteryLowPowerMode, keyboardLayoutHash, keyboardLayoutName);
         }
 
         /// <summary>
@@ -1002,6 +1026,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (rawDeviceAttributes.KeyboardLayoutHashOption.IsSet && rawDeviceAttributes.KeyboardLayoutHash == null)
                 throw new ArgumentNullException(nameof(rawDeviceAttributes.KeyboardLayoutHash), "Property is required for class RawDeviceAttributes.");
+
+            if (rawDeviceAttributes.KeyboardLayoutNameOption.IsSet && rawDeviceAttributes.KeyboardLayoutName == null)
+                throw new ArgumentNullException(nameof(rawDeviceAttributes.KeyboardLayoutName), "Property is required for class RawDeviceAttributes.");
 
             if (rawDeviceAttributes.FontPreferencesOption.IsSet)
             {
@@ -1121,6 +1148,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (rawDeviceAttributes.KeyboardLayoutHashOption.IsSet)
                 writer.WriteString("keyboard_layout_hash", rawDeviceAttributes.KeyboardLayoutHash);
+
+            if (rawDeviceAttributes.KeyboardLayoutNameOption.IsSet)
+                writer.WriteString("keyboard_layout_name", rawDeviceAttributes.KeyboardLayoutName);
         }
     }
 }

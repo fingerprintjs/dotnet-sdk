@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **BatteryCharging** | **bool** | When `true`, the device is currently charging. Available only for web devices on Chromium-based browsers. | [optional] 
 **BatteryLowPowerMode** | **bool** | Whether the device's low power mode is enabled. Available only for Android and iOS devices. | [optional] 
 **KeyboardLayoutHash** | **string** | Unique identifier for the user's keyboard layout. | [optional] 
+**KeyboardLayoutName** | **string** | Name of the user's configured keyboard layout as a BCP 47-style identifier. Only available in Chromium-based browsers, omitted otherwise. | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

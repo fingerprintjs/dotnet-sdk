@@ -373,6 +373,7 @@ namespace Fingerprint.ServerSdk.Test.Api
             const SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus =
                 SearchEventsIncrementalIdentificationStatus.PartiallyCompleted;
             const bool simulator = true;
+            const bool activeCall = true;
 
             var expectedUrl = $"{ServerUrl}events?"
                               + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
@@ -425,7 +426,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                               + $"&total_hits={totalHits}"
                               + $"&tor_node={torNode.ToString().ToLower()}"
                               + $"&incremental_identification_status={SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus)}"
-                              + $"&simulator={simulator.ToString().ToLower()}";
+                              + $"&simulator={simulator.ToString().ToLower()}"
+                              + $"&active_call={activeCall.ToString().ToLower()}";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithLimit(limit)
@@ -472,7 +474,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 .WithTorNode(torNode)
                 .WithHighRecallId(highRecallId)
                 .WithIncrementalIdentificationStatus(incrementalIdentificationStatus)
-                .WithSimulator(simulator));
+                .WithSimulator(simulator)
+                .WithActiveCall(activeCall));
 
             Assert.Multiple(() =>
             {
