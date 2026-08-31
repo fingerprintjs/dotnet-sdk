@@ -37,6 +37,7 @@ Fetch all Automation Intelligence API events via the [`/v4/events?source=edge`](
 
 ### Example
 ```csharp
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,7 +53,12 @@ namespace AnalyzeRequestForAutomationIntelligenceExample
         var host = CreateHostBuilder(args).Build();
         var api = host.Services.GetRequiredService<IFingerprintApi>();
 
-        var edgeRequest = new EdgeRequest(); // EdgeRequest | 
+        var edgeRequest = new EdgeRequest(
+            headers: new List<EdgeRequestHeadersInner> { new EdgeRequestHeadersInner("Host", "example.com") },
+            method: "GET",
+            url: "https://example.com/login",
+            ipv4Address: "34.162.244.71"
+        ); // EdgeRequest | 
 
         // Collect Automation Intelligence.
         IAnalyzeRequestForAutomationIntelligenceApiResponse result = await api.AnalyzeRequestForAutomationIntelligenceAsync(edgeRequest);
