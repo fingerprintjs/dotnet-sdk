@@ -121,6 +121,8 @@ namespace Fingerprint.ServerSdk
             var unsealed = Unseal(sealedData, keys);
 
             var json = Encoding.UTF8.GetString(unsealed);
+            // SPIKE INTER-2457 — BREAKING CHANGE. Deserializes to EventDevice/EventEdge wrapper.
+            // Callers that then read UnsealEventResponse(...).Identification fail to compile.
             var value = JsonSerializer.Deserialize<Event>(json, GetJsonSerializerOptions());
 
             if (value == null)
@@ -180,12 +182,16 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
             jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
             jsonOptions.Converters.Add(new CanvasJsonConverter());
+            jsonOptions.Converters.Add(new EdgeRequestJsonConverter());
+            jsonOptions.Converters.Add(new EdgeRequestHeadersInnerJsonConverter());
             jsonOptions.Converters.Add(new EmojiJsonConverter());
             jsonOptions.Converters.Add(new ErrorJsonConverter());
             jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
             jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
             jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
             jsonOptions.Converters.Add(new EventJsonConverter());
+            jsonOptions.Converters.Add(new EventDeviceJsonConverter());
+            jsonOptions.Converters.Add(new EventEdgeJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionAllowJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionBlockJsonConverter());
