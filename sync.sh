@@ -2,7 +2,8 @@
 set -euo pipefail
 
 defaultBaseUrl="https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi"
-schemaUrl="${1:-$defaultBaseUrl/schemas/fingerprint-server-api-v4.yaml}"
+# Flattened Event (single object, source optional). start/end split into start + start_date_time.
+schemaUrl="${1:-$defaultBaseUrl/schemas/fingerprint-server-api-v4-normalized.yaml}"
 examplesBaseUrl="${2:-$defaultBaseUrl/examples}"
 
 mkdir -p ./res

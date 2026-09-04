@@ -25,7 +25,7 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// Contains results from Fingerprint Identification and all active Smart Signals. Some Smart Signals are only supported for certain device types, these fields will be omitted for events not generated from the supported devices. Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
+    /// An identification event (`source: device`) or an Automation Intelligence event (`source: edge`).  Use `source` to tell them apart. Device events include Identification and device-derived Smart Signals. Edge events do not.  Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details. 
     /// </summary>
     public partial class Event : IValidatableObject
     {
@@ -36,17 +36,25 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         /// <param name="eventId">Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp.  (required).</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
+        /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
+        /// <param name="tags">A customer-provided value or an object that was sent with the identification request or updated later..</param>
+        /// <param name="url">Page URL from which the request was sent..</param>
+        /// <param name="botInfo">botInfo.</param>
+        /// <param name="ipInfo">ipInfo.</param>
+        /// <param name="proxy">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
+        /// <param name="proxyConfidence">proxyConfidence.</param>
+        /// <param name="proxyDetails">proxyDetails.</param>
+        /// <param name="vpn">VPN or other anonymizing service has been used when sending the request. .</param>
+        /// <param name="vpnConfidence">vpnConfidence.</param>
+        /// <param name="vpnMethods">vpnMethods.</param>
         /// <param name="source">source.</param>
         /// <param name="incrementalIdentificationStatus">incrementalIdentificationStatus.</param>
-        /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
         /// <param name="environmentId">Environment Id of the event..</param>
-        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event)..</param>
+        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event)..</param>
         /// <param name="sdk">sdk.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
         /// <param name="identification">identification.</param>
         /// <param name="supplementaryIdHighRecall">supplementaryIdHighRecall.</param>
-        /// <param name="tags">A customer-provided value or an object that was sent with the identification request or updated later..</param>
-        /// <param name="url">Page URL from which the request was sent..</param>
         /// <param name="bundleId">Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. .</param>
         /// <param name="packageName">Package name of the Android application integrated with the Fingerprint SDK for the event. .</param>
         /// <param name="ipAddress">IP address of the requesting browser or bot..</param>
@@ -60,17 +68,12 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="activeCall">Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android. .</param>
         /// <param name="bot">bot.</param>
         /// <param name="botType">Additional classification of the bot type if detected. .</param>
-        /// <param name="botInfo">botInfo.</param>
         /// <param name="clonedApp">Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. .</param>
         /// <param name="developerTools">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. .</param>
         /// <param name="emulator">Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android. .</param>
         /// <param name="factoryResetTimestamp">The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal. .</param>
         /// <param name="frida">[Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * `true` - Frida detected * `false` - No signs of Frida or the client is not a mobile device. .</param>
         /// <param name="ipBlocklist">ipBlocklist.</param>
-        /// <param name="ipInfo">ipInfo.</param>
-        /// <param name="proxy">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
-        /// <param name="proxyConfidence">proxyConfidence.</param>
-        /// <param name="proxyDetails">proxyDetails.</param>
         /// <param name="proxyMlScore">Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="incognito">`true` if we detected incognito mode used in the browser, `false` otherwise. .</param>
         /// <param name="jailbroken">iOS specific jailbreak detection. There are 2 values:  * `true` - Jailbreak detected. * `false` - No signs of jailbreak or the client is not iOS. .</param>
@@ -88,33 +91,38 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="velocity">velocity.</param>
         /// <param name="virtualMachine">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
         /// <param name="virtualMachineMlScore">Machine learning–based virtual machine score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
-        /// <param name="vpn">VPN or other anonymizing service has been used when sending the request. .</param>
-        /// <param name="vpnConfidence">vpnConfidence.</param>
         /// <param name="vpnMlScore">Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="vpnOriginTimezone">Local timezone which is used in timezone_mismatch method. .</param>
         /// <param name="vpnOriginCountry">Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown. .</param>
-        /// <param name="vpnMethods">vpnMethods.</param>
         /// <param name="highActivityDevice">Flag indicating if the request came from a high-activity visitor..</param>
         /// <param name="rareDevice">`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         /// <param name="rareDevicePercentileBucket">rareDevicePercentileBucket.</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="labels">Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
+        public Event(string eventId, long timestamp, Option<string> linkedId = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<BotInfo> botInfo = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<VpnMethods> vpnMethods = default, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
+            LinkedIdOption = linkedId;
+            TagsOption = tags;
+            UrlOption = url;
+            BotInfoOption = botInfo;
+            IpInfoOption = ipInfo;
+            ProxyOption = proxy;
+            ProxyConfidenceOption = proxyConfidence;
+            ProxyDetailsOption = proxyDetails;
+            VpnOption = vpn;
+            VpnConfidenceOption = vpnConfidence;
+            VpnMethodsOption = vpnMethods;
             SourceOption = source;
             IncrementalIdentificationStatusOption = incrementalIdentificationStatus;
-            LinkedIdOption = linkedId;
             EnvironmentIdOption = environmentId;
             SuspectOption = suspect;
             SdkOption = sdk;
             ReplayedOption = replayed;
             IdentificationOption = identification;
             SupplementaryIdHighRecallOption = supplementaryIdHighRecall;
-            TagsOption = tags;
-            UrlOption = url;
             BundleIdOption = bundleId;
             PackageNameOption = packageName;
             IpAddressOption = ipAddress;
@@ -128,17 +136,12 @@ namespace Fingerprint.ServerSdk.Model
             ActiveCallOption = activeCall;
             BotOption = bot;
             BotTypeOption = botType;
-            BotInfoOption = botInfo;
             ClonedAppOption = clonedApp;
             DeveloperToolsOption = developerTools;
             EmulatorOption = emulator;
             FactoryResetTimestampOption = factoryResetTimestamp;
             FridaOption = frida;
             IpBlocklistOption = ipBlocklist;
-            IpInfoOption = ipInfo;
-            ProxyOption = proxy;
-            ProxyConfidenceOption = proxyConfidence;
-            ProxyDetailsOption = proxyDetails;
             ProxyMlScoreOption = proxyMlScore;
             IncognitoOption = incognito;
             JailbrokenOption = jailbroken;
@@ -156,12 +159,9 @@ namespace Fingerprint.ServerSdk.Model
             VelocityOption = velocity;
             VirtualMachineOption = virtualMachine;
             VirtualMachineMlScoreOption = virtualMachineMlScore;
-            VpnOption = vpn;
-            VpnConfidenceOption = vpnConfidence;
             VpnMlScoreOption = vpnMlScore;
             VpnOriginTimezoneOption = vpnOriginTimezone;
             VpnOriginCountryOption = vpnOriginCountry;
-            VpnMethodsOption = vpnMethods;
             HighActivityDeviceOption = highActivityDevice;
             RareDeviceOption = rareDevice;
             RareDevicePercentileBucketOption = rareDevicePercentileBucket;
@@ -171,6 +171,32 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Used to track the state of ProxyConfidence
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ProxyConfidence?> ProxyConfidenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProxyConfidence
+        /// </summary>
+        [JsonPropertyName("proxy_confidence")]
+        public ProxyConfidence? ProxyConfidence { get { return this.ProxyConfidenceOption; } set { this.ProxyConfidenceOption = new Option<ProxyConfidence?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of VpnConfidence
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<VpnConfidence?> VpnConfidenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets VpnConfidence
+        /// </summary>
+        [JsonPropertyName("vpn_confidence")]
+        public VpnConfidence? VpnConfidence { get { return this.VpnConfidenceOption; } set { this.VpnConfidenceOption = new Option<VpnConfidence?>(value); } }
 
         /// <summary>
         /// Used to track the state of Source
@@ -212,19 +238,6 @@ namespace Fingerprint.ServerSdk.Model
         public BotResult? Bot { get { return this.BotOption; } set { this.BotOption = new Option<BotResult?>(value); } }
 
         /// <summary>
-        /// Used to track the state of ProxyConfidence
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ProxyConfidence?> ProxyConfidenceOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ProxyConfidence
-        /// </summary>
-        [JsonPropertyName("proxy_confidence")]
-        public ProxyConfidence? ProxyConfidence { get { return this.ProxyConfidenceOption; } set { this.ProxyConfidenceOption = new Option<ProxyConfidence?>(value); } }
-
-        /// <summary>
         /// Used to track the state of TamperingConfidence
         /// </summary>
         [JsonIgnore]
@@ -236,19 +249,6 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("tampering_confidence")]
         public TamperingConfidence? TamperingConfidence { get { return this.TamperingConfidenceOption; } set { this.TamperingConfidenceOption = new Option<TamperingConfidence?>(value); } }
-
-        /// <summary>
-        /// Used to track the state of VpnConfidence
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<VpnConfidence?> VpnConfidenceOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets VpnConfidence
-        /// </summary>
-        [JsonPropertyName("vpn_confidence")]
-        public VpnConfidence? VpnConfidence { get { return this.VpnConfidenceOption; } set { this.VpnConfidenceOption = new Option<VpnConfidence?>(value); } }
 
         /// <summary>
         /// Used to track the state of RareDevicePercentileBucket
@@ -292,6 +292,114 @@ namespace Fingerprint.ServerSdk.Model
         public string LinkedId { get { return this.LinkedIdOption; } set { this.LinkedIdOption = new Option<string>(value); } }
 
         /// <summary>
+        /// Used to track the state of Tags
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Dictionary<string, Object>> TagsOption { get; private set; }
+
+        /// <summary>
+        /// A customer-provided value or an object that was sent with the identification request or updated later.
+        /// </summary>
+        /// <value>A customer-provided value or an object that was sent with the identification request or updated later.</value>
+        [JsonPropertyName("tags")]
+        public Dictionary<string, Object> Tags { get { return this.TagsOption; } set { this.TagsOption = new Option<Dictionary<string, Object>>(value); } }
+
+        /// <summary>
+        /// Used to track the state of Url
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> UrlOption { get; private set; }
+
+        /// <summary>
+        /// Page URL from which the request was sent.
+        /// </summary>
+        /// <value>Page URL from which the request was sent.</value>
+        [JsonPropertyName("url")]
+        public string Url { get { return this.UrlOption; } set { this.UrlOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of BotInfo
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<BotInfo> BotInfoOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BotInfo
+        /// </summary>
+        [JsonPropertyName("bot_info")]
+        public BotInfo BotInfo { get { return this.BotInfoOption; } set { this.BotInfoOption = new Option<BotInfo>(value); } }
+
+        /// <summary>
+        /// Used to track the state of IpInfo
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<IPInfo> IpInfoOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets IpInfo
+        /// </summary>
+        [JsonPropertyName("ip_info")]
+        public IPInfo IpInfo { get { return this.IpInfoOption; } set { this.IpInfoOption = new Option<IPInfo>(value); } }
+
+        /// <summary>
+        /// Used to track the state of Proxy
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> ProxyOption { get; private set; }
+
+        /// <summary>
+        /// IP address was used by a public proxy provider or belonged to a known recent residential proxy 
+        /// </summary>
+        /// <value>IP address was used by a public proxy provider or belonged to a known recent residential proxy </value>
+        [JsonPropertyName("proxy")]
+        public bool? Proxy { get { return this.ProxyOption; } set { this.ProxyOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProxyDetails
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ProxyDetails> ProxyDetailsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProxyDetails
+        /// </summary>
+        [JsonPropertyName("proxy_details")]
+        public ProxyDetails ProxyDetails { get { return this.ProxyDetailsOption; } set { this.ProxyDetailsOption = new Option<ProxyDetails>(value); } }
+
+        /// <summary>
+        /// Used to track the state of Vpn
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> VpnOption { get; private set; }
+
+        /// <summary>
+        /// VPN or other anonymizing service has been used when sending the request. 
+        /// </summary>
+        /// <value>VPN or other anonymizing service has been used when sending the request. </value>
+        [JsonPropertyName("vpn")]
+        public bool? Vpn { get { return this.VpnOption; } set { this.VpnOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of VpnMethods
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<VpnMethods> VpnMethodsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets VpnMethods
+        /// </summary>
+        [JsonPropertyName("vpn_methods")]
+        public VpnMethods VpnMethods { get { return this.VpnMethodsOption; } set { this.VpnMethodsOption = new Option<VpnMethods>(value); } }
+
+        /// <summary>
         /// Used to track the state of EnvironmentId
         /// </summary>
         [JsonIgnore]
@@ -313,9 +421,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<bool?> SuspectOption { get; private set; }
 
         /// <summary>
-        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).
+        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event).
         /// </summary>
-        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).</value>
+        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event).</value>
         [JsonPropertyName("suspect")]
         public bool? Suspect { get { return this.SuspectOption; } set { this.SuspectOption = new Option<bool?>(value); } }
 
@@ -371,34 +479,6 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("supplementary_id_high_recall")]
         public SupplementaryIDHighRecall SupplementaryIdHighRecall { get { return this.SupplementaryIdHighRecallOption; } set { this.SupplementaryIdHighRecallOption = new Option<SupplementaryIDHighRecall>(value); } }
-
-        /// <summary>
-        /// Used to track the state of Tags
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Dictionary<string, Object>> TagsOption { get; private set; }
-
-        /// <summary>
-        /// A customer-provided value or an object that was sent with the identification request or updated later.
-        /// </summary>
-        /// <value>A customer-provided value or an object that was sent with the identification request or updated later.</value>
-        [JsonPropertyName("tags")]
-        public Dictionary<string, Object> Tags { get { return this.TagsOption; } set { this.TagsOption = new Option<Dictionary<string, Object>>(value); } }
-
-        /// <summary>
-        /// Used to track the state of Url
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string> UrlOption { get; private set; }
-
-        /// <summary>
-        /// Page URL from which the request was sent.
-        /// </summary>
-        /// <value>Page URL from which the request was sent.</value>
-        [JsonPropertyName("url")]
-        public string Url { get { return this.UrlOption; } set { this.UrlOption = new Option<string>(value); } }
 
         /// <summary>
         /// Used to track the state of BundleId
@@ -567,19 +647,6 @@ namespace Fingerprint.ServerSdk.Model
         public string BotType { get { return this.BotTypeOption; } set { this.BotTypeOption = new Option<string>(value); } }
 
         /// <summary>
-        /// Used to track the state of BotInfo
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<BotInfo> BotInfoOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets BotInfo
-        /// </summary>
-        [JsonPropertyName("bot_info")]
-        public BotInfo BotInfo { get { return this.BotInfoOption; } set { this.BotInfoOption = new Option<BotInfo>(value); } }
-
-        /// <summary>
         /// Used to track the state of ClonedApp
         /// </summary>
         [JsonIgnore]
@@ -661,46 +728,6 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("ip_blocklist")]
         public IPBlockList IpBlocklist { get { return this.IpBlocklistOption; } set { this.IpBlocklistOption = new Option<IPBlockList>(value); } }
-
-        /// <summary>
-        /// Used to track the state of IpInfo
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<IPInfo> IpInfoOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets IpInfo
-        /// </summary>
-        [JsonPropertyName("ip_info")]
-        public IPInfo IpInfo { get { return this.IpInfoOption; } set { this.IpInfoOption = new Option<IPInfo>(value); } }
-
-        /// <summary>
-        /// Used to track the state of Proxy
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> ProxyOption { get; private set; }
-
-        /// <summary>
-        /// IP address was used by a public proxy provider or belonged to a known recent residential proxy 
-        /// </summary>
-        /// <value>IP address was used by a public proxy provider or belonged to a known recent residential proxy </value>
-        [JsonPropertyName("proxy")]
-        public bool? Proxy { get { return this.ProxyOption; } set { this.ProxyOption = new Option<bool?>(value); } }
-
-        /// <summary>
-        /// Used to track the state of ProxyDetails
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ProxyDetails> ProxyDetailsOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ProxyDetails
-        /// </summary>
-        [JsonPropertyName("proxy_details")]
-        public ProxyDetails ProxyDetails { get { return this.ProxyDetailsOption; } set { this.ProxyDetailsOption = new Option<ProxyDetails>(value); } }
 
         /// <summary>
         /// Used to track the state of ProxyMlScore
@@ -924,20 +951,6 @@ namespace Fingerprint.ServerSdk.Model
         public double? VirtualMachineMlScore { get { return this.VirtualMachineMlScoreOption; } set { this.VirtualMachineMlScoreOption = new Option<double?>(value); } }
 
         /// <summary>
-        /// Used to track the state of Vpn
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> VpnOption { get; private set; }
-
-        /// <summary>
-        /// VPN or other anonymizing service has been used when sending the request. 
-        /// </summary>
-        /// <value>VPN or other anonymizing service has been used when sending the request. </value>
-        [JsonPropertyName("vpn")]
-        public bool? Vpn { get { return this.VpnOption; } set { this.VpnOption = new Option<bool?>(value); } }
-
-        /// <summary>
         /// Used to track the state of VpnMlScore
         /// </summary>
         [JsonIgnore]
@@ -978,19 +991,6 @@ namespace Fingerprint.ServerSdk.Model
         /// <value>Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown. </value>
         [JsonPropertyName("vpn_origin_country")]
         public string VpnOriginCountry { get { return this.VpnOriginCountryOption; } set { this.VpnOriginCountryOption = new Option<string>(value); } }
-
-        /// <summary>
-        /// Used to track the state of VpnMethods
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<VpnMethods> VpnMethodsOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets VpnMethods
-        /// </summary>
-        [JsonPropertyName("vpn_methods")]
-        public VpnMethods VpnMethods { get { return this.VpnMethodsOption; } set { this.VpnMethodsOption = new Option<VpnMethods>(value); } }
 
         /// <summary>
         /// Used to track the state of HighActivityDevice
@@ -1057,17 +1057,25 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("class Event {\n");
             sb.Append("  EventId: ").Append(EventId).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+            sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
+            sb.Append("  Tags: ").Append(Tags).Append("\n");
+            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  BotInfo: ").Append(BotInfo).Append("\n");
+            sb.Append("  IpInfo: ").Append(IpInfo).Append("\n");
+            sb.Append("  Proxy: ").Append(Proxy).Append("\n");
+            sb.Append("  ProxyConfidence: ").Append(ProxyConfidence).Append("\n");
+            sb.Append("  ProxyDetails: ").Append(ProxyDetails).Append("\n");
+            sb.Append("  Vpn: ").Append(Vpn).Append("\n");
+            sb.Append("  VpnConfidence: ").Append(VpnConfidence).Append("\n");
+            sb.Append("  VpnMethods: ").Append(VpnMethods).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  IncrementalIdentificationStatus: ").Append(IncrementalIdentificationStatus).Append("\n");
-            sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
             sb.Append("  EnvironmentId: ").Append(EnvironmentId).Append("\n");
             sb.Append("  Suspect: ").Append(Suspect).Append("\n");
             sb.Append("  Sdk: ").Append(Sdk).Append("\n");
             sb.Append("  Replayed: ").Append(Replayed).Append("\n");
             sb.Append("  Identification: ").Append(Identification).Append("\n");
             sb.Append("  SupplementaryIdHighRecall: ").Append(SupplementaryIdHighRecall).Append("\n");
-            sb.Append("  Tags: ").Append(Tags).Append("\n");
-            sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  BundleId: ").Append(BundleId).Append("\n");
             sb.Append("  PackageName: ").Append(PackageName).Append("\n");
             sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
@@ -1081,17 +1089,12 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  ActiveCall: ").Append(ActiveCall).Append("\n");
             sb.Append("  Bot: ").Append(Bot).Append("\n");
             sb.Append("  BotType: ").Append(BotType).Append("\n");
-            sb.Append("  BotInfo: ").Append(BotInfo).Append("\n");
             sb.Append("  ClonedApp: ").Append(ClonedApp).Append("\n");
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("  Emulator: ").Append(Emulator).Append("\n");
             sb.Append("  FactoryResetTimestamp: ").Append(FactoryResetTimestamp).Append("\n");
             sb.Append("  Frida: ").Append(Frida).Append("\n");
             sb.Append("  IpBlocklist: ").Append(IpBlocklist).Append("\n");
-            sb.Append("  IpInfo: ").Append(IpInfo).Append("\n");
-            sb.Append("  Proxy: ").Append(Proxy).Append("\n");
-            sb.Append("  ProxyConfidence: ").Append(ProxyConfidence).Append("\n");
-            sb.Append("  ProxyDetails: ").Append(ProxyDetails).Append("\n");
             sb.Append("  ProxyMlScore: ").Append(ProxyMlScore).Append("\n");
             sb.Append("  Incognito: ").Append(Incognito).Append("\n");
             sb.Append("  Jailbroken: ").Append(Jailbroken).Append("\n");
@@ -1109,12 +1112,9 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  Velocity: ").Append(Velocity).Append("\n");
             sb.Append("  VirtualMachine: ").Append(VirtualMachine).Append("\n");
             sb.Append("  VirtualMachineMlScore: ").Append(VirtualMachineMlScore).Append("\n");
-            sb.Append("  Vpn: ").Append(Vpn).Append("\n");
-            sb.Append("  VpnConfidence: ").Append(VpnConfidence).Append("\n");
             sb.Append("  VpnMlScore: ").Append(VpnMlScore).Append("\n");
             sb.Append("  VpnOriginTimezone: ").Append(VpnOriginTimezone).Append("\n");
             sb.Append("  VpnOriginCountry: ").Append(VpnOriginCountry).Append("\n");
-            sb.Append("  VpnMethods: ").Append(VpnMethods).Append("\n");
             sb.Append("  HighActivityDevice: ").Append(HighActivityDevice).Append("\n");
             sb.Append("  RareDevice: ").Append(RareDevice).Append("\n");
             sb.Append("  RareDevicePercentileBucket: ").Append(RareDevicePercentileBucket).Append("\n");
@@ -1207,17 +1207,25 @@ namespace Fingerprint.ServerSdk.Model
 
             Option<string> eventId = default;
             Option<long?> timestamp = default;
+            Option<string> linkedId = default;
+            Option<Dictionary<string, Object>> tags = default;
+            Option<string> url = default;
+            Option<BotInfo> botInfo = default;
+            Option<IPInfo> ipInfo = default;
+            Option<bool?> proxy = default;
+            Option<ProxyConfidence?> proxyConfidence = default;
+            Option<ProxyDetails> proxyDetails = default;
+            Option<bool?> vpn = default;
+            Option<VpnConfidence?> vpnConfidence = default;
+            Option<VpnMethods> vpnMethods = default;
             Option<EventSource?> source = default;
             Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default;
-            Option<string> linkedId = default;
             Option<string> environmentId = default;
             Option<bool?> suspect = default;
             Option<SDK> sdk = default;
             Option<bool?> replayed = default;
             Option<Identification> identification = default;
             Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default;
-            Option<Dictionary<string, Object>> tags = default;
-            Option<string> url = default;
             Option<string> bundleId = default;
             Option<string> packageName = default;
             Option<string> ipAddress = default;
@@ -1231,17 +1239,12 @@ namespace Fingerprint.ServerSdk.Model
             Option<bool?> activeCall = default;
             Option<BotResult?> bot = default;
             Option<string> botType = default;
-            Option<BotInfo> botInfo = default;
             Option<bool?> clonedApp = default;
             Option<bool?> developerTools = default;
             Option<bool?> emulator = default;
             Option<long?> factoryResetTimestamp = default;
             Option<bool?> frida = default;
             Option<IPBlockList> ipBlocklist = default;
-            Option<IPInfo> ipInfo = default;
-            Option<bool?> proxy = default;
-            Option<ProxyConfidence?> proxyConfidence = default;
-            Option<ProxyDetails> proxyDetails = default;
             Option<double?> proxyMlScore = default;
             Option<bool?> incognito = default;
             Option<bool?> jailbroken = default;
@@ -1259,12 +1262,9 @@ namespace Fingerprint.ServerSdk.Model
             Option<Velocity> velocity = default;
             Option<bool?> virtualMachine = default;
             Option<double?> virtualMachineMlScore = default;
-            Option<bool?> vpn = default;
-            Option<VpnConfidence?> vpnConfidence = default;
             Option<double?> vpnMlScore = default;
             Option<string> vpnOriginTimezone = default;
             Option<string> vpnOriginCountry = default;
-            Option<VpnMethods> vpnMethods = default;
             Option<bool?> highActivityDevice = default;
             Option<bool?> rareDevice = default;
             Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default;
@@ -1292,6 +1292,43 @@ namespace Fingerprint.ServerSdk.Model
                         case "timestamp":
                             timestamp = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
                             break;
+                        case "linked_id":
+                            linkedId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "tags":
+                            tags = new Option<Dictionary<string, Object>>(JsonSerializer.Deserialize<Dictionary<string, Object>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "url":
+                            url = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "bot_info":
+                            botInfo = new Option<BotInfo>(JsonSerializer.Deserialize<BotInfo>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "ip_info":
+                            ipInfo = new Option<IPInfo>(JsonSerializer.Deserialize<IPInfo>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "proxy":
+                            proxy = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "proxy_confidence":
+                            string proxyConfidenceRawValue = utf8JsonReader.GetString();
+                            if (proxyConfidenceRawValue != null)
+                                proxyConfidence = new Option<ProxyConfidence?>(ProxyConfidenceValueConverter.FromStringOrDefault(proxyConfidenceRawValue));
+                            break;
+                        case "proxy_details":
+                            proxyDetails = new Option<ProxyDetails>(JsonSerializer.Deserialize<ProxyDetails>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "vpn":
+                            vpn = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "vpn_confidence":
+                            string vpnConfidenceRawValue = utf8JsonReader.GetString();
+                            if (vpnConfidenceRawValue != null)
+                                vpnConfidence = new Option<VpnConfidence?>(VpnConfidenceValueConverter.FromStringOrDefault(vpnConfidenceRawValue));
+                            break;
+                        case "vpn_methods":
+                            vpnMethods = new Option<VpnMethods>(JsonSerializer.Deserialize<VpnMethods>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "source":
                             string sourceRawValue = utf8JsonReader.GetString();
                             if (sourceRawValue != null)
@@ -1301,9 +1338,6 @@ namespace Fingerprint.ServerSdk.Model
                             string incrementalIdentificationStatusRawValue = utf8JsonReader.GetString();
                             if (incrementalIdentificationStatusRawValue != null)
                                 incrementalIdentificationStatus = new Option<IncrementalIdentificationStatus?>(IncrementalIdentificationStatusValueConverter.FromStringOrDefault(incrementalIdentificationStatusRawValue));
-                            break;
-                        case "linked_id":
-                            linkedId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "environment_id":
                             environmentId = new Option<string>(utf8JsonReader.GetString());
@@ -1322,12 +1356,6 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "supplementary_id_high_recall":
                             supplementaryIdHighRecall = new Option<SupplementaryIDHighRecall>(JsonSerializer.Deserialize<SupplementaryIDHighRecall>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "tags":
-                            tags = new Option<Dictionary<string, Object>>(JsonSerializer.Deserialize<Dictionary<string, Object>>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "url":
-                            url = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "bundle_id":
                             bundleId = new Option<string>(utf8JsonReader.GetString());
@@ -1370,9 +1398,6 @@ namespace Fingerprint.ServerSdk.Model
                         case "bot_type":
                             botType = new Option<string>(utf8JsonReader.GetString());
                             break;
-                        case "bot_info":
-                            botInfo = new Option<BotInfo>(JsonSerializer.Deserialize<BotInfo>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "cloned_app":
                             clonedApp = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
@@ -1390,20 +1415,6 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "ip_blocklist":
                             ipBlocklist = new Option<IPBlockList>(JsonSerializer.Deserialize<IPBlockList>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "ip_info":
-                            ipInfo = new Option<IPInfo>(JsonSerializer.Deserialize<IPInfo>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "proxy":
-                            proxy = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
-                            break;
-                        case "proxy_confidence":
-                            string proxyConfidenceRawValue = utf8JsonReader.GetString();
-                            if (proxyConfidenceRawValue != null)
-                                proxyConfidence = new Option<ProxyConfidence?>(ProxyConfidenceValueConverter.FromStringOrDefault(proxyConfidenceRawValue));
-                            break;
-                        case "proxy_details":
-                            proxyDetails = new Option<ProxyDetails>(JsonSerializer.Deserialize<ProxyDetails>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "proxy_ml_score":
                             proxyMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
@@ -1458,14 +1469,6 @@ namespace Fingerprint.ServerSdk.Model
                         case "virtual_machine_ml_score":
                             virtualMachineMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
                             break;
-                        case "vpn":
-                            vpn = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
-                            break;
-                        case "vpn_confidence":
-                            string vpnConfidenceRawValue = utf8JsonReader.GetString();
-                            if (vpnConfidenceRawValue != null)
-                                vpnConfidence = new Option<VpnConfidence?>(VpnConfidenceValueConverter.FromStringOrDefault(vpnConfidenceRawValue));
-                            break;
                         case "vpn_ml_score":
                             vpnMlScore = new Option<double?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (double?)null : utf8JsonReader.GetDouble());
                             break;
@@ -1474,9 +1477,6 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "vpn_origin_country":
                             vpnOriginCountry = new Option<string>(utf8JsonReader.GetString());
-                            break;
-                        case "vpn_methods":
-                            vpnMethods = new Option<VpnMethods>(JsonSerializer.Deserialize<VpnMethods>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "high_activity_device":
                             highActivityDevice = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -1513,14 +1513,44 @@ namespace Fingerprint.ServerSdk.Model
             if (timestamp.IsSet && timestamp.Value == null)
                 throw new ArgumentNullException(nameof(timestamp), "Property is not nullable for class Event.");
 
+            if (linkedId.IsSet && linkedId.Value == null)
+                throw new ArgumentNullException(nameof(linkedId), "Property is not nullable for class Event.");
+
+            if (tags.IsSet && tags.Value == null)
+                throw new ArgumentNullException(nameof(tags), "Property is not nullable for class Event.");
+
+            if (url.IsSet && url.Value == null)
+                throw new ArgumentNullException(nameof(url), "Property is not nullable for class Event.");
+
+            if (botInfo.IsSet && botInfo.Value == null)
+                throw new ArgumentNullException(nameof(botInfo), "Property is not nullable for class Event.");
+
+            if (ipInfo.IsSet && ipInfo.Value == null)
+                throw new ArgumentNullException(nameof(ipInfo), "Property is not nullable for class Event.");
+
+            if (proxy.IsSet && proxy.Value == null)
+                throw new ArgumentNullException(nameof(proxy), "Property is not nullable for class Event.");
+
+            if (proxyConfidence.IsSet && proxyConfidence.Value == null)
+                throw new ArgumentNullException(nameof(proxyConfidence), "Property is not nullable for class Event.");
+
+            if (proxyDetails.IsSet && proxyDetails.Value == null)
+                throw new ArgumentNullException(nameof(proxyDetails), "Property is not nullable for class Event.");
+
+            if (vpn.IsSet && vpn.Value == null)
+                throw new ArgumentNullException(nameof(vpn), "Property is not nullable for class Event.");
+
+            if (vpnConfidence.IsSet && vpnConfidence.Value == null)
+                throw new ArgumentNullException(nameof(vpnConfidence), "Property is not nullable for class Event.");
+
+            if (vpnMethods.IsSet && vpnMethods.Value == null)
+                throw new ArgumentNullException(nameof(vpnMethods), "Property is not nullable for class Event.");
+
             if (source.IsSet && source.Value == null)
                 throw new ArgumentNullException(nameof(source), "Property is not nullable for class Event.");
 
             if (incrementalIdentificationStatus.IsSet && incrementalIdentificationStatus.Value == null)
                 throw new ArgumentNullException(nameof(incrementalIdentificationStatus), "Property is not nullable for class Event.");
-
-            if (linkedId.IsSet && linkedId.Value == null)
-                throw new ArgumentNullException(nameof(linkedId), "Property is not nullable for class Event.");
 
             if (environmentId.IsSet && environmentId.Value == null)
                 throw new ArgumentNullException(nameof(environmentId), "Property is not nullable for class Event.");
@@ -1539,12 +1569,6 @@ namespace Fingerprint.ServerSdk.Model
 
             if (supplementaryIdHighRecall.IsSet && supplementaryIdHighRecall.Value == null)
                 throw new ArgumentNullException(nameof(supplementaryIdHighRecall), "Property is not nullable for class Event.");
-
-            if (tags.IsSet && tags.Value == null)
-                throw new ArgumentNullException(nameof(tags), "Property is not nullable for class Event.");
-
-            if (url.IsSet && url.Value == null)
-                throw new ArgumentNullException(nameof(url), "Property is not nullable for class Event.");
 
             if (bundleId.IsSet && bundleId.Value == null)
                 throw new ArgumentNullException(nameof(bundleId), "Property is not nullable for class Event.");
@@ -1585,9 +1609,6 @@ namespace Fingerprint.ServerSdk.Model
             if (botType.IsSet && botType.Value == null)
                 throw new ArgumentNullException(nameof(botType), "Property is not nullable for class Event.");
 
-            if (botInfo.IsSet && botInfo.Value == null)
-                throw new ArgumentNullException(nameof(botInfo), "Property is not nullable for class Event.");
-
             if (clonedApp.IsSet && clonedApp.Value == null)
                 throw new ArgumentNullException(nameof(clonedApp), "Property is not nullable for class Event.");
 
@@ -1605,18 +1626,6 @@ namespace Fingerprint.ServerSdk.Model
 
             if (ipBlocklist.IsSet && ipBlocklist.Value == null)
                 throw new ArgumentNullException(nameof(ipBlocklist), "Property is not nullable for class Event.");
-
-            if (ipInfo.IsSet && ipInfo.Value == null)
-                throw new ArgumentNullException(nameof(ipInfo), "Property is not nullable for class Event.");
-
-            if (proxy.IsSet && proxy.Value == null)
-                throw new ArgumentNullException(nameof(proxy), "Property is not nullable for class Event.");
-
-            if (proxyConfidence.IsSet && proxyConfidence.Value == null)
-                throw new ArgumentNullException(nameof(proxyConfidence), "Property is not nullable for class Event.");
-
-            if (proxyDetails.IsSet && proxyDetails.Value == null)
-                throw new ArgumentNullException(nameof(proxyDetails), "Property is not nullable for class Event.");
 
             if (proxyMlScore.IsSet && proxyMlScore.Value == null)
                 throw new ArgumentNullException(nameof(proxyMlScore), "Property is not nullable for class Event.");
@@ -1669,12 +1678,6 @@ namespace Fingerprint.ServerSdk.Model
             if (virtualMachineMlScore.IsSet && virtualMachineMlScore.Value == null)
                 throw new ArgumentNullException(nameof(virtualMachineMlScore), "Property is not nullable for class Event.");
 
-            if (vpn.IsSet && vpn.Value == null)
-                throw new ArgumentNullException(nameof(vpn), "Property is not nullable for class Event.");
-
-            if (vpnConfidence.IsSet && vpnConfidence.Value == null)
-                throw new ArgumentNullException(nameof(vpnConfidence), "Property is not nullable for class Event.");
-
             if (vpnMlScore.IsSet && vpnMlScore.Value == null)
                 throw new ArgumentNullException(nameof(vpnMlScore), "Property is not nullable for class Event.");
 
@@ -1683,9 +1686,6 @@ namespace Fingerprint.ServerSdk.Model
 
             if (vpnOriginCountry.IsSet && vpnOriginCountry.Value == null)
                 throw new ArgumentNullException(nameof(vpnOriginCountry), "Property is not nullable for class Event.");
-
-            if (vpnMethods.IsSet && vpnMethods.Value == null)
-                throw new ArgumentNullException(nameof(vpnMethods), "Property is not nullable for class Event.");
 
             if (highActivityDevice.IsSet && highActivityDevice.Value == null)
                 throw new ArgumentNullException(nameof(highActivityDevice), "Property is not nullable for class Event.");
@@ -1702,7 +1702,7 @@ namespace Fingerprint.ServerSdk.Model
             if (labels.IsSet && labels.Value == null)
                 throw new ArgumentNullException(nameof(labels), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, source, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
+            return new Event(eventId.Value, timestamp.Value.Value, linkedId, tags, url, botInfo, ipInfo, proxy, proxyConfidence, proxyDetails, vpn, vpnConfidence, vpnMethods, source, incrementalIdentificationStatus, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
         }
 
         /// <summary>
@@ -1735,6 +1735,24 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.LinkedIdOption.IsSet && varEvent.LinkedId == null)
                 throw new ArgumentNullException(nameof(varEvent.LinkedId), "Property is required for class Event.");
 
+            if (varEvent.TagsOption.IsSet && varEvent.Tags == null)
+                throw new ArgumentNullException(nameof(varEvent.Tags), "Property is required for class Event.");
+
+            if (varEvent.UrlOption.IsSet && varEvent.Url == null)
+                throw new ArgumentNullException(nameof(varEvent.Url), "Property is required for class Event.");
+
+            if (varEvent.BotInfoOption.IsSet && varEvent.BotInfo == null)
+                throw new ArgumentNullException(nameof(varEvent.BotInfo), "Property is required for class Event.");
+
+            if (varEvent.IpInfoOption.IsSet && varEvent.IpInfo == null)
+                throw new ArgumentNullException(nameof(varEvent.IpInfo), "Property is required for class Event.");
+
+            if (varEvent.ProxyDetailsOption.IsSet && varEvent.ProxyDetails == null)
+                throw new ArgumentNullException(nameof(varEvent.ProxyDetails), "Property is required for class Event.");
+
+            if (varEvent.VpnMethodsOption.IsSet && varEvent.VpnMethods == null)
+                throw new ArgumentNullException(nameof(varEvent.VpnMethods), "Property is required for class Event.");
+
             if (varEvent.EnvironmentIdOption.IsSet && varEvent.EnvironmentId == null)
                 throw new ArgumentNullException(nameof(varEvent.EnvironmentId), "Property is required for class Event.");
 
@@ -1746,12 +1764,6 @@ namespace Fingerprint.ServerSdk.Model
 
             if (varEvent.SupplementaryIdHighRecallOption.IsSet && varEvent.SupplementaryIdHighRecall == null)
                 throw new ArgumentNullException(nameof(varEvent.SupplementaryIdHighRecall), "Property is required for class Event.");
-
-            if (varEvent.TagsOption.IsSet && varEvent.Tags == null)
-                throw new ArgumentNullException(nameof(varEvent.Tags), "Property is required for class Event.");
-
-            if (varEvent.UrlOption.IsSet && varEvent.Url == null)
-                throw new ArgumentNullException(nameof(varEvent.Url), "Property is required for class Event.");
 
             if (varEvent.BundleIdOption.IsSet && varEvent.BundleId == null)
                 throw new ArgumentNullException(nameof(varEvent.BundleId), "Property is required for class Event.");
@@ -1786,17 +1798,8 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.BotTypeOption.IsSet && varEvent.BotType == null)
                 throw new ArgumentNullException(nameof(varEvent.BotType), "Property is required for class Event.");
 
-            if (varEvent.BotInfoOption.IsSet && varEvent.BotInfo == null)
-                throw new ArgumentNullException(nameof(varEvent.BotInfo), "Property is required for class Event.");
-
             if (varEvent.IpBlocklistOption.IsSet && varEvent.IpBlocklist == null)
                 throw new ArgumentNullException(nameof(varEvent.IpBlocklist), "Property is required for class Event.");
-
-            if (varEvent.IpInfoOption.IsSet && varEvent.IpInfo == null)
-                throw new ArgumentNullException(nameof(varEvent.IpInfo), "Property is required for class Event.");
-
-            if (varEvent.ProxyDetailsOption.IsSet && varEvent.ProxyDetails == null)
-                throw new ArgumentNullException(nameof(varEvent.ProxyDetails), "Property is required for class Event.");
 
             if (varEvent.RuleActionOption.IsSet && varEvent.RuleAction == null)
                 throw new ArgumentNullException(nameof(varEvent.RuleAction), "Property is required for class Event.");
@@ -1813,9 +1816,6 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.VpnOriginCountryOption.IsSet && varEvent.VpnOriginCountry == null)
                 throw new ArgumentNullException(nameof(varEvent.VpnOriginCountry), "Property is required for class Event.");
 
-            if (varEvent.VpnMethodsOption.IsSet && varEvent.VpnMethods == null)
-                throw new ArgumentNullException(nameof(varEvent.VpnMethods), "Property is required for class Event.");
-
             if (varEvent.RawDeviceAttributesOption.IsSet && varEvent.RawDeviceAttributes == null)
                 throw new ArgumentNullException(nameof(varEvent.RawDeviceAttributes), "Property is required for class Event.");
 
@@ -1826,6 +1826,53 @@ namespace Fingerprint.ServerSdk.Model
 
             writer.WriteNumber("timestamp", varEvent.Timestamp);
 
+            if (varEvent.LinkedIdOption.IsSet)
+                writer.WriteString("linked_id", varEvent.LinkedId);
+
+            if (varEvent.TagsOption.IsSet)
+            {
+                writer.WritePropertyName("tags");
+                JsonSerializer.Serialize(writer, varEvent.Tags, jsonSerializerOptions);
+            }
+            if (varEvent.UrlOption.IsSet)
+                writer.WriteString("url", varEvent.Url);
+
+            if (varEvent.BotInfoOption.IsSet)
+            {
+                writer.WritePropertyName("bot_info");
+                JsonSerializer.Serialize(writer, varEvent.BotInfo, jsonSerializerOptions);
+            }
+            if (varEvent.IpInfoOption.IsSet)
+            {
+                writer.WritePropertyName("ip_info");
+                JsonSerializer.Serialize(writer, varEvent.IpInfo, jsonSerializerOptions);
+            }
+            if (varEvent.ProxyOption.IsSet)
+                writer.WriteBoolean("proxy", varEvent.ProxyOption.Value.Value);
+
+            if (varEvent.ProxyConfidenceOption.IsSet)
+            {
+                var proxyConfidenceRawValue = ProxyConfidenceValueConverter.ToJsonValue(varEvent.ProxyConfidence.Value);
+                writer.WriteString("proxy_confidence", proxyConfidenceRawValue);
+            }
+            if (varEvent.ProxyDetailsOption.IsSet)
+            {
+                writer.WritePropertyName("proxy_details");
+                JsonSerializer.Serialize(writer, varEvent.ProxyDetails, jsonSerializerOptions);
+            }
+            if (varEvent.VpnOption.IsSet)
+                writer.WriteBoolean("vpn", varEvent.VpnOption.Value.Value);
+
+            if (varEvent.VpnConfidenceOption.IsSet)
+            {
+                var vpnConfidenceRawValue = VpnConfidenceValueConverter.ToJsonValue(varEvent.VpnConfidence.Value);
+                writer.WriteString("vpn_confidence", vpnConfidenceRawValue);
+            }
+            if (varEvent.VpnMethodsOption.IsSet)
+            {
+                writer.WritePropertyName("vpn_methods");
+                JsonSerializer.Serialize(writer, varEvent.VpnMethods, jsonSerializerOptions);
+            }
             if (varEvent.SourceOption.IsSet)
             {
                 var sourceRawValue = EventSourceValueConverter.ToJsonValue(varEvent.Source.Value);
@@ -1836,9 +1883,6 @@ namespace Fingerprint.ServerSdk.Model
                 var incrementalIdentificationStatusRawValue = IncrementalIdentificationStatusValueConverter.ToJsonValue(varEvent.IncrementalIdentificationStatus.Value);
                 writer.WriteString("incremental_identification_status", incrementalIdentificationStatusRawValue);
             }
-            if (varEvent.LinkedIdOption.IsSet)
-                writer.WriteString("linked_id", varEvent.LinkedId);
-
             if (varEvent.EnvironmentIdOption.IsSet)
                 writer.WriteString("environment_id", varEvent.EnvironmentId);
 
@@ -1863,14 +1907,6 @@ namespace Fingerprint.ServerSdk.Model
                 writer.WritePropertyName("supplementary_id_high_recall");
                 JsonSerializer.Serialize(writer, varEvent.SupplementaryIdHighRecall, jsonSerializerOptions);
             }
-            if (varEvent.TagsOption.IsSet)
-            {
-                writer.WritePropertyName("tags");
-                JsonSerializer.Serialize(writer, varEvent.Tags, jsonSerializerOptions);
-            }
-            if (varEvent.UrlOption.IsSet)
-                writer.WriteString("url", varEvent.Url);
-
             if (varEvent.BundleIdOption.IsSet)
                 writer.WriteString("bundle_id", varEvent.BundleId);
 
@@ -1916,11 +1952,6 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.BotTypeOption.IsSet)
                 writer.WriteString("bot_type", varEvent.BotType);
 
-            if (varEvent.BotInfoOption.IsSet)
-            {
-                writer.WritePropertyName("bot_info");
-                JsonSerializer.Serialize(writer, varEvent.BotInfo, jsonSerializerOptions);
-            }
             if (varEvent.ClonedAppOption.IsSet)
                 writer.WriteBoolean("cloned_app", varEvent.ClonedAppOption.Value.Value);
 
@@ -1940,24 +1971,6 @@ namespace Fingerprint.ServerSdk.Model
             {
                 writer.WritePropertyName("ip_blocklist");
                 JsonSerializer.Serialize(writer, varEvent.IpBlocklist, jsonSerializerOptions);
-            }
-            if (varEvent.IpInfoOption.IsSet)
-            {
-                writer.WritePropertyName("ip_info");
-                JsonSerializer.Serialize(writer, varEvent.IpInfo, jsonSerializerOptions);
-            }
-            if (varEvent.ProxyOption.IsSet)
-                writer.WriteBoolean("proxy", varEvent.ProxyOption.Value.Value);
-
-            if (varEvent.ProxyConfidenceOption.IsSet)
-            {
-                var proxyConfidenceRawValue = ProxyConfidenceValueConverter.ToJsonValue(varEvent.ProxyConfidence.Value);
-                writer.WriteString("proxy_confidence", proxyConfidenceRawValue);
-            }
-            if (varEvent.ProxyDetailsOption.IsSet)
-            {
-                writer.WritePropertyName("proxy_details");
-                JsonSerializer.Serialize(writer, varEvent.ProxyDetails, jsonSerializerOptions);
             }
             if (varEvent.ProxyMlScoreOption.IsSet)
                 writer.WriteNumber("proxy_ml_score", varEvent.ProxyMlScoreOption.Value.Value);
@@ -2018,14 +2031,6 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.VirtualMachineMlScoreOption.IsSet)
                 writer.WriteNumber("virtual_machine_ml_score", varEvent.VirtualMachineMlScoreOption.Value.Value);
 
-            if (varEvent.VpnOption.IsSet)
-                writer.WriteBoolean("vpn", varEvent.VpnOption.Value.Value);
-
-            if (varEvent.VpnConfidenceOption.IsSet)
-            {
-                var vpnConfidenceRawValue = VpnConfidenceValueConverter.ToJsonValue(varEvent.VpnConfidence.Value);
-                writer.WriteString("vpn_confidence", vpnConfidenceRawValue);
-            }
             if (varEvent.VpnMlScoreOption.IsSet)
                 writer.WriteNumber("vpn_ml_score", varEvent.VpnMlScoreOption.Value.Value);
 
@@ -2035,11 +2040,6 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.VpnOriginCountryOption.IsSet)
                 writer.WriteString("vpn_origin_country", varEvent.VpnOriginCountry);
 
-            if (varEvent.VpnMethodsOption.IsSet)
-            {
-                writer.WritePropertyName("vpn_methods");
-                JsonSerializer.Serialize(writer, varEvent.VpnMethods, jsonSerializerOptions);
-            }
             if (varEvent.HighActivityDeviceOption.IsSet)
                 writer.WriteBoolean("high_activity_device", varEvent.HighActivityDeviceOption.Value.Value);
 

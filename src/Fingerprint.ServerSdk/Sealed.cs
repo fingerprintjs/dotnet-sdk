@@ -180,12 +180,15 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
             jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
             jsonOptions.Converters.Add(new CanvasJsonConverter());
+            jsonOptions.Converters.Add(new EdgeRequestJsonConverter());
+            jsonOptions.Converters.Add(new EdgeRequestHeadersInnerJsonConverter());
             jsonOptions.Converters.Add(new EmojiJsonConverter());
             jsonOptions.Converters.Add(new ErrorJsonConverter());
             jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
             jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
             jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
             jsonOptions.Converters.Add(new EventJsonConverter());
+            jsonOptions.Converters.Add(new EventEdgeJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionAllowJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionBlockJsonConverter());
