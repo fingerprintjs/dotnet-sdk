@@ -84,7 +84,7 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
             _jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
-            _jsonOptions.Converters.Add(new EventJsonConverter());
+            _jsonOptions.Converters.Add(new EventHydratingJsonConverter());
             _jsonOptions.Converters.Add(new EventDeviceJsonConverter());
             _jsonOptions.Converters.Add(new EventEdgeJsonConverter());
             _jsonOptions.Converters.Add(new EventRuleActionJsonConverter());

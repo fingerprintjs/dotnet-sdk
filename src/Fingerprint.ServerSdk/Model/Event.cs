@@ -127,7 +127,6 @@ namespace Fingerprint.ServerSdk.Model
 
             EventDevice eventDevice = null;
             EventEdge eventEdge = null;
-            bool sourcePresent = false;
 
             Utf8JsonReader utf8JsonReaderDiscriminator = utf8JsonReader;
             while (utf8JsonReaderDiscriminator.Read())
@@ -144,7 +143,6 @@ namespace Fingerprint.ServerSdk.Model
                     utf8JsonReaderDiscriminator.Read();
                     if (localVarJsonPropertyName.Equals("source"))
                     {
-                        sourcePresent = true;
                         string discriminator = utf8JsonReaderDiscriminator.GetString();
                         if (discriminator != null && discriminator.Equals("device"))
                         {
@@ -158,13 +156,6 @@ namespace Fingerprint.ServerSdk.Model
                         }
                     }
                 }
-            }
-
-            // SPIKE INTER-2457 — omit source → EventDevice. Do not rewrite source:edge.
-            if (!sourcePresent)
-            {
-                Utf8JsonReader utf8JsonReaderEventDevice = utf8JsonReader;
-                eventDevice = JsonSerializer.Deserialize<EventDevice>(ref utf8JsonReaderEventDevice, jsonSerializerOptions);
             }
 
             while (utf8JsonReader.Read())

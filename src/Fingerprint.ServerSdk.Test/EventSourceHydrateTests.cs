@@ -9,7 +9,7 @@ public class EventSourceHydrateTests
     private static JsonSerializerOptions Options()
     {
         var options = new JsonSerializerOptions();
-        options.Converters.Add(new EventJsonConverter());
+        options.Converters.Add(new EventHydratingJsonConverter());
         options.Converters.Add(new EventDeviceJsonConverter());
         options.Converters.Add(new EventEdgeJsonConverter());
         options.Converters.Add(new IPInfoJsonConverter());
@@ -42,5 +42,24 @@ public class EventSourceHydrateTests
         Assert.NotNull(ev!.EventEdge);
         Assert.Null(ev.EventDevice);
         Assert.Equal(EventSource.Edge, ev.EventEdge.Source);
+    }
+
+    [Fact]
+    public void DeserializeEvent_EmptySource_HydratesToEventDevice()
+    {
+        const string json = "{\"event_id\":\"d1\",\"timestamp\":1,\"source\":\"\"}";
+
+        var ev = JsonSerializer.Deserialize<Event>(json, Options());
+
+        Assert.NotNull(ev!.EventDevice);
+        Assert.Equal(EventSource.Device, ev.EventDevice.Source);
+    }
+
+    [Fact]
+    public void DeserializeEvent_UnknownSource_Fails()
+    {
+        const string json = "{\"event_id\":\"d1\",\"timestamp\":1,\"source\":\"webhook\"}";
+
+        Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Event>(json, Options()));
     }
 }

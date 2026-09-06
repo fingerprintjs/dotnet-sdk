@@ -189,7 +189,7 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
             jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
             jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
-            jsonOptions.Converters.Add(new EventJsonConverter());
+            jsonOptions.Converters.Add(new EventHydratingJsonConverter());
             jsonOptions.Converters.Add(new EventDeviceJsonConverter());
             jsonOptions.Converters.Add(new EventEdgeJsonConverter());
             jsonOptions.Converters.Add(new EventRuleActionJsonConverter());
