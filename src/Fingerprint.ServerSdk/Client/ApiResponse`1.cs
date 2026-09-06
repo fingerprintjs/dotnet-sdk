@@ -299,6 +299,26 @@ namespace Fingerprint.ServerSdk.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
+    public interface IContentTooLarge<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is ContentTooLarge
+        /// </summary>
+        /// <returns></returns>
+        TType ContentTooLarge();
+
+        /// <summary>
+        /// Returns true if the response is ContentTooLarge and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryContentTooLarge(out TType result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
     public interface IOk<TType> : IApiResponse
     {
         /// <summary>

@@ -192,6 +192,8 @@ public class ApiTests : IAsyncLifetime
 
         // Try to request old events to check if they still could be deserialized
         await _api.GetEventAsync(oldestEvent.EventId);
+        // SPIKE INTER-2457 — COMPILE BREAK. Event has no Identification.
+        // Identification is on EventDevice (oldestEvent.EventDevice.Identification).
         await _api.SearchEventsAsync(new SearchEventsRequest().WithVisitorId(oldestEvent.Identification.VisitorId));
     }
 

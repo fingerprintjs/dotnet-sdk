@@ -29,7 +29,7 @@ public class SealedTest
         _jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
         _jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
         _jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
-        _jsonOptions.Converters.Add(new EventJsonConverter());
+        _jsonOptions.Converters.Add(new EventHydratingJsonConverter());
         _jsonOptions.Converters.Add(new EventRuleActionJsonConverter());
         _jsonOptions.Converters.Add(new EventRuleActionAllowJsonConverter());
         _jsonOptions.Converters.Add(new EventRuleActionBlockJsonConverter());

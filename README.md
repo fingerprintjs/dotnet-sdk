@@ -299,6 +299,7 @@ All URIs are relative to *https://api.fpjs.io/v4*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*FingerprintApi* | [**AnalyzeRequestForAutomationIntelligenceAsync**](docs/FingerprintApi.md#analyzerequestforautomationintelligence) | **POST** /edge | Collect Automation Intelligence.
 *FingerprintApi* | [**DeleteVisitorDataAsync**](docs/FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete a visitor ID
 *FingerprintApi* | [**GetEventAsync**](docs/FingerprintApi.md#getevent) | **GET** /events/{event_id} | Get an event by event ID
 *FingerprintApi* | [**SearchEventsAsync**](docs/FingerprintApi.md#searchevents) | **GET** /events | Search events
@@ -315,11 +316,15 @@ Class | Method | HTTP request | Description
  - [Model.BotResult](docs/models/BotResult.md)
  - [Model.BrowserDetails](docs/models/BrowserDetails.md)
  - [Model.Canvas](docs/models/Canvas.md)
+ - [Model.EdgeRequest](docs/models/EdgeRequest.md)
+ - [Model.EdgeRequestHeadersInner](docs/models/EdgeRequestHeadersInner.md)
  - [Model.Emoji](docs/models/Emoji.md)
  - [Model.Error](docs/models/Error.md)
  - [Model.ErrorCode](docs/models/ErrorCode.md)
  - [Model.ErrorResponse](docs/models/ErrorResponse.md)
  - [Model.Event](docs/models/Event.md)
+ - [Model.EventDevice](docs/models/EventDevice.md)
+ - [Model.EventEdge](docs/models/EventEdge.md)
  - [Model.EventRuleAction](docs/models/EventRuleAction.md)
  - [Model.EventRuleActionAllow](docs/models/EventRuleActionAllow.md)
  - [Model.EventRuleActionBlock](docs/models/EventRuleActionBlock.md)

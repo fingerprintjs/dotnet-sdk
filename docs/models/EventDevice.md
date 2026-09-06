@@ -1,0 +1,76 @@
+# Fingerprint.ServerSdk.Model.EventDevice
+Contains results from Fingerprint Identification and Smart Signals derived from client-side device telemetry. Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**EventId** | **string** | Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp.  | 
+**Timestamp** | **long** | Timestamp of the event with millisecond precision in Unix time. | 
+**Source** | **EventSource** |  | 
+**LinkedId** | **string** | A customer-provided id that was sent with the request. | [optional] 
+**Tags** | **Dictionary&lt;string, Object&gt;** | A customer-provided value or an object that was sent with the identification request or updated later. | [optional] 
+**Url** | **string** | Page URL from which the request was sent. | [optional] 
+**BotInfo** | [**BotInfo**](BotInfo.md) |  | [optional] 
+**IpInfo** | [**IPInfo**](IPInfo.md) |  | [optional] 
+**Proxy** | **bool** | IP address was used by a public proxy provider or belonged to a known recent residential proxy  | [optional] 
+**ProxyConfidence** | **ProxyConfidence** |  | [optional] 
+**ProxyDetails** | [**ProxyDetails**](ProxyDetails.md) |  | [optional] 
+**Vpn** | **bool** | VPN or other anonymizing service has been used when sending the request.  | [optional] 
+**VpnConfidence** | **VpnConfidence** |  | [optional] 
+**VpnMethods** | [**VpnMethods**](VpnMethods.md) |  | [optional] 
+**IncrementalIdentificationStatus** | **IncrementalIdentificationStatus** |  | [optional] 
+**EnvironmentId** | **string** | Environment Id of the event. | [optional] 
+**Suspect** | **bool** | Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event). | [optional] 
+**Sdk** | [**SDK**](SDK.md) |  | [optional] 
+**Replayed** | **bool** | `true` if we determined that this payload was replayed, `false` otherwise.  | [optional] 
+**Identification** | [**Identification**](Identification.md) |  | [optional] 
+**SupplementaryIdHighRecall** | [**SupplementaryIDHighRecall**](SupplementaryIDHighRecall.md) |  | [optional] 
+**BundleId** | **string** | Bundle Id of the iOS application integrated with the Fingerprint SDK for the event.  | [optional] 
+**PackageName** | **string** | Package name of the Android application integrated with the Fingerprint SDK for the event.  | [optional] 
+**IpAddress** | **string** | IP address of the requesting browser or bot. | [optional] 
+**UserAgent** | **string** | User Agent of the client. | [optional] 
+**Device** | **string** | Device model or family extracted from the user agent string. On web, this field is also present inside `browser_details`.  | [optional] 
+**Os** | **string** | Operating system family extracted from the user agent string. On web, this field is also present inside `browser_details`.  | [optional] 
+**OsVersion** | **string** | Operating system version string extracted from the user agent string. On web, this field is also present inside `browser_details`.  | [optional] 
+**ClientReferrer** | **string** | Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).  | [optional] 
+**BrowserDetails** | [**BrowserDetails**](BrowserDetails.md) |  | [optional] 
+**Proximity** | [**Proximity**](Proximity.md) |  | [optional] 
+**ActiveCall** | **bool** | Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android.  | [optional] 
+**Bot** | **BotResult** |  | [optional] 
+**BotType** | **string** | Additional classification of the bot type if detected.  | [optional] 
+**ClonedApp** | **bool** | Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android.  | [optional] 
+**DeveloperTools** | **bool** | `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  | [optional] 
+**Emulator** | **bool** | Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android.  | [optional] 
+**FactoryResetTimestamp** | **long** | The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal.  | [optional] 
+**Frida** | **bool** | [Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * `true` - Frida detected * `false` - No signs of Frida or the client is not a mobile device.  | [optional] 
+**IpBlocklist** | [**IPBlockList**](IPBlockList.md) |  | [optional] 
+**ProxyMlScore** | **double** | Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  | [optional] 
+**Incognito** | **bool** | `true` if we detected incognito mode used in the browser, `false` otherwise.  | [optional] 
+**Jailbroken** | **bool** | iOS specific jailbreak detection. There are 2 values:  * `true` - Jailbreak detected. * `false` - No signs of jailbreak or the client is not iOS.  | [optional] 
+**LocationSpoofing** | **bool** | Flag indicating whether the request came from a mobile device with location spoofing enabled. | [optional] 
+**MitmAttack** | **bool** | * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://docs.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal.  | [optional] 
+**PrivacySettings** | **bool** | `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`.  | [optional] 
+**RootApps** | **bool** | Android specific root management apps detection. There are 2 values:  * `true` - Root Management Apps detected (e.g. Magisk). * `false` - No Root Management Apps detected or the client isn't Android.  | [optional] 
+**RuleAction** | [**EventRuleAction**](EventRuleAction.md) |  | [optional] 
+**Simulator** | **bool** | iOS specific simulator detection. There are 2 values: * `true` - Simulator environment detected. * `false` - No signs of simulator or the client is not iOS.  | [optional] 
+**SuspectScore** | **int** | Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://docs.fingerprint.com/docs/suspect-score  | [optional] 
+**Tampering** | **bool** | The field can be used as a standalone flag for tampering detection. Alternatively, the more granular fields documented below can be used for workflows that require more context. * `true` if tampering is detected through an anomalous browser signature, anti-detect browser detection, or other tampering-related methods * `false` if none of the tampering checks return a positive result  | [optional] 
+**TamperingConfidence** | **TamperingConfidence** |  | [optional] 
+**TamperingMlScore** | **double** | The output of this model is captured as tampering_ml_score, a number indicating how likely an event is coming from an anti detect browser. Values close to 1 signify higher confidence and we consider anything above the threshold of 0.8 to be actionable (the result and anti_detect_browser fields conveniently captures that fact)  | [optional] 
+**TamperingDetails** | [**TamperingDetails**](TamperingDetails.md) |  | [optional] 
+**Velocity** | [**Velocity**](Velocity.md) |  | [optional] 
+**VirtualMachine** | **bool** | `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise.  | [optional] 
+**VirtualMachineMlScore** | **double** | Machine learning–based virtual machine score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  | [optional] 
+**VpnMlScore** | **double** | Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  | [optional] 
+**VpnOriginTimezone** | **string** | Local timezone which is used in timezone_mismatch method.  | [optional] 
+**VpnOriginCountry** | **string** | Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown.  | [optional] 
+**HighActivityDevice** | **bool** | Flag indicating if the request came from a high-activity visitor. | [optional] 
+**RareDevice** | **bool** | `true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  | [optional] 
+**RareDevicePercentileBucket** | **RareDevicePercentileBucket** |  | [optional] 
+**RawDeviceAttributes** | [**RawDeviceAttributes**](RawDeviceAttributes.md) |  | [optional] 
+**Labels** | [**List&lt;LabelsInner&gt;**](LabelsInner.md) | Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  | [optional] 
+
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+
