@@ -127,6 +127,7 @@ namespace Fingerprint.ServerSdk.Model
 
             EventDevice eventDevice = null;
             EventEdge eventEdge = null;
+            bool sourcePresent = false;
 
             Utf8JsonReader utf8JsonReaderDiscriminator = utf8JsonReader;
             while (utf8JsonReaderDiscriminator.Read())
@@ -143,19 +144,27 @@ namespace Fingerprint.ServerSdk.Model
                     utf8JsonReaderDiscriminator.Read();
                     if (localVarJsonPropertyName.Equals("source"))
                     {
+                        sourcePresent = true;
                         string discriminator = utf8JsonReaderDiscriminator.GetString();
-                        if (discriminator.Equals("device"))
+                        if (discriminator != null && discriminator.Equals("device"))
                         {
                             Utf8JsonReader utf8JsonReaderEventDevice = utf8JsonReader;
                             eventDevice = JsonSerializer.Deserialize<EventDevice>(ref utf8JsonReaderEventDevice, jsonSerializerOptions);
                         }
-                        if (discriminator.Equals("edge"))
+                        if (discriminator != null && discriminator.Equals("edge"))
                         {
                             Utf8JsonReader utf8JsonReaderEventEdge = utf8JsonReader;
                             eventEdge = JsonSerializer.Deserialize<EventEdge>(ref utf8JsonReaderEventEdge, jsonSerializerOptions);
                         }
                     }
                 }
+            }
+
+            // SPIKE INTER-2457 — omit source → EventDevice. Do not rewrite source:edge.
+            if (!sourcePresent)
+            {
+                Utf8JsonReader utf8JsonReaderEventDevice = utf8JsonReader;
+                eventDevice = JsonSerializer.Deserialize<EventDevice>(ref utf8JsonReaderEventDevice, jsonSerializerOptions);
             }
 
             while (utf8JsonReader.Read())
@@ -183,9 +192,6 @@ namespace Fingerprint.ServerSdk.Model
                     }
                 }
             }
-
-            if (!source.IsSet)
-                throw new ArgumentException("Property is required for class Event.", nameof(source));
 
             if (source.IsSet && source.Value == null)
                 throw new ArgumentNullException(nameof(source), "Property is not nullable for class Event.");

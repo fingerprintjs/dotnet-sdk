@@ -1500,8 +1500,9 @@ namespace Fingerprint.ServerSdk.Model
             if (!timestamp.IsSet)
                 throw new ArgumentException("Property is required for class EventDevice.", nameof(timestamp));
 
+            // SPIKE INTER-2457 — omit source → device. Do not rewrite source:edge.
             if (!source.IsSet)
-                throw new ArgumentException("Property is required for class EventDevice.", nameof(source));
+                source = new Option<EventSource?>(EventSource.Device);
 
             if (eventId.IsSet && eventId.Value == null)
                 throw new ArgumentNullException(nameof(eventId), "Property is not nullable for class EventDevice.");
