@@ -13,96 +13,96 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Device intelligence results for the identification event.
+    /// </summary>
+    [DataContract]
+    public class SearchEventsResponseEvents : IEquatable<SearchEventsResponseEvents>
+    {
+
+
         /// <summary>
-            /// Device intelligence results for the identification event.
-            /// </summary>
-        [DataContract]
-                public class SearchEventsResponseEvents :  IEquatable<SearchEventsResponseEvents>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="SearchEventsResponseEvents" /> class.
-            /// </summary>
-                /// <param name="products">products (required).</param>
+        /// Initializes a new instance of the <see cref="SearchEventsResponseEvents" /> class.
+        /// </summary>
+        /// <param name="products">products (required).</param>
         public SearchEventsResponseEvents(Products products = default(Products))
         {
-                            // to ensure "products" is required (not null)
-                            // swagger debug: SearchEventsResponseEvents Products
-        
-                            if (products == null)
-                            {
-                            throw new InvalidDataException("products is a required property for SearchEventsResponseEvents and cannot be null");
-                            }
-                            else
-                            {
-                            this.Products = products;
-                            }
+            // to ensure "products" is required (not null)
+            // swagger debug: SearchEventsResponseEvents Products
+
+            if (products == null)
+            {
+                throw new InvalidDataException("products is a required property for SearchEventsResponseEvents and cannot be null");
+            }
+            else
+            {
+                this.Products = products;
+            }
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Products
-                        /// </summary>
-                    [DataMember(Name="products", EmitDefaultValue=false)]
-                    [JsonPropertyName("products")]
-                    public Products Products { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Products
+        /// </summary>
+        [DataMember(Name = "products", EmitDefaultValue = false)]
+        [JsonPropertyName("products")]
+        public Products Products { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class SearchEventsResponseEvents {\n");
+            var sb = new StringBuilder();
+            sb.Append("class SearchEventsResponseEvents {\n");
             sb.Append("  Products: ").Append(Products).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if SearchEventsResponseEvents instances are equal
-            /// </summary>
+        /// Returns true if SearchEventsResponseEvents instances are equal
+        /// </summary>
         /// <param name="input">Instance of SearchEventsResponseEvents to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(SearchEventsResponseEvents? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Products == input.Products ||
-            (this.Products != null &&
-            this.Products.Equals(input.Products))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Products == input.Products ||
+                (this.Products != null &&
+                this.Products.Equals(input.Products))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Products != null)
-            hashCode = hashCode * 59 + this.Products.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Products != null)
+                    hashCode = hashCode * 59 + this.Products.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

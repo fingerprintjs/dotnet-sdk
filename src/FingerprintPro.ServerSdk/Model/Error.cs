@@ -13,123 +13,123 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Error
+    /// </summary>
+    [DataContract]
+    public class Error : IEquatable<Error>
+    {
+
+
         /// <summary>
-            /// Error
-            /// </summary>
-        [DataContract]
-                public class Error :  IEquatable<Error>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Error" /> class.
-            /// </summary>
-                /// <param name="code">code (required).</param>
-                /// <param name="message">message (required).</param>
+        /// Initializes a new instance of the <see cref="Error" /> class.
+        /// </summary>
+        /// <param name="code">code (required).</param>
+        /// <param name="message">message (required).</param>
         public Error(ErrorCode code = default(ErrorCode), string message = default(string))
         {
-                            // to ensure "code" is required (not null)
-                            // swagger debug: Error Code
-        
-                            if (code == null)
-                            {
-                            throw new InvalidDataException("code is a required property for Error and cannot be null");
-                            }
-                            else
-                            {
-                            this.Code = code;
-                            }
-                            // to ensure "message" is required (not null)
-                            // swagger debug: Error Message
-        
-                            if (message == null)
-                            {
-                            throw new InvalidDataException("message is a required property for Error and cannot be null");
-                            }
-                            else
-                            {
-                            this.Message = message;
-                            }
+            // to ensure "code" is required (not null)
+            // swagger debug: Error Code
+
+            if (code == null)
+            {
+                throw new InvalidDataException("code is a required property for Error and cannot be null");
+            }
+            else
+            {
+                this.Code = code;
+            }
+            // to ensure "message" is required (not null)
+            // swagger debug: Error Message
+
+            if (message == null)
+            {
+                throw new InvalidDataException("message is a required property for Error and cannot be null");
+            }
+            else
+            {
+                this.Message = message;
+            }
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Code
-                        /// </summary>
-                    [DataMember(Name="code", EmitDefaultValue=false)]
-                    [JsonPropertyName("code")]
-                    public ErrorCode Code { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Message
-                        /// </summary>
-                    [DataMember(Name="message", EmitDefaultValue=false)]
-                    [JsonPropertyName("message")]
-                    public string Message { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Code
+        /// </summary>
+        [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
+        public ErrorCode Code { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Message
+        /// </summary>
+        [DataMember(Name = "message", EmitDefaultValue = false)]
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Error {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Error {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Error instances are equal
-            /// </summary>
+        /// Returns true if Error instances are equal
+        /// </summary>
         /// <param name="input">Instance of Error to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Error? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Code == input.Code ||
-            (this.Code != null &&
-            this.Code.Equals(input.Code))
-            ) && 
-            (
-            this.Message == input.Message ||
-            (this.Message != null &&
-            this.Message.Equals(input.Message))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Code == input.Code ||
+                (this.Code != null &&
+                this.Code.Equals(input.Code))
+                ) &&
+                (
+                this.Message == input.Message ||
+                (this.Message != null &&
+                this.Message.Equals(input.Message))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Code != null)
-            hashCode = hashCode * 59 + this.Code.GetHashCode();
-            if (this.Message != null)
-            hashCode = hashCode * 59 + this.Message.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Code != null)
+                    hashCode = hashCode * 59 + this.Code.GetHashCode();
+                if (this.Message != null)
+                    hashCode = hashCode * 59 + this.Message.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

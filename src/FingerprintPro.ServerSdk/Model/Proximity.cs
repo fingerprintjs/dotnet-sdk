@@ -13,204 +13,205 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed. 
+    /// </summary>
+    [DataContract]
+    public class Proximity : IEquatable<Proximity>
+    {
         /// <summary>
-            /// Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed. 
-            /// </summary>
-        [DataContract]
-                public class Proximity :  IEquatable<Proximity>
+        /// The radius of the proximity zone’s precision level, in meters. 
+        /// </summary>
+        /// <value>The radius of the proximity zone’s precision level, in meters. </value>
+        public enum PrecisionRadiusEnum
         {
-                            /// <summary>
-                            /// The radius of the proximity zone’s precision level, in meters. 
-                            /// </summary>
-                            /// <value>The radius of the proximity zone’s precision level, in meters. </value>
-                                                        public enum PrecisionRadiusEnum
-                            {
-                                /// <summary>
-                                /// Enum NUMBER_10 for value: 10
-                                /// </summary>
-                                
-                                NUMBER_10 = 10,
-                                /// <summary>
-                                /// Enum NUMBER_25 for value: 25
-                                /// </summary>
-                                
-                                NUMBER_25 = 25,
-                                /// <summary>
-                                /// Enum NUMBER_65 for value: 65
-                                /// </summary>
-                                
-                                NUMBER_65 = 65,
-                                /// <summary>
-                                /// Enum NUMBER_175 for value: 175
-                                /// </summary>
-                                
-                                NUMBER_175 = 175,
-                                /// <summary>
-                                /// Enum NUMBER_450 for value: 450
-                                /// </summary>
-                                
-                                NUMBER_450 = 450,
-                                /// <summary>
-                                /// Enum NUMBER_1200 for value: 1200
-                                /// </summary>
-                                
-                                NUMBER_1200 = 1200,
-                                /// <summary>
-                                /// Enum NUMBER_3300 for value: 3300
-                                /// </summary>
-                                
-                                NUMBER_3300 = 3300,
-                                /// <summary>
-                                /// Enum NUMBER_8500 for value: 8500
-                                /// </summary>
-                                
-                                NUMBER_8500 = 8500,
-                                /// <summary>
-                                /// Enum NUMBER_22500 for value: 22500
-                                /// </summary>
-                                
-                                NUMBER_22500 = 22500                            }
-                /// <summary>
-                    /// The radius of the proximity zone’s precision level, in meters. 
-                    /// </summary>
-                    /// <value>The radius of the proximity zone’s precision level, in meters. </value>
-                [DataMember(Name="precisionRadius", EmitDefaultValue=false)]
-                [JsonPropertyName("precisionRadius")]
-                public PrecisionRadiusEnum PrecisionRadius { get; set; }
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Proximity" /> class.
+            /// <summary>
+            /// Enum NUMBER_10 for value: 10
             /// </summary>
-                /// <param name="id">A stable privacy-preserving identifier for a given proximity zone.  (required).</param>
-                /// <param name="precisionRadius">The radius of the proximity zone’s precision level, in meters.  (required).</param>
-                /// <param name="confidence">A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone.  (required).</param>
+
+            NUMBER_10 = 10,
+            /// <summary>
+            /// Enum NUMBER_25 for value: 25
+            /// </summary>
+
+            NUMBER_25 = 25,
+            /// <summary>
+            /// Enum NUMBER_65 for value: 65
+            /// </summary>
+
+            NUMBER_65 = 65,
+            /// <summary>
+            /// Enum NUMBER_175 for value: 175
+            /// </summary>
+
+            NUMBER_175 = 175,
+            /// <summary>
+            /// Enum NUMBER_450 for value: 450
+            /// </summary>
+
+            NUMBER_450 = 450,
+            /// <summary>
+            /// Enum NUMBER_1200 for value: 1200
+            /// </summary>
+
+            NUMBER_1200 = 1200,
+            /// <summary>
+            /// Enum NUMBER_3300 for value: 3300
+            /// </summary>
+
+            NUMBER_3300 = 3300,
+            /// <summary>
+            /// Enum NUMBER_8500 for value: 8500
+            /// </summary>
+
+            NUMBER_8500 = 8500,
+            /// <summary>
+            /// Enum NUMBER_22500 for value: 22500
+            /// </summary>
+
+            NUMBER_22500 = 22500
+        }
+        /// <summary>
+        /// The radius of the proximity zone’s precision level, in meters. 
+        /// </summary>
+        /// <value>The radius of the proximity zone’s precision level, in meters. </value>
+        [DataMember(Name = "precisionRadius", EmitDefaultValue = false)]
+        [JsonPropertyName("precisionRadius")]
+        public PrecisionRadiusEnum PrecisionRadius { get; set; }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Proximity" /> class.
+        /// </summary>
+        /// <param name="id">A stable privacy-preserving identifier for a given proximity zone.  (required).</param>
+        /// <param name="precisionRadius">The radius of the proximity zone’s precision level, in meters.  (required).</param>
+        /// <param name="confidence">A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone.  (required).</param>
         public Proximity(string id = default(string), PrecisionRadiusEnum precisionRadius = default(PrecisionRadiusEnum), float? confidence = default(float?))
         {
-                            // to ensure "id" is required (not null)
-                            // swagger debug: Proximity Id
-        
-                            if (id == null)
-                            {
-                            throw new InvalidDataException("id is a required property for Proximity and cannot be null");
-                            }
-                            else
-                            {
-                            this.Id = id;
-                            }
-                            // to ensure "precisionRadius" is required (not null)
-                            // swagger debug: Proximity PrecisionRadius
-        
-                            if (precisionRadius == null)
-                            {
-                            throw new InvalidDataException("precisionRadius is a required property for Proximity and cannot be null");
-                            }
-                            else
-                            {
-                            this.PrecisionRadius = precisionRadius;
-                            }
-                            // to ensure "confidence" is required (not null)
-                            // swagger debug: Proximity Confidence
-        
-                            if (confidence == null)
-                            {
-                            throw new InvalidDataException("confidence is a required property for Proximity and cannot be null");
-                            }
-                            else
-                            {
-                            this.Confidence = confidence;
-                            }
+            // to ensure "id" is required (not null)
+            // swagger debug: Proximity Id
+
+            if (id == null)
+            {
+                throw new InvalidDataException("id is a required property for Proximity and cannot be null");
+            }
+            else
+            {
+                this.Id = id;
+            }
+            // to ensure "precisionRadius" is required (not null)
+            // swagger debug: Proximity PrecisionRadius
+
+            if (precisionRadius == null)
+            {
+                throw new InvalidDataException("precisionRadius is a required property for Proximity and cannot be null");
+            }
+            else
+            {
+                this.PrecisionRadius = precisionRadius;
+            }
+            // to ensure "confidence" is required (not null)
+            // swagger debug: Proximity Confidence
+
+            if (confidence == null)
+            {
+                throw new InvalidDataException("confidence is a required property for Proximity and cannot be null");
+            }
+            else
+            {
+                this.Confidence = confidence;
+            }
         }
-        
-                    /// <summary>
-                        /// A stable privacy-preserving identifier for a given proximity zone. 
-                        /// </summary>
-                        /// <value>A stable privacy-preserving identifier for a given proximity zone. </value>
-                    [DataMember(Name="id", EmitDefaultValue=false)]
-                    [JsonPropertyName("id")]
-                    public string Id { get; set; }
-        
-        
-                    /// <summary>
-                        /// A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
-                        /// </summary>
-                        /// <value>A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. </value>
-                    [DataMember(Name="confidence", EmitDefaultValue=false)]
-                    [JsonPropertyName("confidence")]
-                    public float? Confidence { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// A stable privacy-preserving identifier for a given proximity zone. 
+        /// </summary>
+        /// <value>A stable privacy-preserving identifier for a given proximity zone. </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+
+        /// <summary>
+        /// A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
+        /// </summary>
+        /// <value>A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. </value>
+        [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
+        public float? Confidence { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Proximity {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Proximity {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  PrecisionRadius: ").Append(PrecisionRadius).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Proximity instances are equal
-            /// </summary>
+        /// Returns true if Proximity instances are equal
+        /// </summary>
         /// <param name="input">Instance of Proximity to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Proximity? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Id == input.Id ||
-            (this.Id != null &&
-            this.Id.Equals(input.Id))
-            ) && 
-            (
-            this.PrecisionRadius == input.PrecisionRadius ||
-            (this.PrecisionRadius != null &&
-            this.PrecisionRadius.Equals(input.PrecisionRadius))
-            ) && 
-            (
-            this.Confidence == input.Confidence ||
-            (this.Confidence != null &&
-            this.Confidence.Equals(input.Confidence))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Id == input.Id ||
+                (this.Id != null &&
+                this.Id.Equals(input.Id))
+                ) &&
+                (
+                this.PrecisionRadius == input.PrecisionRadius ||
+                (this.PrecisionRadius != null &&
+                this.PrecisionRadius.Equals(input.PrecisionRadius))
+                ) &&
+                (
+                this.Confidence == input.Confidence ||
+                (this.Confidence != null &&
+                this.Confidence.Equals(input.Confidence))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Id != null)
-            hashCode = hashCode * 59 + this.Id.GetHashCode();
-            if (this.PrecisionRadius != null)
-            hashCode = hashCode * 59 + this.PrecisionRadius.GetHashCode();
-            if (this.Confidence != null)
-            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Id != null)
+                    hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.PrecisionRadius != null)
+                    hashCode = hashCode * 59 + this.PrecisionRadius.GetHashCode();
+                if (this.Confidence != null)
+                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

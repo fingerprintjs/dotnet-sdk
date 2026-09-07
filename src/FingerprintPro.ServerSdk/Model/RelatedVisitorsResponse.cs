@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// RelatedVisitorsResponse
+    /// </summary>
+    [DataContract]
+    public class RelatedVisitorsResponse : IEquatable<RelatedVisitorsResponse>
+    {
+
+
         /// <summary>
-            /// RelatedVisitorsResponse
-            /// </summary>
-        [DataContract]
-                public class RelatedVisitorsResponse :  IEquatable<RelatedVisitorsResponse>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="RelatedVisitorsResponse" /> class.
-            /// </summary>
-                /// <param name="relatedVisitors">relatedVisitors (required).</param>
+        /// Initializes a new instance of the <see cref="RelatedVisitorsResponse" /> class.
+        /// </summary>
+        /// <param name="relatedVisitors">relatedVisitors (required).</param>
         public RelatedVisitorsResponse(List<RelatedVisitor> relatedVisitors = default(List<RelatedVisitor>))
         {
-                            // to ensure "relatedVisitors" is required (not null)
-                            // swagger debug: RelatedVisitorsResponse RelatedVisitors
-        
-                            if (relatedVisitors == null)
-                            {
-                            throw new InvalidDataException("relatedVisitors is a required property for RelatedVisitorsResponse and cannot be null");
-                            }
-                            else
-                            {
-                            this.RelatedVisitors = relatedVisitors;
-                            }
+            // to ensure "relatedVisitors" is required (not null)
+            // swagger debug: RelatedVisitorsResponse RelatedVisitors
+
+            if (relatedVisitors == null)
+            {
+                throw new InvalidDataException("relatedVisitors is a required property for RelatedVisitorsResponse and cannot be null");
+            }
+            else
+            {
+                this.RelatedVisitors = relatedVisitors;
+            }
         }
-        
-                    /// <summary>
-                        /// Gets or Sets RelatedVisitors
-                        /// </summary>
-                    [DataMember(Name="relatedVisitors", EmitDefaultValue=false)]
-                    [JsonPropertyName("relatedVisitors")]
-                    public List<RelatedVisitor> RelatedVisitors { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets RelatedVisitors
+        /// </summary>
+        [DataMember(Name = "relatedVisitors", EmitDefaultValue = false)]
+        [JsonPropertyName("relatedVisitors")]
+        public List<RelatedVisitor> RelatedVisitors { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class RelatedVisitorsResponse {\n");
+            var sb = new StringBuilder();
+            sb.Append("class RelatedVisitorsResponse {\n");
             sb.Append("  RelatedVisitors: ").Append(RelatedVisitors).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if RelatedVisitorsResponse instances are equal
-            /// </summary>
+        /// Returns true if RelatedVisitorsResponse instances are equal
+        /// </summary>
         /// <param name="input">Instance of RelatedVisitorsResponse to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(RelatedVisitorsResponse? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.RelatedVisitors == input.RelatedVisitors ||
-            this.RelatedVisitors != null &&
-            input.RelatedVisitors != null &&
-            this.RelatedVisitors.SequenceEqual(input.RelatedVisitors)
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.RelatedVisitors == input.RelatedVisitors ||
+                this.RelatedVisitors != null &&
+                input.RelatedVisitors != null &&
+                this.RelatedVisitors.SequenceEqual(input.RelatedVisitors)
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.RelatedVisitors != null)
-            hashCode = hashCode * 59 + this.RelatedVisitors.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.RelatedVisitors != null)
+                    hashCode = hashCode * 59 + this.RelatedVisitors.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

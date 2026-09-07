@@ -13,83 +13,84 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
-            /// <summary>
-            /// Error code:  * `RequestCannotBeParsed` - the query parameters or JSON payload contains some errors            that prevented us from parsing it (wrong type/surpassed limits).  * `RequestReadTimeout` - the request body could not be read before the connection timed out.  * `TokenRequired` - `Auth-API-Key` header is missing or empty.  * `TokenNotFound` - no Fingerprint application found for specified secret key.  * `SubscriptionNotActive` - Fingerprint application is not active.  * `WrongRegion` - server and application region differ.  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application.  * `WorkspaceScopedSecretKeyRequired` - The provided secret API key is scoped to an environment, but this operation requires a workspace-scoped secret API key.  * `RequestNotFound` - the specified request ID was not found. It never existed, expired, or it has been deleted.  * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded.  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded.  * `StateNotReady` - The event specified with request id is           not ready for updates yet. Try again.           This error happens in rare cases when update API is called immediately           after receiving the request id on the client. In case you need to send           information right away, we recommend using the JS agent API instead.  * `Failed` - internal server error. 
-            /// </summary>
-            /// <value>Error code:  * `RequestCannotBeParsed` - the query parameters or JSON payload contains some errors            that prevented us from parsing it (wrong type/surpassed limits).  * `RequestReadTimeout` - the request body could not be read before the connection timed out.  * `TokenRequired` - `Auth-API-Key` header is missing or empty.  * `TokenNotFound` - no Fingerprint application found for specified secret key.  * `SubscriptionNotActive` - Fingerprint application is not active.  * `WrongRegion` - server and application region differ.  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application.  * `WorkspaceScopedSecretKeyRequired` - The provided secret API key is scoped to an environment, but this operation requires a workspace-scoped secret API key.  * `RequestNotFound` - the specified request ID was not found. It never existed, expired, or it has been deleted.  * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded.  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded.  * `StateNotReady` - The event specified with request id is           not ready for updates yet. Try again.           This error happens in rare cases when update API is called immediately           after receiving the request id on the client. In case you need to send           information right away, we recommend using the JS agent API instead.  * `Failed` - internal server error. </value>
-            [JsonConverter(typeof(JsonStringEnumConverter))]
-                        public enum ErrorCode
-            {
-                /// <summary>
-                /// Enum RequestCannotBeParsed for value: RequestCannotBeParsed
-                /// </summary>
-                [EnumMember(Value = "RequestCannotBeParsed")]
-                RequestCannotBeParsed = 1,
-                /// <summary>
-                /// Enum RequestReadTimeout for value: RequestReadTimeout
-                /// </summary>
-                [EnumMember(Value = "RequestReadTimeout")]
-                RequestReadTimeout = 2,
-                /// <summary>
-                /// Enum TokenRequired for value: TokenRequired
-                /// </summary>
-                [EnumMember(Value = "TokenRequired")]
-                TokenRequired = 3,
-                /// <summary>
-                /// Enum TokenNotFound for value: TokenNotFound
-                /// </summary>
-                [EnumMember(Value = "TokenNotFound")]
-                TokenNotFound = 4,
-                /// <summary>
-                /// Enum SubscriptionNotActive for value: SubscriptionNotActive
-                /// </summary>
-                [EnumMember(Value = "SubscriptionNotActive")]
-                SubscriptionNotActive = 5,
-                /// <summary>
-                /// Enum WrongRegion for value: WrongRegion
-                /// </summary>
-                [EnumMember(Value = "WrongRegion")]
-                WrongRegion = 6,
-                /// <summary>
-                /// Enum FeatureNotEnabled for value: FeatureNotEnabled
-                /// </summary>
-                [EnumMember(Value = "FeatureNotEnabled")]
-                FeatureNotEnabled = 7,
-                /// <summary>
-                /// Enum WorkspaceScopedSecretKeyRequired for value: WorkspaceScopedSecretKeyRequired
-                /// </summary>
-                [EnumMember(Value = "WorkspaceScopedSecretKeyRequired")]
-                WorkspaceScopedSecretKeyRequired = 8,
-                /// <summary>
-                /// Enum RequestNotFound for value: RequestNotFound
-                /// </summary>
-                [EnumMember(Value = "RequestNotFound")]
-                RequestNotFound = 9,
-                /// <summary>
-                /// Enum VisitorNotFound for value: VisitorNotFound
-                /// </summary>
-                [EnumMember(Value = "VisitorNotFound")]
-                VisitorNotFound = 10,
-                /// <summary>
-                /// Enum TooManyRequests for value: TooManyRequests
-                /// </summary>
-                [EnumMember(Value = "TooManyRequests")]
-                TooManyRequests = 11,
-                /// <summary>
-                /// Enum _429TooManyRequests for value: 429 Too Many Requests
-                /// </summary>
-                [EnumMember(Value = "429 Too Many Requests")]
-                _429TooManyRequests = 12,
-                /// <summary>
-                /// Enum StateNotReady for value: StateNotReady
-                /// </summary>
-                [EnumMember(Value = "StateNotReady")]
-                StateNotReady = 13,
-                /// <summary>
-                /// Enum Failed for value: Failed
-                /// </summary>
-                [EnumMember(Value = "Failed")]
-                Failed = 14            }
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Error code:  * `RequestCannotBeParsed` - the query parameters or JSON payload contains some errors            that prevented us from parsing it (wrong type/surpassed limits).  * `RequestReadTimeout` - the request body could not be read before the connection timed out.  * `TokenRequired` - `Auth-API-Key` header is missing or empty.  * `TokenNotFound` - no Fingerprint application found for specified secret key.  * `SubscriptionNotActive` - Fingerprint application is not active.  * `WrongRegion` - server and application region differ.  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application.  * `WorkspaceScopedSecretKeyRequired` - The provided secret API key is scoped to an environment, but this operation requires a workspace-scoped secret API key.  * `RequestNotFound` - the specified request ID was not found. It never existed, expired, or it has been deleted.  * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded.  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded.  * `StateNotReady` - The event specified with request id is           not ready for updates yet. Try again.           This error happens in rare cases when update API is called immediately           after receiving the request id on the client. In case you need to send           information right away, we recommend using the JS agent API instead.  * `Failed` - internal server error. 
+    /// </summary>
+    /// <value>Error code:  * `RequestCannotBeParsed` - the query parameters or JSON payload contains some errors            that prevented us from parsing it (wrong type/surpassed limits).  * `RequestReadTimeout` - the request body could not be read before the connection timed out.  * `TokenRequired` - `Auth-API-Key` header is missing or empty.  * `TokenNotFound` - no Fingerprint application found for specified secret key.  * `SubscriptionNotActive` - Fingerprint application is not active.  * `WrongRegion` - server and application region differ.  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application.  * `WorkspaceScopedSecretKeyRequired` - The provided secret API key is scoped to an environment, but this operation requires a workspace-scoped secret API key.  * `RequestNotFound` - the specified request ID was not found. It never existed, expired, or it has been deleted.  * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded.  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded.  * `StateNotReady` - The event specified with request id is           not ready for updates yet. Try again.           This error happens in rare cases when update API is called immediately           after receiving the request id on the client. In case you need to send           information right away, we recommend using the JS agent API instead.  * `Failed` - internal server error. </value>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum ErrorCode
+    {
+        /// <summary>
+        /// Enum RequestCannotBeParsed for value: RequestCannotBeParsed
+        /// </summary>
+        [EnumMember(Value = "RequestCannotBeParsed")]
+        RequestCannotBeParsed = 1,
+        /// <summary>
+        /// Enum RequestReadTimeout for value: RequestReadTimeout
+        /// </summary>
+        [EnumMember(Value = "RequestReadTimeout")]
+        RequestReadTimeout = 2,
+        /// <summary>
+        /// Enum TokenRequired for value: TokenRequired
+        /// </summary>
+        [EnumMember(Value = "TokenRequired")]
+        TokenRequired = 3,
+        /// <summary>
+        /// Enum TokenNotFound for value: TokenNotFound
+        /// </summary>
+        [EnumMember(Value = "TokenNotFound")]
+        TokenNotFound = 4,
+        /// <summary>
+        /// Enum SubscriptionNotActive for value: SubscriptionNotActive
+        /// </summary>
+        [EnumMember(Value = "SubscriptionNotActive")]
+        SubscriptionNotActive = 5,
+        /// <summary>
+        /// Enum WrongRegion for value: WrongRegion
+        /// </summary>
+        [EnumMember(Value = "WrongRegion")]
+        WrongRegion = 6,
+        /// <summary>
+        /// Enum FeatureNotEnabled for value: FeatureNotEnabled
+        /// </summary>
+        [EnumMember(Value = "FeatureNotEnabled")]
+        FeatureNotEnabled = 7,
+        /// <summary>
+        /// Enum WorkspaceScopedSecretKeyRequired for value: WorkspaceScopedSecretKeyRequired
+        /// </summary>
+        [EnumMember(Value = "WorkspaceScopedSecretKeyRequired")]
+        WorkspaceScopedSecretKeyRequired = 8,
+        /// <summary>
+        /// Enum RequestNotFound for value: RequestNotFound
+        /// </summary>
+        [EnumMember(Value = "RequestNotFound")]
+        RequestNotFound = 9,
+        /// <summary>
+        /// Enum VisitorNotFound for value: VisitorNotFound
+        /// </summary>
+        [EnumMember(Value = "VisitorNotFound")]
+        VisitorNotFound = 10,
+        /// <summary>
+        /// Enum TooManyRequests for value: TooManyRequests
+        /// </summary>
+        [EnumMember(Value = "TooManyRequests")]
+        TooManyRequests = 11,
+        /// <summary>
+        /// Enum _429TooManyRequests for value: 429 Too Many Requests
+        /// </summary>
+        [EnumMember(Value = "429 Too Many Requests")]
+        _429TooManyRequests = 12,
+        /// <summary>
+        /// Enum StateNotReady for value: StateNotReady
+        /// </summary>
+        [EnumMember(Value = "StateNotReady")]
+        StateNotReady = 13,
+        /// <summary>
+        /// Enum Failed for value: Failed
+        /// </summary>
+        [EnumMember(Value = "Failed")]
+        Failed = 14
+    }
 }

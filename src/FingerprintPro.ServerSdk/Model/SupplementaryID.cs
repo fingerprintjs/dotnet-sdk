@@ -13,156 +13,156 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// SupplementaryID
+    /// </summary>
+    [DataContract]
+    public class SupplementaryID : IEquatable<SupplementaryID>
+    {
+
+
         /// <summary>
-            /// SupplementaryID
-            /// </summary>
-        [DataContract]
-                public class SupplementaryID :  IEquatable<SupplementaryID>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="SupplementaryID" /> class.
-            /// </summary>
-                /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser or mobile device..</param>
-                /// <param name="visitorFound">Attribute represents if a visitor had been identified before..</param>
-                /// <param name="confidence">confidence.</param>
-                /// <param name="firstSeenAt">firstSeenAt.</param>
-                /// <param name="lastSeenAt">lastSeenAt.</param>
+        /// Initializes a new instance of the <see cref="SupplementaryID" /> class.
+        /// </summary>
+        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser or mobile device..</param>
+        /// <param name="visitorFound">Attribute represents if a visitor had been identified before..</param>
+        /// <param name="confidence">confidence.</param>
+        /// <param name="firstSeenAt">firstSeenAt.</param>
+        /// <param name="lastSeenAt">lastSeenAt.</param>
         public SupplementaryID(string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt))
         {
-                                                    this.VisitorId = visitorId;
-                                                    this.VisitorFound = visitorFound;
-                                                    this.Confidence = confidence;
-                                                    this.FirstSeenAt = firstSeenAt;
-                                                    this.LastSeenAt = lastSeenAt;
+            this.VisitorId = visitorId;
+            this.VisitorFound = visitorFound;
+            this.Confidence = confidence;
+            this.FirstSeenAt = firstSeenAt;
+            this.LastSeenAt = lastSeenAt;
         }
-        
-                    /// <summary>
-                        /// String of 20 characters that uniquely identifies the visitor's browser or mobile device.
-                        /// </summary>
-                        /// <value>String of 20 characters that uniquely identifies the visitor's browser or mobile device.</value>
-                    [DataMember(Name="visitorId", EmitDefaultValue=false)]
-                    [JsonPropertyName("visitorId")]
-                    public string VisitorId { get; set; }
-        
-                    /// <summary>
-                        /// Attribute represents if a visitor had been identified before.
-                        /// </summary>
-                        /// <value>Attribute represents if a visitor had been identified before.</value>
-                    [DataMember(Name="visitorFound", EmitDefaultValue=false)]
-                    [JsonPropertyName("visitorFound")]
-                    public bool? VisitorFound { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Confidence
-                        /// </summary>
-                    [DataMember(Name="confidence", EmitDefaultValue=false)]
-                    [JsonPropertyName("confidence")]
-                    public IdentificationConfidence Confidence { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets FirstSeenAt
-                        /// </summary>
-                    [DataMember(Name="firstSeenAt", EmitDefaultValue=false)]
-                    [JsonPropertyName("firstSeenAt")]
-                    public IdentificationSeenAt FirstSeenAt { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets LastSeenAt
-                        /// </summary>
-                    [DataMember(Name="lastSeenAt", EmitDefaultValue=false)]
-                    [JsonPropertyName("lastSeenAt")]
-                    public IdentificationSeenAt LastSeenAt { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// String of 20 characters that uniquely identifies the visitor's browser or mobile device.
+        /// </summary>
+        /// <value>String of 20 characters that uniquely identifies the visitor's browser or mobile device.</value>
+        [DataMember(Name = "visitorId", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorId")]
+        public string VisitorId { get; set; }
+
+        /// <summary>
+        /// Attribute represents if a visitor had been identified before.
+        /// </summary>
+        /// <value>Attribute represents if a visitor had been identified before.</value>
+        [DataMember(Name = "visitorFound", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorFound")]
+        public bool? VisitorFound { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Confidence
+        /// </summary>
+        [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
+        public IdentificationConfidence Confidence { get; set; }
+
+        /// <summary>
+        /// Gets or Sets FirstSeenAt
+        /// </summary>
+        [DataMember(Name = "firstSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("firstSeenAt")]
+        public IdentificationSeenAt FirstSeenAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets LastSeenAt
+        /// </summary>
+        [DataMember(Name = "lastSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("lastSeenAt")]
+        public IdentificationSeenAt LastSeenAt { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class SupplementaryID {\n");
+            var sb = new StringBuilder();
+            sb.Append("class SupplementaryID {\n");
             sb.Append("  VisitorId: ").Append(VisitorId).Append("\n");
             sb.Append("  VisitorFound: ").Append(VisitorFound).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("  FirstSeenAt: ").Append(FirstSeenAt).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if SupplementaryID instances are equal
-            /// </summary>
+        /// Returns true if SupplementaryID instances are equal
+        /// </summary>
         /// <param name="input">Instance of SupplementaryID to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(SupplementaryID? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.VisitorId == input.VisitorId ||
-            (this.VisitorId != null &&
-            this.VisitorId.Equals(input.VisitorId))
-            ) && 
-            (
-            this.VisitorFound == input.VisitorFound ||
-            (this.VisitorFound != null &&
-            this.VisitorFound.Equals(input.VisitorFound))
-            ) && 
-            (
-            this.Confidence == input.Confidence ||
-            (this.Confidence != null &&
-            this.Confidence.Equals(input.Confidence))
-            ) && 
-            (
-            this.FirstSeenAt == input.FirstSeenAt ||
-            (this.FirstSeenAt != null &&
-            this.FirstSeenAt.Equals(input.FirstSeenAt))
-            ) && 
-            (
-            this.LastSeenAt == input.LastSeenAt ||
-            (this.LastSeenAt != null &&
-            this.LastSeenAt.Equals(input.LastSeenAt))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.VisitorId == input.VisitorId ||
+                (this.VisitorId != null &&
+                this.VisitorId.Equals(input.VisitorId))
+                ) &&
+                (
+                this.VisitorFound == input.VisitorFound ||
+                (this.VisitorFound != null &&
+                this.VisitorFound.Equals(input.VisitorFound))
+                ) &&
+                (
+                this.Confidence == input.Confidence ||
+                (this.Confidence != null &&
+                this.Confidence.Equals(input.Confidence))
+                ) &&
+                (
+                this.FirstSeenAt == input.FirstSeenAt ||
+                (this.FirstSeenAt != null &&
+                this.FirstSeenAt.Equals(input.FirstSeenAt))
+                ) &&
+                (
+                this.LastSeenAt == input.LastSeenAt ||
+                (this.LastSeenAt != null &&
+                this.LastSeenAt.Equals(input.LastSeenAt))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.VisitorId != null)
-            hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
-            if (this.VisitorFound != null)
-            hashCode = hashCode * 59 + this.VisitorFound.GetHashCode();
-            if (this.Confidence != null)
-            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-            if (this.FirstSeenAt != null)
-            hashCode = hashCode * 59 + this.FirstSeenAt.GetHashCode();
-            if (this.LastSeenAt != null)
-            hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.VisitorId != null)
+                    hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
+                if (this.VisitorFound != null)
+                    hashCode = hashCode * 59 + this.VisitorFound.GetHashCode();
+                if (this.Confidence != null)
+                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+                if (this.FirstSeenAt != null)
+                    hashCode = hashCode * 59 + this.FirstSeenAt.GetHashCode();
+                if (this.LastSeenAt != null)
+                    hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

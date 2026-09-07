@@ -13,164 +13,164 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Sums key data points for a specific `visitorId`, `ipAddress` and `linkedId` at three distinct time intervals: 5 minutes, 1 hour, and 24 hours as follows:   - Number of distinct IP addresses associated to the visitor ID. - Number of distinct linked IDs associated with the visitor ID. - Number of distinct countries associated with the visitor ID. - Number of identification events associated with the visitor ID. - Number of identification events associated with the detected IP address. - Number of distinct IP addresses associated with the provided linked ID. - Number of distinct visitor IDs associated with the provided linked ID.  The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted  if the number of `events` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. 
+    /// </summary>
+    [DataContract]
+    public class Velocity : IEquatable<Velocity>
+    {
+
+
         /// <summary>
-            /// Sums key data points for a specific `visitorId`, `ipAddress` and `linkedId` at three distinct time intervals: 5 minutes, 1 hour, and 24 hours as follows:   - Number of distinct IP addresses associated to the visitor ID. - Number of distinct linked IDs associated with the visitor ID. - Number of distinct countries associated with the visitor ID. - Number of identification events associated with the visitor ID. - Number of identification events associated with the detected IP address. - Number of distinct IP addresses associated with the provided linked ID. - Number of distinct visitor IDs associated with the provided linked ID.  The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted  if the number of `events` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. 
-            /// </summary>
-        [DataContract]
-                public class Velocity :  IEquatable<Velocity>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Velocity" /> class.
-            /// </summary>
-                /// <param name="distinctIp">distinctIp (required).</param>
-                /// <param name="distinctLinkedId">distinctLinkedId (required).</param>
-                /// <param name="distinctCountry">distinctCountry (required).</param>
-                /// <param name="events">events (required).</param>
-                /// <param name="ipEvents">ipEvents (required).</param>
-                /// <param name="distinctIpByLinkedId">distinctIpByLinkedId (required).</param>
-                /// <param name="distinctVisitorIdByLinkedId">distinctVisitorIdByLinkedId (required).</param>
+        /// Initializes a new instance of the <see cref="Velocity" /> class.
+        /// </summary>
+        /// <param name="distinctIp">distinctIp (required).</param>
+        /// <param name="distinctLinkedId">distinctLinkedId (required).</param>
+        /// <param name="distinctCountry">distinctCountry (required).</param>
+        /// <param name="events">events (required).</param>
+        /// <param name="ipEvents">ipEvents (required).</param>
+        /// <param name="distinctIpByLinkedId">distinctIpByLinkedId (required).</param>
+        /// <param name="distinctVisitorIdByLinkedId">distinctVisitorIdByLinkedId (required).</param>
         public Velocity(VelocityData distinctIp = default(VelocityData), VelocityData distinctLinkedId = default(VelocityData), VelocityData distinctCountry = default(VelocityData), VelocityData events = default(VelocityData), VelocityData ipEvents = default(VelocityData), VelocityData distinctIpByLinkedId = default(VelocityData), VelocityData distinctVisitorIdByLinkedId = default(VelocityData))
         {
-                            // to ensure "distinctIp" is required (not null)
-                            // swagger debug: Velocity DistinctIp
-        
-                            if (distinctIp == null)
-                            {
-                            throw new InvalidDataException("distinctIp is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.DistinctIp = distinctIp;
-                            }
-                            // to ensure "distinctLinkedId" is required (not null)
-                            // swagger debug: Velocity DistinctLinkedId
-        
-                            if (distinctLinkedId == null)
-                            {
-                            throw new InvalidDataException("distinctLinkedId is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.DistinctLinkedId = distinctLinkedId;
-                            }
-                            // to ensure "distinctCountry" is required (not null)
-                            // swagger debug: Velocity DistinctCountry
-        
-                            if (distinctCountry == null)
-                            {
-                            throw new InvalidDataException("distinctCountry is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.DistinctCountry = distinctCountry;
-                            }
-                            // to ensure "events" is required (not null)
-                            // swagger debug: Velocity Events
-        
-                            if (events == null)
-                            {
-                            throw new InvalidDataException("events is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.Events = events;
-                            }
-                            // to ensure "ipEvents" is required (not null)
-                            // swagger debug: Velocity IpEvents
-        
-                            if (ipEvents == null)
-                            {
-                            throw new InvalidDataException("ipEvents is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.IpEvents = ipEvents;
-                            }
-                            // to ensure "distinctIpByLinkedId" is required (not null)
-                            // swagger debug: Velocity DistinctIpByLinkedId
-        
-                            if (distinctIpByLinkedId == null)
-                            {
-                            throw new InvalidDataException("distinctIpByLinkedId is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.DistinctIpByLinkedId = distinctIpByLinkedId;
-                            }
-                            // to ensure "distinctVisitorIdByLinkedId" is required (not null)
-                            // swagger debug: Velocity DistinctVisitorIdByLinkedId
-        
-                            if (distinctVisitorIdByLinkedId == null)
-                            {
-                            throw new InvalidDataException("distinctVisitorIdByLinkedId is a required property for Velocity and cannot be null");
-                            }
-                            else
-                            {
-                            this.DistinctVisitorIdByLinkedId = distinctVisitorIdByLinkedId;
-                            }
+            // to ensure "distinctIp" is required (not null)
+            // swagger debug: Velocity DistinctIp
+
+            if (distinctIp == null)
+            {
+                throw new InvalidDataException("distinctIp is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.DistinctIp = distinctIp;
+            }
+            // to ensure "distinctLinkedId" is required (not null)
+            // swagger debug: Velocity DistinctLinkedId
+
+            if (distinctLinkedId == null)
+            {
+                throw new InvalidDataException("distinctLinkedId is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.DistinctLinkedId = distinctLinkedId;
+            }
+            // to ensure "distinctCountry" is required (not null)
+            // swagger debug: Velocity DistinctCountry
+
+            if (distinctCountry == null)
+            {
+                throw new InvalidDataException("distinctCountry is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.DistinctCountry = distinctCountry;
+            }
+            // to ensure "events" is required (not null)
+            // swagger debug: Velocity Events
+
+            if (events == null)
+            {
+                throw new InvalidDataException("events is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.Events = events;
+            }
+            // to ensure "ipEvents" is required (not null)
+            // swagger debug: Velocity IpEvents
+
+            if (ipEvents == null)
+            {
+                throw new InvalidDataException("ipEvents is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.IpEvents = ipEvents;
+            }
+            // to ensure "distinctIpByLinkedId" is required (not null)
+            // swagger debug: Velocity DistinctIpByLinkedId
+
+            if (distinctIpByLinkedId == null)
+            {
+                throw new InvalidDataException("distinctIpByLinkedId is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.DistinctIpByLinkedId = distinctIpByLinkedId;
+            }
+            // to ensure "distinctVisitorIdByLinkedId" is required (not null)
+            // swagger debug: Velocity DistinctVisitorIdByLinkedId
+
+            if (distinctVisitorIdByLinkedId == null)
+            {
+                throw new InvalidDataException("distinctVisitorIdByLinkedId is a required property for Velocity and cannot be null");
+            }
+            else
+            {
+                this.DistinctVisitorIdByLinkedId = distinctVisitorIdByLinkedId;
+            }
         }
-        
-                    /// <summary>
-                        /// Gets or Sets DistinctIp
-                        /// </summary>
-                    [DataMember(Name="distinctIp", EmitDefaultValue=false)]
-                    [JsonPropertyName("distinctIp")]
-                    public VelocityData DistinctIp { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets DistinctLinkedId
-                        /// </summary>
-                    [DataMember(Name="distinctLinkedId", EmitDefaultValue=false)]
-                    [JsonPropertyName("distinctLinkedId")]
-                    public VelocityData DistinctLinkedId { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets DistinctCountry
-                        /// </summary>
-                    [DataMember(Name="distinctCountry", EmitDefaultValue=false)]
-                    [JsonPropertyName("distinctCountry")]
-                    public VelocityData DistinctCountry { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Events
-                        /// </summary>
-                    [DataMember(Name="events", EmitDefaultValue=false)]
-                    [JsonPropertyName("events")]
-                    public VelocityData Events { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets IpEvents
-                        /// </summary>
-                    [DataMember(Name="ipEvents", EmitDefaultValue=false)]
-                    [JsonPropertyName("ipEvents")]
-                    public VelocityData IpEvents { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets DistinctIpByLinkedId
-                        /// </summary>
-                    [DataMember(Name="distinctIpByLinkedId", EmitDefaultValue=false)]
-                    [JsonPropertyName("distinctIpByLinkedId")]
-                    public VelocityData DistinctIpByLinkedId { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets DistinctVisitorIdByLinkedId
-                        /// </summary>
-                    [DataMember(Name="distinctVisitorIdByLinkedId", EmitDefaultValue=false)]
-                    [JsonPropertyName("distinctVisitorIdByLinkedId")]
-                    public VelocityData DistinctVisitorIdByLinkedId { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets DistinctIp
+        /// </summary>
+        [DataMember(Name = "distinctIp", EmitDefaultValue = false)]
+        [JsonPropertyName("distinctIp")]
+        public VelocityData DistinctIp { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DistinctLinkedId
+        /// </summary>
+        [DataMember(Name = "distinctLinkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("distinctLinkedId")]
+        public VelocityData DistinctLinkedId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DistinctCountry
+        /// </summary>
+        [DataMember(Name = "distinctCountry", EmitDefaultValue = false)]
+        [JsonPropertyName("distinctCountry")]
+        public VelocityData DistinctCountry { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Events
+        /// </summary>
+        [DataMember(Name = "events", EmitDefaultValue = false)]
+        [JsonPropertyName("events")]
+        public VelocityData Events { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IpEvents
+        /// </summary>
+        [DataMember(Name = "ipEvents", EmitDefaultValue = false)]
+        [JsonPropertyName("ipEvents")]
+        public VelocityData IpEvents { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DistinctIpByLinkedId
+        /// </summary>
+        [DataMember(Name = "distinctIpByLinkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("distinctIpByLinkedId")]
+        public VelocityData DistinctIpByLinkedId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DistinctVisitorIdByLinkedId
+        /// </summary>
+        [DataMember(Name = "distinctVisitorIdByLinkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("distinctVisitorIdByLinkedId")]
+        public VelocityData DistinctVisitorIdByLinkedId { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Velocity {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Velocity {\n");
             sb.Append("  DistinctIp: ").Append(DistinctIp).Append("\n");
             sb.Append("  DistinctLinkedId: ").Append(DistinctLinkedId).Append("\n");
             sb.Append("  DistinctCountry: ").Append(DistinctCountry).Append("\n");
@@ -178,93 +178,93 @@ using FingerprintPro.ServerSdk.Json;
             sb.Append("  IpEvents: ").Append(IpEvents).Append("\n");
             sb.Append("  DistinctIpByLinkedId: ").Append(DistinctIpByLinkedId).Append("\n");
             sb.Append("  DistinctVisitorIdByLinkedId: ").Append(DistinctVisitorIdByLinkedId).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Velocity instances are equal
-            /// </summary>
+        /// Returns true if Velocity instances are equal
+        /// </summary>
         /// <param name="input">Instance of Velocity to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Velocity? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.DistinctIp == input.DistinctIp ||
-            (this.DistinctIp != null &&
-            this.DistinctIp.Equals(input.DistinctIp))
-            ) && 
-            (
-            this.DistinctLinkedId == input.DistinctLinkedId ||
-            (this.DistinctLinkedId != null &&
-            this.DistinctLinkedId.Equals(input.DistinctLinkedId))
-            ) && 
-            (
-            this.DistinctCountry == input.DistinctCountry ||
-            (this.DistinctCountry != null &&
-            this.DistinctCountry.Equals(input.DistinctCountry))
-            ) && 
-            (
-            this.Events == input.Events ||
-            (this.Events != null &&
-            this.Events.Equals(input.Events))
-            ) && 
-            (
-            this.IpEvents == input.IpEvents ||
-            (this.IpEvents != null &&
-            this.IpEvents.Equals(input.IpEvents))
-            ) && 
-            (
-            this.DistinctIpByLinkedId == input.DistinctIpByLinkedId ||
-            (this.DistinctIpByLinkedId != null &&
-            this.DistinctIpByLinkedId.Equals(input.DistinctIpByLinkedId))
-            ) && 
-            (
-            this.DistinctVisitorIdByLinkedId == input.DistinctVisitorIdByLinkedId ||
-            (this.DistinctVisitorIdByLinkedId != null &&
-            this.DistinctVisitorIdByLinkedId.Equals(input.DistinctVisitorIdByLinkedId))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.DistinctIp == input.DistinctIp ||
+                (this.DistinctIp != null &&
+                this.DistinctIp.Equals(input.DistinctIp))
+                ) &&
+                (
+                this.DistinctLinkedId == input.DistinctLinkedId ||
+                (this.DistinctLinkedId != null &&
+                this.DistinctLinkedId.Equals(input.DistinctLinkedId))
+                ) &&
+                (
+                this.DistinctCountry == input.DistinctCountry ||
+                (this.DistinctCountry != null &&
+                this.DistinctCountry.Equals(input.DistinctCountry))
+                ) &&
+                (
+                this.Events == input.Events ||
+                (this.Events != null &&
+                this.Events.Equals(input.Events))
+                ) &&
+                (
+                this.IpEvents == input.IpEvents ||
+                (this.IpEvents != null &&
+                this.IpEvents.Equals(input.IpEvents))
+                ) &&
+                (
+                this.DistinctIpByLinkedId == input.DistinctIpByLinkedId ||
+                (this.DistinctIpByLinkedId != null &&
+                this.DistinctIpByLinkedId.Equals(input.DistinctIpByLinkedId))
+                ) &&
+                (
+                this.DistinctVisitorIdByLinkedId == input.DistinctVisitorIdByLinkedId ||
+                (this.DistinctVisitorIdByLinkedId != null &&
+                this.DistinctVisitorIdByLinkedId.Equals(input.DistinctVisitorIdByLinkedId))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.DistinctIp != null)
-            hashCode = hashCode * 59 + this.DistinctIp.GetHashCode();
-            if (this.DistinctLinkedId != null)
-            hashCode = hashCode * 59 + this.DistinctLinkedId.GetHashCode();
-            if (this.DistinctCountry != null)
-            hashCode = hashCode * 59 + this.DistinctCountry.GetHashCode();
-            if (this.Events != null)
-            hashCode = hashCode * 59 + this.Events.GetHashCode();
-            if (this.IpEvents != null)
-            hashCode = hashCode * 59 + this.IpEvents.GetHashCode();
-            if (this.DistinctIpByLinkedId != null)
-            hashCode = hashCode * 59 + this.DistinctIpByLinkedId.GetHashCode();
-            if (this.DistinctVisitorIdByLinkedId != null)
-            hashCode = hashCode * 59 + this.DistinctVisitorIdByLinkedId.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.DistinctIp != null)
+                    hashCode = hashCode * 59 + this.DistinctIp.GetHashCode();
+                if (this.DistinctLinkedId != null)
+                    hashCode = hashCode * 59 + this.DistinctLinkedId.GetHashCode();
+                if (this.DistinctCountry != null)
+                    hashCode = hashCode * 59 + this.DistinctCountry.GetHashCode();
+                if (this.Events != null)
+                    hashCode = hashCode * 59 + this.Events.GetHashCode();
+                if (this.IpEvents != null)
+                    hashCode = hashCode * 59 + this.IpEvents.GetHashCode();
+                if (this.DistinctIpByLinkedId != null)
+                    hashCode = hashCode * 59 + this.DistinctIpByLinkedId.GetHashCode();
+                if (this.DistinctVisitorIdByLinkedId != null)
+                    hashCode = hashCode * 59 + this.DistinctVisitorIdByLinkedId.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

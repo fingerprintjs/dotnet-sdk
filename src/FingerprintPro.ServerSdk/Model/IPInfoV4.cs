@@ -13,157 +13,157 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// IPInfoV4
+    /// </summary>
+    [DataContract]
+    public class IPInfoV4 : IEquatable<IPInfoV4>
+    {
+
+
         /// <summary>
-            /// IPInfoV4
-            /// </summary>
-        [DataContract]
-                public class IPInfoV4 :  IEquatable<IPInfoV4>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="IPInfoV4" /> class.
-            /// </summary>
-                /// <param name="address">address (required).</param>
-                /// <param name="geolocation">geolocation (required).</param>
-                /// <param name="asn">asn.</param>
-                /// <param name="datacenter">datacenter.</param>
+        /// Initializes a new instance of the <see cref="IPInfoV4" /> class.
+        /// </summary>
+        /// <param name="address">address (required).</param>
+        /// <param name="geolocation">geolocation (required).</param>
+        /// <param name="asn">asn.</param>
+        /// <param name="datacenter">datacenter.</param>
         public IPInfoV4(string address = default(string), Geolocation geolocation = default(Geolocation), IPInfoASN asn = default(IPInfoASN), IPInfoDataCenter datacenter = default(IPInfoDataCenter))
         {
-                            // to ensure "address" is required (not null)
-                            // swagger debug: IPInfoV4 Address
-        
-                            if (address == null)
-                            {
-                            throw new InvalidDataException("address is a required property for IPInfoV4 and cannot be null");
-                            }
-                            else
-                            {
-                            this.Address = address;
-                            }
-                            // to ensure "geolocation" is required (not null)
-                            // swagger debug: IPInfoV4 Geolocation
-        
-                            if (geolocation == null)
-                            {
-                            throw new InvalidDataException("geolocation is a required property for IPInfoV4 and cannot be null");
-                            }
-                            else
-                            {
-                            this.Geolocation = geolocation;
-                            }
-                                                    this.Asn = asn;
-                                                    this.Datacenter = datacenter;
+            // to ensure "address" is required (not null)
+            // swagger debug: IPInfoV4 Address
+
+            if (address == null)
+            {
+                throw new InvalidDataException("address is a required property for IPInfoV4 and cannot be null");
+            }
+            else
+            {
+                this.Address = address;
+            }
+            // to ensure "geolocation" is required (not null)
+            // swagger debug: IPInfoV4 Geolocation
+
+            if (geolocation == null)
+            {
+                throw new InvalidDataException("geolocation is a required property for IPInfoV4 and cannot be null");
+            }
+            else
+            {
+                this.Geolocation = geolocation;
+            }
+            this.Asn = asn;
+            this.Datacenter = datacenter;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Address
-                        /// </summary>
-                    [DataMember(Name="address", EmitDefaultValue=false)]
-                    [JsonPropertyName("address")]
-                    public string Address { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Geolocation
-                        /// </summary>
-                    [DataMember(Name="geolocation", EmitDefaultValue=false)]
-                    [JsonPropertyName("geolocation")]
-                    public Geolocation Geolocation { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Asn
-                        /// </summary>
-                    [DataMember(Name="asn", EmitDefaultValue=false)]
-                    [JsonPropertyName("asn")]
-                    public IPInfoASN Asn { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Datacenter
-                        /// </summary>
-                    [DataMember(Name="datacenter", EmitDefaultValue=false)]
-                    [JsonPropertyName("datacenter")]
-                    public IPInfoDataCenter Datacenter { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Address
+        /// </summary>
+        [DataMember(Name = "address", EmitDefaultValue = false)]
+        [JsonPropertyName("address")]
+        public string Address { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Geolocation
+        /// </summary>
+        [DataMember(Name = "geolocation", EmitDefaultValue = false)]
+        [JsonPropertyName("geolocation")]
+        public Geolocation Geolocation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Asn
+        /// </summary>
+        [DataMember(Name = "asn", EmitDefaultValue = false)]
+        [JsonPropertyName("asn")]
+        public IPInfoASN Asn { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Datacenter
+        /// </summary>
+        [DataMember(Name = "datacenter", EmitDefaultValue = false)]
+        [JsonPropertyName("datacenter")]
+        public IPInfoDataCenter Datacenter { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class IPInfoV4 {\n");
+            var sb = new StringBuilder();
+            sb.Append("class IPInfoV4 {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  Geolocation: ").Append(Geolocation).Append("\n");
             sb.Append("  Asn: ").Append(Asn).Append("\n");
             sb.Append("  Datacenter: ").Append(Datacenter).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if IPInfoV4 instances are equal
-            /// </summary>
+        /// Returns true if IPInfoV4 instances are equal
+        /// </summary>
         /// <param name="input">Instance of IPInfoV4 to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(IPInfoV4? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Address == input.Address ||
-            (this.Address != null &&
-            this.Address.Equals(input.Address))
-            ) && 
-            (
-            this.Geolocation == input.Geolocation ||
-            (this.Geolocation != null &&
-            this.Geolocation.Equals(input.Geolocation))
-            ) && 
-            (
-            this.Asn == input.Asn ||
-            (this.Asn != null &&
-            this.Asn.Equals(input.Asn))
-            ) && 
-            (
-            this.Datacenter == input.Datacenter ||
-            (this.Datacenter != null &&
-            this.Datacenter.Equals(input.Datacenter))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Address == input.Address ||
+                (this.Address != null &&
+                this.Address.Equals(input.Address))
+                ) &&
+                (
+                this.Geolocation == input.Geolocation ||
+                (this.Geolocation != null &&
+                this.Geolocation.Equals(input.Geolocation))
+                ) &&
+                (
+                this.Asn == input.Asn ||
+                (this.Asn != null &&
+                this.Asn.Equals(input.Asn))
+                ) &&
+                (
+                this.Datacenter == input.Datacenter ||
+                (this.Datacenter != null &&
+                this.Datacenter.Equals(input.Datacenter))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Address != null)
-            hashCode = hashCode * 59 + this.Address.GetHashCode();
-            if (this.Geolocation != null)
-            hashCode = hashCode * 59 + this.Geolocation.GetHashCode();
-            if (this.Asn != null)
-            hashCode = hashCode * 59 + this.Asn.GetHashCode();
-            if (this.Datacenter != null)
-            hashCode = hashCode * 59 + this.Datacenter.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Address != null)
+                    hashCode = hashCode * 59 + this.Address.GetHashCode();
+                if (this.Geolocation != null)
+                    hashCode = hashCode * 59 + this.Geolocation.GetHashCode();
+                if (this.Asn != null)
+                    hashCode = hashCode * 59 + this.Asn.GetHashCode();
+                if (this.Datacenter != null)
+                    hashCode = hashCode * 59 + this.Datacenter.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

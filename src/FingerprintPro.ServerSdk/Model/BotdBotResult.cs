@@ -13,28 +13,29 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
-            /// <summary>
-            /// Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
-            /// </summary>
-            /// <value>Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
-            [JsonConverter(typeof(JsonStringEnumConverter))]
-                        public enum BotdBotResult
-            {
-                /// <summary>
-                /// Enum NotDetected for value: notDetected
-                /// </summary>
-                [EnumMember(Value = "notDetected")]
-                NotDetected = 1,
-                /// <summary>
-                /// Enum Good for value: good
-                /// </summary>
-                [EnumMember(Value = "good")]
-                Good = 2,
-                /// <summary>
-                /// Enum Bad for value: bad
-                /// </summary>
-                [EnumMember(Value = "bad")]
-                Bad = 3            }
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
+    /// </summary>
+    /// <value>Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum BotdBotResult
+    {
+        /// <summary>
+        /// Enum NotDetected for value: notDetected
+        /// </summary>
+        [EnumMember(Value = "notDetected")]
+        NotDetected = 1,
+        /// <summary>
+        /// Enum Good for value: good
+        /// </summary>
+        [EnumMember(Value = "good")]
+        Good = 2,
+        /// <summary>
+        /// Enum Bad for value: bad
+        /// </summary>
+        [EnumMember(Value = "bad")]
+        Bad = 3
+    }
 }

@@ -13,142 +13,143 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookRareDevice
+    /// </summary>
+    [DataContract]
+    public class WebhookRareDevice : IEquatable<WebhookRareDevice>
+    {
         /// <summary>
-            /// WebhookRareDevice
-            /// </summary>
-        [DataContract]
-                public class WebhookRareDevice :  IEquatable<WebhookRareDevice>
+        /// The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. 
+        /// </summary>
+        /// <value>The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. </value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public enum PercentileBucketEnum
         {
-                            /// <summary>
-                            /// The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. 
-                            /// </summary>
-                            /// <value>The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. </value>
-                            [JsonConverter(typeof(JsonStringEnumConverter))]
-                                                        public enum PercentileBucketEnum
-                            {
-                                /// <summary>
-                                /// Enum P95 for value: &lt;p95
-                                /// </summary>
-                                [EnumMember(Value = "<p95")]
-                                P95 = 1,
-                                /// <summary>
-                                /// Enum P95P99 for value: p95-p99
-                                /// </summary>
-                                [EnumMember(Value = "p95-p99")]
-                                P95P99 = 2,
-                                /// <summary>
-                                /// Enum P99P995 for value: p99-p99.5
-                                /// </summary>
-                                [EnumMember(Value = "p99-p99.5")]
-                                P99P995 = 3,
-                                /// <summary>
-                                /// Enum P995P999 for value: p99.5-p99.9
-                                /// </summary>
-                                [EnumMember(Value = "p99.5-p99.9")]
-                                P995P999 = 4,
-                                /// <summary>
-                                /// Enum P999 for value: p99.9+
-                                /// </summary>
-                                [EnumMember(Value = "p99.9+")]
-                                P999 = 5,
-                                /// <summary>
-                                /// Enum Notseen for value: not_seen
-                                /// </summary>
-                                [EnumMember(Value = "not_seen")]
-                                Notseen = 6                            }
-                /// <summary>
-                    /// The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. 
-                    /// </summary>
-                    /// <value>The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. </value>
-                [DataMember(Name="percentileBucket", EmitDefaultValue=false)]
-                [JsonPropertyName("percentileBucket")]
-                public PercentileBucketEnum? PercentileBucket { get; set; }
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookRareDevice" /> class.
+            /// <summary>
+            /// Enum P95 for value: &lt;p95
             /// </summary>
-                /// <param name="result">`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
-                /// <param name="percentileBucket">The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. .</param>
+            [EnumMember(Value = "<p95")]
+            P95 = 1,
+            /// <summary>
+            /// Enum P95P99 for value: p95-p99
+            /// </summary>
+            [EnumMember(Value = "p95-p99")]
+            P95P99 = 2,
+            /// <summary>
+            /// Enum P99P995 for value: p99-p99.5
+            /// </summary>
+            [EnumMember(Value = "p99-p99.5")]
+            P99P995 = 3,
+            /// <summary>
+            /// Enum P995P999 for value: p99.5-p99.9
+            /// </summary>
+            [EnumMember(Value = "p99.5-p99.9")]
+            P995P999 = 4,
+            /// <summary>
+            /// Enum P999 for value: p99.9+
+            /// </summary>
+            [EnumMember(Value = "p99.9+")]
+            P999 = 5,
+            /// <summary>
+            /// Enum Notseen for value: not_seen
+            /// </summary>
+            [EnumMember(Value = "not_seen")]
+            Notseen = 6
+        }
+        /// <summary>
+        /// The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. 
+        /// </summary>
+        /// <value>The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. </value>
+        [DataMember(Name = "percentileBucket", EmitDefaultValue = false)]
+        [JsonPropertyName("percentileBucket")]
+        public PercentileBucketEnum? PercentileBucket { get; set; }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebhookRareDevice" /> class.
+        /// </summary>
+        /// <param name="result">`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
+        /// <param name="percentileBucket">The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices. .</param>
         public WebhookRareDevice(bool? result = default(bool?), PercentileBucketEnum? percentileBucket = default(PercentileBucketEnum?))
         {
-                                                    this.Result = result;
-                                                    this.PercentileBucket = percentileBucket;
+            this.Result = result;
+            this.PercentileBucket = percentileBucket;
         }
-        
-                    /// <summary>
-                        /// `true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
-                        /// </summary>
-                        /// <value>`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+        /// </summary>
+        /// <value>`true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookRareDevice {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookRareDevice {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  PercentileBucket: ").Append(PercentileBucket).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookRareDevice instances are equal
-            /// </summary>
+        /// Returns true if WebhookRareDevice instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookRareDevice to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookRareDevice? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            ) && 
-            (
-            this.PercentileBucket == input.PercentileBucket ||
-            (this.PercentileBucket != null &&
-            this.PercentileBucket.Equals(input.PercentileBucket))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.PercentileBucket == input.PercentileBucket ||
+                (this.PercentileBucket != null &&
+                this.PercentileBucket.Equals(input.PercentileBucket))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-            if (this.PercentileBucket != null)
-            hashCode = hashCode * 59 + this.PercentileBucket.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.PercentileBucket != null)
+                    hashCode = hashCode * 59 + this.PercentileBucket.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

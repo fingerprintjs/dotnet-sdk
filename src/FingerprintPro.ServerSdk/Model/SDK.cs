@@ -13,143 +13,143 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Contains information about the SDK used to perform the request.
+    /// </summary>
+    [DataContract]
+    public class SDK : IEquatable<SDK>
+    {
+
+
         /// <summary>
-            /// Contains information about the SDK used to perform the request.
-            /// </summary>
-        [DataContract]
-                public class SDK :  IEquatable<SDK>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="SDK" /> class.
-            /// </summary>
-                /// <param name="platform">Platform of the SDK. (required).</param>
-                /// <param name="version">SDK version string. (required).</param>
-                /// <param name="integrations">integrations.</param>
+        /// Initializes a new instance of the <see cref="SDK" /> class.
+        /// </summary>
+        /// <param name="platform">Platform of the SDK. (required).</param>
+        /// <param name="version">SDK version string. (required).</param>
+        /// <param name="integrations">integrations.</param>
         public SDK(string platform = default(string), string version = default(string), List<Integration> integrations = default(List<Integration>))
         {
-                            // to ensure "platform" is required (not null)
-                            // swagger debug: SDK Platform
-        
-                            if (platform == null)
-                            {
-                            throw new InvalidDataException("platform is a required property for SDK and cannot be null");
-                            }
-                            else
-                            {
-                            this.Platform = platform;
-                            }
-                            // to ensure "version" is required (not null)
-                            // swagger debug: SDK Version
-        
-                            if (version == null)
-                            {
-                            throw new InvalidDataException("version is a required property for SDK and cannot be null");
-                            }
-                            else
-                            {
-                            this.Version = version;
-                            }
-                                                    this.Integrations = integrations;
+            // to ensure "platform" is required (not null)
+            // swagger debug: SDK Platform
+
+            if (platform == null)
+            {
+                throw new InvalidDataException("platform is a required property for SDK and cannot be null");
+            }
+            else
+            {
+                this.Platform = platform;
+            }
+            // to ensure "version" is required (not null)
+            // swagger debug: SDK Version
+
+            if (version == null)
+            {
+                throw new InvalidDataException("version is a required property for SDK and cannot be null");
+            }
+            else
+            {
+                this.Version = version;
+            }
+            this.Integrations = integrations;
         }
-        
-                    /// <summary>
-                        /// Platform of the SDK.
-                        /// </summary>
-                        /// <value>Platform of the SDK.</value>
-                    [DataMember(Name="platform", EmitDefaultValue=false)]
-                    [JsonPropertyName("platform")]
-                    public string Platform { get; set; }
-        
-                    /// <summary>
-                        /// SDK version string.
-                        /// </summary>
-                        /// <value>SDK version string.</value>
-                    [DataMember(Name="version", EmitDefaultValue=false)]
-                    [JsonPropertyName("version")]
-                    public string Version { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Integrations
-                        /// </summary>
-                    [DataMember(Name="integrations", EmitDefaultValue=false)]
-                    [JsonPropertyName("integrations")]
-                    public List<Integration> Integrations { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Platform of the SDK.
+        /// </summary>
+        /// <value>Platform of the SDK.</value>
+        [DataMember(Name = "platform", EmitDefaultValue = false)]
+        [JsonPropertyName("platform")]
+        public string Platform { get; set; }
+
+        /// <summary>
+        /// SDK version string.
+        /// </summary>
+        /// <value>SDK version string.</value>
+        [DataMember(Name = "version", EmitDefaultValue = false)]
+        [JsonPropertyName("version")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Integrations
+        /// </summary>
+        [DataMember(Name = "integrations", EmitDefaultValue = false)]
+        [JsonPropertyName("integrations")]
+        public List<Integration> Integrations { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class SDK {\n");
+            var sb = new StringBuilder();
+            sb.Append("class SDK {\n");
             sb.Append("  Platform: ").Append(Platform).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("  Integrations: ").Append(Integrations).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if SDK instances are equal
-            /// </summary>
+        /// Returns true if SDK instances are equal
+        /// </summary>
         /// <param name="input">Instance of SDK to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(SDK? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Platform == input.Platform ||
-            (this.Platform != null &&
-            this.Platform.Equals(input.Platform))
-            ) && 
-            (
-            this.Version == input.Version ||
-            (this.Version != null &&
-            this.Version.Equals(input.Version))
-            ) && 
-            (
-            this.Integrations == input.Integrations ||
-            this.Integrations != null &&
-            input.Integrations != null &&
-            this.Integrations.SequenceEqual(input.Integrations)
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Platform == input.Platform ||
+                (this.Platform != null &&
+                this.Platform.Equals(input.Platform))
+                ) &&
+                (
+                this.Version == input.Version ||
+                (this.Version != null &&
+                this.Version.Equals(input.Version))
+                ) &&
+                (
+                this.Integrations == input.Integrations ||
+                this.Integrations != null &&
+                input.Integrations != null &&
+                this.Integrations.SequenceEqual(input.Integrations)
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Platform != null)
-            hashCode = hashCode * 59 + this.Platform.GetHashCode();
-            if (this.Version != null)
-            hashCode = hashCode * 59 + this.Version.GetHashCode();
-            if (this.Integrations != null)
-            hashCode = hashCode * 59 + this.Integrations.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Platform != null)
+                    hashCode = hashCode * 59 + this.Platform.GetHashCode();
+                if (this.Version != null)
+                    hashCode = hashCode * 59 + this.Version.GetHashCode();
+                if (this.Integrations != null)
+                    hashCode = hashCode * 59 + this.Integrations.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

@@ -13,105 +13,105 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookFactoryReset
+    /// </summary>
+    [DataContract]
+    public class WebhookFactoryReset : IEquatable<WebhookFactoryReset>
+    {
+
+
         /// <summary>
-            /// WebhookFactoryReset
-            /// </summary>
-        [DataContract]
-                public class WebhookFactoryReset :  IEquatable<WebhookFactoryReset>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookFactoryReset" /> class.
-            /// </summary>
-                /// <param name="time">Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. .</param>
-                /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. .</param>
+        /// Initializes a new instance of the <see cref="WebhookFactoryReset" /> class.
+        /// </summary>
+        /// <param name="time">Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. .</param>
+        /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. .</param>
         public WebhookFactoryReset(DateTime? time = default(DateTime?), long? timestamp = default(long?))
         {
-                                                    this.Time = time;
-                                                    this.Timestamp = timestamp;
+            this.Time = time;
+            this.Timestamp = timestamp;
         }
-        
-                    /// <summary>
-                        /// Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. 
-                        /// </summary>
-                        /// <value>Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. </value>
-                    [DataMember(Name="time", EmitDefaultValue=false)]
-                    [JsonPropertyName("time")]
-                    public DateTime? Time { get; set; }
-        
-                    /// <summary>
-                        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. 
-                        /// </summary>
-                        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. </value>
-                    [DataMember(Name="timestamp", EmitDefaultValue=false)]
-                    [JsonPropertyName("timestamp")]
-                    public long? Timestamp { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. 
+        /// </summary>
+        /// <value>Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. </value>
+        [DataMember(Name = "time", EmitDefaultValue = false)]
+        [JsonPropertyName("time")]
+        public DateTime? Time { get; set; }
+
+        /// <summary>
+        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. 
+        /// </summary>
+        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. </value>
+        [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+        [JsonPropertyName("timestamp")]
+        public long? Timestamp { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookFactoryReset {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookFactoryReset {\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookFactoryReset instances are equal
-            /// </summary>
+        /// Returns true if WebhookFactoryReset instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookFactoryReset to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookFactoryReset? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Time == input.Time ||
-            (this.Time != null &&
-            this.Time.Equals(input.Time))
-            ) && 
-            (
-            this.Timestamp == input.Timestamp ||
-            (this.Timestamp != null &&
-            this.Timestamp.Equals(input.Timestamp))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Time == input.Time ||
+                (this.Time != null &&
+                this.Time.Equals(input.Time))
+                ) &&
+                (
+                this.Timestamp == input.Timestamp ||
+                (this.Timestamp != null &&
+                this.Timestamp.Equals(input.Timestamp))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Time != null)
-            hashCode = hashCode * 59 + this.Time.GetHashCode();
-            if (this.Timestamp != null)
-            hashCode = hashCode * 59 + this.Timestamp.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Time != null)
+                    hashCode = hashCode * 59 + this.Time.GetHashCode();
+                if (this.Timestamp != null)
+                    hashCode = hashCode * 59 + this.Timestamp.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

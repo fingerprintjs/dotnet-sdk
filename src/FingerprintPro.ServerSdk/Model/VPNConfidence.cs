@@ -13,28 +13,29 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
-            /// <summary>
-            /// A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.
-            /// </summary>
-            /// <value>A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.</value>
-            [JsonConverter(typeof(JsonStringEnumConverter))]
-                        public enum VPNConfidence
-            {
-                /// <summary>
-                /// Enum Low for value: low
-                /// </summary>
-                [EnumMember(Value = "low")]
-                Low = 1,
-                /// <summary>
-                /// Enum Medium for value: medium
-                /// </summary>
-                [EnumMember(Value = "medium")]
-                Medium = 2,
-                /// <summary>
-                /// Enum High for value: high
-                /// </summary>
-                [EnumMember(Value = "high")]
-                High = 3            }
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.
+    /// </summary>
+    /// <value>A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.</value>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum VPNConfidence
+    {
+        /// <summary>
+        /// Enum Low for value: low
+        /// </summary>
+        [EnumMember(Value = "low")]
+        Low = 1,
+        /// <summary>
+        /// Enum Medium for value: medium
+        /// </summary>
+        [EnumMember(Value = "medium")]
+        Medium = 2,
+        /// <summary>
+        /// Enum High for value: high
+        /// </summary>
+        [EnumMember(Value = "high")]
+        High = 3
+    }
 }

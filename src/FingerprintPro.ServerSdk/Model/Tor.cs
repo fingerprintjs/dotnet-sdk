@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Tor
+    /// </summary>
+    [DataContract]
+    public class Tor : IEquatable<Tor>
+    {
+
+
         /// <summary>
-            /// Tor
-            /// </summary>
-        [DataContract]
-                public class Tor :  IEquatable<Tor>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Tor" /> class.
-            /// </summary>
-                /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise.  (required).</param>
+        /// Initializes a new instance of the <see cref="Tor" /> class.
+        /// </summary>
+        /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise.  (required).</param>
         public Tor(bool? result = default(bool?))
         {
-                            // to ensure "result" is required (not null)
-                            // swagger debug: Tor Result
-        
-                            if (result == null)
-                            {
-                            throw new InvalidDataException("result is a required property for Tor and cannot be null");
-                            }
-                            else
-                            {
-                            this.Result = result;
-                            }
+            // to ensure "result" is required (not null)
+            // swagger debug: Tor Result
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for Tor and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
-        
-                    /// <summary>
-                        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
-                        /// </summary>
-                        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
+        /// </summary>
+        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Tor {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Tor {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Tor instances are equal
-            /// </summary>
+        /// Returns true if Tor instances are equal
+        /// </summary>
         /// <param name="input">Instance of Tor to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Tor? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

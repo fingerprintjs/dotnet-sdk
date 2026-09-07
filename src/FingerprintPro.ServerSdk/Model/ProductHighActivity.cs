@@ -13,103 +13,103 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// ProductHighActivity
+    /// </summary>
+    [DataContract]
+    public class ProductHighActivity : IEquatable<ProductHighActivity>
+    {
+
+
         /// <summary>
-            /// ProductHighActivity
-            /// </summary>
-        [DataContract]
-                public class ProductHighActivity :  IEquatable<ProductHighActivity>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="ProductHighActivity" /> class.
-            /// </summary>
-                /// <param name="data">data.</param>
-                /// <param name="error">error.</param>
+        /// Initializes a new instance of the <see cref="ProductHighActivity" /> class.
+        /// </summary>
+        /// <param name="data">data.</param>
+        /// <param name="error">error.</param>
         public ProductHighActivity(HighActivity data = default(HighActivity), Error error = default(Error))
         {
-                                                    this.Data = data;
-                                                    this.Error = error;
+            this.Data = data;
+            this.Error = error;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Data
-                        /// </summary>
-                    [DataMember(Name="data", EmitDefaultValue=false)]
-                    [JsonPropertyName("data")]
-                    public HighActivity Data { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Error
-                        /// </summary>
-                    [DataMember(Name="error", EmitDefaultValue=false)]
-                    [JsonPropertyName("error")]
-                    public Error Error { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Data
+        /// </summary>
+        [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
+        public HighActivity Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
+        public Error Error { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class ProductHighActivity {\n");
+            var sb = new StringBuilder();
+            sb.Append("class ProductHighActivity {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if ProductHighActivity instances are equal
-            /// </summary>
+        /// Returns true if ProductHighActivity instances are equal
+        /// </summary>
         /// <param name="input">Instance of ProductHighActivity to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(ProductHighActivity? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Data == input.Data ||
-            (this.Data != null &&
-            this.Data.Equals(input.Data))
-            ) && 
-            (
-            this.Error == input.Error ||
-            (this.Error != null &&
-            this.Error.Equals(input.Error))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Data == input.Data ||
+                (this.Data != null &&
+                this.Data.Equals(input.Data))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Data != null)
-            hashCode = hashCode * 59 + this.Data.GetHashCode();
-            if (this.Error != null)
-            hashCode = hashCode * 59 + this.Error.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Data != null)
+                    hashCode = hashCode * 59 + this.Data.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

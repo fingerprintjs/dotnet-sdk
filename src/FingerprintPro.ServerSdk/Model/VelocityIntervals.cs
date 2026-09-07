@@ -13,141 +13,141 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Is absent if the velocity data could not be generated for the visitor ID. 
+    /// </summary>
+    [DataContract]
+    public class VelocityIntervals : IEquatable<VelocityIntervals>
+    {
+
+
         /// <summary>
-            /// Is absent if the velocity data could not be generated for the visitor ID. 
-            /// </summary>
-        [DataContract]
-                public class VelocityIntervals :  IEquatable<VelocityIntervals>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="VelocityIntervals" /> class.
-            /// </summary>
-                /// <param name="_5m">_5m (required).</param>
-                /// <param name="_1h">_1h (required).</param>
-                /// <param name="_24h">The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted if the number of `events`` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. .</param>
+        /// Initializes a new instance of the <see cref="VelocityIntervals" /> class.
+        /// </summary>
+        /// <param name="_5m">_5m (required).</param>
+        /// <param name="_1h">_1h (required).</param>
+        /// <param name="_24h">The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted if the number of `events`` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. .</param>
         public VelocityIntervals(int? _5m = default(int?), int? _1h = default(int?), int? _24h = default(int?))
         {
-                            // to ensure "_5m" is required (not null)
-                            // swagger debug: VelocityIntervals _5m
-        
-                            if (_5m == null)
-                            {
-                            throw new InvalidDataException("_5m is a required property for VelocityIntervals and cannot be null");
-                            }
-                            else
-                            {
-                            this._5m = _5m;
-                            }
-                            // to ensure "_1h" is required (not null)
-                            // swagger debug: VelocityIntervals _1h
-        
-                            if (_1h == null)
-                            {
-                            throw new InvalidDataException("_1h is a required property for VelocityIntervals and cannot be null");
-                            }
-                            else
-                            {
-                            this._1h = _1h;
-                            }
-                                                    this._24h = _24h;
+            // to ensure "_5m" is required (not null)
+            // swagger debug: VelocityIntervals _5m
+
+            if (_5m == null)
+            {
+                throw new InvalidDataException("_5m is a required property for VelocityIntervals and cannot be null");
+            }
+            else
+            {
+                this._5m = _5m;
+            }
+            // to ensure "_1h" is required (not null)
+            // swagger debug: VelocityIntervals _1h
+
+            if (_1h == null)
+            {
+                throw new InvalidDataException("_1h is a required property for VelocityIntervals and cannot be null");
+            }
+            else
+            {
+                this._1h = _1h;
+            }
+            this._24h = _24h;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets _5m
-                        /// </summary>
-                    [DataMember(Name="5m", EmitDefaultValue=false)]
-                    [JsonPropertyName("5m")]
-                    public int? _5m { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets _1h
-                        /// </summary>
-                    [DataMember(Name="1h", EmitDefaultValue=false)]
-                    [JsonPropertyName("1h")]
-                    public int? _1h { get; set; }
-        
-                    /// <summary>
-                        /// The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted if the number of `events`` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. 
-                        /// </summary>
-                        /// <value>The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted if the number of `events`` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. </value>
-                    [DataMember(Name="24h", EmitDefaultValue=false)]
-                    [JsonPropertyName("24h")]
-                    public int? _24h { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets _5m
+        /// </summary>
+        [DataMember(Name = "5m", EmitDefaultValue = false)]
+        [JsonPropertyName("5m")]
+        public int? _5m { get; set; }
+
+        /// <summary>
+        /// Gets or Sets _1h
+        /// </summary>
+        [DataMember(Name = "1h", EmitDefaultValue = false)]
+        [JsonPropertyName("1h")]
+        public int? _1h { get; set; }
+
+        /// <summary>
+        /// The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted if the number of `events`` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. 
+        /// </summary>
+        /// <value>The `24h` interval of `distinctIp`, `distinctLinkedId`, `distinctCountry`, `distinctIpByLinkedId` and `distinctVisitorIdByLinkedId` will be omitted if the number of `events`` for the visitor ID in the last 24 hours (`events.intervals.['24h']`) is higher than 20.000. </value>
+        [DataMember(Name = "24h", EmitDefaultValue = false)]
+        [JsonPropertyName("24h")]
+        public int? _24h { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class VelocityIntervals {\n");
+            var sb = new StringBuilder();
+            sb.Append("class VelocityIntervals {\n");
             sb.Append("  _5m: ").Append(_5m).Append("\n");
             sb.Append("  _1h: ").Append(_1h).Append("\n");
             sb.Append("  _24h: ").Append(_24h).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if VelocityIntervals instances are equal
-            /// </summary>
+        /// Returns true if VelocityIntervals instances are equal
+        /// </summary>
         /// <param name="input">Instance of VelocityIntervals to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(VelocityIntervals? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this._5m == input._5m ||
-            (this._5m != null &&
-            this._5m.Equals(input._5m))
-            ) && 
-            (
-            this._1h == input._1h ||
-            (this._1h != null &&
-            this._1h.Equals(input._1h))
-            ) && 
-            (
-            this._24h == input._24h ||
-            (this._24h != null &&
-            this._24h.Equals(input._24h))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this._5m == input._5m ||
+                (this._5m != null &&
+                this._5m.Equals(input._5m))
+                ) &&
+                (
+                this._1h == input._1h ||
+                (this._1h != null &&
+                this._1h.Equals(input._1h))
+                ) &&
+                (
+                this._24h == input._24h ||
+                (this._24h != null &&
+                this._24h.Equals(input._24h))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this._5m != null)
-            hashCode = hashCode * 59 + this._5m.GetHashCode();
-            if (this._1h != null)
-            hashCode = hashCode * 59 + this._1h.GetHashCode();
-            if (this._24h != null)
-            hashCode = hashCode * 59 + this._24h.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this._5m != null)
+                    hashCode = hashCode * 59 + this._5m.GetHashCode();
+                if (this._1h != null)
+                    hashCode = hashCode * 59 + this._1h.GetHashCode();
+                if (this._24h != null)
+                    hashCode = hashCode * 59 + this._24h.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

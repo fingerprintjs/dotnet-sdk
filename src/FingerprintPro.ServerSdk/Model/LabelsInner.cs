@@ -13,130 +13,130 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// LabelsInner
+    /// </summary>
+    [DataContract]
+    public class LabelsInner : IEquatable<LabelsInner>
+    {
+
+
         /// <summary>
-            /// LabelsInner
-            /// </summary>
-        [DataContract]
-                public class LabelsInner :  IEquatable<LabelsInner>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="LabelsInner" /> class.
-            /// </summary>
-                /// <param name="label">label (required).</param>
-                /// <param name="prediction">prediction.</param>
-                /// <param name="mlScore">mlScore.</param>
+        /// Initializes a new instance of the <see cref="LabelsInner" /> class.
+        /// </summary>
+        /// <param name="label">label (required).</param>
+        /// <param name="prediction">prediction.</param>
+        /// <param name="mlScore">mlScore.</param>
         public LabelsInner(string label = default(string), bool? prediction = default(bool?), double? mlScore = default(double?))
         {
-                            // to ensure "label" is required (not null)
-                            // swagger debug: LabelsInner Label
-        
-                            if (label == null)
-                            {
-                            throw new InvalidDataException("label is a required property for LabelsInner and cannot be null");
-                            }
-                            else
-                            {
-                            this.Label = label;
-                            }
-                                                    this.Prediction = prediction;
-                                                    this.MlScore = mlScore;
+            // to ensure "label" is required (not null)
+            // swagger debug: LabelsInner Label
+
+            if (label == null)
+            {
+                throw new InvalidDataException("label is a required property for LabelsInner and cannot be null");
+            }
+            else
+            {
+                this.Label = label;
+            }
+            this.Prediction = prediction;
+            this.MlScore = mlScore;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Label
-                        /// </summary>
-                    [DataMember(Name="label", EmitDefaultValue=false)]
-                    [JsonPropertyName("label")]
-                    public string Label { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Prediction
-                        /// </summary>
-                    [DataMember(Name="prediction", EmitDefaultValue=false)]
-                    [JsonPropertyName("prediction")]
-                    public bool? Prediction { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets MlScore
-                        /// </summary>
-                    [DataMember(Name="mlScore", EmitDefaultValue=false)]
-                    [JsonPropertyName("mlScore")]
-                    public double? MlScore { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Label
+        /// </summary>
+        [DataMember(Name = "label", EmitDefaultValue = false)]
+        [JsonPropertyName("label")]
+        public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Prediction
+        /// </summary>
+        [DataMember(Name = "prediction", EmitDefaultValue = false)]
+        [JsonPropertyName("prediction")]
+        public bool? Prediction { get; set; }
+
+        /// <summary>
+        /// Gets or Sets MlScore
+        /// </summary>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class LabelsInner {\n");
+            var sb = new StringBuilder();
+            sb.Append("class LabelsInner {\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Prediction: ").Append(Prediction).Append("\n");
             sb.Append("  MlScore: ").Append(MlScore).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if LabelsInner instances are equal
-            /// </summary>
+        /// Returns true if LabelsInner instances are equal
+        /// </summary>
         /// <param name="input">Instance of LabelsInner to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(LabelsInner? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Label == input.Label ||
-            (this.Label != null &&
-            this.Label.Equals(input.Label))
-            ) && 
-            (
-            this.Prediction == input.Prediction ||
-            (this.Prediction != null &&
-            this.Prediction.Equals(input.Prediction))
-            ) && 
-            (
-            this.MlScore == input.MlScore ||
-            (this.MlScore != null &&
-            this.MlScore.Equals(input.MlScore))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Label == input.Label ||
+                (this.Label != null &&
+                this.Label.Equals(input.Label))
+                ) &&
+                (
+                this.Prediction == input.Prediction ||
+                (this.Prediction != null &&
+                this.Prediction.Equals(input.Prediction))
+                ) &&
+                (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Label != null)
-            hashCode = hashCode * 59 + this.Label.GetHashCode();
-            if (this.Prediction != null)
-            hashCode = hashCode * 59 + this.Prediction.GetHashCode();
-            if (this.MlScore != null)
-            hashCode = hashCode * 59 + this.MlScore.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Label != null)
+                    hashCode = hashCode * 59 + this.Label.GetHashCode();
+                if (this.Prediction != null)
+                    hashCode = hashCode * 59 + this.Prediction.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

@@ -13,70 +13,70 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+    /// </summary>
+    [DataContract]
+    public class Labels : List<LabelsInner>, IEquatable<Labels>
+    {
+
+
         /// <summary>
-            /// Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
-            /// </summary>
-        [DataContract]
-                public class Labels : List<LabelsInner>,  IEquatable<Labels>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Labels" /> class.
-            /// </summary>
+        /// Initializes a new instance of the <see cref="Labels" /> class.
+        /// </summary>
         public Labels() : base()
         {
         }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Labels {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Labels {\n");
             sb.Append("  ").Append(base.ToString()!.Replace("\n", "\n  ")).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Labels instances are equal
-            /// </summary>
+        /// Returns true if Labels instances are equal
+        /// </summary>
         /// <param name="input">Instance of Labels to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Labels? input)
         {
-        if (input == null)
-        return false;
-        
-        return base.Equals(input);
+            if (input == null)
+                return false;
+
+            return base.Equals(input);
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = base.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = base.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

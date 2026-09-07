@@ -13,105 +13,105 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookVirtualMachine
+    /// </summary>
+    [DataContract]
+    public class WebhookVirtualMachine : IEquatable<WebhookVirtualMachine>
+    {
+
+
         /// <summary>
-            /// WebhookVirtualMachine
-            /// </summary>
-        [DataContract]
-                public class WebhookVirtualMachine :  IEquatable<WebhookVirtualMachine>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookVirtualMachine" /> class.
-            /// </summary>
-                /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
-                /// <param name="mlScore">Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result .</param>
+        /// Initializes a new instance of the <see cref="WebhookVirtualMachine" /> class.
+        /// </summary>
+        /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
+        /// <param name="mlScore">Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result .</param>
         public WebhookVirtualMachine(bool? result = default(bool?), double? mlScore = default(double?))
         {
-                                                    this.Result = result;
-                                                    this.MlScore = mlScore;
+            this.Result = result;
+            this.MlScore = mlScore;
         }
-        
-                    /// <summary>
-                        /// `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
-                        /// </summary>
-                        /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
-                    /// <summary>
-                        /// Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result 
-                        /// </summary>
-                        /// <value>Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result </value>
-                    [DataMember(Name="mlScore", EmitDefaultValue=false)]
-                    [JsonPropertyName("mlScore")]
-                    public double? MlScore { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
+        /// </summary>
+        /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result 
+        /// </summary>
+        /// <value>Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result </value>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookVirtualMachine {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookVirtualMachine {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  MlScore: ").Append(MlScore).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookVirtualMachine instances are equal
-            /// </summary>
+        /// Returns true if WebhookVirtualMachine instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookVirtualMachine to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookVirtualMachine? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            ) && 
-            (
-            this.MlScore == input.MlScore ||
-            (this.MlScore != null &&
-            this.MlScore.Equals(input.MlScore))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-            if (this.MlScore != null)
-            hashCode = hashCode * 59 + this.MlScore.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

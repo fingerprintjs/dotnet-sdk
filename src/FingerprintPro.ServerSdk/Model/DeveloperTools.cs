@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// DeveloperTools
+    /// </summary>
+    [DataContract]
+    public class DeveloperTools : IEquatable<DeveloperTools>
+    {
+
+
         /// <summary>
-            /// DeveloperTools
-            /// </summary>
-        [DataContract]
-                public class DeveloperTools :  IEquatable<DeveloperTools>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="DeveloperTools" /> class.
-            /// </summary>
-                /// <param name="result">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  (required).</param>
+        /// Initializes a new instance of the <see cref="DeveloperTools" /> class.
+        /// </summary>
+        /// <param name="result">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  (required).</param>
         public DeveloperTools(bool? result = default(bool?))
         {
-                            // to ensure "result" is required (not null)
-                            // swagger debug: DeveloperTools Result
-        
-                            if (result == null)
-                            {
-                            throw new InvalidDataException("result is a required property for DeveloperTools and cannot be null");
-                            }
-                            else
-                            {
-                            this.Result = result;
-                            }
+            // to ensure "result" is required (not null)
+            // swagger debug: DeveloperTools Result
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for DeveloperTools and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
-        
-                    /// <summary>
-                        /// `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. 
-                        /// </summary>
-                        /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. 
+        /// </summary>
+        /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class DeveloperTools {\n");
+            var sb = new StringBuilder();
+            sb.Append("class DeveloperTools {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if DeveloperTools instances are equal
-            /// </summary>
+        /// Returns true if DeveloperTools instances are equal
+        /// </summary>
         /// <param name="input">Instance of DeveloperTools to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(DeveloperTools? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

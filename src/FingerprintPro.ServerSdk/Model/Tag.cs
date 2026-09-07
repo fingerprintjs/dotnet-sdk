@@ -13,70 +13,70 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// A customer-provided value or an object that was sent with identification request.
+    /// </summary>
+    [DataContract]
+    public class Tag : DictionaryModel<String, Object>, IEquatable<Tag>
+    {
+
+
         /// <summary>
-            /// A customer-provided value or an object that was sent with identification request.
-            /// </summary>
-        [DataContract]
-                public class Tag : DictionaryModel<String, Object>,  IEquatable<Tag>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Tag" /> class.
-            /// </summary>
+        /// Initializes a new instance of the <see cref="Tag" /> class.
+        /// </summary>
         public Tag() : base()
         {
         }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Tag {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Tag {\n");
             sb.Append("  ").Append(base.ToString()!.Replace("\n", "\n  ")).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Tag instances are equal
-            /// </summary>
+        /// Returns true if Tag instances are equal
+        /// </summary>
         /// <param name="input">Instance of Tag to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Tag? input)
         {
-        if (input == null)
-        return false;
-        
-        return base.Equals(input);
+            if (input == null)
+                return false;
+
+            return base.Equals(input);
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = base.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = base.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

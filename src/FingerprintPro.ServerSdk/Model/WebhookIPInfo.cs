@@ -13,103 +13,103 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Details about the request IP address. Has separate fields for v4 and v6 IP address versions.
+    /// </summary>
+    [DataContract]
+    public class WebhookIPInfo : IEquatable<WebhookIPInfo>
+    {
+
+
         /// <summary>
-            /// Details about the request IP address. Has separate fields for v4 and v6 IP address versions.
-            /// </summary>
-        [DataContract]
-                public class WebhookIPInfo :  IEquatable<WebhookIPInfo>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookIPInfo" /> class.
-            /// </summary>
-                /// <param name="v4">v4.</param>
-                /// <param name="v6">v6.</param>
+        /// Initializes a new instance of the <see cref="WebhookIPInfo" /> class.
+        /// </summary>
+        /// <param name="v4">v4.</param>
+        /// <param name="v6">v6.</param>
         public WebhookIPInfo(IPInfoV4 v4 = default(IPInfoV4), IPInfoV6 v6 = default(IPInfoV6))
         {
-                                                    this.V4 = v4;
-                                                    this.V6 = v6;
+            this.V4 = v4;
+            this.V6 = v6;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets V4
-                        /// </summary>
-                    [DataMember(Name="v4", EmitDefaultValue=false)]
-                    [JsonPropertyName("v4")]
-                    public IPInfoV4 V4 { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets V6
-                        /// </summary>
-                    [DataMember(Name="v6", EmitDefaultValue=false)]
-                    [JsonPropertyName("v6")]
-                    public IPInfoV6 V6 { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets V4
+        /// </summary>
+        [DataMember(Name = "v4", EmitDefaultValue = false)]
+        [JsonPropertyName("v4")]
+        public IPInfoV4 V4 { get; set; }
+
+        /// <summary>
+        /// Gets or Sets V6
+        /// </summary>
+        [DataMember(Name = "v6", EmitDefaultValue = false)]
+        [JsonPropertyName("v6")]
+        public IPInfoV6 V6 { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookIPInfo {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookIPInfo {\n");
             sb.Append("  V4: ").Append(V4).Append("\n");
             sb.Append("  V6: ").Append(V6).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookIPInfo instances are equal
-            /// </summary>
+        /// Returns true if WebhookIPInfo instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookIPInfo to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookIPInfo? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.V4 == input.V4 ||
-            (this.V4 != null &&
-            this.V4.Equals(input.V4))
-            ) && 
-            (
-            this.V6 == input.V6 ||
-            (this.V6 != null &&
-            this.V6.Equals(input.V6))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.V4 == input.V4 ||
+                (this.V4 != null &&
+                this.V4.Equals(input.V4))
+                ) &&
+                (
+                this.V6 == input.V6 ||
+                (this.V6 != null &&
+                this.V6.Equals(input.V6))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.V4 != null)
-            hashCode = hashCode * 59 + this.V4.GetHashCode();
-            if (this.V6 != null)
-            hashCode = hashCode * 59 + this.V6.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.V4 != null)
+                    hashCode = hashCode * 59 + this.V4.GetHashCode();
+                if (this.V6 != null)
+                    hashCode = hashCode * 59 + this.V6.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

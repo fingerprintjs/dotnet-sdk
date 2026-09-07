@@ -13,283 +13,283 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Contains all information about the request identified by `requestId`, depending on the pricing plan (Pro, Pro Plus, Enterprise)
+    /// </summary>
+    [DataContract]
+    public class Products : IEquatable<Products>
+    {
+
+
         /// <summary>
-            /// Contains all information about the request identified by `requestId`, depending on the pricing plan (Pro, Pro Plus, Enterprise)
-            /// </summary>
-        [DataContract]
-                public class Products :  IEquatable<Products>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="Products" /> class.
-            /// </summary>
-                /// <param name="identification">identification.</param>
-                /// <param name="botd">botd.</param>
-                /// <param name="rootApps">rootApps.</param>
-                /// <param name="emulator">emulator.</param>
-                /// <param name="ipInfo">ipInfo.</param>
-                /// <param name="ipBlocklist">ipBlocklist.</param>
-                /// <param name="tor">tor.</param>
-                /// <param name="vpn">vpn.</param>
-                /// <param name="proxy">proxy.</param>
-                /// <param name="incognito">incognito.</param>
-                /// <param name="tampering">tampering.</param>
-                /// <param name="clonedApp">clonedApp.</param>
-                /// <param name="factoryReset">factoryReset.</param>
-                /// <param name="jailbroken">jailbroken.</param>
-                /// <param name="frida">frida.</param>
-                /// <param name="privacySettings">privacySettings.</param>
-                /// <param name="virtualMachine">virtualMachine.</param>
-                /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
-                /// <param name="highActivity">highActivity.</param>
-                /// <param name="locationSpoofing">locationSpoofing.</param>
-                /// <param name="suspectScore">suspectScore.</param>
-                /// <param name="remoteControl">remoteControl.</param>
-                /// <param name="velocity">velocity.</param>
-                /// <param name="developerTools">developerTools.</param>
-                /// <param name="mitmAttack">mitmAttack.</param>
-                /// <param name="rareDevice">rareDevice.</param>
-                /// <param name="proximity">proximity.</param>
-                /// <param name="labels">labels.</param>
+        /// Initializes a new instance of the <see cref="Products" /> class.
+        /// </summary>
+        /// <param name="identification">identification.</param>
+        /// <param name="botd">botd.</param>
+        /// <param name="rootApps">rootApps.</param>
+        /// <param name="emulator">emulator.</param>
+        /// <param name="ipInfo">ipInfo.</param>
+        /// <param name="ipBlocklist">ipBlocklist.</param>
+        /// <param name="tor">tor.</param>
+        /// <param name="vpn">vpn.</param>
+        /// <param name="proxy">proxy.</param>
+        /// <param name="incognito">incognito.</param>
+        /// <param name="tampering">tampering.</param>
+        /// <param name="clonedApp">clonedApp.</param>
+        /// <param name="factoryReset">factoryReset.</param>
+        /// <param name="jailbroken">jailbroken.</param>
+        /// <param name="frida">frida.</param>
+        /// <param name="privacySettings">privacySettings.</param>
+        /// <param name="virtualMachine">virtualMachine.</param>
+        /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
+        /// <param name="highActivity">highActivity.</param>
+        /// <param name="locationSpoofing">locationSpoofing.</param>
+        /// <param name="suspectScore">suspectScore.</param>
+        /// <param name="remoteControl">remoteControl.</param>
+        /// <param name="velocity">velocity.</param>
+        /// <param name="developerTools">developerTools.</param>
+        /// <param name="mitmAttack">mitmAttack.</param>
+        /// <param name="rareDevice">rareDevice.</param>
+        /// <param name="proximity">proximity.</param>
+        /// <param name="labels">labels.</param>
         public Products(ProductIdentification identification = default(ProductIdentification), ProductBotd botd = default(ProductBotd), ProductRootApps rootApps = default(ProductRootApps), ProductEmulator emulator = default(ProductEmulator), ProductIPInfo ipInfo = default(ProductIPInfo), ProductIPBlocklist ipBlocklist = default(ProductIPBlocklist), ProductTor tor = default(ProductTor), ProductVPN vpn = default(ProductVPN), ProductProxy proxy = default(ProductProxy), ProductIncognito incognito = default(ProductIncognito), ProductTampering tampering = default(ProductTampering), ProductClonedApp clonedApp = default(ProductClonedApp), ProductFactoryReset factoryReset = default(ProductFactoryReset), ProductJailbroken jailbroken = default(ProductJailbroken), ProductFrida frida = default(ProductFrida), ProductPrivacySettings privacySettings = default(ProductPrivacySettings), ProductVirtualMachine virtualMachine = default(ProductVirtualMachine), ProductRawDeviceAttributes rawDeviceAttributes = default(ProductRawDeviceAttributes), ProductHighActivity highActivity = default(ProductHighActivity), ProductLocationSpoofing locationSpoofing = default(ProductLocationSpoofing), ProductSuspectScore suspectScore = default(ProductSuspectScore), ProductRemoteControl remoteControl = default(ProductRemoteControl), ProductVelocity velocity = default(ProductVelocity), ProductDeveloperTools developerTools = default(ProductDeveloperTools), ProductMitMAttack mitmAttack = default(ProductMitMAttack), ProductRareDevice rareDevice = default(ProductRareDevice), ProductProximity proximity = default(ProductProximity), ProductLabels labels = default(ProductLabels))
         {
-                                                    this.Identification = identification;
-                                                    this.Botd = botd;
-                                                    this.RootApps = rootApps;
-                                                    this.Emulator = emulator;
-                                                    this.IpInfo = ipInfo;
-                                                    this.IpBlocklist = ipBlocklist;
-                                                    this.Tor = tor;
-                                                    this.Vpn = vpn;
-                                                    this.Proxy = proxy;
-                                                    this.Incognito = incognito;
-                                                    this.Tampering = tampering;
-                                                    this.ClonedApp = clonedApp;
-                                                    this.FactoryReset = factoryReset;
-                                                    this.Jailbroken = jailbroken;
-                                                    this.Frida = frida;
-                                                    this.PrivacySettings = privacySettings;
-                                                    this.VirtualMachine = virtualMachine;
-                                                    this.RawDeviceAttributes = rawDeviceAttributes;
-                                                    this.HighActivity = highActivity;
-                                                    this.LocationSpoofing = locationSpoofing;
-                                                    this.SuspectScore = suspectScore;
-                                                    this.RemoteControl = remoteControl;
-                                                    this.Velocity = velocity;
-                                                    this.DeveloperTools = developerTools;
-                                                    this.MitmAttack = mitmAttack;
-                                                    this.RareDevice = rareDevice;
-                                                    this.Proximity = proximity;
-                                                    this.Labels = labels;
+            this.Identification = identification;
+            this.Botd = botd;
+            this.RootApps = rootApps;
+            this.Emulator = emulator;
+            this.IpInfo = ipInfo;
+            this.IpBlocklist = ipBlocklist;
+            this.Tor = tor;
+            this.Vpn = vpn;
+            this.Proxy = proxy;
+            this.Incognito = incognito;
+            this.Tampering = tampering;
+            this.ClonedApp = clonedApp;
+            this.FactoryReset = factoryReset;
+            this.Jailbroken = jailbroken;
+            this.Frida = frida;
+            this.PrivacySettings = privacySettings;
+            this.VirtualMachine = virtualMachine;
+            this.RawDeviceAttributes = rawDeviceAttributes;
+            this.HighActivity = highActivity;
+            this.LocationSpoofing = locationSpoofing;
+            this.SuspectScore = suspectScore;
+            this.RemoteControl = remoteControl;
+            this.Velocity = velocity;
+            this.DeveloperTools = developerTools;
+            this.MitmAttack = mitmAttack;
+            this.RareDevice = rareDevice;
+            this.Proximity = proximity;
+            this.Labels = labels;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Identification
-                        /// </summary>
-                    [DataMember(Name="identification", EmitDefaultValue=false)]
-                    [JsonPropertyName("identification")]
-                    public ProductIdentification Identification { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Botd
-                        /// </summary>
-                    [DataMember(Name="botd", EmitDefaultValue=false)]
-                    [JsonPropertyName("botd")]
-                    public ProductBotd Botd { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets RootApps
-                        /// </summary>
-                    [DataMember(Name="rootApps", EmitDefaultValue=false)]
-                    [JsonPropertyName("rootApps")]
-                    public ProductRootApps RootApps { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Emulator
-                        /// </summary>
-                    [DataMember(Name="emulator", EmitDefaultValue=false)]
-                    [JsonPropertyName("emulator")]
-                    public ProductEmulator Emulator { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets IpInfo
-                        /// </summary>
-                    [DataMember(Name="ipInfo", EmitDefaultValue=false)]
-                    [JsonPropertyName("ipInfo")]
-                    public ProductIPInfo IpInfo { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets IpBlocklist
-                        /// </summary>
-                    [DataMember(Name="ipBlocklist", EmitDefaultValue=false)]
-                    [JsonPropertyName("ipBlocklist")]
-                    public ProductIPBlocklist IpBlocklist { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Tor
-                        /// </summary>
-                    [DataMember(Name="tor", EmitDefaultValue=false)]
-                    [JsonPropertyName("tor")]
-                    public ProductTor Tor { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Vpn
-                        /// </summary>
-                    [DataMember(Name="vpn", EmitDefaultValue=false)]
-                    [JsonPropertyName("vpn")]
-                    public ProductVPN Vpn { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Proxy
-                        /// </summary>
-                    [DataMember(Name="proxy", EmitDefaultValue=false)]
-                    [JsonPropertyName("proxy")]
-                    public ProductProxy Proxy { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Incognito
-                        /// </summary>
-                    [DataMember(Name="incognito", EmitDefaultValue=false)]
-                    [JsonPropertyName("incognito")]
-                    public ProductIncognito Incognito { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Tampering
-                        /// </summary>
-                    [DataMember(Name="tampering", EmitDefaultValue=false)]
-                    [JsonPropertyName("tampering")]
-                    public ProductTampering Tampering { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets ClonedApp
-                        /// </summary>
-                    [DataMember(Name="clonedApp", EmitDefaultValue=false)]
-                    [JsonPropertyName("clonedApp")]
-                    public ProductClonedApp ClonedApp { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets FactoryReset
-                        /// </summary>
-                    [DataMember(Name="factoryReset", EmitDefaultValue=false)]
-                    [JsonPropertyName("factoryReset")]
-                    public ProductFactoryReset FactoryReset { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Jailbroken
-                        /// </summary>
-                    [DataMember(Name="jailbroken", EmitDefaultValue=false)]
-                    [JsonPropertyName("jailbroken")]
-                    public ProductJailbroken Jailbroken { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Frida
-                        /// </summary>
-                    [DataMember(Name="frida", EmitDefaultValue=false)]
-                    [JsonPropertyName("frida")]
-                    public ProductFrida Frida { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets PrivacySettings
-                        /// </summary>
-                    [DataMember(Name="privacySettings", EmitDefaultValue=false)]
-                    [JsonPropertyName("privacySettings")]
-                    public ProductPrivacySettings PrivacySettings { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets VirtualMachine
-                        /// </summary>
-                    [DataMember(Name="virtualMachine", EmitDefaultValue=false)]
-                    [JsonPropertyName("virtualMachine")]
-                    public ProductVirtualMachine VirtualMachine { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets RawDeviceAttributes
-                        /// </summary>
-                    [DataMember(Name="rawDeviceAttributes", EmitDefaultValue=false)]
-                    [JsonPropertyName("rawDeviceAttributes")]
-                    public ProductRawDeviceAttributes RawDeviceAttributes { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets HighActivity
-                        /// </summary>
-                    [DataMember(Name="highActivity", EmitDefaultValue=false)]
-                    [JsonPropertyName("highActivity")]
-                    public ProductHighActivity HighActivity { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets LocationSpoofing
-                        /// </summary>
-                    [DataMember(Name="locationSpoofing", EmitDefaultValue=false)]
-                    [JsonPropertyName("locationSpoofing")]
-                    public ProductLocationSpoofing LocationSpoofing { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets SuspectScore
-                        /// </summary>
-                    [DataMember(Name="suspectScore", EmitDefaultValue=false)]
-                    [JsonPropertyName("suspectScore")]
-                    public ProductSuspectScore SuspectScore { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets RemoteControl
-                        /// </summary>
-                    [DataMember(Name="remoteControl", EmitDefaultValue=false)]
-                    [JsonPropertyName("remoteControl")]
-                    public ProductRemoteControl RemoteControl { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Velocity
-                        /// </summary>
-                    [DataMember(Name="velocity", EmitDefaultValue=false)]
-                    [JsonPropertyName("velocity")]
-                    public ProductVelocity Velocity { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets DeveloperTools
-                        /// </summary>
-                    [DataMember(Name="developerTools", EmitDefaultValue=false)]
-                    [JsonPropertyName("developerTools")]
-                    public ProductDeveloperTools DeveloperTools { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets MitmAttack
-                        /// </summary>
-                    [DataMember(Name="mitmAttack", EmitDefaultValue=false)]
-                    [JsonPropertyName("mitmAttack")]
-                    public ProductMitMAttack MitmAttack { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets RareDevice
-                        /// </summary>
-                    [DataMember(Name="rareDevice", EmitDefaultValue=false)]
-                    [JsonPropertyName("rareDevice")]
-                    public ProductRareDevice RareDevice { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Proximity
-                        /// </summary>
-                    [DataMember(Name="proximity", EmitDefaultValue=false)]
-                    [JsonPropertyName("proximity")]
-                    public ProductProximity Proximity { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Labels
-                        /// </summary>
-                    [DataMember(Name="labels", EmitDefaultValue=false)]
-                    [JsonPropertyName("labels")]
-                    public ProductLabels Labels { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Identification
+        /// </summary>
+        [DataMember(Name = "identification", EmitDefaultValue = false)]
+        [JsonPropertyName("identification")]
+        public ProductIdentification Identification { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Botd
+        /// </summary>
+        [DataMember(Name = "botd", EmitDefaultValue = false)]
+        [JsonPropertyName("botd")]
+        public ProductBotd Botd { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RootApps
+        /// </summary>
+        [DataMember(Name = "rootApps", EmitDefaultValue = false)]
+        [JsonPropertyName("rootApps")]
+        public ProductRootApps RootApps { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Emulator
+        /// </summary>
+        [DataMember(Name = "emulator", EmitDefaultValue = false)]
+        [JsonPropertyName("emulator")]
+        public ProductEmulator Emulator { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IpInfo
+        /// </summary>
+        [DataMember(Name = "ipInfo", EmitDefaultValue = false)]
+        [JsonPropertyName("ipInfo")]
+        public ProductIPInfo IpInfo { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IpBlocklist
+        /// </summary>
+        [DataMember(Name = "ipBlocklist", EmitDefaultValue = false)]
+        [JsonPropertyName("ipBlocklist")]
+        public ProductIPBlocklist IpBlocklist { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tor
+        /// </summary>
+        [DataMember(Name = "tor", EmitDefaultValue = false)]
+        [JsonPropertyName("tor")]
+        public ProductTor Tor { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Vpn
+        /// </summary>
+        [DataMember(Name = "vpn", EmitDefaultValue = false)]
+        [JsonPropertyName("vpn")]
+        public ProductVPN Vpn { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Proxy
+        /// </summary>
+        [DataMember(Name = "proxy", EmitDefaultValue = false)]
+        [JsonPropertyName("proxy")]
+        public ProductProxy Proxy { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Incognito
+        /// </summary>
+        [DataMember(Name = "incognito", EmitDefaultValue = false)]
+        [JsonPropertyName("incognito")]
+        public ProductIncognito Incognito { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tampering
+        /// </summary>
+        [DataMember(Name = "tampering", EmitDefaultValue = false)]
+        [JsonPropertyName("tampering")]
+        public ProductTampering Tampering { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ClonedApp
+        /// </summary>
+        [DataMember(Name = "clonedApp", EmitDefaultValue = false)]
+        [JsonPropertyName("clonedApp")]
+        public ProductClonedApp ClonedApp { get; set; }
+
+        /// <summary>
+        /// Gets or Sets FactoryReset
+        /// </summary>
+        [DataMember(Name = "factoryReset", EmitDefaultValue = false)]
+        [JsonPropertyName("factoryReset")]
+        public ProductFactoryReset FactoryReset { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Jailbroken
+        /// </summary>
+        [DataMember(Name = "jailbroken", EmitDefaultValue = false)]
+        [JsonPropertyName("jailbroken")]
+        public ProductJailbroken Jailbroken { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Frida
+        /// </summary>
+        [DataMember(Name = "frida", EmitDefaultValue = false)]
+        [JsonPropertyName("frida")]
+        public ProductFrida Frida { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PrivacySettings
+        /// </summary>
+        [DataMember(Name = "privacySettings", EmitDefaultValue = false)]
+        [JsonPropertyName("privacySettings")]
+        public ProductPrivacySettings PrivacySettings { get; set; }
+
+        /// <summary>
+        /// Gets or Sets VirtualMachine
+        /// </summary>
+        [DataMember(Name = "virtualMachine", EmitDefaultValue = false)]
+        [JsonPropertyName("virtualMachine")]
+        public ProductVirtualMachine VirtualMachine { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RawDeviceAttributes
+        /// </summary>
+        [DataMember(Name = "rawDeviceAttributes", EmitDefaultValue = false)]
+        [JsonPropertyName("rawDeviceAttributes")]
+        public ProductRawDeviceAttributes RawDeviceAttributes { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HighActivity
+        /// </summary>
+        [DataMember(Name = "highActivity", EmitDefaultValue = false)]
+        [JsonPropertyName("highActivity")]
+        public ProductHighActivity HighActivity { get; set; }
+
+        /// <summary>
+        /// Gets or Sets LocationSpoofing
+        /// </summary>
+        [DataMember(Name = "locationSpoofing", EmitDefaultValue = false)]
+        [JsonPropertyName("locationSpoofing")]
+        public ProductLocationSpoofing LocationSpoofing { get; set; }
+
+        /// <summary>
+        /// Gets or Sets SuspectScore
+        /// </summary>
+        [DataMember(Name = "suspectScore", EmitDefaultValue = false)]
+        [JsonPropertyName("suspectScore")]
+        public ProductSuspectScore SuspectScore { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RemoteControl
+        /// </summary>
+        [DataMember(Name = "remoteControl", EmitDefaultValue = false)]
+        [JsonPropertyName("remoteControl")]
+        public ProductRemoteControl RemoteControl { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Velocity
+        /// </summary>
+        [DataMember(Name = "velocity", EmitDefaultValue = false)]
+        [JsonPropertyName("velocity")]
+        public ProductVelocity Velocity { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DeveloperTools
+        /// </summary>
+        [DataMember(Name = "developerTools", EmitDefaultValue = false)]
+        [JsonPropertyName("developerTools")]
+        public ProductDeveloperTools DeveloperTools { get; set; }
+
+        /// <summary>
+        /// Gets or Sets MitmAttack
+        /// </summary>
+        [DataMember(Name = "mitmAttack", EmitDefaultValue = false)]
+        [JsonPropertyName("mitmAttack")]
+        public ProductMitMAttack MitmAttack { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RareDevice
+        /// </summary>
+        [DataMember(Name = "rareDevice", EmitDefaultValue = false)]
+        [JsonPropertyName("rareDevice")]
+        public ProductRareDevice RareDevice { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Proximity
+        /// </summary>
+        [DataMember(Name = "proximity", EmitDefaultValue = false)]
+        [JsonPropertyName("proximity")]
+        public ProductProximity Proximity { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Labels
+        /// </summary>
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
+        [JsonPropertyName("labels")]
+        public ProductLabels Labels { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class Products {\n");
+            var sb = new StringBuilder();
+            sb.Append("class Products {\n");
             sb.Append("  Identification: ").Append(Identification).Append("\n");
             sb.Append("  Botd: ").Append(Botd).Append("\n");
             sb.Append("  RootApps: ").Append(RootApps).Append("\n");
@@ -318,240 +318,240 @@ using FingerprintPro.ServerSdk.Json;
             sb.Append("  RareDevice: ").Append(RareDevice).Append("\n");
             sb.Append("  Proximity: ").Append(Proximity).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if Products instances are equal
-            /// </summary>
+        /// Returns true if Products instances are equal
+        /// </summary>
         /// <param name="input">Instance of Products to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Products? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Identification == input.Identification ||
-            (this.Identification != null &&
-            this.Identification.Equals(input.Identification))
-            ) && 
-            (
-            this.Botd == input.Botd ||
-            (this.Botd != null &&
-            this.Botd.Equals(input.Botd))
-            ) && 
-            (
-            this.RootApps == input.RootApps ||
-            (this.RootApps != null &&
-            this.RootApps.Equals(input.RootApps))
-            ) && 
-            (
-            this.Emulator == input.Emulator ||
-            (this.Emulator != null &&
-            this.Emulator.Equals(input.Emulator))
-            ) && 
-            (
-            this.IpInfo == input.IpInfo ||
-            (this.IpInfo != null &&
-            this.IpInfo.Equals(input.IpInfo))
-            ) && 
-            (
-            this.IpBlocklist == input.IpBlocklist ||
-            (this.IpBlocklist != null &&
-            this.IpBlocklist.Equals(input.IpBlocklist))
-            ) && 
-            (
-            this.Tor == input.Tor ||
-            (this.Tor != null &&
-            this.Tor.Equals(input.Tor))
-            ) && 
-            (
-            this.Vpn == input.Vpn ||
-            (this.Vpn != null &&
-            this.Vpn.Equals(input.Vpn))
-            ) && 
-            (
-            this.Proxy == input.Proxy ||
-            (this.Proxy != null &&
-            this.Proxy.Equals(input.Proxy))
-            ) && 
-            (
-            this.Incognito == input.Incognito ||
-            (this.Incognito != null &&
-            this.Incognito.Equals(input.Incognito))
-            ) && 
-            (
-            this.Tampering == input.Tampering ||
-            (this.Tampering != null &&
-            this.Tampering.Equals(input.Tampering))
-            ) && 
-            (
-            this.ClonedApp == input.ClonedApp ||
-            (this.ClonedApp != null &&
-            this.ClonedApp.Equals(input.ClonedApp))
-            ) && 
-            (
-            this.FactoryReset == input.FactoryReset ||
-            (this.FactoryReset != null &&
-            this.FactoryReset.Equals(input.FactoryReset))
-            ) && 
-            (
-            this.Jailbroken == input.Jailbroken ||
-            (this.Jailbroken != null &&
-            this.Jailbroken.Equals(input.Jailbroken))
-            ) && 
-            (
-            this.Frida == input.Frida ||
-            (this.Frida != null &&
-            this.Frida.Equals(input.Frida))
-            ) && 
-            (
-            this.PrivacySettings == input.PrivacySettings ||
-            (this.PrivacySettings != null &&
-            this.PrivacySettings.Equals(input.PrivacySettings))
-            ) && 
-            (
-            this.VirtualMachine == input.VirtualMachine ||
-            (this.VirtualMachine != null &&
-            this.VirtualMachine.Equals(input.VirtualMachine))
-            ) && 
-            (
-            this.RawDeviceAttributes == input.RawDeviceAttributes ||
-            (this.RawDeviceAttributes != null &&
-            this.RawDeviceAttributes.Equals(input.RawDeviceAttributes))
-            ) && 
-            (
-            this.HighActivity == input.HighActivity ||
-            (this.HighActivity != null &&
-            this.HighActivity.Equals(input.HighActivity))
-            ) && 
-            (
-            this.LocationSpoofing == input.LocationSpoofing ||
-            (this.LocationSpoofing != null &&
-            this.LocationSpoofing.Equals(input.LocationSpoofing))
-            ) && 
-            (
-            this.SuspectScore == input.SuspectScore ||
-            (this.SuspectScore != null &&
-            this.SuspectScore.Equals(input.SuspectScore))
-            ) && 
-            (
-            this.RemoteControl == input.RemoteControl ||
-            (this.RemoteControl != null &&
-            this.RemoteControl.Equals(input.RemoteControl))
-            ) && 
-            (
-            this.Velocity == input.Velocity ||
-            (this.Velocity != null &&
-            this.Velocity.Equals(input.Velocity))
-            ) && 
-            (
-            this.DeveloperTools == input.DeveloperTools ||
-            (this.DeveloperTools != null &&
-            this.DeveloperTools.Equals(input.DeveloperTools))
-            ) && 
-            (
-            this.MitmAttack == input.MitmAttack ||
-            (this.MitmAttack != null &&
-            this.MitmAttack.Equals(input.MitmAttack))
-            ) && 
-            (
-            this.RareDevice == input.RareDevice ||
-            (this.RareDevice != null &&
-            this.RareDevice.Equals(input.RareDevice))
-            ) && 
-            (
-            this.Proximity == input.Proximity ||
-            (this.Proximity != null &&
-            this.Proximity.Equals(input.Proximity))
-            ) && 
-            (
-            this.Labels == input.Labels ||
-            (this.Labels != null &&
-            this.Labels.Equals(input.Labels))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Identification == input.Identification ||
+                (this.Identification != null &&
+                this.Identification.Equals(input.Identification))
+                ) &&
+                (
+                this.Botd == input.Botd ||
+                (this.Botd != null &&
+                this.Botd.Equals(input.Botd))
+                ) &&
+                (
+                this.RootApps == input.RootApps ||
+                (this.RootApps != null &&
+                this.RootApps.Equals(input.RootApps))
+                ) &&
+                (
+                this.Emulator == input.Emulator ||
+                (this.Emulator != null &&
+                this.Emulator.Equals(input.Emulator))
+                ) &&
+                (
+                this.IpInfo == input.IpInfo ||
+                (this.IpInfo != null &&
+                this.IpInfo.Equals(input.IpInfo))
+                ) &&
+                (
+                this.IpBlocklist == input.IpBlocklist ||
+                (this.IpBlocklist != null &&
+                this.IpBlocklist.Equals(input.IpBlocklist))
+                ) &&
+                (
+                this.Tor == input.Tor ||
+                (this.Tor != null &&
+                this.Tor.Equals(input.Tor))
+                ) &&
+                (
+                this.Vpn == input.Vpn ||
+                (this.Vpn != null &&
+                this.Vpn.Equals(input.Vpn))
+                ) &&
+                (
+                this.Proxy == input.Proxy ||
+                (this.Proxy != null &&
+                this.Proxy.Equals(input.Proxy))
+                ) &&
+                (
+                this.Incognito == input.Incognito ||
+                (this.Incognito != null &&
+                this.Incognito.Equals(input.Incognito))
+                ) &&
+                (
+                this.Tampering == input.Tampering ||
+                (this.Tampering != null &&
+                this.Tampering.Equals(input.Tampering))
+                ) &&
+                (
+                this.ClonedApp == input.ClonedApp ||
+                (this.ClonedApp != null &&
+                this.ClonedApp.Equals(input.ClonedApp))
+                ) &&
+                (
+                this.FactoryReset == input.FactoryReset ||
+                (this.FactoryReset != null &&
+                this.FactoryReset.Equals(input.FactoryReset))
+                ) &&
+                (
+                this.Jailbroken == input.Jailbroken ||
+                (this.Jailbroken != null &&
+                this.Jailbroken.Equals(input.Jailbroken))
+                ) &&
+                (
+                this.Frida == input.Frida ||
+                (this.Frida != null &&
+                this.Frida.Equals(input.Frida))
+                ) &&
+                (
+                this.PrivacySettings == input.PrivacySettings ||
+                (this.PrivacySettings != null &&
+                this.PrivacySettings.Equals(input.PrivacySettings))
+                ) &&
+                (
+                this.VirtualMachine == input.VirtualMachine ||
+                (this.VirtualMachine != null &&
+                this.VirtualMachine.Equals(input.VirtualMachine))
+                ) &&
+                (
+                this.RawDeviceAttributes == input.RawDeviceAttributes ||
+                (this.RawDeviceAttributes != null &&
+                this.RawDeviceAttributes.Equals(input.RawDeviceAttributes))
+                ) &&
+                (
+                this.HighActivity == input.HighActivity ||
+                (this.HighActivity != null &&
+                this.HighActivity.Equals(input.HighActivity))
+                ) &&
+                (
+                this.LocationSpoofing == input.LocationSpoofing ||
+                (this.LocationSpoofing != null &&
+                this.LocationSpoofing.Equals(input.LocationSpoofing))
+                ) &&
+                (
+                this.SuspectScore == input.SuspectScore ||
+                (this.SuspectScore != null &&
+                this.SuspectScore.Equals(input.SuspectScore))
+                ) &&
+                (
+                this.RemoteControl == input.RemoteControl ||
+                (this.RemoteControl != null &&
+                this.RemoteControl.Equals(input.RemoteControl))
+                ) &&
+                (
+                this.Velocity == input.Velocity ||
+                (this.Velocity != null &&
+                this.Velocity.Equals(input.Velocity))
+                ) &&
+                (
+                this.DeveloperTools == input.DeveloperTools ||
+                (this.DeveloperTools != null &&
+                this.DeveloperTools.Equals(input.DeveloperTools))
+                ) &&
+                (
+                this.MitmAttack == input.MitmAttack ||
+                (this.MitmAttack != null &&
+                this.MitmAttack.Equals(input.MitmAttack))
+                ) &&
+                (
+                this.RareDevice == input.RareDevice ||
+                (this.RareDevice != null &&
+                this.RareDevice.Equals(input.RareDevice))
+                ) &&
+                (
+                this.Proximity == input.Proximity ||
+                (this.Proximity != null &&
+                this.Proximity.Equals(input.Proximity))
+                ) &&
+                (
+                this.Labels == input.Labels ||
+                (this.Labels != null &&
+                this.Labels.Equals(input.Labels))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Identification != null)
-            hashCode = hashCode * 59 + this.Identification.GetHashCode();
-            if (this.Botd != null)
-            hashCode = hashCode * 59 + this.Botd.GetHashCode();
-            if (this.RootApps != null)
-            hashCode = hashCode * 59 + this.RootApps.GetHashCode();
-            if (this.Emulator != null)
-            hashCode = hashCode * 59 + this.Emulator.GetHashCode();
-            if (this.IpInfo != null)
-            hashCode = hashCode * 59 + this.IpInfo.GetHashCode();
-            if (this.IpBlocklist != null)
-            hashCode = hashCode * 59 + this.IpBlocklist.GetHashCode();
-            if (this.Tor != null)
-            hashCode = hashCode * 59 + this.Tor.GetHashCode();
-            if (this.Vpn != null)
-            hashCode = hashCode * 59 + this.Vpn.GetHashCode();
-            if (this.Proxy != null)
-            hashCode = hashCode * 59 + this.Proxy.GetHashCode();
-            if (this.Incognito != null)
-            hashCode = hashCode * 59 + this.Incognito.GetHashCode();
-            if (this.Tampering != null)
-            hashCode = hashCode * 59 + this.Tampering.GetHashCode();
-            if (this.ClonedApp != null)
-            hashCode = hashCode * 59 + this.ClonedApp.GetHashCode();
-            if (this.FactoryReset != null)
-            hashCode = hashCode * 59 + this.FactoryReset.GetHashCode();
-            if (this.Jailbroken != null)
-            hashCode = hashCode * 59 + this.Jailbroken.GetHashCode();
-            if (this.Frida != null)
-            hashCode = hashCode * 59 + this.Frida.GetHashCode();
-            if (this.PrivacySettings != null)
-            hashCode = hashCode * 59 + this.PrivacySettings.GetHashCode();
-            if (this.VirtualMachine != null)
-            hashCode = hashCode * 59 + this.VirtualMachine.GetHashCode();
-            if (this.RawDeviceAttributes != null)
-            hashCode = hashCode * 59 + this.RawDeviceAttributes.GetHashCode();
-            if (this.HighActivity != null)
-            hashCode = hashCode * 59 + this.HighActivity.GetHashCode();
-            if (this.LocationSpoofing != null)
-            hashCode = hashCode * 59 + this.LocationSpoofing.GetHashCode();
-            if (this.SuspectScore != null)
-            hashCode = hashCode * 59 + this.SuspectScore.GetHashCode();
-            if (this.RemoteControl != null)
-            hashCode = hashCode * 59 + this.RemoteControl.GetHashCode();
-            if (this.Velocity != null)
-            hashCode = hashCode * 59 + this.Velocity.GetHashCode();
-            if (this.DeveloperTools != null)
-            hashCode = hashCode * 59 + this.DeveloperTools.GetHashCode();
-            if (this.MitmAttack != null)
-            hashCode = hashCode * 59 + this.MitmAttack.GetHashCode();
-            if (this.RareDevice != null)
-            hashCode = hashCode * 59 + this.RareDevice.GetHashCode();
-            if (this.Proximity != null)
-            hashCode = hashCode * 59 + this.Proximity.GetHashCode();
-            if (this.Labels != null)
-            hashCode = hashCode * 59 + this.Labels.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Identification != null)
+                    hashCode = hashCode * 59 + this.Identification.GetHashCode();
+                if (this.Botd != null)
+                    hashCode = hashCode * 59 + this.Botd.GetHashCode();
+                if (this.RootApps != null)
+                    hashCode = hashCode * 59 + this.RootApps.GetHashCode();
+                if (this.Emulator != null)
+                    hashCode = hashCode * 59 + this.Emulator.GetHashCode();
+                if (this.IpInfo != null)
+                    hashCode = hashCode * 59 + this.IpInfo.GetHashCode();
+                if (this.IpBlocklist != null)
+                    hashCode = hashCode * 59 + this.IpBlocklist.GetHashCode();
+                if (this.Tor != null)
+                    hashCode = hashCode * 59 + this.Tor.GetHashCode();
+                if (this.Vpn != null)
+                    hashCode = hashCode * 59 + this.Vpn.GetHashCode();
+                if (this.Proxy != null)
+                    hashCode = hashCode * 59 + this.Proxy.GetHashCode();
+                if (this.Incognito != null)
+                    hashCode = hashCode * 59 + this.Incognito.GetHashCode();
+                if (this.Tampering != null)
+                    hashCode = hashCode * 59 + this.Tampering.GetHashCode();
+                if (this.ClonedApp != null)
+                    hashCode = hashCode * 59 + this.ClonedApp.GetHashCode();
+                if (this.FactoryReset != null)
+                    hashCode = hashCode * 59 + this.FactoryReset.GetHashCode();
+                if (this.Jailbroken != null)
+                    hashCode = hashCode * 59 + this.Jailbroken.GetHashCode();
+                if (this.Frida != null)
+                    hashCode = hashCode * 59 + this.Frida.GetHashCode();
+                if (this.PrivacySettings != null)
+                    hashCode = hashCode * 59 + this.PrivacySettings.GetHashCode();
+                if (this.VirtualMachine != null)
+                    hashCode = hashCode * 59 + this.VirtualMachine.GetHashCode();
+                if (this.RawDeviceAttributes != null)
+                    hashCode = hashCode * 59 + this.RawDeviceAttributes.GetHashCode();
+                if (this.HighActivity != null)
+                    hashCode = hashCode * 59 + this.HighActivity.GetHashCode();
+                if (this.LocationSpoofing != null)
+                    hashCode = hashCode * 59 + this.LocationSpoofing.GetHashCode();
+                if (this.SuspectScore != null)
+                    hashCode = hashCode * 59 + this.SuspectScore.GetHashCode();
+                if (this.RemoteControl != null)
+                    hashCode = hashCode * 59 + this.RemoteControl.GetHashCode();
+                if (this.Velocity != null)
+                    hashCode = hashCode * 59 + this.Velocity.GetHashCode();
+                if (this.DeveloperTools != null)
+                    hashCode = hashCode * 59 + this.DeveloperTools.GetHashCode();
+                if (this.MitmAttack != null)
+                    hashCode = hashCode * 59 + this.MitmAttack.GetHashCode();
+                if (this.RareDevice != null)
+                    hashCode = hashCode * 59 + this.RareDevice.GetHashCode();
+                if (this.Proximity != null)
+                    hashCode = hashCode * 59 + this.Proximity.GetHashCode();
+                if (this.Labels != null)
+                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

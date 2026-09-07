@@ -13,137 +13,138 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Proxy detection details (present if proxy is detected)
+    /// </summary>
+    [DataContract]
+    public class ProxyDetails : IEquatable<ProxyDetails>
+    {
         /// <summary>
-            /// Proxy detection details (present if proxy is detected)
-            /// </summary>
-        [DataContract]
-                public class ProxyDetails :  IEquatable<ProxyDetails>
+        /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
+        /// </summary>
+        /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public enum ProxyTypeEnum
         {
-                            /// <summary>
-                            /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
-                            /// </summary>
-                            /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
-                            [JsonConverter(typeof(JsonStringEnumConverter))]
-                                                        public enum ProxyTypeEnum
-                            {
-                                /// <summary>
-                                /// Enum Residential for value: residential
-                                /// </summary>
-                                [EnumMember(Value = "residential")]
-                                Residential = 1,
-                                /// <summary>
-                                /// Enum Datacenter for value: data_center
-                                /// </summary>
-                                [EnumMember(Value = "data_center")]
-                                Datacenter = 2,
-                                /// <summary>
-                                /// Enum Unknown for value: unknown
-                                /// </summary>
-                                [EnumMember(Value = "unknown")]
-                                Unknown = 3                            }
-                /// <summary>
-                    /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
-                    /// </summary>
-                    /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
-                [DataMember(Name="proxyType", EmitDefaultValue=false)]
-                [JsonPropertyName("proxyType")]
-                public ProxyTypeEnum ProxyType { get; set; }
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="ProxyDetails" /> class.
+            /// <summary>
+            /// Enum Residential for value: residential
             /// </summary>
-                /// <param name="proxyType">Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type  (required).</param>
-                /// <param name="lastSeenAt">ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. .</param>
+            [EnumMember(Value = "residential")]
+            Residential = 1,
+            /// <summary>
+            /// Enum Datacenter for value: data_center
+            /// </summary>
+            [EnumMember(Value = "data_center")]
+            Datacenter = 2,
+            /// <summary>
+            /// Enum Unknown for value: unknown
+            /// </summary>
+            [EnumMember(Value = "unknown")]
+            Unknown = 3
+        }
+        /// <summary>
+        /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
+        /// </summary>
+        /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
+        [DataMember(Name = "proxyType", EmitDefaultValue = false)]
+        [JsonPropertyName("proxyType")]
+        public ProxyTypeEnum ProxyType { get; set; }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProxyDetails" /> class.
+        /// </summary>
+        /// <param name="proxyType">Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type  (required).</param>
+        /// <param name="lastSeenAt">ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. .</param>
         public ProxyDetails(ProxyTypeEnum proxyType = default(ProxyTypeEnum), DateTime? lastSeenAt = default(DateTime?))
         {
-                            // to ensure "proxyType" is required (not null)
-                            // swagger debug: ProxyDetails ProxyType
-        
-                            if (proxyType == null)
-                            {
-                            throw new InvalidDataException("proxyType is a required property for ProxyDetails and cannot be null");
-                            }
-                            else
-                            {
-                            this.ProxyType = proxyType;
-                            }
-                                                    this.LastSeenAt = lastSeenAt;
+            // to ensure "proxyType" is required (not null)
+            // swagger debug: ProxyDetails ProxyType
+
+            if (proxyType == null)
+            {
+                throw new InvalidDataException("proxyType is a required property for ProxyDetails and cannot be null");
+            }
+            else
+            {
+                this.ProxyType = proxyType;
+            }
+            this.LastSeenAt = lastSeenAt;
         }
-        
-        
-                    /// <summary>
-                        /// ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. 
-                        /// </summary>
-                        /// <value>ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. </value>
-                    [DataMember(Name="lastSeenAt", EmitDefaultValue=false)]
-                    [JsonPropertyName("lastSeenAt")]
-                    public DateTime? LastSeenAt { get; set; }
-        
+
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. 
+        /// </summary>
+        /// <value>ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. </value>
+        [DataMember(Name = "lastSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("lastSeenAt")]
+        public DateTime? LastSeenAt { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class ProxyDetails {\n");
+            var sb = new StringBuilder();
+            sb.Append("class ProxyDetails {\n");
             sb.Append("  ProxyType: ").Append(ProxyType).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if ProxyDetails instances are equal
-            /// </summary>
+        /// Returns true if ProxyDetails instances are equal
+        /// </summary>
         /// <param name="input">Instance of ProxyDetails to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(ProxyDetails? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.ProxyType == input.ProxyType ||
-            (this.ProxyType != null &&
-            this.ProxyType.Equals(input.ProxyType))
-            ) && 
-            (
-            this.LastSeenAt == input.LastSeenAt ||
-            (this.LastSeenAt != null &&
-            this.LastSeenAt.Equals(input.LastSeenAt))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.ProxyType == input.ProxyType ||
+                (this.ProxyType != null &&
+                this.ProxyType.Equals(input.ProxyType))
+                ) &&
+                (
+                this.LastSeenAt == input.LastSeenAt ||
+                (this.LastSeenAt != null &&
+                this.LastSeenAt.Equals(input.LastSeenAt))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.ProxyType != null)
-            hashCode = hashCode * 59 + this.ProxyType.GetHashCode();
-            if (this.LastSeenAt != null)
-            hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.ProxyType != null)
+                    hashCode = hashCode * 59 + this.ProxyType.GetHashCode();
+                if (this.LastSeenAt != null)
+                    hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

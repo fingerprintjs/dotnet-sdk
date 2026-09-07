@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// MitMAttack
+    /// </summary>
+    [DataContract]
+    public class MitMAttack : IEquatable<MitMAttack>
+    {
+
+
         /// <summary>
-            /// MitMAttack
-            /// </summary>
-        [DataContract]
-                public class MitMAttack :  IEquatable<MitMAttack>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="MitMAttack" /> class.
-            /// </summary>
-                /// <param name="result">* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal.  (required).</param>
+        /// Initializes a new instance of the <see cref="MitMAttack" /> class.
+        /// </summary>
+        /// <param name="result">* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal.  (required).</param>
         public MitMAttack(bool? result = default(bool?))
         {
-                            // to ensure "result" is required (not null)
-                            // swagger debug: MitMAttack Result
-        
-                            if (result == null)
-                            {
-                            throw new InvalidDataException("result is a required property for MitMAttack and cannot be null");
-                            }
-                            else
-                            {
-                            this.Result = result;
-                            }
+            // to ensure "result" is required (not null)
+            // swagger debug: MitMAttack Result
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for MitMAttack and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
-        
-                    /// <summary>
-                        /// * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. 
-                        /// </summary>
-                        /// <value>* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. 
+        /// </summary>
+        /// <value>* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class MitMAttack {\n");
+            var sb = new StringBuilder();
+            sb.Append("class MitMAttack {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if MitMAttack instances are equal
-            /// </summary>
+        /// Returns true if MitMAttack instances are equal
+        /// </summary>
         /// <param name="input">Instance of MitMAttack to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(MitMAttack? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

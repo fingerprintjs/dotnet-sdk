@@ -13,103 +13,103 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// RawDeviceAttributeError
+    /// </summary>
+    [DataContract]
+    public class RawDeviceAttributeError : IEquatable<RawDeviceAttributeError>
+    {
+
+
         /// <summary>
-            /// RawDeviceAttributeError
-            /// </summary>
-        [DataContract]
-                public class RawDeviceAttributeError :  IEquatable<RawDeviceAttributeError>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="RawDeviceAttributeError" /> class.
-            /// </summary>
-                /// <param name="name">name.</param>
-                /// <param name="message">message.</param>
+        /// Initializes a new instance of the <see cref="RawDeviceAttributeError" /> class.
+        /// </summary>
+        /// <param name="name">name.</param>
+        /// <param name="message">message.</param>
         public RawDeviceAttributeError(string name = default(string), string message = default(string))
         {
-                                                    this.Name = name;
-                                                    this.Message = message;
+            this.Name = name;
+            this.Message = message;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Name
-                        /// </summary>
-                    [DataMember(Name="name", EmitDefaultValue=false)]
-                    [JsonPropertyName("name")]
-                    public string Name { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Message
-                        /// </summary>
-                    [DataMember(Name="message", EmitDefaultValue=false)]
-                    [JsonPropertyName("message")]
-                    public string Message { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Message
+        /// </summary>
+        [DataMember(Name = "message", EmitDefaultValue = false)]
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class RawDeviceAttributeError {\n");
+            var sb = new StringBuilder();
+            sb.Append("class RawDeviceAttributeError {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if RawDeviceAttributeError instances are equal
-            /// </summary>
+        /// Returns true if RawDeviceAttributeError instances are equal
+        /// </summary>
         /// <param name="input">Instance of RawDeviceAttributeError to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(RawDeviceAttributeError? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Name == input.Name ||
-            (this.Name != null &&
-            this.Name.Equals(input.Name))
-            ) && 
-            (
-            this.Message == input.Message ||
-            (this.Message != null &&
-            this.Message.Equals(input.Message))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Name == input.Name ||
+                (this.Name != null &&
+                this.Name.Equals(input.Name))
+                ) &&
+                (
+                this.Message == input.Message ||
+                (this.Message != null &&
+                this.Message.Equals(input.Message))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Name != null)
-            hashCode = hashCode * 59 + this.Name.GetHashCode();
-            if (this.Message != null)
-            hashCode = hashCode * 59 + this.Message.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Message != null)
+                    hashCode = hashCode * 59 + this.Message.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// RelatedVisitor
+    /// </summary>
+    [DataContract]
+    public class RelatedVisitor : IEquatable<RelatedVisitor>
+    {
+
+
         /// <summary>
-            /// RelatedVisitor
-            /// </summary>
-        [DataContract]
-                public class RelatedVisitor :  IEquatable<RelatedVisitor>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="RelatedVisitor" /> class.
-            /// </summary>
-                /// <param name="visitorId">Visitor ID of a browser that originates from the same mobile device as the input visitor ID. (required).</param>
+        /// Initializes a new instance of the <see cref="RelatedVisitor" /> class.
+        /// </summary>
+        /// <param name="visitorId">Visitor ID of a browser that originates from the same mobile device as the input visitor ID. (required).</param>
         public RelatedVisitor(string visitorId = default(string))
         {
-                            // to ensure "visitorId" is required (not null)
-                            // swagger debug: RelatedVisitor VisitorId
-        
-                            if (visitorId == null)
-                            {
-                            throw new InvalidDataException("visitorId is a required property for RelatedVisitor and cannot be null");
-                            }
-                            else
-                            {
-                            this.VisitorId = visitorId;
-                            }
+            // to ensure "visitorId" is required (not null)
+            // swagger debug: RelatedVisitor VisitorId
+
+            if (visitorId == null)
+            {
+                throw new InvalidDataException("visitorId is a required property for RelatedVisitor and cannot be null");
+            }
+            else
+            {
+                this.VisitorId = visitorId;
+            }
         }
-        
-                    /// <summary>
-                        /// Visitor ID of a browser that originates from the same mobile device as the input visitor ID.
-                        /// </summary>
-                        /// <value>Visitor ID of a browser that originates from the same mobile device as the input visitor ID.</value>
-                    [DataMember(Name="visitorId", EmitDefaultValue=false)]
-                    [JsonPropertyName("visitorId")]
-                    public string VisitorId { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Visitor ID of a browser that originates from the same mobile device as the input visitor ID.
+        /// </summary>
+        /// <value>Visitor ID of a browser that originates from the same mobile device as the input visitor ID.</value>
+        [DataMember(Name = "visitorId", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorId")]
+        public string VisitorId { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class RelatedVisitor {\n");
+            var sb = new StringBuilder();
+            sb.Append("class RelatedVisitor {\n");
             sb.Append("  VisitorId: ").Append(VisitorId).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if RelatedVisitor instances are equal
-            /// </summary>
+        /// Returns true if RelatedVisitor instances are equal
+        /// </summary>
         /// <param name="input">Instance of RelatedVisitor to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(RelatedVisitor? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.VisitorId == input.VisitorId ||
-            (this.VisitorId != null &&
-            this.VisitorId.Equals(input.VisitorId))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.VisitorId == input.VisitorId ||
+                (this.VisitorId != null &&
+                this.VisitorId.Equals(input.VisitorId))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.VisitorId != null)
-            hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.VisitorId != null)
+                    hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

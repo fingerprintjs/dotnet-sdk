@@ -13,87 +13,87 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookPrivacySettings
+    /// </summary>
+    [DataContract]
+    public class WebhookPrivacySettings : IEquatable<WebhookPrivacySettings>
+    {
+
+
         /// <summary>
-            /// WebhookPrivacySettings
-            /// </summary>
-        [DataContract]
-                public class WebhookPrivacySettings :  IEquatable<WebhookPrivacySettings>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookPrivacySettings" /> class.
-            /// </summary>
-                /// <param name="result">`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. .</param>
+        /// Initializes a new instance of the <see cref="WebhookPrivacySettings" /> class.
+        /// </summary>
+        /// <param name="result">`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. .</param>
         public WebhookPrivacySettings(bool? result = default(bool?))
         {
-                                                    this.Result = result;
+            this.Result = result;
         }
-        
-                    /// <summary>
-                        /// `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. 
-                        /// </summary>
-                        /// <value>`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. 
+        /// </summary>
+        /// <value>`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookPrivacySettings {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookPrivacySettings {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookPrivacySettings instances are equal
-            /// </summary>
+        /// Returns true if WebhookPrivacySettings instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookPrivacySettings to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookPrivacySettings? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

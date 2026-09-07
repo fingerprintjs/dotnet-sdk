@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// ClonedApp
+    /// </summary>
+    [DataContract]
+    public class ClonedApp : IEquatable<ClonedApp>
+    {
+
+
         /// <summary>
-            /// ClonedApp
-            /// </summary>
-        [DataContract]
-                public class ClonedApp :  IEquatable<ClonedApp>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="ClonedApp" /> class.
-            /// </summary>
-                /// <param name="result">Android specific cloned application detection. There are 2 values:    * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected).   * `false` - No signs of cloned application detected or the client is not Android.  (required).</param>
+        /// Initializes a new instance of the <see cref="ClonedApp" /> class.
+        /// </summary>
+        /// <param name="result">Android specific cloned application detection. There are 2 values:    * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected).   * `false` - No signs of cloned application detected or the client is not Android.  (required).</param>
         public ClonedApp(bool? result = default(bool?))
         {
-                            // to ensure "result" is required (not null)
-                            // swagger debug: ClonedApp Result
-        
-                            if (result == null)
-                            {
-                            throw new InvalidDataException("result is a required property for ClonedApp and cannot be null");
-                            }
-                            else
-                            {
-                            this.Result = result;
-                            }
+            // to ensure "result" is required (not null)
+            // swagger debug: ClonedApp Result
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for ClonedApp and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
-        
-                    /// <summary>
-                        /// Android specific cloned application detection. There are 2 values:    * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected).   * `false` - No signs of cloned application detected or the client is not Android. 
-                        /// </summary>
-                        /// <value>Android specific cloned application detection. There are 2 values:    * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected).   * `false` - No signs of cloned application detected or the client is not Android. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Android specific cloned application detection. There are 2 values:    * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected).   * `false` - No signs of cloned application detected or the client is not Android. 
+        /// </summary>
+        /// <value>Android specific cloned application detection. There are 2 values:    * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected).   * `false` - No signs of cloned application detected or the client is not Android. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class ClonedApp {\n");
+            var sb = new StringBuilder();
+            sb.Append("class ClonedApp {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if ClonedApp instances are equal
-            /// </summary>
+        /// Returns true if ClonedApp instances are equal
+        /// </summary>
         /// <param name="input">Instance of ClonedApp to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(ClonedApp? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

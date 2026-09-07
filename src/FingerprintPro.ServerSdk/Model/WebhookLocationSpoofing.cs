@@ -13,87 +13,87 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookLocationSpoofing
+    /// </summary>
+    [DataContract]
+    public class WebhookLocationSpoofing : IEquatable<WebhookLocationSpoofing>
+    {
+
+
         /// <summary>
-            /// WebhookLocationSpoofing
-            /// </summary>
-        [DataContract]
-                public class WebhookLocationSpoofing :  IEquatable<WebhookLocationSpoofing>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookLocationSpoofing" /> class.
-            /// </summary>
-                /// <param name="result">Flag indicating whether the request came from a mobile device with location spoofing enabled..</param>
+        /// Initializes a new instance of the <see cref="WebhookLocationSpoofing" /> class.
+        /// </summary>
+        /// <param name="result">Flag indicating whether the request came from a mobile device with location spoofing enabled..</param>
         public WebhookLocationSpoofing(bool? result = default(bool?))
         {
-                                                    this.Result = result;
+            this.Result = result;
         }
-        
-                    /// <summary>
-                        /// Flag indicating whether the request came from a mobile device with location spoofing enabled.
-                        /// </summary>
-                        /// <value>Flag indicating whether the request came from a mobile device with location spoofing enabled.</value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Flag indicating whether the request came from a mobile device with location spoofing enabled.
+        /// </summary>
+        /// <value>Flag indicating whether the request came from a mobile device with location spoofing enabled.</value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookLocationSpoofing {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookLocationSpoofing {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookLocationSpoofing instances are equal
-            /// </summary>
+        /// Returns true if WebhookLocationSpoofing instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookLocationSpoofing to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookLocationSpoofing? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

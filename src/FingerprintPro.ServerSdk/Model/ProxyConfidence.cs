@@ -13,28 +13,29 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
-            /// <summary>
-            /// Confidence level of the proxy detection. If a proxy is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". 
-            /// </summary>
-            /// <value>Confidence level of the proxy detection. If a proxy is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". </value>
-            [JsonConverter(typeof(JsonStringEnumConverter))]
-                        public enum ProxyConfidence
-            {
-                /// <summary>
-                /// Enum Low for value: low
-                /// </summary>
-                [EnumMember(Value = "low")]
-                Low = 1,
-                /// <summary>
-                /// Enum Medium for value: medium
-                /// </summary>
-                [EnumMember(Value = "medium")]
-                Medium = 2,
-                /// <summary>
-                /// Enum High for value: high
-                /// </summary>
-                [EnumMember(Value = "high")]
-                High = 3            }
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// Confidence level of the proxy detection. If a proxy is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". 
+    /// </summary>
+    /// <value>Confidence level of the proxy detection. If a proxy is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". </value>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum ProxyConfidence
+    {
+        /// <summary>
+        /// Enum Low for value: low
+        /// </summary>
+        [EnumMember(Value = "low")]
+        Low = 1,
+        /// <summary>
+        /// Enum Medium for value: medium
+        /// </summary>
+        [EnumMember(Value = "medium")]
+        Medium = 2,
+        /// <summary>
+        /// Enum High for value: high
+        /// </summary>
+        [EnumMember(Value = "high")]
+        High = 3
+    }
 }

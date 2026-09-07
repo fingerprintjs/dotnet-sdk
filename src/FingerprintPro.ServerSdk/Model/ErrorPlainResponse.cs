@@ -13,96 +13,96 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// ErrorPlainResponse
+    /// </summary>
+    [DataContract]
+    public class ErrorPlainResponse : IEquatable<ErrorPlainResponse>
+    {
+
+
         /// <summary>
-            /// ErrorPlainResponse
-            /// </summary>
-        [DataContract]
-                public class ErrorPlainResponse :  IEquatable<ErrorPlainResponse>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="ErrorPlainResponse" /> class.
-            /// </summary>
-                /// <param name="error">error (required).</param>
+        /// Initializes a new instance of the <see cref="ErrorPlainResponse" /> class.
+        /// </summary>
+        /// <param name="error">error (required).</param>
         public ErrorPlainResponse(string error = default(string))
         {
-                            // to ensure "error" is required (not null)
-                            // swagger debug: ErrorPlainResponse Error
-        
-                            if (error == null)
-                            {
-                            throw new InvalidDataException("error is a required property for ErrorPlainResponse and cannot be null");
-                            }
-                            else
-                            {
-                            this.Error = error;
-                            }
+            // to ensure "error" is required (not null)
+            // swagger debug: ErrorPlainResponse Error
+
+            if (error == null)
+            {
+                throw new InvalidDataException("error is a required property for ErrorPlainResponse and cannot be null");
+            }
+            else
+            {
+                this.Error = error;
+            }
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Error
-                        /// </summary>
-                    [DataMember(Name="error", EmitDefaultValue=false)]
-                    [JsonPropertyName("error")]
-                    public string Error { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
+        public string Error { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class ErrorPlainResponse {\n");
+            var sb = new StringBuilder();
+            sb.Append("class ErrorPlainResponse {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if ErrorPlainResponse instances are equal
-            /// </summary>
+        /// Returns true if ErrorPlainResponse instances are equal
+        /// </summary>
         /// <param name="input">Instance of ErrorPlainResponse to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(ErrorPlainResponse? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Error == input.Error ||
-            (this.Error != null &&
-            this.Error.Equals(input.Error))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Error != null)
-            hashCode = hashCode * 59 + this.Error.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

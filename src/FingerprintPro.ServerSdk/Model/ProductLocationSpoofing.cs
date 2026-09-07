@@ -13,103 +13,103 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// ProductLocationSpoofing
+    /// </summary>
+    [DataContract]
+    public class ProductLocationSpoofing : IEquatable<ProductLocationSpoofing>
+    {
+
+
         /// <summary>
-            /// ProductLocationSpoofing
-            /// </summary>
-        [DataContract]
-                public class ProductLocationSpoofing :  IEquatable<ProductLocationSpoofing>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="ProductLocationSpoofing" /> class.
-            /// </summary>
-                /// <param name="data">data.</param>
-                /// <param name="error">error.</param>
+        /// Initializes a new instance of the <see cref="ProductLocationSpoofing" /> class.
+        /// </summary>
+        /// <param name="data">data.</param>
+        /// <param name="error">error.</param>
         public ProductLocationSpoofing(LocationSpoofing data = default(LocationSpoofing), Error error = default(Error))
         {
-                                                    this.Data = data;
-                                                    this.Error = error;
+            this.Data = data;
+            this.Error = error;
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Data
-                        /// </summary>
-                    [DataMember(Name="data", EmitDefaultValue=false)]
-                    [JsonPropertyName("data")]
-                    public LocationSpoofing Data { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Error
-                        /// </summary>
-                    [DataMember(Name="error", EmitDefaultValue=false)]
-                    [JsonPropertyName("error")]
-                    public Error Error { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Data
+        /// </summary>
+        [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
+        public LocationSpoofing Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
+        public Error Error { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class ProductLocationSpoofing {\n");
+            var sb = new StringBuilder();
+            sb.Append("class ProductLocationSpoofing {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if ProductLocationSpoofing instances are equal
-            /// </summary>
+        /// Returns true if ProductLocationSpoofing instances are equal
+        /// </summary>
         /// <param name="input">Instance of ProductLocationSpoofing to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(ProductLocationSpoofing? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Data == input.Data ||
-            (this.Data != null &&
-            this.Data.Equals(input.Data))
-            ) && 
-            (
-            this.Error == input.Error ||
-            (this.Error != null &&
-            this.Error.Equals(input.Error))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Data == input.Data ||
+                (this.Data != null &&
+                this.Data.Equals(input.Data))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Data != null)
-            hashCode = hashCode * 59 + this.Data.GetHashCode();
-            if (this.Error != null)
-            hashCode = hashCode * 59 + this.Error.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Data != null)
+                    hashCode = hashCode * 59 + this.Data.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

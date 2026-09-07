@@ -13,122 +13,122 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// EventsUpdateRequest
+    /// </summary>
+    [DataContract]
+    public class EventsUpdateRequest : IEquatable<EventsUpdateRequest>
+    {
+
+
         /// <summary>
-            /// EventsUpdateRequest
-            /// </summary>
-        [DataContract]
-                public class EventsUpdateRequest :  IEquatable<EventsUpdateRequest>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="EventsUpdateRequest" /> class.
-            /// </summary>
-                /// <param name="linkedId">LinkedID value to assign to the existing event.</param>
-                /// <param name="tag">tag.</param>
-                /// <param name="suspect">Suspect flag indicating observed suspicious or fraudulent event.</param>
+        /// Initializes a new instance of the <see cref="EventsUpdateRequest" /> class.
+        /// </summary>
+        /// <param name="linkedId">LinkedID value to assign to the existing event.</param>
+        /// <param name="tag">tag.</param>
+        /// <param name="suspect">Suspect flag indicating observed suspicious or fraudulent event.</param>
         public EventsUpdateRequest(string linkedId = default(string), Tag tag = default(Tag), bool? suspect = default(bool?))
         {
-                                                    this.LinkedId = linkedId;
-                                                    this.Tag = tag;
-                                                    this.Suspect = suspect;
+            this.LinkedId = linkedId;
+            this.Tag = tag;
+            this.Suspect = suspect;
         }
-        
-                    /// <summary>
-                        /// LinkedID value to assign to the existing event
-                        /// </summary>
-                        /// <value>LinkedID value to assign to the existing event</value>
-                    [DataMember(Name="linkedId", EmitDefaultValue=false)]
-                    [JsonPropertyName("linkedId")]
-                    public string LinkedId { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Tag
-                        /// </summary>
-                    [DataMember(Name="tag", EmitDefaultValue=false)]
-                    [JsonPropertyName("tag")]
-                    public Tag Tag { get; set; }
-        
-                    /// <summary>
-                        /// Suspect flag indicating observed suspicious or fraudulent event
-                        /// </summary>
-                        /// <value>Suspect flag indicating observed suspicious or fraudulent event</value>
-                    [DataMember(Name="suspect", EmitDefaultValue=false)]
-                    [JsonPropertyName("suspect")]
-                    public bool? Suspect { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// LinkedID value to assign to the existing event
+        /// </summary>
+        /// <value>LinkedID value to assign to the existing event</value>
+        [DataMember(Name = "linkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("linkedId")]
+        public string LinkedId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tag
+        /// </summary>
+        [DataMember(Name = "tag", EmitDefaultValue = false)]
+        [JsonPropertyName("tag")]
+        public Tag Tag { get; set; }
+
+        /// <summary>
+        /// Suspect flag indicating observed suspicious or fraudulent event
+        /// </summary>
+        /// <value>Suspect flag indicating observed suspicious or fraudulent event</value>
+        [DataMember(Name = "suspect", EmitDefaultValue = false)]
+        [JsonPropertyName("suspect")]
+        public bool? Suspect { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class EventsUpdateRequest {\n");
+            var sb = new StringBuilder();
+            sb.Append("class EventsUpdateRequest {\n");
             sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
             sb.Append("  Tag: ").Append(Tag).Append("\n");
             sb.Append("  Suspect: ").Append(Suspect).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if EventsUpdateRequest instances are equal
-            /// </summary>
+        /// Returns true if EventsUpdateRequest instances are equal
+        /// </summary>
         /// <param name="input">Instance of EventsUpdateRequest to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(EventsUpdateRequest? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.LinkedId == input.LinkedId ||
-            (this.LinkedId != null &&
-            this.LinkedId.Equals(input.LinkedId))
-            ) && 
-            (
-            this.Tag == input.Tag ||
-            (this.Tag != null &&
-            this.Tag.Equals(input.Tag))
-            ) && 
-            (
-            this.Suspect == input.Suspect ||
-            (this.Suspect != null &&
-            this.Suspect.Equals(input.Suspect))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.LinkedId == input.LinkedId ||
+                (this.LinkedId != null &&
+                this.LinkedId.Equals(input.LinkedId))
+                ) &&
+                (
+                this.Tag == input.Tag ||
+                (this.Tag != null &&
+                this.Tag.Equals(input.Tag))
+                ) &&
+                (
+                this.Suspect == input.Suspect ||
+                (this.Suspect != null &&
+                this.Suspect.Equals(input.Suspect))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.LinkedId != null)
-            hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
-            if (this.Tag != null)
-            hashCode = hashCode * 59 + this.Tag.GetHashCode();
-            if (this.Suspect != null)
-            hashCode = hashCode * 59 + this.Suspect.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.LinkedId != null)
+                    hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
+                if (this.Tag != null)
+                    hashCode = hashCode * 59 + this.Tag.GetHashCode();
+                if (this.Suspect != null)
+                    hashCode = hashCode * 59 + this.Suspect.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

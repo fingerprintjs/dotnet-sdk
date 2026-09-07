@@ -13,139 +13,139 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookProxy
+    /// </summary>
+    [DataContract]
+    public class WebhookProxy : IEquatable<WebhookProxy>
+    {
+
+
         /// <summary>
-            /// WebhookProxy
-            /// </summary>
-        [DataContract]
-                public class WebhookProxy :  IEquatable<WebhookProxy>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookProxy" /> class.
-            /// </summary>
-                /// <param name="result">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
-                /// <param name="confidence">confidence.</param>
-                /// <param name="details">details.</param>
-                /// <param name="mlScore">Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
+        /// Initializes a new instance of the <see cref="WebhookProxy" /> class.
+        /// </summary>
+        /// <param name="result">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
+        /// <param name="confidence">confidence.</param>
+        /// <param name="details">details.</param>
+        /// <param name="mlScore">Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         public WebhookProxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence), ProxyDetails details = default(ProxyDetails), double? mlScore = default(double?))
         {
-                                                    this.Result = result;
-                                                    this.Confidence = confidence;
-                                                    this.Details = details;
-                                                    this.MlScore = mlScore;
+            this.Result = result;
+            this.Confidence = confidence;
+            this.Details = details;
+            this.MlScore = mlScore;
         }
-        
-                    /// <summary>
-                        /// IP address was used by a public proxy provider or belonged to a known recent residential proxy 
-                        /// </summary>
-                        /// <value>IP address was used by a public proxy provider or belonged to a known recent residential proxy </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Confidence
-                        /// </summary>
-                    [DataMember(Name="confidence", EmitDefaultValue=false)]
-                    [JsonPropertyName("confidence")]
-                    public ProxyConfidence Confidence { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Details
-                        /// </summary>
-                    [DataMember(Name="details", EmitDefaultValue=false)]
-                    [JsonPropertyName("details")]
-                    public ProxyDetails Details { get; set; }
-        
-                    /// <summary>
-                        /// Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
-                        /// </summary>
-                        /// <value>Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
-                    [DataMember(Name="mlScore", EmitDefaultValue=false)]
-                    [JsonPropertyName("mlScore")]
-                    public double? MlScore { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// IP address was used by a public proxy provider or belonged to a known recent residential proxy 
+        /// </summary>
+        /// <value>IP address was used by a public proxy provider or belonged to a known recent residential proxy </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Confidence
+        /// </summary>
+        [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
+        public ProxyConfidence Confidence { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Details
+        /// </summary>
+        [DataMember(Name = "details", EmitDefaultValue = false)]
+        [JsonPropertyName("details")]
+        public ProxyDetails Details { get; set; }
+
+        /// <summary>
+        /// Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+        /// </summary>
+        /// <value>Machine learning-based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
+        [JsonPropertyName("mlScore")]
+        public double? MlScore { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookProxy {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookProxy {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("  Details: ").Append(Details).Append("\n");
             sb.Append("  MlScore: ").Append(MlScore).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookProxy instances are equal
-            /// </summary>
+        /// Returns true if WebhookProxy instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookProxy to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookProxy? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            ) && 
-            (
-            this.Confidence == input.Confidence ||
-            (this.Confidence != null &&
-            this.Confidence.Equals(input.Confidence))
-            ) && 
-            (
-            this.Details == input.Details ||
-            (this.Details != null &&
-            this.Details.Equals(input.Details))
-            ) && 
-            (
-            this.MlScore == input.MlScore ||
-            (this.MlScore != null &&
-            this.MlScore.Equals(input.MlScore))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.Confidence == input.Confidence ||
+                (this.Confidence != null &&
+                this.Confidence.Equals(input.Confidence))
+                ) &&
+                (
+                this.Details == input.Details ||
+                (this.Details != null &&
+                this.Details.Equals(input.Details))
+                ) &&
+                (
+                this.MlScore == input.MlScore ||
+                (this.MlScore != null &&
+                this.MlScore.Equals(input.MlScore))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-            if (this.Confidence != null)
-            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-            if (this.Details != null)
-            hashCode = hashCode * 59 + this.Details.GetHashCode();
-            if (this.MlScore != null)
-            hashCode = hashCode * 59 + this.MlScore.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Confidence != null)
+                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+                if (this.Details != null)
+                    hashCode = hashCode * 59 + this.Details.GetHashCode();
+                if (this.MlScore != null)
+                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

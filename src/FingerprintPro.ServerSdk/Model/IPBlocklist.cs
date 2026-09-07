@@ -13,124 +13,124 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// IPBlocklist
+    /// </summary>
+    [DataContract]
+    public class IPBlocklist : IEquatable<IPBlocklist>
+    {
+
+
         /// <summary>
-            /// IPBlocklist
-            /// </summary>
-        [DataContract]
-                public class IPBlocklist :  IEquatable<IPBlocklist>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="IPBlocklist" /> class.
-            /// </summary>
-                /// <param name="result">`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise.  (required).</param>
-                /// <param name="details">details (required).</param>
+        /// Initializes a new instance of the <see cref="IPBlocklist" /> class.
+        /// </summary>
+        /// <param name="result">`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise.  (required).</param>
+        /// <param name="details">details (required).</param>
         public IPBlocklist(bool? result = default(bool?), IPBlocklistDetails details = default(IPBlocklistDetails))
         {
-                            // to ensure "result" is required (not null)
-                            // swagger debug: IPBlocklist Result
-        
-                            if (result == null)
-                            {
-                            throw new InvalidDataException("result is a required property for IPBlocklist and cannot be null");
-                            }
-                            else
-                            {
-                            this.Result = result;
-                            }
-                            // to ensure "details" is required (not null)
-                            // swagger debug: IPBlocklist Details
-        
-                            if (details == null)
-                            {
-                            throw new InvalidDataException("details is a required property for IPBlocklist and cannot be null");
-                            }
-                            else
-                            {
-                            this.Details = details;
-                            }
+            // to ensure "result" is required (not null)
+            // swagger debug: IPBlocklist Result
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for IPBlocklist and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
+            // to ensure "details" is required (not null)
+            // swagger debug: IPBlocklist Details
+
+            if (details == null)
+            {
+                throw new InvalidDataException("details is a required property for IPBlocklist and cannot be null");
+            }
+            else
+            {
+                this.Details = details;
+            }
         }
-        
-                    /// <summary>
-                        /// `true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. 
-                        /// </summary>
-                        /// <value>`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Details
-                        /// </summary>
-                    [DataMember(Name="details", EmitDefaultValue=false)]
-                    [JsonPropertyName("details")]
-                    public IPBlocklistDetails Details { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. 
+        /// </summary>
+        /// <value>`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Details
+        /// </summary>
+        [DataMember(Name = "details", EmitDefaultValue = false)]
+        [JsonPropertyName("details")]
+        public IPBlocklistDetails Details { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class IPBlocklist {\n");
+            var sb = new StringBuilder();
+            sb.Append("class IPBlocklist {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Details: ").Append(Details).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if IPBlocklist instances are equal
-            /// </summary>
+        /// Returns true if IPBlocklist instances are equal
+        /// </summary>
         /// <param name="input">Instance of IPBlocklist to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(IPBlocklist? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            ) && 
-            (
-            this.Details == input.Details ||
-            (this.Details != null &&
-            this.Details.Equals(input.Details))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.Details == input.Details ||
+                (this.Details != null &&
+                this.Details.Equals(input.Details))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-            if (this.Details != null)
-            hashCode = hashCode * 59 + this.Details.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Details != null)
+                    hashCode = hashCode * 59 + this.Details.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

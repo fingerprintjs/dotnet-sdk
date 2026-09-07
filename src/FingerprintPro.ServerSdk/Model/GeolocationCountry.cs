@@ -13,123 +13,123 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// GeolocationCountry
+    /// </summary>
+    [DataContract]
+    public class GeolocationCountry : IEquatable<GeolocationCountry>
+    {
+
+
         /// <summary>
-            /// GeolocationCountry
-            /// </summary>
-        [DataContract]
-                public class GeolocationCountry :  IEquatable<GeolocationCountry>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="GeolocationCountry" /> class.
-            /// </summary>
-                /// <param name="code">code (required).</param>
-                /// <param name="name">name (required).</param>
+        /// Initializes a new instance of the <see cref="GeolocationCountry" /> class.
+        /// </summary>
+        /// <param name="code">code (required).</param>
+        /// <param name="name">name (required).</param>
         public GeolocationCountry(string code = default(string), string name = default(string))
         {
-                            // to ensure "code" is required (not null)
-                            // swagger debug: GeolocationCountry Code
-        
-                            if (code == null)
-                            {
-                            throw new InvalidDataException("code is a required property for GeolocationCountry and cannot be null");
-                            }
-                            else
-                            {
-                            this.Code = code;
-                            }
-                            // to ensure "name" is required (not null)
-                            // swagger debug: GeolocationCountry Name
-        
-                            if (name == null)
-                            {
-                            throw new InvalidDataException("name is a required property for GeolocationCountry and cannot be null");
-                            }
-                            else
-                            {
-                            this.Name = name;
-                            }
+            // to ensure "code" is required (not null)
+            // swagger debug: GeolocationCountry Code
+
+            if (code == null)
+            {
+                throw new InvalidDataException("code is a required property for GeolocationCountry and cannot be null");
+            }
+            else
+            {
+                this.Code = code;
+            }
+            // to ensure "name" is required (not null)
+            // swagger debug: GeolocationCountry Name
+
+            if (name == null)
+            {
+                throw new InvalidDataException("name is a required property for GeolocationCountry and cannot be null");
+            }
+            else
+            {
+                this.Name = name;
+            }
         }
-        
-                    /// <summary>
-                        /// Gets or Sets Code
-                        /// </summary>
-                    [DataMember(Name="code", EmitDefaultValue=false)]
-                    [JsonPropertyName("code")]
-                    public string Code { get; set; }
-        
-                    /// <summary>
-                        /// Gets or Sets Name
-                        /// </summary>
-                    [DataMember(Name="name", EmitDefaultValue=false)]
-                    [JsonPropertyName("name")]
-                    public string Name { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// Gets or Sets Code
+        /// </summary>
+        [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class GeolocationCountry {\n");
+            var sb = new StringBuilder();
+            sb.Append("class GeolocationCountry {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if GeolocationCountry instances are equal
-            /// </summary>
+        /// Returns true if GeolocationCountry instances are equal
+        /// </summary>
         /// <param name="input">Instance of GeolocationCountry to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(GeolocationCountry? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Code == input.Code ||
-            (this.Code != null &&
-            this.Code.Equals(input.Code))
-            ) && 
-            (
-            this.Name == input.Name ||
-            (this.Name != null &&
-            this.Name.Equals(input.Name))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Code == input.Code ||
+                (this.Code != null &&
+                this.Code.Equals(input.Code))
+                ) &&
+                (
+                this.Name == input.Name ||
+                (this.Name != null &&
+                this.Name.Equals(input.Name))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Code != null)
-            hashCode = hashCode * 59 + this.Code.GetHashCode();
-            if (this.Name != null)
-            hashCode = hashCode * 59 + this.Name.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Code != null)
+                    hashCode = hashCode * 59 + this.Code.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }

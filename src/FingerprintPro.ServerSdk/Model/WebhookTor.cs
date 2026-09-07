@@ -13,87 +13,87 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-        namespace FingerprintPro.ServerSdk.Model
-        {
+namespace FingerprintPro.ServerSdk.Model
+{
+    /// <summary>
+    /// WebhookTor
+    /// </summary>
+    [DataContract]
+    public class WebhookTor : IEquatable<WebhookTor>
+    {
+
+
         /// <summary>
-            /// WebhookTor
-            /// </summary>
-        [DataContract]
-                public class WebhookTor :  IEquatable<WebhookTor>
-        {
-        
-        
-        /// <summary>
-            /// Initializes a new instance of the <see cref="WebhookTor" /> class.
-            /// </summary>
-                /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise. .</param>
+        /// Initializes a new instance of the <see cref="WebhookTor" /> class.
+        /// </summary>
+        /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise. .</param>
         public WebhookTor(bool? result = default(bool?))
         {
-                                                    this.Result = result;
+            this.Result = result;
         }
-        
-                    /// <summary>
-                        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
-                        /// </summary>
-                        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
-                    [DataMember(Name="result", EmitDefaultValue=false)]
-                    [JsonPropertyName("result")]
-                    public bool? Result { get; set; }
-        
+
         /// <summary>
-            /// Returns the string presentation of the object
-            /// </summary>
+        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
+        /// </summary>
+        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
+        public bool? Result { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-        var sb = new StringBuilder();
-        sb.Append("class WebhookTor {\n");
+            var sb = new StringBuilder();
+            sb.Append("class WebhookTor {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
+            sb.Append("}\n");
+            return sb.ToString();
         }
-        
+
         /// <summary>
-            /// Returns the JSON string presentation of the object
-            /// </summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-        return JsonUtils.Serialize(this);
+            return JsonUtils.Serialize(this);
         }
-        
+
         /// <summary>
-            /// Returns true if WebhookTor instances are equal
-            /// </summary>
+        /// Returns true if WebhookTor instances are equal
+        /// </summary>
         /// <param name="input">Instance of WebhookTor to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookTor? input)
         {
-        if (input == null)
-        return false;
-        
-        return 
-            (
-            this.Result == input.Result ||
-            (this.Result != null &&
-            this.Result.Equals(input.Result))
-            );
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
+                );
         }
-        
+
         /// <summary>
-            /// Gets the hash code
-            /// </summary>
+        /// Gets the hash code
+        /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-        unchecked // Overflow is fine, just wrap
-        {
-            int hashCode = 41;
-            if (this.Result != null)
-            hashCode = hashCode * 59 + this.Result.GetHashCode();
-        return hashCode;
-        }
-        }
-        
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                return hashCode;
             }
+        }
+
+    }
 }
