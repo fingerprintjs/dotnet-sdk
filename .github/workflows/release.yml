@@ -17,6 +17,7 @@ jobs:
       publish-command: bash ./changeset-publish.sh
       language: dotnet
       language-version: '8.x'
+      unmarkReleaseAsLatest: ${{ github.ref_name == 'api-v3' }}
       prepare-command: |
         dotnet --version && dotnet restore && dotnet list package
         dotnet build --configuration Release --no-restore
