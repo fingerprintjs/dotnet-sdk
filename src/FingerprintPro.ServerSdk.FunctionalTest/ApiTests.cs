@@ -101,7 +101,8 @@ public class ApiTests
     [Test]
     public void SearchEvents_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
+        // Use 89 days instead of 90 to avoid flakiness from request latency pushing the start time past the 90-day limit.
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
         var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
 
         var response = _api.SearchEvents(
