@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,164 +13,164 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// BrowserDetails
-    /// </summary>
-    [DataContract]
-    public class BrowserDetails : IEquatable<BrowserDetails>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrowserDetails" /> class.
-        /// </summary>
-        /// <param name="browserName">browserName (required).</param>
-        /// <param name="browserMajorVersion">browserMajorVersion (required).</param>
-        /// <param name="browserFullVersion">browserFullVersion (required).</param>
-        /// <param name="os">os (required).</param>
-        /// <param name="osVersion">osVersion (required).</param>
-        /// <param name="device">device (required).</param>
-        /// <param name="userAgent">userAgent (required).</param>
+            /// BrowserDetails
+            /// </summary>
+        [DataContract]
+                public class BrowserDetails :  IEquatable<BrowserDetails>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="BrowserDetails" /> class.
+            /// </summary>
+                /// <param name="browserName">browserName (required).</param>
+                /// <param name="browserMajorVersion">browserMajorVersion (required).</param>
+                /// <param name="browserFullVersion">browserFullVersion (required).</param>
+                /// <param name="os">os (required).</param>
+                /// <param name="osVersion">osVersion (required).</param>
+                /// <param name="device">device (required).</param>
+                /// <param name="userAgent">userAgent (required).</param>
         public BrowserDetails(string browserName = default(string), string browserMajorVersion = default(string), string browserFullVersion = default(string), string os = default(string), string osVersion = default(string), string device = default(string), string userAgent = default(string))
         {
-            // to ensure "browserName" is required (not null)
-            // swagger debug: BrowserDetails BrowserName
-
-            if (browserName == null)
-            {
-                throw new InvalidDataException("browserName is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.BrowserName = browserName;
-            }
-            // to ensure "browserMajorVersion" is required (not null)
-            // swagger debug: BrowserDetails BrowserMajorVersion
-
-            if (browserMajorVersion == null)
-            {
-                throw new InvalidDataException("browserMajorVersion is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.BrowserMajorVersion = browserMajorVersion;
-            }
-            // to ensure "browserFullVersion" is required (not null)
-            // swagger debug: BrowserDetails BrowserFullVersion
-
-            if (browserFullVersion == null)
-            {
-                throw new InvalidDataException("browserFullVersion is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.BrowserFullVersion = browserFullVersion;
-            }
-            // to ensure "os" is required (not null)
-            // swagger debug: BrowserDetails Os
-
-            if (os == null)
-            {
-                throw new InvalidDataException("os is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.Os = os;
-            }
-            // to ensure "osVersion" is required (not null)
-            // swagger debug: BrowserDetails OsVersion
-
-            if (osVersion == null)
-            {
-                throw new InvalidDataException("osVersion is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.OsVersion = osVersion;
-            }
-            // to ensure "device" is required (not null)
-            // swagger debug: BrowserDetails Device
-
-            if (device == null)
-            {
-                throw new InvalidDataException("device is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.Device = device;
-            }
-            // to ensure "userAgent" is required (not null)
-            // swagger debug: BrowserDetails UserAgent
-
-            if (userAgent == null)
-            {
-                throw new InvalidDataException("userAgent is a required property for BrowserDetails and cannot be null");
-            }
-            else
-            {
-                this.UserAgent = userAgent;
-            }
+                            // to ensure "browserName" is required (not null)
+                            // swagger debug: BrowserDetails BrowserName
+        
+                            if (browserName == null)
+                            {
+                            throw new InvalidDataException("browserName is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.BrowserName = browserName;
+                            }
+                            // to ensure "browserMajorVersion" is required (not null)
+                            // swagger debug: BrowserDetails BrowserMajorVersion
+        
+                            if (browserMajorVersion == null)
+                            {
+                            throw new InvalidDataException("browserMajorVersion is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.BrowserMajorVersion = browserMajorVersion;
+                            }
+                            // to ensure "browserFullVersion" is required (not null)
+                            // swagger debug: BrowserDetails BrowserFullVersion
+        
+                            if (browserFullVersion == null)
+                            {
+                            throw new InvalidDataException("browserFullVersion is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.BrowserFullVersion = browserFullVersion;
+                            }
+                            // to ensure "os" is required (not null)
+                            // swagger debug: BrowserDetails Os
+        
+                            if (os == null)
+                            {
+                            throw new InvalidDataException("os is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.Os = os;
+                            }
+                            // to ensure "osVersion" is required (not null)
+                            // swagger debug: BrowserDetails OsVersion
+        
+                            if (osVersion == null)
+                            {
+                            throw new InvalidDataException("osVersion is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.OsVersion = osVersion;
+                            }
+                            // to ensure "device" is required (not null)
+                            // swagger debug: BrowserDetails Device
+        
+                            if (device == null)
+                            {
+                            throw new InvalidDataException("device is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.Device = device;
+                            }
+                            // to ensure "userAgent" is required (not null)
+                            // swagger debug: BrowserDetails UserAgent
+        
+                            if (userAgent == null)
+                            {
+                            throw new InvalidDataException("userAgent is a required property for BrowserDetails and cannot be null");
+                            }
+                            else
+                            {
+                            this.UserAgent = userAgent;
+                            }
         }
-
+        
+                    /// <summary>
+                        /// Gets or Sets BrowserName
+                        /// </summary>
+                    [DataMember(Name="browserName", EmitDefaultValue=false)]
+                    [JsonPropertyName("browserName")]
+                    public string BrowserName { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets BrowserMajorVersion
+                        /// </summary>
+                    [DataMember(Name="browserMajorVersion", EmitDefaultValue=false)]
+                    [JsonPropertyName("browserMajorVersion")]
+                    public string BrowserMajorVersion { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets BrowserFullVersion
+                        /// </summary>
+                    [DataMember(Name="browserFullVersion", EmitDefaultValue=false)]
+                    [JsonPropertyName("browserFullVersion")]
+                    public string BrowserFullVersion { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Os
+                        /// </summary>
+                    [DataMember(Name="os", EmitDefaultValue=false)]
+                    [JsonPropertyName("os")]
+                    public string Os { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets OsVersion
+                        /// </summary>
+                    [DataMember(Name="osVersion", EmitDefaultValue=false)]
+                    [JsonPropertyName("osVersion")]
+                    public string OsVersion { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Device
+                        /// </summary>
+                    [DataMember(Name="device", EmitDefaultValue=false)]
+                    [JsonPropertyName("device")]
+                    public string Device { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets UserAgent
+                        /// </summary>
+                    [DataMember(Name="userAgent", EmitDefaultValue=false)]
+                    [JsonPropertyName("userAgent")]
+                    public string UserAgent { get; set; }
+        
         /// <summary>
-        /// Gets or Sets BrowserName
-        /// </summary>
-        [DataMember(Name = "browserName", EmitDefaultValue = false)]
-        [JsonPropertyName("browserName")]
-        public string BrowserName { get; set; }
-
-        /// <summary>
-        /// Gets or Sets BrowserMajorVersion
-        /// </summary>
-        [DataMember(Name = "browserMajorVersion", EmitDefaultValue = false)]
-        [JsonPropertyName("browserMajorVersion")]
-        public string BrowserMajorVersion { get; set; }
-
-        /// <summary>
-        /// Gets or Sets BrowserFullVersion
-        /// </summary>
-        [DataMember(Name = "browserFullVersion", EmitDefaultValue = false)]
-        [JsonPropertyName("browserFullVersion")]
-        public string BrowserFullVersion { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Os
-        /// </summary>
-        [DataMember(Name = "os", EmitDefaultValue = false)]
-        [JsonPropertyName("os")]
-        public string Os { get; set; }
-
-        /// <summary>
-        /// Gets or Sets OsVersion
-        /// </summary>
-        [DataMember(Name = "osVersion", EmitDefaultValue = false)]
-        [JsonPropertyName("osVersion")]
-        public string OsVersion { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Device
-        /// </summary>
-        [DataMember(Name = "device", EmitDefaultValue = false)]
-        [JsonPropertyName("device")]
-        public string Device { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UserAgent
-        /// </summary>
-        [DataMember(Name = "userAgent", EmitDefaultValue = false)]
-        [JsonPropertyName("userAgent")]
-        public string UserAgent { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class BrowserDetails {\n");
+        var sb = new StringBuilder();
+        sb.Append("class BrowserDetails {\n");
             sb.Append("  BrowserName: ").Append(BrowserName).Append("\n");
             sb.Append("  BrowserMajorVersion: ").Append(BrowserMajorVersion).Append("\n");
             sb.Append("  BrowserFullVersion: ").Append(BrowserFullVersion).Append("\n");
@@ -178,93 +178,93 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  OsVersion: ").Append(OsVersion).Append("\n");
             sb.Append("  Device: ").Append(Device).Append("\n");
             sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if BrowserDetails instances are equal
-        /// </summary>
+            /// Returns true if BrowserDetails instances are equal
+            /// </summary>
         /// <param name="input">Instance of BrowserDetails to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(BrowserDetails? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.BrowserName == input.BrowserName ||
-                (this.BrowserName != null &&
-                this.BrowserName.Equals(input.BrowserName))
-                ) &&
-                (
-                this.BrowserMajorVersion == input.BrowserMajorVersion ||
-                (this.BrowserMajorVersion != null &&
-                this.BrowserMajorVersion.Equals(input.BrowserMajorVersion))
-                ) &&
-                (
-                this.BrowserFullVersion == input.BrowserFullVersion ||
-                (this.BrowserFullVersion != null &&
-                this.BrowserFullVersion.Equals(input.BrowserFullVersion))
-                ) &&
-                (
-                this.Os == input.Os ||
-                (this.Os != null &&
-                this.Os.Equals(input.Os))
-                ) &&
-                (
-                this.OsVersion == input.OsVersion ||
-                (this.OsVersion != null &&
-                this.OsVersion.Equals(input.OsVersion))
-                ) &&
-                (
-                this.Device == input.Device ||
-                (this.Device != null &&
-                this.Device.Equals(input.Device))
-                ) &&
-                (
-                this.UserAgent == input.UserAgent ||
-                (this.UserAgent != null &&
-                this.UserAgent.Equals(input.UserAgent))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.BrowserName == input.BrowserName ||
+            (this.BrowserName != null &&
+            this.BrowserName.Equals(input.BrowserName))
+            ) && 
+            (
+            this.BrowserMajorVersion == input.BrowserMajorVersion ||
+            (this.BrowserMajorVersion != null &&
+            this.BrowserMajorVersion.Equals(input.BrowserMajorVersion))
+            ) && 
+            (
+            this.BrowserFullVersion == input.BrowserFullVersion ||
+            (this.BrowserFullVersion != null &&
+            this.BrowserFullVersion.Equals(input.BrowserFullVersion))
+            ) && 
+            (
+            this.Os == input.Os ||
+            (this.Os != null &&
+            this.Os.Equals(input.Os))
+            ) && 
+            (
+            this.OsVersion == input.OsVersion ||
+            (this.OsVersion != null &&
+            this.OsVersion.Equals(input.OsVersion))
+            ) && 
+            (
+            this.Device == input.Device ||
+            (this.Device != null &&
+            this.Device.Equals(input.Device))
+            ) && 
+            (
+            this.UserAgent == input.UserAgent ||
+            (this.UserAgent != null &&
+            this.UserAgent.Equals(input.UserAgent))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.BrowserName != null)
-                    hashCode = hashCode * 59 + this.BrowserName.GetHashCode();
-                if (this.BrowserMajorVersion != null)
-                    hashCode = hashCode * 59 + this.BrowserMajorVersion.GetHashCode();
-                if (this.BrowserFullVersion != null)
-                    hashCode = hashCode * 59 + this.BrowserFullVersion.GetHashCode();
-                if (this.Os != null)
-                    hashCode = hashCode * 59 + this.Os.GetHashCode();
-                if (this.OsVersion != null)
-                    hashCode = hashCode * 59 + this.OsVersion.GetHashCode();
-                if (this.Device != null)
-                    hashCode = hashCode * 59 + this.Device.GetHashCode();
-                if (this.UserAgent != null)
-                    hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.BrowserName != null)
+            hashCode = hashCode * 59 + this.BrowserName.GetHashCode();
+            if (this.BrowserMajorVersion != null)
+            hashCode = hashCode * 59 + this.BrowserMajorVersion.GetHashCode();
+            if (this.BrowserFullVersion != null)
+            hashCode = hashCode * 59 + this.BrowserFullVersion.GetHashCode();
+            if (this.Os != null)
+            hashCode = hashCode * 59 + this.Os.GetHashCode();
+            if (this.OsVersion != null)
+            hashCode = hashCode * 59 + this.OsVersion.GetHashCode();
+            if (this.Device != null)
+            hashCode = hashCode * 59 + this.Device.GetHashCode();
+            if (this.UserAgent != null)
+            hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

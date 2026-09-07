@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// RelatedVisitor
-    /// </summary>
-    [DataContract]
-    public class RelatedVisitor : IEquatable<RelatedVisitor>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RelatedVisitor" /> class.
-        /// </summary>
-        /// <param name="visitorId">Visitor ID of a browser that originates from the same mobile device as the input visitor ID. (required).</param>
+            /// RelatedVisitor
+            /// </summary>
+        [DataContract]
+                public class RelatedVisitor :  IEquatable<RelatedVisitor>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="RelatedVisitor" /> class.
+            /// </summary>
+                /// <param name="visitorId">Visitor ID of a browser that originates from the same mobile device as the input visitor ID. (required).</param>
         public RelatedVisitor(string visitorId = default(string))
         {
-            // to ensure "visitorId" is required (not null)
-            // swagger debug: RelatedVisitor VisitorId
-
-            if (visitorId == null)
-            {
-                throw new InvalidDataException("visitorId is a required property for RelatedVisitor and cannot be null");
-            }
-            else
-            {
-                this.VisitorId = visitorId;
-            }
+                            // to ensure "visitorId" is required (not null)
+                            // swagger debug: RelatedVisitor VisitorId
+        
+                            if (visitorId == null)
+                            {
+                            throw new InvalidDataException("visitorId is a required property for RelatedVisitor and cannot be null");
+                            }
+                            else
+                            {
+                            this.VisitorId = visitorId;
+                            }
         }
-
+        
+                    /// <summary>
+                        /// Visitor ID of a browser that originates from the same mobile device as the input visitor ID.
+                        /// </summary>
+                        /// <value>Visitor ID of a browser that originates from the same mobile device as the input visitor ID.</value>
+                    [DataMember(Name="visitorId", EmitDefaultValue=false)]
+                    [JsonPropertyName("visitorId")]
+                    public string VisitorId { get; set; }
+        
         /// <summary>
-        /// Visitor ID of a browser that originates from the same mobile device as the input visitor ID.
-        /// </summary>
-        /// <value>Visitor ID of a browser that originates from the same mobile device as the input visitor ID.</value>
-        [DataMember(Name = "visitorId", EmitDefaultValue = false)]
-        [JsonPropertyName("visitorId")]
-        public string VisitorId { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class RelatedVisitor {\n");
+        var sb = new StringBuilder();
+        sb.Append("class RelatedVisitor {\n");
             sb.Append("  VisitorId: ").Append(VisitorId).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if RelatedVisitor instances are equal
-        /// </summary>
+            /// Returns true if RelatedVisitor instances are equal
+            /// </summary>
         /// <param name="input">Instance of RelatedVisitor to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(RelatedVisitor? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.VisitorId == input.VisitorId ||
-                (this.VisitorId != null &&
-                this.VisitorId.Equals(input.VisitorId))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.VisitorId == input.VisitorId ||
+            (this.VisitorId != null &&
+            this.VisitorId.Equals(input.VisitorId))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.VisitorId != null)
-                    hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.VisitorId != null)
+            hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

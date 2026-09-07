@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,122 +13,122 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Integration
-    /// </summary>
-    [DataContract]
-    public class Integration : IEquatable<Integration>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Integration" /> class.
-        /// </summary>
-        /// <param name="name">The name of the specific integration, e.g. \"fingerprint-pro-react\"..</param>
-        /// <param name="version">The version of the specific integration, e.g. \"3.11.10\"..</param>
-        /// <param name="subintegration">subintegration.</param>
+            /// Integration
+            /// </summary>
+        [DataContract]
+                public class Integration :  IEquatable<Integration>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="Integration" /> class.
+            /// </summary>
+                /// <param name="name">The name of the specific integration, e.g. \"fingerprint-pro-react\"..</param>
+                /// <param name="version">The version of the specific integration, e.g. \"3.11.10\"..</param>
+                /// <param name="subintegration">subintegration.</param>
         public Integration(string name = default(string), string version = default(string), IntegrationSubintegration subintegration = default(IntegrationSubintegration))
         {
-            this.Name = name;
-            this.Version = version;
-            this.Subintegration = subintegration;
+                                                    this.Name = name;
+                                                    this.Version = version;
+                                                    this.Subintegration = subintegration;
         }
-
+        
+                    /// <summary>
+                        /// The name of the specific integration, e.g. \"fingerprint-pro-react\".
+                        /// </summary>
+                        /// <value>The name of the specific integration, e.g. \"fingerprint-pro-react\".</value>
+                    [DataMember(Name="name", EmitDefaultValue=false)]
+                    [JsonPropertyName("name")]
+                    public string Name { get; set; }
+        
+                    /// <summary>
+                        /// The version of the specific integration, e.g. \"3.11.10\".
+                        /// </summary>
+                        /// <value>The version of the specific integration, e.g. \"3.11.10\".</value>
+                    [DataMember(Name="version", EmitDefaultValue=false)]
+                    [JsonPropertyName("version")]
+                    public string Version { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Subintegration
+                        /// </summary>
+                    [DataMember(Name="subintegration", EmitDefaultValue=false)]
+                    [JsonPropertyName("subintegration")]
+                    public IntegrationSubintegration Subintegration { get; set; }
+        
         /// <summary>
-        /// The name of the specific integration, e.g. \"fingerprint-pro-react\".
-        /// </summary>
-        /// <value>The name of the specific integration, e.g. \"fingerprint-pro-react\".</value>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// The version of the specific integration, e.g. \"3.11.10\".
-        /// </summary>
-        /// <value>The version of the specific integration, e.g. \"3.11.10\".</value>
-        [DataMember(Name = "version", EmitDefaultValue = false)]
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Subintegration
-        /// </summary>
-        [DataMember(Name = "subintegration", EmitDefaultValue = false)]
-        [JsonPropertyName("subintegration")]
-        public IntegrationSubintegration Subintegration { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class Integration {\n");
+        var sb = new StringBuilder();
+        sb.Append("class Integration {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("  Subintegration: ").Append(Subintegration).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if Integration instances are equal
-        /// </summary>
+            /// Returns true if Integration instances are equal
+            /// </summary>
         /// <param name="input">Instance of Integration to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Integration? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Name == input.Name ||
-                (this.Name != null &&
-                this.Name.Equals(input.Name))
-                ) &&
-                (
-                this.Version == input.Version ||
-                (this.Version != null &&
-                this.Version.Equals(input.Version))
-                ) &&
-                (
-                this.Subintegration == input.Subintegration ||
-                (this.Subintegration != null &&
-                this.Subintegration.Equals(input.Subintegration))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Name == input.Name ||
+            (this.Name != null &&
+            this.Name.Equals(input.Name))
+            ) && 
+            (
+            this.Version == input.Version ||
+            (this.Version != null &&
+            this.Version.Equals(input.Version))
+            ) && 
+            (
+            this.Subintegration == input.Subintegration ||
+            (this.Subintegration != null &&
+            this.Subintegration.Equals(input.Subintegration))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Version != null)
-                    hashCode = hashCode * 59 + this.Version.GetHashCode();
-                if (this.Subintegration != null)
-                    hashCode = hashCode * 59 + this.Subintegration.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Name != null)
+            hashCode = hashCode * 59 + this.Name.GetHashCode();
+            if (this.Version != null)
+            hashCode = hashCode * 59 + this.Version.GetHashCode();
+            if (this.Subintegration != null)
+            hashCode = hashCode * 59 + this.Subintegration.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

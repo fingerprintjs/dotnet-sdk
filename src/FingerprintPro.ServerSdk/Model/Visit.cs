@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,284 +13,284 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Visit
-    /// </summary>
-    [DataContract]
-    public class Visit : IEquatable<Visit>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Visit" /> class.
-        /// </summary>
-        /// <param name="requestId">Unique identifier of the user's request. (required).</param>
-        /// <param name="browserDetails">browserDetails (required).</param>
-        /// <param name="incognito">Flag if user used incognito session. (required).</param>
-        /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
-        /// <param name="ipLocation">ipLocation.</param>
-        /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
-        /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
-        /// <param name="time">Time expressed according to ISO 8601 in UTC format, when the request from the client agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible. (required).</param>
-        /// <param name="url">Page URL from which the request was sent. (required).</param>
-        /// <param name="tag">tag (required).</param>
-        /// <param name="confidence">confidence.</param>
-        /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
-        /// <param name="firstSeenAt">firstSeenAt (required).</param>
-        /// <param name="lastSeenAt">lastSeenAt (required).</param>
-        /// <param name="components">components.</param>
+            /// Visit
+            /// </summary>
+        [DataContract]
+                public class Visit :  IEquatable<Visit>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="Visit" /> class.
+            /// </summary>
+                /// <param name="requestId">Unique identifier of the user's request. (required).</param>
+                /// <param name="browserDetails">browserDetails (required).</param>
+                /// <param name="incognito">Flag if user used incognito session. (required).</param>
+                /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
+                /// <param name="ipLocation">ipLocation.</param>
+                /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
+                /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
+                /// <param name="time">Time expressed according to ISO 8601 in UTC format, when the request from the client agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible. (required).</param>
+                /// <param name="url">Page URL from which the request was sent. (required).</param>
+                /// <param name="tag">tag (required).</param>
+                /// <param name="confidence">confidence.</param>
+                /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
+                /// <param name="firstSeenAt">firstSeenAt (required).</param>
+                /// <param name="lastSeenAt">lastSeenAt (required).</param>
+                /// <param name="components">components.</param>
         public Visit(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes))
         {
-            // to ensure "requestId" is required (not null)
-            // swagger debug: Visit RequestId
-
-            if (requestId == null)
-            {
-                throw new InvalidDataException("requestId is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.RequestId = requestId;
-            }
-            // to ensure "browserDetails" is required (not null)
-            // swagger debug: Visit BrowserDetails
-
-            if (browserDetails == null)
-            {
-                throw new InvalidDataException("browserDetails is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.BrowserDetails = browserDetails;
-            }
-            // to ensure "incognito" is required (not null)
-            // swagger debug: Visit Incognito
-
-            if (incognito == null)
-            {
-                throw new InvalidDataException("incognito is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Incognito = incognito;
-            }
-            // to ensure "ip" is required (not null)
-            // swagger debug: Visit Ip
-
-            if (ip == null)
-            {
-                throw new InvalidDataException("ip is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Ip = ip;
-            }
-            // to ensure "timestamp" is required (not null)
-            // swagger debug: Visit Timestamp
-
-            if (timestamp == null)
-            {
-                throw new InvalidDataException("timestamp is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Timestamp = timestamp;
-            }
-            // to ensure "time" is required (not null)
-            // swagger debug: Visit Time
-
-            if (time == null)
-            {
-                throw new InvalidDataException("time is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Time = time;
-            }
-            // to ensure "url" is required (not null)
-            // swagger debug: Visit Url
-
-            if (url == null)
-            {
-                throw new InvalidDataException("url is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Url = url;
-            }
-            // to ensure "tag" is required (not null)
-            // swagger debug: Visit Tag
-
-            if (tag == null)
-            {
-                throw new InvalidDataException("tag is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Tag = tag;
-            }
-            // to ensure "visitorFound" is required (not null)
-            // swagger debug: Visit VisitorFound
-
-            if (visitorFound == null)
-            {
-                throw new InvalidDataException("visitorFound is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.VisitorFound = visitorFound;
-            }
-            // to ensure "firstSeenAt" is required (not null)
-            // swagger debug: Visit FirstSeenAt
-
-            if (firstSeenAt == null)
-            {
-                throw new InvalidDataException("firstSeenAt is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.FirstSeenAt = firstSeenAt;
-            }
-            // to ensure "lastSeenAt" is required (not null)
-            // swagger debug: Visit LastSeenAt
-
-            if (lastSeenAt == null)
-            {
-                throw new InvalidDataException("lastSeenAt is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.LastSeenAt = lastSeenAt;
-            }
-            this.IpLocation = ipLocation;
-            this.LinkedId = linkedId;
-            this.Confidence = confidence;
-            this.Components = components;
+                            // to ensure "requestId" is required (not null)
+                            // swagger debug: Visit RequestId
+        
+                            if (requestId == null)
+                            {
+                            throw new InvalidDataException("requestId is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.RequestId = requestId;
+                            }
+                            // to ensure "browserDetails" is required (not null)
+                            // swagger debug: Visit BrowserDetails
+        
+                            if (browserDetails == null)
+                            {
+                            throw new InvalidDataException("browserDetails is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.BrowserDetails = browserDetails;
+                            }
+                            // to ensure "incognito" is required (not null)
+                            // swagger debug: Visit Incognito
+        
+                            if (incognito == null)
+                            {
+                            throw new InvalidDataException("incognito is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.Incognito = incognito;
+                            }
+                            // to ensure "ip" is required (not null)
+                            // swagger debug: Visit Ip
+        
+                            if (ip == null)
+                            {
+                            throw new InvalidDataException("ip is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.Ip = ip;
+                            }
+                            // to ensure "timestamp" is required (not null)
+                            // swagger debug: Visit Timestamp
+        
+                            if (timestamp == null)
+                            {
+                            throw new InvalidDataException("timestamp is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.Timestamp = timestamp;
+                            }
+                            // to ensure "time" is required (not null)
+                            // swagger debug: Visit Time
+        
+                            if (time == null)
+                            {
+                            throw new InvalidDataException("time is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.Time = time;
+                            }
+                            // to ensure "url" is required (not null)
+                            // swagger debug: Visit Url
+        
+                            if (url == null)
+                            {
+                            throw new InvalidDataException("url is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.Url = url;
+                            }
+                            // to ensure "tag" is required (not null)
+                            // swagger debug: Visit Tag
+        
+                            if (tag == null)
+                            {
+                            throw new InvalidDataException("tag is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.Tag = tag;
+                            }
+                            // to ensure "visitorFound" is required (not null)
+                            // swagger debug: Visit VisitorFound
+        
+                            if (visitorFound == null)
+                            {
+                            throw new InvalidDataException("visitorFound is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.VisitorFound = visitorFound;
+                            }
+                            // to ensure "firstSeenAt" is required (not null)
+                            // swagger debug: Visit FirstSeenAt
+        
+                            if (firstSeenAt == null)
+                            {
+                            throw new InvalidDataException("firstSeenAt is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.FirstSeenAt = firstSeenAt;
+                            }
+                            // to ensure "lastSeenAt" is required (not null)
+                            // swagger debug: Visit LastSeenAt
+        
+                            if (lastSeenAt == null)
+                            {
+                            throw new InvalidDataException("lastSeenAt is a required property for Visit and cannot be null");
+                            }
+                            else
+                            {
+                            this.LastSeenAt = lastSeenAt;
+                            }
+                                                    this.IpLocation = ipLocation;
+                                                    this.LinkedId = linkedId;
+                                                    this.Confidence = confidence;
+                                                    this.Components = components;
         }
-
+        
+                    /// <summary>
+                        /// Unique identifier of the user's request.
+                        /// </summary>
+                        /// <value>Unique identifier of the user's request.</value>
+                    [DataMember(Name="requestId", EmitDefaultValue=false)]
+                    [JsonPropertyName("requestId")]
+                    public string RequestId { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets BrowserDetails
+                        /// </summary>
+                    [DataMember(Name="browserDetails", EmitDefaultValue=false)]
+                    [JsonPropertyName("browserDetails")]
+                    public BrowserDetails BrowserDetails { get; set; }
+        
+                    /// <summary>
+                        /// Flag if user used incognito session.
+                        /// </summary>
+                        /// <value>Flag if user used incognito session.</value>
+                    [DataMember(Name="incognito", EmitDefaultValue=false)]
+                    [JsonPropertyName("incognito")]
+                    public bool? Incognito { get; set; }
+        
+                    /// <summary>
+                        /// IP address of the requesting browser or bot.
+                        /// </summary>
+                        /// <value>IP address of the requesting browser or bot.</value>
+                    [DataMember(Name="ip", EmitDefaultValue=false)]
+                    [JsonPropertyName("ip")]
+                    public string Ip { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets IpLocation
+                        /// </summary>
+                    [DataMember(Name="ipLocation", EmitDefaultValue=false)]
+                    [JsonPropertyName("ipLocation")]
+                    public DeprecatedGeolocation IpLocation { get; set; }
+        
+                    /// <summary>
+                        /// A customer-provided id that was sent with the request.
+                        /// </summary>
+                        /// <value>A customer-provided id that was sent with the request.</value>
+                    [DataMember(Name="linkedId", EmitDefaultValue=false)]
+                    [JsonPropertyName("linkedId")]
+                    public string LinkedId { get; set; }
+        
+                    /// <summary>
+                        /// Timestamp of the event with millisecond precision in Unix time.
+                        /// </summary>
+                        /// <value>Timestamp of the event with millisecond precision in Unix time.</value>
+                    [DataMember(Name="timestamp", EmitDefaultValue=false)]
+                    [JsonPropertyName("timestamp")]
+                    public long? Timestamp { get; set; }
+        
+                    /// <summary>
+                        /// Time expressed according to ISO 8601 in UTC format, when the request from the client agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.
+                        /// </summary>
+                        /// <value>Time expressed according to ISO 8601 in UTC format, when the request from the client agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.</value>
+                    [DataMember(Name="time", EmitDefaultValue=false)]
+                    [JsonPropertyName("time")]
+                    public DateTime? Time { get; set; }
+        
+                    /// <summary>
+                        /// Page URL from which the request was sent.
+                        /// </summary>
+                        /// <value>Page URL from which the request was sent.</value>
+                    [DataMember(Name="url", EmitDefaultValue=false)]
+                    [JsonPropertyName("url")]
+                    public string Url { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Tag
+                        /// </summary>
+                    [DataMember(Name="tag", EmitDefaultValue=false)]
+                    [JsonPropertyName("tag")]
+                    public Tag Tag { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Confidence
+                        /// </summary>
+                    [DataMember(Name="confidence", EmitDefaultValue=false)]
+                    [JsonPropertyName("confidence")]
+                    public IdentificationConfidence Confidence { get; set; }
+        
+                    /// <summary>
+                        /// Attribute represents if a visitor had been identified before.
+                        /// </summary>
+                        /// <value>Attribute represents if a visitor had been identified before.</value>
+                    [DataMember(Name="visitorFound", EmitDefaultValue=false)]
+                    [JsonPropertyName("visitorFound")]
+                    public bool? VisitorFound { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets FirstSeenAt
+                        /// </summary>
+                    [DataMember(Name="firstSeenAt", EmitDefaultValue=false)]
+                    [JsonPropertyName("firstSeenAt")]
+                    public IdentificationSeenAt FirstSeenAt { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets LastSeenAt
+                        /// </summary>
+                    [DataMember(Name="lastSeenAt", EmitDefaultValue=false)]
+                    [JsonPropertyName("lastSeenAt")]
+                    public IdentificationSeenAt LastSeenAt { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Components
+                        /// </summary>
+                    [DataMember(Name="components", EmitDefaultValue=false)]
+                    [JsonPropertyName("components")]
+                    public RawDeviceAttributes Components { get; set; }
+        
         /// <summary>
-        /// Unique identifier of the user's request.
-        /// </summary>
-        /// <value>Unique identifier of the user's request.</value>
-        [DataMember(Name = "requestId", EmitDefaultValue = false)]
-        [JsonPropertyName("requestId")]
-        public string RequestId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets BrowserDetails
-        /// </summary>
-        [DataMember(Name = "browserDetails", EmitDefaultValue = false)]
-        [JsonPropertyName("browserDetails")]
-        public BrowserDetails BrowserDetails { get; set; }
-
-        /// <summary>
-        /// Flag if user used incognito session.
-        /// </summary>
-        /// <value>Flag if user used incognito session.</value>
-        [DataMember(Name = "incognito", EmitDefaultValue = false)]
-        [JsonPropertyName("incognito")]
-        public bool? Incognito { get; set; }
-
-        /// <summary>
-        /// IP address of the requesting browser or bot.
-        /// </summary>
-        /// <value>IP address of the requesting browser or bot.</value>
-        [DataMember(Name = "ip", EmitDefaultValue = false)]
-        [JsonPropertyName("ip")]
-        public string Ip { get; set; }
-
-        /// <summary>
-        /// Gets or Sets IpLocation
-        /// </summary>
-        [DataMember(Name = "ipLocation", EmitDefaultValue = false)]
-        [JsonPropertyName("ipLocation")]
-        public DeprecatedGeolocation IpLocation { get; set; }
-
-        /// <summary>
-        /// A customer-provided id that was sent with the request.
-        /// </summary>
-        /// <value>A customer-provided id that was sent with the request.</value>
-        [DataMember(Name = "linkedId", EmitDefaultValue = false)]
-        [JsonPropertyName("linkedId")]
-        public string LinkedId { get; set; }
-
-        /// <summary>
-        /// Timestamp of the event with millisecond precision in Unix time.
-        /// </summary>
-        /// <value>Timestamp of the event with millisecond precision in Unix time.</value>
-        [DataMember(Name = "timestamp", EmitDefaultValue = false)]
-        [JsonPropertyName("timestamp")]
-        public long? Timestamp { get; set; }
-
-        /// <summary>
-        /// Time expressed according to ISO 8601 in UTC format, when the request from the client agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.
-        /// </summary>
-        /// <value>Time expressed according to ISO 8601 in UTC format, when the request from the client agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.</value>
-        [DataMember(Name = "time", EmitDefaultValue = false)]
-        [JsonPropertyName("time")]
-        public DateTime? Time { get; set; }
-
-        /// <summary>
-        /// Page URL from which the request was sent.
-        /// </summary>
-        /// <value>Page URL from which the request was sent.</value>
-        [DataMember(Name = "url", EmitDefaultValue = false)]
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Tag
-        /// </summary>
-        [DataMember(Name = "tag", EmitDefaultValue = false)]
-        [JsonPropertyName("tag")]
-        public Tag Tag { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Confidence
-        /// </summary>
-        [DataMember(Name = "confidence", EmitDefaultValue = false)]
-        [JsonPropertyName("confidence")]
-        public IdentificationConfidence Confidence { get; set; }
-
-        /// <summary>
-        /// Attribute represents if a visitor had been identified before.
-        /// </summary>
-        /// <value>Attribute represents if a visitor had been identified before.</value>
-        [DataMember(Name = "visitorFound", EmitDefaultValue = false)]
-        [JsonPropertyName("visitorFound")]
-        public bool? VisitorFound { get; set; }
-
-        /// <summary>
-        /// Gets or Sets FirstSeenAt
-        /// </summary>
-        [DataMember(Name = "firstSeenAt", EmitDefaultValue = false)]
-        [JsonPropertyName("firstSeenAt")]
-        public IdentificationSeenAt FirstSeenAt { get; set; }
-
-        /// <summary>
-        /// Gets or Sets LastSeenAt
-        /// </summary>
-        [DataMember(Name = "lastSeenAt", EmitDefaultValue = false)]
-        [JsonPropertyName("lastSeenAt")]
-        public IdentificationSeenAt LastSeenAt { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Components
-        /// </summary>
-        [DataMember(Name = "components", EmitDefaultValue = false)]
-        [JsonPropertyName("components")]
-        public RawDeviceAttributes Components { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class Visit {\n");
+        var sb = new StringBuilder();
+        sb.Append("class Visit {\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  BrowserDetails: ").Append(BrowserDetails).Append("\n");
             sb.Append("  Incognito: ").Append(Incognito).Append("\n");
@@ -306,149 +306,149 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  FirstSeenAt: ").Append(FirstSeenAt).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
             sb.Append("  Components: ").Append(Components).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if Visit instances are equal
-        /// </summary>
+            /// Returns true if Visit instances are equal
+            /// </summary>
         /// <param name="input">Instance of Visit to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Visit? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.RequestId == input.RequestId ||
-                (this.RequestId != null &&
-                this.RequestId.Equals(input.RequestId))
-                ) &&
-                (
-                this.BrowserDetails == input.BrowserDetails ||
-                (this.BrowserDetails != null &&
-                this.BrowserDetails.Equals(input.BrowserDetails))
-                ) &&
-                (
-                this.Incognito == input.Incognito ||
-                (this.Incognito != null &&
-                this.Incognito.Equals(input.Incognito))
-                ) &&
-                (
-                this.Ip == input.Ip ||
-                (this.Ip != null &&
-                this.Ip.Equals(input.Ip))
-                ) &&
-                (
-                this.IpLocation == input.IpLocation ||
-                (this.IpLocation != null &&
-                this.IpLocation.Equals(input.IpLocation))
-                ) &&
-                (
-                this.LinkedId == input.LinkedId ||
-                (this.LinkedId != null &&
-                this.LinkedId.Equals(input.LinkedId))
-                ) &&
-                (
-                this.Timestamp == input.Timestamp ||
-                (this.Timestamp != null &&
-                this.Timestamp.Equals(input.Timestamp))
-                ) &&
-                (
-                this.Time == input.Time ||
-                (this.Time != null &&
-                this.Time.Equals(input.Time))
-                ) &&
-                (
-                this.Url == input.Url ||
-                (this.Url != null &&
-                this.Url.Equals(input.Url))
-                ) &&
-                (
-                this.Tag == input.Tag ||
-                (this.Tag != null &&
-                this.Tag.Equals(input.Tag))
-                ) &&
-                (
-                this.Confidence == input.Confidence ||
-                (this.Confidence != null &&
-                this.Confidence.Equals(input.Confidence))
-                ) &&
-                (
-                this.VisitorFound == input.VisitorFound ||
-                (this.VisitorFound != null &&
-                this.VisitorFound.Equals(input.VisitorFound))
-                ) &&
-                (
-                this.FirstSeenAt == input.FirstSeenAt ||
-                (this.FirstSeenAt != null &&
-                this.FirstSeenAt.Equals(input.FirstSeenAt))
-                ) &&
-                (
-                this.LastSeenAt == input.LastSeenAt ||
-                (this.LastSeenAt != null &&
-                this.LastSeenAt.Equals(input.LastSeenAt))
-                ) &&
-                (
-                this.Components == input.Components ||
-                (this.Components != null &&
-                this.Components.Equals(input.Components))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.RequestId == input.RequestId ||
+            (this.RequestId != null &&
+            this.RequestId.Equals(input.RequestId))
+            ) && 
+            (
+            this.BrowserDetails == input.BrowserDetails ||
+            (this.BrowserDetails != null &&
+            this.BrowserDetails.Equals(input.BrowserDetails))
+            ) && 
+            (
+            this.Incognito == input.Incognito ||
+            (this.Incognito != null &&
+            this.Incognito.Equals(input.Incognito))
+            ) && 
+            (
+            this.Ip == input.Ip ||
+            (this.Ip != null &&
+            this.Ip.Equals(input.Ip))
+            ) && 
+            (
+            this.IpLocation == input.IpLocation ||
+            (this.IpLocation != null &&
+            this.IpLocation.Equals(input.IpLocation))
+            ) && 
+            (
+            this.LinkedId == input.LinkedId ||
+            (this.LinkedId != null &&
+            this.LinkedId.Equals(input.LinkedId))
+            ) && 
+            (
+            this.Timestamp == input.Timestamp ||
+            (this.Timestamp != null &&
+            this.Timestamp.Equals(input.Timestamp))
+            ) && 
+            (
+            this.Time == input.Time ||
+            (this.Time != null &&
+            this.Time.Equals(input.Time))
+            ) && 
+            (
+            this.Url == input.Url ||
+            (this.Url != null &&
+            this.Url.Equals(input.Url))
+            ) && 
+            (
+            this.Tag == input.Tag ||
+            (this.Tag != null &&
+            this.Tag.Equals(input.Tag))
+            ) && 
+            (
+            this.Confidence == input.Confidence ||
+            (this.Confidence != null &&
+            this.Confidence.Equals(input.Confidence))
+            ) && 
+            (
+            this.VisitorFound == input.VisitorFound ||
+            (this.VisitorFound != null &&
+            this.VisitorFound.Equals(input.VisitorFound))
+            ) && 
+            (
+            this.FirstSeenAt == input.FirstSeenAt ||
+            (this.FirstSeenAt != null &&
+            this.FirstSeenAt.Equals(input.FirstSeenAt))
+            ) && 
+            (
+            this.LastSeenAt == input.LastSeenAt ||
+            (this.LastSeenAt != null &&
+            this.LastSeenAt.Equals(input.LastSeenAt))
+            ) && 
+            (
+            this.Components == input.Components ||
+            (this.Components != null &&
+            this.Components.Equals(input.Components))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.RequestId != null)
-                    hashCode = hashCode * 59 + this.RequestId.GetHashCode();
-                if (this.BrowserDetails != null)
-                    hashCode = hashCode * 59 + this.BrowserDetails.GetHashCode();
-                if (this.Incognito != null)
-                    hashCode = hashCode * 59 + this.Incognito.GetHashCode();
-                if (this.Ip != null)
-                    hashCode = hashCode * 59 + this.Ip.GetHashCode();
-                if (this.IpLocation != null)
-                    hashCode = hashCode * 59 + this.IpLocation.GetHashCode();
-                if (this.LinkedId != null)
-                    hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
-                if (this.Timestamp != null)
-                    hashCode = hashCode * 59 + this.Timestamp.GetHashCode();
-                if (this.Time != null)
-                    hashCode = hashCode * 59 + this.Time.GetHashCode();
-                if (this.Url != null)
-                    hashCode = hashCode * 59 + this.Url.GetHashCode();
-                if (this.Tag != null)
-                    hashCode = hashCode * 59 + this.Tag.GetHashCode();
-                if (this.Confidence != null)
-                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-                if (this.VisitorFound != null)
-                    hashCode = hashCode * 59 + this.VisitorFound.GetHashCode();
-                if (this.FirstSeenAt != null)
-                    hashCode = hashCode * 59 + this.FirstSeenAt.GetHashCode();
-                if (this.LastSeenAt != null)
-                    hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
-                if (this.Components != null)
-                    hashCode = hashCode * 59 + this.Components.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.RequestId != null)
+            hashCode = hashCode * 59 + this.RequestId.GetHashCode();
+            if (this.BrowserDetails != null)
+            hashCode = hashCode * 59 + this.BrowserDetails.GetHashCode();
+            if (this.Incognito != null)
+            hashCode = hashCode * 59 + this.Incognito.GetHashCode();
+            if (this.Ip != null)
+            hashCode = hashCode * 59 + this.Ip.GetHashCode();
+            if (this.IpLocation != null)
+            hashCode = hashCode * 59 + this.IpLocation.GetHashCode();
+            if (this.LinkedId != null)
+            hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
+            if (this.Timestamp != null)
+            hashCode = hashCode * 59 + this.Timestamp.GetHashCode();
+            if (this.Time != null)
+            hashCode = hashCode * 59 + this.Time.GetHashCode();
+            if (this.Url != null)
+            hashCode = hashCode * 59 + this.Url.GetHashCode();
+            if (this.Tag != null)
+            hashCode = hashCode * 59 + this.Tag.GetHashCode();
+            if (this.Confidence != null)
+            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+            if (this.VisitorFound != null)
+            hashCode = hashCode * 59 + this.VisitorFound.GetHashCode();
+            if (this.FirstSeenAt != null)
+            hashCode = hashCode * 59 + this.FirstSeenAt.GetHashCode();
+            if (this.LastSeenAt != null)
+            hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
+            if (this.Components != null)
+            hashCode = hashCode * 59 + this.Components.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

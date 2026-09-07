@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,103 +13,103 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// ProductLabels
-    /// </summary>
-    [DataContract]
-    public class ProductLabels : IEquatable<ProductLabels>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductLabels" /> class.
-        /// </summary>
-        /// <param name="data">data.</param>
-        /// <param name="error">error.</param>
+            /// ProductLabels
+            /// </summary>
+        [DataContract]
+                public class ProductLabels :  IEquatable<ProductLabels>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="ProductLabels" /> class.
+            /// </summary>
+                /// <param name="data">data.</param>
+                /// <param name="error">error.</param>
         public ProductLabels(Labels data = default(Labels), Error error = default(Error))
         {
-            this.Data = data;
-            this.Error = error;
+                                                    this.Data = data;
+                                                    this.Error = error;
         }
-
+        
+                    /// <summary>
+                        /// Gets or Sets Data
+                        /// </summary>
+                    [DataMember(Name="data", EmitDefaultValue=false)]
+                    [JsonPropertyName("data")]
+                    public Labels Data { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Error
+                        /// </summary>
+                    [DataMember(Name="error", EmitDefaultValue=false)]
+                    [JsonPropertyName("error")]
+                    public Error Error { get; set; }
+        
         /// <summary>
-        /// Gets or Sets Data
-        /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        [JsonPropertyName("data")]
-        public Labels Data { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Error
-        /// </summary>
-        [DataMember(Name = "error", EmitDefaultValue = false)]
-        [JsonPropertyName("error")]
-        public Error Error { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class ProductLabels {\n");
+        var sb = new StringBuilder();
+        sb.Append("class ProductLabels {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if ProductLabels instances are equal
-        /// </summary>
+            /// Returns true if ProductLabels instances are equal
+            /// </summary>
         /// <param name="input">Instance of ProductLabels to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(ProductLabels? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
-                ) &&
-                (
-                this.Error == input.Error ||
-                (this.Error != null &&
-                this.Error.Equals(input.Error))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Data == input.Data ||
+            (this.Data != null &&
+            this.Data.Equals(input.Data))
+            ) && 
+            (
+            this.Error == input.Error ||
+            (this.Error != null &&
+            this.Error.Equals(input.Error))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
-                if (this.Error != null)
-                    hashCode = hashCode * 59 + this.Error.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Data != null)
+            hashCode = hashCode * 59 + this.Data.GetHashCode();
+            if (this.Error != null)
+            hashCode = hashCode * 59 + this.Error.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

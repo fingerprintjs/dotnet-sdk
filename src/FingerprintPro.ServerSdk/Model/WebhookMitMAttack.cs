@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,87 +13,87 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// WebhookMitMAttack
-    /// </summary>
-    [DataContract]
-    public class WebhookMitMAttack : IEquatable<WebhookMitMAttack>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookMitMAttack" /> class.
-        /// </summary>
-        /// <param name="result">* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-overview#mitm-attack-detection) to learn more about this Smart Signal. .</param>
+            /// WebhookMitMAttack
+            /// </summary>
+        [DataContract]
+                public class WebhookMitMAttack :  IEquatable<WebhookMitMAttack>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="WebhookMitMAttack" /> class.
+            /// </summary>
+                /// <param name="result">* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-overview#mitm-attack-detection) to learn more about this Smart Signal. .</param>
         public WebhookMitMAttack(bool? result = default(bool?))
         {
-            this.Result = result;
+                                                    this.Result = result;
         }
-
+        
+                    /// <summary>
+                        /// * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-overview#mitm-attack-detection) to learn more about this Smart Signal. 
+                        /// </summary>
+                        /// <value>* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-overview#mitm-attack-detection) to learn more about this Smart Signal. </value>
+                    [DataMember(Name="result", EmitDefaultValue=false)]
+                    [JsonPropertyName("result")]
+                    public bool? Result { get; set; }
+        
         /// <summary>
-        /// * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-overview#mitm-attack-detection) to learn more about this Smart Signal. 
-        /// </summary>
-        /// <value>* `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-overview#mitm-attack-detection) to learn more about this Smart Signal. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class WebhookMitMAttack {\n");
+        var sb = new StringBuilder();
+        sb.Append("class WebhookMitMAttack {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if WebhookMitMAttack instances are equal
-        /// </summary>
+            /// Returns true if WebhookMitMAttack instances are equal
+            /// </summary>
         /// <param name="input">Instance of WebhookMitMAttack to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookMitMAttack? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Result == input.Result ||
+            (this.Result != null &&
+            this.Result.Equals(input.Result))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Result != null)
+            hashCode = hashCode * 59 + this.Result.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

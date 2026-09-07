@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,97 +13,97 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Jailbroken
-    /// </summary>
-    [DataContract]
-    public class Jailbroken : IEquatable<Jailbroken>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Jailbroken" /> class.
-        /// </summary>
-        /// <param name="result">iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS.  (required).</param>
+            /// Jailbroken
+            /// </summary>
+        [DataContract]
+                public class Jailbroken :  IEquatable<Jailbroken>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="Jailbroken" /> class.
+            /// </summary>
+                /// <param name="result">iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS.  (required).</param>
         public Jailbroken(bool? result = default(bool?))
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: Jailbroken Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for Jailbroken and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
+                            // to ensure "result" is required (not null)
+                            // swagger debug: Jailbroken Result
+        
+                            if (result == null)
+                            {
+                            throw new InvalidDataException("result is a required property for Jailbroken and cannot be null");
+                            }
+                            else
+                            {
+                            this.Result = result;
+                            }
         }
-
+        
+                    /// <summary>
+                        /// iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. 
+                        /// </summary>
+                        /// <value>iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. </value>
+                    [DataMember(Name="result", EmitDefaultValue=false)]
+                    [JsonPropertyName("result")]
+                    public bool? Result { get; set; }
+        
         /// <summary>
-        /// iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. 
-        /// </summary>
-        /// <value>iOS specific jailbreak detection. There are 2 values:    * `true` - Jailbreak detected.   * `false` - No signs of jailbreak or the client is not iOS. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class Jailbroken {\n");
+        var sb = new StringBuilder();
+        sb.Append("class Jailbroken {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if Jailbroken instances are equal
-        /// </summary>
+            /// Returns true if Jailbroken instances are equal
+            /// </summary>
         /// <param name="input">Instance of Jailbroken to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Jailbroken? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Result == input.Result ||
+            (this.Result != null &&
+            this.Result.Equals(input.Result))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Result != null)
+            hashCode = hashCode * 59 + this.Result.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

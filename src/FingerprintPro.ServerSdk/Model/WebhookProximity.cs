@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,205 +13,204 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed. 
-    /// </summary>
-    [DataContract]
-    public class WebhookProximity : IEquatable<WebhookProximity>
-    {
-        /// <summary>
-        /// The radius of the proximity zone’s precision level, in meters. 
-        /// </summary>
-        /// <value>The radius of the proximity zone’s precision level, in meters. </value>
-        public enum PrecisionRadiusEnum
+        namespace FingerprintPro.ServerSdk.Model
         {
-            /// <summary>
-            /// Enum NUMBER_10 for value: 10
-            /// </summary>
-
-            NUMBER_10 = 10,
-            /// <summary>
-            /// Enum NUMBER_25 for value: 25
-            /// </summary>
-
-            NUMBER_25 = 25,
-            /// <summary>
-            /// Enum NUMBER_65 for value: 65
-            /// </summary>
-
-            NUMBER_65 = 65,
-            /// <summary>
-            /// Enum NUMBER_175 for value: 175
-            /// </summary>
-
-            NUMBER_175 = 175,
-            /// <summary>
-            /// Enum NUMBER_450 for value: 450
-            /// </summary>
-
-            NUMBER_450 = 450,
-            /// <summary>
-            /// Enum NUMBER_1200 for value: 1200
-            /// </summary>
-
-            NUMBER_1200 = 1200,
-            /// <summary>
-            /// Enum NUMBER_3300 for value: 3300
-            /// </summary>
-
-            NUMBER_3300 = 3300,
-            /// <summary>
-            /// Enum NUMBER_8500 for value: 8500
-            /// </summary>
-
-            NUMBER_8500 = 8500,
-            /// <summary>
-            /// Enum NUMBER_22500 for value: 22500
-            /// </summary>
-
-            NUMBER_22500 = 22500
-        }
         /// <summary>
-        /// The radius of the proximity zone’s precision level, in meters. 
-        /// </summary>
-        /// <value>The radius of the proximity zone’s precision level, in meters. </value>
-        [DataMember(Name = "precisionRadius", EmitDefaultValue = false)]
-        [JsonPropertyName("precisionRadius")]
-        public PrecisionRadiusEnum PrecisionRadius { get; set; }
-
-
+            /// Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed. 
+            /// </summary>
+        [DataContract]
+                public class WebhookProximity :  IEquatable<WebhookProximity>
+        {
+                            /// <summary>
+                            /// The radius of the proximity zone’s precision level, in meters. 
+                            /// </summary>
+                            /// <value>The radius of the proximity zone’s precision level, in meters. </value>
+                                                        public enum PrecisionRadiusEnum
+                            {
+                                /// <summary>
+                                /// Enum NUMBER_10 for value: 10
+                                /// </summary>
+                                
+                                NUMBER_10 = 10,
+                                /// <summary>
+                                /// Enum NUMBER_25 for value: 25
+                                /// </summary>
+                                
+                                NUMBER_25 = 25,
+                                /// <summary>
+                                /// Enum NUMBER_65 for value: 65
+                                /// </summary>
+                                
+                                NUMBER_65 = 65,
+                                /// <summary>
+                                /// Enum NUMBER_175 for value: 175
+                                /// </summary>
+                                
+                                NUMBER_175 = 175,
+                                /// <summary>
+                                /// Enum NUMBER_450 for value: 450
+                                /// </summary>
+                                
+                                NUMBER_450 = 450,
+                                /// <summary>
+                                /// Enum NUMBER_1200 for value: 1200
+                                /// </summary>
+                                
+                                NUMBER_1200 = 1200,
+                                /// <summary>
+                                /// Enum NUMBER_3300 for value: 3300
+                                /// </summary>
+                                
+                                NUMBER_3300 = 3300,
+                                /// <summary>
+                                /// Enum NUMBER_8500 for value: 8500
+                                /// </summary>
+                                
+                                NUMBER_8500 = 8500,
+                                /// <summary>
+                                /// Enum NUMBER_22500 for value: 22500
+                                /// </summary>
+                                
+                                NUMBER_22500 = 22500                            }
+                /// <summary>
+                    /// The radius of the proximity zone’s precision level, in meters. 
+                    /// </summary>
+                    /// <value>The radius of the proximity zone’s precision level, in meters. </value>
+                [DataMember(Name="precisionRadius", EmitDefaultValue=false)]
+                [JsonPropertyName("precisionRadius")]
+                public PrecisionRadiusEnum PrecisionRadius { get; set; }
+        
+        
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookProximity" /> class.
-        /// </summary>
-        /// <param name="id">A stable privacy-preserving identifier for a given proximity zone.  (required).</param>
-        /// <param name="precisionRadius">The radius of the proximity zone’s precision level, in meters.  (required).</param>
-        /// <param name="confidence">A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone.  (required).</param>
+            /// Initializes a new instance of the <see cref="WebhookProximity" /> class.
+            /// </summary>
+                /// <param name="id">A stable privacy-preserving identifier for a given proximity zone.  (required).</param>
+                /// <param name="precisionRadius">The radius of the proximity zone’s precision level, in meters.  (required).</param>
+                /// <param name="confidence">A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone.  (required).</param>
         public WebhookProximity(string id = default(string), PrecisionRadiusEnum precisionRadius = default(PrecisionRadiusEnum), float? confidence = default(float?))
         {
-            // to ensure "id" is required (not null)
-            // swagger debug: WebhookProximity Id
-
-            if (id == null)
-            {
-                throw new InvalidDataException("id is a required property for WebhookProximity and cannot be null");
-            }
-            else
-            {
-                this.Id = id;
-            }
-            // to ensure "precisionRadius" is required (not null)
-            // swagger debug: WebhookProximity PrecisionRadius
-
-            if (precisionRadius == null)
-            {
-                throw new InvalidDataException("precisionRadius is a required property for WebhookProximity and cannot be null");
-            }
-            else
-            {
-                this.PrecisionRadius = precisionRadius;
-            }
-            // to ensure "confidence" is required (not null)
-            // swagger debug: WebhookProximity Confidence
-
-            if (confidence == null)
-            {
-                throw new InvalidDataException("confidence is a required property for WebhookProximity and cannot be null");
-            }
-            else
-            {
-                this.Confidence = confidence;
-            }
+                            // to ensure "id" is required (not null)
+                            // swagger debug: WebhookProximity Id
+        
+                            if (id == null)
+                            {
+                            throw new InvalidDataException("id is a required property for WebhookProximity and cannot be null");
+                            }
+                            else
+                            {
+                            this.Id = id;
+                            }
+                            // to ensure "precisionRadius" is required (not null)
+                            // swagger debug: WebhookProximity PrecisionRadius
+        
+                            if (precisionRadius == null)
+                            {
+                            throw new InvalidDataException("precisionRadius is a required property for WebhookProximity and cannot be null");
+                            }
+                            else
+                            {
+                            this.PrecisionRadius = precisionRadius;
+                            }
+                            // to ensure "confidence" is required (not null)
+                            // swagger debug: WebhookProximity Confidence
+        
+                            if (confidence == null)
+                            {
+                            throw new InvalidDataException("confidence is a required property for WebhookProximity and cannot be null");
+                            }
+                            else
+                            {
+                            this.Confidence = confidence;
+                            }
         }
-
+        
+                    /// <summary>
+                        /// A stable privacy-preserving identifier for a given proximity zone. 
+                        /// </summary>
+                        /// <value>A stable privacy-preserving identifier for a given proximity zone. </value>
+                    [DataMember(Name="id", EmitDefaultValue=false)]
+                    [JsonPropertyName("id")]
+                    public string Id { get; set; }
+        
+        
+                    /// <summary>
+                        /// A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
+                        /// </summary>
+                        /// <value>A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. </value>
+                    [DataMember(Name="confidence", EmitDefaultValue=false)]
+                    [JsonPropertyName("confidence")]
+                    public float? Confidence { get; set; }
+        
         /// <summary>
-        /// A stable privacy-preserving identifier for a given proximity zone. 
-        /// </summary>
-        /// <value>A stable privacy-preserving identifier for a given proximity zone. </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        [JsonPropertyName("id")]
-        public string Id { get; set; }
-
-
-        /// <summary>
-        /// A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
-        /// </summary>
-        /// <value>A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. </value>
-        [DataMember(Name = "confidence", EmitDefaultValue = false)]
-        [JsonPropertyName("confidence")]
-        public float? Confidence { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class WebhookProximity {\n");
+        var sb = new StringBuilder();
+        sb.Append("class WebhookProximity {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  PrecisionRadius: ").Append(PrecisionRadius).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if WebhookProximity instances are equal
-        /// </summary>
+            /// Returns true if WebhookProximity instances are equal
+            /// </summary>
         /// <param name="input">Instance of WebhookProximity to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(WebhookProximity? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Id == input.Id ||
-                (this.Id != null &&
-                this.Id.Equals(input.Id))
-                ) &&
-                (
-                this.PrecisionRadius == input.PrecisionRadius ||
-                (this.PrecisionRadius != null &&
-                this.PrecisionRadius.Equals(input.PrecisionRadius))
-                ) &&
-                (
-                this.Confidence == input.Confidence ||
-                (this.Confidence != null &&
-                this.Confidence.Equals(input.Confidence))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Id == input.Id ||
+            (this.Id != null &&
+            this.Id.Equals(input.Id))
+            ) && 
+            (
+            this.PrecisionRadius == input.PrecisionRadius ||
+            (this.PrecisionRadius != null &&
+            this.PrecisionRadius.Equals(input.PrecisionRadius))
+            ) && 
+            (
+            this.Confidence == input.Confidence ||
+            (this.Confidence != null &&
+            this.Confidence.Equals(input.Confidence))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.PrecisionRadius != null)
-                    hashCode = hashCode * 59 + this.PrecisionRadius.GetHashCode();
-                if (this.Confidence != null)
-                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Id != null)
+            hashCode = hashCode * 59 + this.Id.GetHashCode();
+            if (this.PrecisionRadius != null)
+            hashCode = hashCode * 59 + this.PrecisionRadius.GetHashCode();
+            if (this.Confidence != null)
+            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

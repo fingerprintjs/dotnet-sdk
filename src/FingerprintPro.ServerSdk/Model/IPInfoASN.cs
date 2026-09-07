@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,167 +13,167 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// IPInfoASN
-    /// </summary>
-    [DataContract]
-    public class IPInfoASN : IEquatable<IPInfoASN>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IPInfoASN" /> class.
-        /// </summary>
-        /// <param name="asn">asn (required).</param>
-        /// <param name="name">name (required).</param>
-        /// <param name="network">network (required).</param>
-        /// <param name="type">type.</param>
+            /// IPInfoASN
+            /// </summary>
+        [DataContract]
+                public class IPInfoASN :  IEquatable<IPInfoASN>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="IPInfoASN" /> class.
+            /// </summary>
+                /// <param name="asn">asn (required).</param>
+                /// <param name="name">name (required).</param>
+                /// <param name="network">network (required).</param>
+                /// <param name="type">type.</param>
         public IPInfoASN(string asn = default(string), string name = default(string), string network = default(string), string type = default(string))
         {
-            // to ensure "asn" is required (not null)
-            // swagger debug: IPInfoASN Asn
-
-            if (asn == null)
-            {
-                throw new InvalidDataException("asn is a required property for IPInfoASN and cannot be null");
-            }
-            else
-            {
-                this.Asn = asn;
-            }
-            // to ensure "name" is required (not null)
-            // swagger debug: IPInfoASN Name
-
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for IPInfoASN and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            // to ensure "network" is required (not null)
-            // swagger debug: IPInfoASN Network
-
-            if (network == null)
-            {
-                throw new InvalidDataException("network is a required property for IPInfoASN and cannot be null");
-            }
-            else
-            {
-                this.Network = network;
-            }
-            this.Type = type;
+                            // to ensure "asn" is required (not null)
+                            // swagger debug: IPInfoASN Asn
+        
+                            if (asn == null)
+                            {
+                            throw new InvalidDataException("asn is a required property for IPInfoASN and cannot be null");
+                            }
+                            else
+                            {
+                            this.Asn = asn;
+                            }
+                            // to ensure "name" is required (not null)
+                            // swagger debug: IPInfoASN Name
+        
+                            if (name == null)
+                            {
+                            throw new InvalidDataException("name is a required property for IPInfoASN and cannot be null");
+                            }
+                            else
+                            {
+                            this.Name = name;
+                            }
+                            // to ensure "network" is required (not null)
+                            // swagger debug: IPInfoASN Network
+        
+                            if (network == null)
+                            {
+                            throw new InvalidDataException("network is a required property for IPInfoASN and cannot be null");
+                            }
+                            else
+                            {
+                            this.Network = network;
+                            }
+                                                    this.Type = type;
         }
-
+        
+                    /// <summary>
+                        /// Gets or Sets Asn
+                        /// </summary>
+                    [DataMember(Name="asn", EmitDefaultValue=false)]
+                    [JsonPropertyName("asn")]
+                    public string Asn { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Name
+                        /// </summary>
+                    [DataMember(Name="name", EmitDefaultValue=false)]
+                    [JsonPropertyName("name")]
+                    public string Name { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Network
+                        /// </summary>
+                    [DataMember(Name="network", EmitDefaultValue=false)]
+                    [JsonPropertyName("network")]
+                    public string Network { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Type
+                        /// </summary>
+                    [DataMember(Name="type", EmitDefaultValue=false)]
+                    [JsonPropertyName("type")]
+                    public string Type { get; set; }
+        
         /// <summary>
-        /// Gets or Sets Asn
-        /// </summary>
-        [DataMember(Name = "asn", EmitDefaultValue = false)]
-        [JsonPropertyName("asn")]
-        public string Asn { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Name
-        /// </summary>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Network
-        /// </summary>
-        [DataMember(Name = "network", EmitDefaultValue = false)]
-        [JsonPropertyName("network")]
-        public string Network { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = false)]
-        [JsonPropertyName("type")]
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class IPInfoASN {\n");
+        var sb = new StringBuilder();
+        sb.Append("class IPInfoASN {\n");
             sb.Append("  Asn: ").Append(Asn).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Network: ").Append(Network).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if IPInfoASN instances are equal
-        /// </summary>
+            /// Returns true if IPInfoASN instances are equal
+            /// </summary>
         /// <param name="input">Instance of IPInfoASN to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(IPInfoASN? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Asn == input.Asn ||
-                (this.Asn != null &&
-                this.Asn.Equals(input.Asn))
-                ) &&
-                (
-                this.Name == input.Name ||
-                (this.Name != null &&
-                this.Name.Equals(input.Name))
-                ) &&
-                (
-                this.Network == input.Network ||
-                (this.Network != null &&
-                this.Network.Equals(input.Network))
-                ) &&
-                (
-                this.Type == input.Type ||
-                (this.Type != null &&
-                this.Type.Equals(input.Type))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Asn == input.Asn ||
+            (this.Asn != null &&
+            this.Asn.Equals(input.Asn))
+            ) && 
+            (
+            this.Name == input.Name ||
+            (this.Name != null &&
+            this.Name.Equals(input.Name))
+            ) && 
+            (
+            this.Network == input.Network ||
+            (this.Network != null &&
+            this.Network.Equals(input.Network))
+            ) && 
+            (
+            this.Type == input.Type ||
+            (this.Type != null &&
+            this.Type.Equals(input.Type))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Asn != null)
-                    hashCode = hashCode * 59 + this.Asn.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Network != null)
-                    hashCode = hashCode * 59 + this.Network.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Asn != null)
+            hashCode = hashCode * 59 + this.Asn.GetHashCode();
+            if (this.Name != null)
+            hashCode = hashCode * 59 + this.Name.GetHashCode();
+            if (this.Network != null)
+            hashCode = hashCode * 59 + this.Network.GetHashCode();
+            if (this.Type != null)
+            hashCode = hashCode * 59 + this.Type.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

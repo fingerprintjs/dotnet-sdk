@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,105 +13,105 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Contains a list of all identification events matching the specified search criteria.
-    /// </summary>
-    [DataContract]
-    public class SearchEventsResponse : IEquatable<SearchEventsResponse>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SearchEventsResponse" /> class.
-        /// </summary>
-        /// <param name="events">events.</param>
-        /// <param name="paginationKey">Use this value in the `pagination_key` parameter to request the next page of search results..</param>
+            /// Contains a list of all identification events matching the specified search criteria.
+            /// </summary>
+        [DataContract]
+                public class SearchEventsResponse :  IEquatable<SearchEventsResponse>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="SearchEventsResponse" /> class.
+            /// </summary>
+                /// <param name="events">events.</param>
+                /// <param name="paginationKey">Use this value in the `pagination_key` parameter to request the next page of search results..</param>
         public SearchEventsResponse(List<SearchEventsResponseEvents> events = default(List<SearchEventsResponseEvents>), string paginationKey = default(string))
         {
-            this.Events = events;
-            this.PaginationKey = paginationKey;
+                                                    this.Events = events;
+                                                    this.PaginationKey = paginationKey;
         }
-
+        
+                    /// <summary>
+                        /// Gets or Sets Events
+                        /// </summary>
+                    [DataMember(Name="events", EmitDefaultValue=false)]
+                    [JsonPropertyName("events")]
+                    public List<SearchEventsResponseEvents> Events { get; set; }
+        
+                    /// <summary>
+                        /// Use this value in the `pagination_key` parameter to request the next page of search results.
+                        /// </summary>
+                        /// <value>Use this value in the `pagination_key` parameter to request the next page of search results.</value>
+                    [DataMember(Name="paginationKey", EmitDefaultValue=false)]
+                    [JsonPropertyName("paginationKey")]
+                    public string PaginationKey { get; set; }
+        
         /// <summary>
-        /// Gets or Sets Events
-        /// </summary>
-        [DataMember(Name = "events", EmitDefaultValue = false)]
-        [JsonPropertyName("events")]
-        public List<SearchEventsResponseEvents> Events { get; set; }
-
-        /// <summary>
-        /// Use this value in the `pagination_key` parameter to request the next page of search results.
-        /// </summary>
-        /// <value>Use this value in the `pagination_key` parameter to request the next page of search results.</value>
-        [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
-        [JsonPropertyName("paginationKey")]
-        public string PaginationKey { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class SearchEventsResponse {\n");
+        var sb = new StringBuilder();
+        sb.Append("class SearchEventsResponse {\n");
             sb.Append("  Events: ").Append(Events).Append("\n");
             sb.Append("  PaginationKey: ").Append(PaginationKey).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if SearchEventsResponse instances are equal
-        /// </summary>
+            /// Returns true if SearchEventsResponse instances are equal
+            /// </summary>
         /// <param name="input">Instance of SearchEventsResponse to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(SearchEventsResponse? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Events == input.Events ||
-                this.Events != null &&
-                input.Events != null &&
-                this.Events.SequenceEqual(input.Events)
-                ) &&
-                (
-                this.PaginationKey == input.PaginationKey ||
-                (this.PaginationKey != null &&
-                this.PaginationKey.Equals(input.PaginationKey))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Events == input.Events ||
+            this.Events != null &&
+            input.Events != null &&
+            this.Events.SequenceEqual(input.Events)
+            ) && 
+            (
+            this.PaginationKey == input.PaginationKey ||
+            (this.PaginationKey != null &&
+            this.PaginationKey.Equals(input.PaginationKey))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Events != null)
-                    hashCode = hashCode * 59 + this.Events.GetHashCode();
-                if (this.PaginationKey != null)
-                    hashCode = hashCode * 59 + this.PaginationKey.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Events != null)
+            hashCode = hashCode * 59 + this.Events.GetHashCode();
+            if (this.PaginationKey != null)
+            hashCode = hashCode * 59 + this.PaginationKey.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

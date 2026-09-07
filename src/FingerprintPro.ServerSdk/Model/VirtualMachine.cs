@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,115 +13,115 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// VirtualMachine
-    /// </summary>
-    [DataContract]
-    public class VirtualMachine : IEquatable<VirtualMachine>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VirtualMachine" /> class.
-        /// </summary>
-        /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise.  (required).</param>
-        /// <param name="mlScore">Machine learning-based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result     .</param>
+            /// VirtualMachine
+            /// </summary>
+        [DataContract]
+                public class VirtualMachine :  IEquatable<VirtualMachine>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="VirtualMachine" /> class.
+            /// </summary>
+                /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise.  (required).</param>
+                /// <param name="mlScore">Machine learning-based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result .</param>
         public VirtualMachine(bool? result = default(bool?), double? mlScore = default(double?))
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: VirtualMachine Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for VirtualMachine and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
-            this.MlScore = mlScore;
+                            // to ensure "result" is required (not null)
+                            // swagger debug: VirtualMachine Result
+        
+                            if (result == null)
+                            {
+                            throw new InvalidDataException("result is a required property for VirtualMachine and cannot be null");
+                            }
+                            else
+                            {
+                            this.Result = result;
+                            }
+                                                    this.MlScore = mlScore;
         }
-
+        
+                    /// <summary>
+                        /// `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
+                        /// </summary>
+                        /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
+                    [DataMember(Name="result", EmitDefaultValue=false)]
+                    [JsonPropertyName("result")]
+                    public bool? Result { get; set; }
+        
+                    /// <summary>
+                        /// Machine learning-based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result 
+                        /// </summary>
+                        /// <value>Machine learning-based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result </value>
+                    [DataMember(Name="mlScore", EmitDefaultValue=false)]
+                    [JsonPropertyName("mlScore")]
+                    public double? MlScore { get; set; }
+        
         /// <summary>
-        /// `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
-        /// </summary>
-        /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
-
-        /// <summary>
-        /// Machine learning-based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result     
-        /// </summary>
-        /// <value>Machine learning-based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result     </value>
-        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
-        [JsonPropertyName("mlScore")]
-        public double? MlScore { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class VirtualMachine {\n");
+        var sb = new StringBuilder();
+        sb.Append("class VirtualMachine {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  MlScore: ").Append(MlScore).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if VirtualMachine instances are equal
-        /// </summary>
+            /// Returns true if VirtualMachine instances are equal
+            /// </summary>
         /// <param name="input">Instance of VirtualMachine to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(VirtualMachine? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
-                ) &&
-                (
-                this.MlScore == input.MlScore ||
-                (this.MlScore != null &&
-                this.MlScore.Equals(input.MlScore))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Result == input.Result ||
+            (this.Result != null &&
+            this.Result.Equals(input.Result))
+            ) && 
+            (
+            this.MlScore == input.MlScore ||
+            (this.MlScore != null &&
+            this.MlScore.Equals(input.MlScore))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
-                if (this.MlScore != null)
-                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Result != null)
+            hashCode = hashCode * 59 + this.Result.GetHashCode();
+            if (this.MlScore != null)
+            hashCode = hashCode * 59 + this.MlScore.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

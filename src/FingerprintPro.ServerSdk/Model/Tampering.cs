@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,232 +13,231 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Tampering
-    /// </summary>
-    [DataContract]
-    public class Tampering : IEquatable<Tampering>
-    {
-        /// <summary>
-        /// Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". 
-        /// </summary>
-        /// <value>Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". </value>
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public enum ConfidenceEnum
+        namespace FingerprintPro.ServerSdk.Model
         {
-            /// <summary>
-            /// Enum Low for value: low
-            /// </summary>
-            [EnumMember(Value = "low")]
-            Low = 1,
-            /// <summary>
-            /// Enum Medium for value: medium
-            /// </summary>
-            [EnumMember(Value = "medium")]
-            Medium = 2,
-            /// <summary>
-            /// Enum High for value: high
-            /// </summary>
-            [EnumMember(Value = "high")]
-            High = 3
-        }
         /// <summary>
-        /// Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". 
-        /// </summary>
-        /// <value>Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". </value>
-        [DataMember(Name = "confidence", EmitDefaultValue = false)]
-        [JsonPropertyName("confidence")]
-        public ConfidenceEnum Confidence { get; set; }
-
-
+            /// Tampering
+            /// </summary>
+        [DataContract]
+                public class Tampering :  IEquatable<Tampering>
+        {
+                            /// <summary>
+                            /// Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". 
+                            /// </summary>
+                            /// <value>Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". </value>
+                            [JsonConverter(typeof(JsonStringEnumConverter))]
+                                                        public enum ConfidenceEnum
+                            {
+                                /// <summary>
+                                /// Enum Low for value: low
+                                /// </summary>
+                                [EnumMember(Value = "low")]
+                                Low = 1,
+                                /// <summary>
+                                /// Enum Medium for value: medium
+                                /// </summary>
+                                [EnumMember(Value = "medium")]
+                                Medium = 2,
+                                /// <summary>
+                                /// Enum High for value: high
+                                /// </summary>
+                                [EnumMember(Value = "high")]
+                                High = 3                            }
+                /// <summary>
+                    /// Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". 
+                    /// </summary>
+                    /// <value>Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\". </value>
+                [DataMember(Name="confidence", EmitDefaultValue=false)]
+                [JsonPropertyName("confidence")]
+                public ConfidenceEnum Confidence { get; set; }
+        
+        
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tampering" /> class.
-        /// </summary>
-        /// <param name="result">Indicates if an identification request from a browser or an Android SDK has been tampered with. Not supported in the iOS SDK, is always `false` for iOS requests.   * `true` - If the request meets either of the following conditions:     * Contains anomalous browser or device attributes that could not have been legitimately produced by the JavaScript agent or the Android SDK (see `anomalyScore`).     * Originated from an anti-detect browser like Incognition (see `antiDetectBrowser`).   * `false` - If the request is considered genuine or was generated by the iOS SDK.  (required).</param>
-        /// <param name="confidence">Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\".  (required).</param>
-        /// <param name="anomalyScore">A score that indicates the extent of anomalous data in the request. This field applies to requests originating from **both** browsers and Android SDKs.    * Values above `0.5` indicate that the request has been tampered with.   * Values below `0.5` indicate that the request is genuine.  (required).</param>
-        /// <param name="mlScore">A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model  (required).</param>
-        /// <param name="antiDetectBrowser">Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. This field does not apply to requests originating from mobile SDKs.   * `true` - The browser resembles a known anti-detect browser, for example, Incognition.   * `false` - The browser does not resemble an anti-detect browser or the request originates from a mobile SDK.  (required).</param>
+            /// Initializes a new instance of the <see cref="Tampering" /> class.
+            /// </summary>
+                /// <param name="result">Indicates if an identification request from a browser or an Android SDK has been tampered with. Not supported in the iOS SDK, is always `false` for iOS requests.   * `true` - If the request meets either of the following conditions:     * Contains anomalous browser or device attributes that could not have been legitimately produced by the JavaScript agent or the Android SDK (see `anomalyScore`).     * Originated from an anti-detect browser like Incognition (see `antiDetectBrowser`).   * `false` - If the request is considered genuine or was generated by the iOS SDK.  (required).</param>
+                /// <param name="confidence">Confidence level of the tampering detection. If a tampering is not detected, confidence is \"high\". If it's detected, can be \"low\", \"medium\", or \"high\".  (required).</param>
+                /// <param name="anomalyScore">A score that indicates the extent of anomalous data in the request. This field applies to requests originating from **both** browsers and Android SDKs.    * Values above `0.5` indicate that the request has been tampered with.   * Values below `0.5` indicate that the request is genuine.  (required).</param>
+                /// <param name="mlScore">A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model  (required).</param>
+                /// <param name="antiDetectBrowser">Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. This field does not apply to requests originating from mobile SDKs.   * `true` - The browser resembles a known anti-detect browser, for example, Incognition.   * `false` - The browser does not resemble an anti-detect browser or the request originates from a mobile SDK.  (required).</param>
         public Tampering(bool? result = default(bool?), ConfidenceEnum confidence = default(ConfidenceEnum), double? anomalyScore = default(double?), double? mlScore = default(double?), bool? antiDetectBrowser = default(bool?))
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: Tampering Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for Tampering and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
-            // to ensure "confidence" is required (not null)
-            // swagger debug: Tampering Confidence
-
-            if (confidence == null)
-            {
-                throw new InvalidDataException("confidence is a required property for Tampering and cannot be null");
-            }
-            else
-            {
-                this.Confidence = confidence;
-            }
-            // to ensure "anomalyScore" is required (not null)
-            // swagger debug: Tampering AnomalyScore
-
-            if (anomalyScore == null)
-            {
-                throw new InvalidDataException("anomalyScore is a required property for Tampering and cannot be null");
-            }
-            else
-            {
-                this.AnomalyScore = anomalyScore;
-            }
-            // to ensure "mlScore" is required (not null)
-            // swagger debug: Tampering MlScore
-
-            if (mlScore == null)
-            {
-                throw new InvalidDataException("mlScore is a required property for Tampering and cannot be null");
-            }
-            else
-            {
-                this.MlScore = mlScore;
-            }
-            // to ensure "antiDetectBrowser" is required (not null)
-            // swagger debug: Tampering AntiDetectBrowser
-
-            if (antiDetectBrowser == null)
-            {
-                throw new InvalidDataException("antiDetectBrowser is a required property for Tampering and cannot be null");
-            }
-            else
-            {
-                this.AntiDetectBrowser = antiDetectBrowser;
-            }
+                            // to ensure "result" is required (not null)
+                            // swagger debug: Tampering Result
+        
+                            if (result == null)
+                            {
+                            throw new InvalidDataException("result is a required property for Tampering and cannot be null");
+                            }
+                            else
+                            {
+                            this.Result = result;
+                            }
+                            // to ensure "confidence" is required (not null)
+                            // swagger debug: Tampering Confidence
+        
+                            if (confidence == null)
+                            {
+                            throw new InvalidDataException("confidence is a required property for Tampering and cannot be null");
+                            }
+                            else
+                            {
+                            this.Confidence = confidence;
+                            }
+                            // to ensure "anomalyScore" is required (not null)
+                            // swagger debug: Tampering AnomalyScore
+        
+                            if (anomalyScore == null)
+                            {
+                            throw new InvalidDataException("anomalyScore is a required property for Tampering and cannot be null");
+                            }
+                            else
+                            {
+                            this.AnomalyScore = anomalyScore;
+                            }
+                            // to ensure "mlScore" is required (not null)
+                            // swagger debug: Tampering MlScore
+        
+                            if (mlScore == null)
+                            {
+                            throw new InvalidDataException("mlScore is a required property for Tampering and cannot be null");
+                            }
+                            else
+                            {
+                            this.MlScore = mlScore;
+                            }
+                            // to ensure "antiDetectBrowser" is required (not null)
+                            // swagger debug: Tampering AntiDetectBrowser
+        
+                            if (antiDetectBrowser == null)
+                            {
+                            throw new InvalidDataException("antiDetectBrowser is a required property for Tampering and cannot be null");
+                            }
+                            else
+                            {
+                            this.AntiDetectBrowser = antiDetectBrowser;
+                            }
         }
-
+        
+                    /// <summary>
+                        /// Indicates if an identification request from a browser or an Android SDK has been tampered with. Not supported in the iOS SDK, is always `false` for iOS requests.   * `true` - If the request meets either of the following conditions:     * Contains anomalous browser or device attributes that could not have been legitimately produced by the JavaScript agent or the Android SDK (see `anomalyScore`).     * Originated from an anti-detect browser like Incognition (see `antiDetectBrowser`).   * `false` - If the request is considered genuine or was generated by the iOS SDK. 
+                        /// </summary>
+                        /// <value>Indicates if an identification request from a browser or an Android SDK has been tampered with. Not supported in the iOS SDK, is always `false` for iOS requests.   * `true` - If the request meets either of the following conditions:     * Contains anomalous browser or device attributes that could not have been legitimately produced by the JavaScript agent or the Android SDK (see `anomalyScore`).     * Originated from an anti-detect browser like Incognition (see `antiDetectBrowser`).   * `false` - If the request is considered genuine or was generated by the iOS SDK. </value>
+                    [DataMember(Name="result", EmitDefaultValue=false)]
+                    [JsonPropertyName("result")]
+                    public bool? Result { get; set; }
+        
+        
+                    /// <summary>
+                        /// A score that indicates the extent of anomalous data in the request. This field applies to requests originating from **both** browsers and Android SDKs.    * Values above `0.5` indicate that the request has been tampered with.   * Values below `0.5` indicate that the request is genuine. 
+                        /// </summary>
+                        /// <value>A score that indicates the extent of anomalous data in the request. This field applies to requests originating from **both** browsers and Android SDKs.    * Values above `0.5` indicate that the request has been tampered with.   * Values below `0.5` indicate that the request is genuine. </value>
+                    [DataMember(Name="anomalyScore", EmitDefaultValue=false)]
+                    [JsonPropertyName("anomalyScore")]
+                    public double? AnomalyScore { get; set; }
+        
+                    /// <summary>
+                        /// A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model 
+                        /// </summary>
+                        /// <value>A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model </value>
+                    [DataMember(Name="mlScore", EmitDefaultValue=false)]
+                    [JsonPropertyName("mlScore")]
+                    public double? MlScore { get; set; }
+        
+                    /// <summary>
+                        /// Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. This field does not apply to requests originating from mobile SDKs.   * `true` - The browser resembles a known anti-detect browser, for example, Incognition.   * `false` - The browser does not resemble an anti-detect browser or the request originates from a mobile SDK. 
+                        /// </summary>
+                        /// <value>Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. This field does not apply to requests originating from mobile SDKs.   * `true` - The browser resembles a known anti-detect browser, for example, Incognition.   * `false` - The browser does not resemble an anti-detect browser or the request originates from a mobile SDK. </value>
+                    [DataMember(Name="antiDetectBrowser", EmitDefaultValue=false)]
+                    [JsonPropertyName("antiDetectBrowser")]
+                    public bool? AntiDetectBrowser { get; set; }
+        
         /// <summary>
-        /// Indicates if an identification request from a browser or an Android SDK has been tampered with. Not supported in the iOS SDK, is always `false` for iOS requests.   * `true` - If the request meets either of the following conditions:     * Contains anomalous browser or device attributes that could not have been legitimately produced by the JavaScript agent or the Android SDK (see `anomalyScore`).     * Originated from an anti-detect browser like Incognition (see `antiDetectBrowser`).   * `false` - If the request is considered genuine or was generated by the iOS SDK. 
-        /// </summary>
-        /// <value>Indicates if an identification request from a browser or an Android SDK has been tampered with. Not supported in the iOS SDK, is always `false` for iOS requests.   * `true` - If the request meets either of the following conditions:     * Contains anomalous browser or device attributes that could not have been legitimately produced by the JavaScript agent or the Android SDK (see `anomalyScore`).     * Originated from an anti-detect browser like Incognition (see `antiDetectBrowser`).   * `false` - If the request is considered genuine or was generated by the iOS SDK. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
-
-
-        /// <summary>
-        /// A score that indicates the extent of anomalous data in the request. This field applies to requests originating from **both** browsers and Android SDKs.    * Values above `0.5` indicate that the request has been tampered with.   * Values below `0.5` indicate that the request is genuine. 
-        /// </summary>
-        /// <value>A score that indicates the extent of anomalous data in the request. This field applies to requests originating from **both** browsers and Android SDKs.    * Values above `0.5` indicate that the request has been tampered with.   * Values below `0.5` indicate that the request is genuine. </value>
-        [DataMember(Name = "anomalyScore", EmitDefaultValue = false)]
-        [JsonPropertyName("anomalyScore")]
-        public double? AnomalyScore { get; set; }
-
-        /// <summary>
-        /// A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model 
-        /// </summary>
-        /// <value>A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model </value>
-        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
-        [JsonPropertyName("mlScore")]
-        public double? MlScore { get; set; }
-
-        /// <summary>
-        /// Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. This field does not apply to requests originating from mobile SDKs.   * `true` - The browser resembles a known anti-detect browser, for example, Incognition.   * `false` - The browser does not resemble an anti-detect browser or the request originates from a mobile SDK. 
-        /// </summary>
-        /// <value>Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. This field does not apply to requests originating from mobile SDKs.   * `true` - The browser resembles a known anti-detect browser, for example, Incognition.   * `false` - The browser does not resemble an anti-detect browser or the request originates from a mobile SDK. </value>
-        [DataMember(Name = "antiDetectBrowser", EmitDefaultValue = false)]
-        [JsonPropertyName("antiDetectBrowser")]
-        public bool? AntiDetectBrowser { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class Tampering {\n");
+        var sb = new StringBuilder();
+        sb.Append("class Tampering {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("  AnomalyScore: ").Append(AnomalyScore).Append("\n");
             sb.Append("  MlScore: ").Append(MlScore).Append("\n");
             sb.Append("  AntiDetectBrowser: ").Append(AntiDetectBrowser).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if Tampering instances are equal
-        /// </summary>
+            /// Returns true if Tampering instances are equal
+            /// </summary>
         /// <param name="input">Instance of Tampering to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Tampering? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
-                ) &&
-                (
-                this.Confidence == input.Confidence ||
-                (this.Confidence != null &&
-                this.Confidence.Equals(input.Confidence))
-                ) &&
-                (
-                this.AnomalyScore == input.AnomalyScore ||
-                (this.AnomalyScore != null &&
-                this.AnomalyScore.Equals(input.AnomalyScore))
-                ) &&
-                (
-                this.MlScore == input.MlScore ||
-                (this.MlScore != null &&
-                this.MlScore.Equals(input.MlScore))
-                ) &&
-                (
-                this.AntiDetectBrowser == input.AntiDetectBrowser ||
-                (this.AntiDetectBrowser != null &&
-                this.AntiDetectBrowser.Equals(input.AntiDetectBrowser))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Result == input.Result ||
+            (this.Result != null &&
+            this.Result.Equals(input.Result))
+            ) && 
+            (
+            this.Confidence == input.Confidence ||
+            (this.Confidence != null &&
+            this.Confidence.Equals(input.Confidence))
+            ) && 
+            (
+            this.AnomalyScore == input.AnomalyScore ||
+            (this.AnomalyScore != null &&
+            this.AnomalyScore.Equals(input.AnomalyScore))
+            ) && 
+            (
+            this.MlScore == input.MlScore ||
+            (this.MlScore != null &&
+            this.MlScore.Equals(input.MlScore))
+            ) && 
+            (
+            this.AntiDetectBrowser == input.AntiDetectBrowser ||
+            (this.AntiDetectBrowser != null &&
+            this.AntiDetectBrowser.Equals(input.AntiDetectBrowser))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
-                if (this.Confidence != null)
-                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-                if (this.AnomalyScore != null)
-                    hashCode = hashCode * 59 + this.AnomalyScore.GetHashCode();
-                if (this.MlScore != null)
-                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
-                if (this.AntiDetectBrowser != null)
-                    hashCode = hashCode * 59 + this.AntiDetectBrowser.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Result != null)
+            hashCode = hashCode * 59 + this.Result.GetHashCode();
+            if (this.Confidence != null)
+            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+            if (this.AnomalyScore != null)
+            hashCode = hashCode * 59 + this.AnomalyScore.GetHashCode();
+            if (this.MlScore != null)
+            hashCode = hashCode * 59 + this.MlScore.GetHashCode();
+            if (this.AntiDetectBrowser != null)
+            hashCode = hashCode * 59 + this.AntiDetectBrowser.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,225 +13,225 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// VPN
-    /// </summary>
-    [DataContract]
-    public class VPN : IEquatable<VPN>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VPN" /> class.
-        /// </summary>
-        /// <param name="result">VPN or other anonymizing service has been used when sending the request. (required).</param>
-        /// <param name="confidence">confidence (required).</param>
-        /// <param name="mlScore">Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
-        /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method. (required).</param>
-        /// <param name="originCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). (required).</param>
-        /// <param name="methods">methods (required).</param>
+            /// VPN
+            /// </summary>
+        [DataContract]
+                public class VPN :  IEquatable<VPN>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="VPN" /> class.
+            /// </summary>
+                /// <param name="result">VPN or other anonymizing service has been used when sending the request. (required).</param>
+                /// <param name="confidence">confidence (required).</param>
+                /// <param name="mlScore">Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
+                /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method. (required).</param>
+                /// <param name="originCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). (required).</param>
+                /// <param name="methods">methods (required).</param>
         public VPN(bool? result = default(bool?), VPNConfidence confidence = default(VPNConfidence), double? mlScore = default(double?), string originTimezone = default(string), string originCountry = default(string), VPNMethods methods = default(VPNMethods))
         {
-            // to ensure "result" is required (not null)
-            // swagger debug: VPN Result
-
-            if (result == null)
-            {
-                throw new InvalidDataException("result is a required property for VPN and cannot be null");
-            }
-            else
-            {
-                this.Result = result;
-            }
-            // to ensure "confidence" is required (not null)
-            // swagger debug: VPN Confidence
-
-            if (confidence == null)
-            {
-                throw new InvalidDataException("confidence is a required property for VPN and cannot be null");
-            }
-            else
-            {
-                this.Confidence = confidence;
-            }
-            // to ensure "originTimezone" is required (not null)
-            // swagger debug: VPN OriginTimezone
-
-            if (originTimezone == null)
-            {
-                throw new InvalidDataException("originTimezone is a required property for VPN and cannot be null");
-            }
-            else
-            {
-                this.OriginTimezone = originTimezone;
-            }
-            // to ensure "originCountry" is required (not null)
-            // swagger debug: VPN OriginCountry
-
-            if (originCountry == null)
-            {
-                throw new InvalidDataException("originCountry is a required property for VPN and cannot be null");
-            }
-            else
-            {
-                this.OriginCountry = originCountry;
-            }
-            // to ensure "methods" is required (not null)
-            // swagger debug: VPN Methods
-
-            if (methods == null)
-            {
-                throw new InvalidDataException("methods is a required property for VPN and cannot be null");
-            }
-            else
-            {
-                this.Methods = methods;
-            }
-            this.MlScore = mlScore;
+                            // to ensure "result" is required (not null)
+                            // swagger debug: VPN Result
+        
+                            if (result == null)
+                            {
+                            throw new InvalidDataException("result is a required property for VPN and cannot be null");
+                            }
+                            else
+                            {
+                            this.Result = result;
+                            }
+                            // to ensure "confidence" is required (not null)
+                            // swagger debug: VPN Confidence
+        
+                            if (confidence == null)
+                            {
+                            throw new InvalidDataException("confidence is a required property for VPN and cannot be null");
+                            }
+                            else
+                            {
+                            this.Confidence = confidence;
+                            }
+                            // to ensure "originTimezone" is required (not null)
+                            // swagger debug: VPN OriginTimezone
+        
+                            if (originTimezone == null)
+                            {
+                            throw new InvalidDataException("originTimezone is a required property for VPN and cannot be null");
+                            }
+                            else
+                            {
+                            this.OriginTimezone = originTimezone;
+                            }
+                            // to ensure "originCountry" is required (not null)
+                            // swagger debug: VPN OriginCountry
+        
+                            if (originCountry == null)
+                            {
+                            throw new InvalidDataException("originCountry is a required property for VPN and cannot be null");
+                            }
+                            else
+                            {
+                            this.OriginCountry = originCountry;
+                            }
+                            // to ensure "methods" is required (not null)
+                            // swagger debug: VPN Methods
+        
+                            if (methods == null)
+                            {
+                            throw new InvalidDataException("methods is a required property for VPN and cannot be null");
+                            }
+                            else
+                            {
+                            this.Methods = methods;
+                            }
+                                                    this.MlScore = mlScore;
         }
-
+        
+                    /// <summary>
+                        /// VPN or other anonymizing service has been used when sending the request.
+                        /// </summary>
+                        /// <value>VPN or other anonymizing service has been used when sending the request.</value>
+                    [DataMember(Name="result", EmitDefaultValue=false)]
+                    [JsonPropertyName("result")]
+                    public bool? Result { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Confidence
+                        /// </summary>
+                    [DataMember(Name="confidence", EmitDefaultValue=false)]
+                    [JsonPropertyName("confidence")]
+                    public VPNConfidence Confidence { get; set; }
+        
+                    /// <summary>
+                        /// Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
+                        /// </summary>
+                        /// <value>Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
+                    [DataMember(Name="mlScore", EmitDefaultValue=false)]
+                    [JsonPropertyName("mlScore")]
+                    public double? MlScore { get; set; }
+        
+                    /// <summary>
+                        /// Local timezone which is used in timezoneMismatch method.
+                        /// </summary>
+                        /// <value>Local timezone which is used in timezoneMismatch method.</value>
+                    [DataMember(Name="originTimezone", EmitDefaultValue=false)]
+                    [JsonPropertyName("originTimezone")]
+                    public string OriginTimezone { get; set; }
+        
+                    /// <summary>
+                        /// Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).
+                        /// </summary>
+                        /// <value>Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).</value>
+                    [DataMember(Name="originCountry", EmitDefaultValue=false)]
+                    [JsonPropertyName("originCountry")]
+                    public string OriginCountry { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Methods
+                        /// </summary>
+                    [DataMember(Name="methods", EmitDefaultValue=false)]
+                    [JsonPropertyName("methods")]
+                    public VPNMethods Methods { get; set; }
+        
         /// <summary>
-        /// VPN or other anonymizing service has been used when sending the request.
-        /// </summary>
-        /// <value>VPN or other anonymizing service has been used when sending the request.</value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        [JsonPropertyName("result")]
-        public bool? Result { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Confidence
-        /// </summary>
-        [DataMember(Name = "confidence", EmitDefaultValue = false)]
-        [JsonPropertyName("confidence")]
-        public VPNConfidence Confidence { get; set; }
-
-        /// <summary>
-        /// Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). 
-        /// </summary>
-        /// <value>Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). </value>
-        [DataMember(Name = "mlScore", EmitDefaultValue = false)]
-        [JsonPropertyName("mlScore")]
-        public double? MlScore { get; set; }
-
-        /// <summary>
-        /// Local timezone which is used in timezoneMismatch method.
-        /// </summary>
-        /// <value>Local timezone which is used in timezoneMismatch method.</value>
-        [DataMember(Name = "originTimezone", EmitDefaultValue = false)]
-        [JsonPropertyName("originTimezone")]
-        public string OriginTimezone { get; set; }
-
-        /// <summary>
-        /// Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).
-        /// </summary>
-        /// <value>Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).</value>
-        [DataMember(Name = "originCountry", EmitDefaultValue = false)]
-        [JsonPropertyName("originCountry")]
-        public string OriginCountry { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Methods
-        /// </summary>
-        [DataMember(Name = "methods", EmitDefaultValue = false)]
-        [JsonPropertyName("methods")]
-        public VPNMethods Methods { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class VPN {\n");
+        var sb = new StringBuilder();
+        sb.Append("class VPN {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("  MlScore: ").Append(MlScore).Append("\n");
             sb.Append("  OriginTimezone: ").Append(OriginTimezone).Append("\n");
             sb.Append("  OriginCountry: ").Append(OriginCountry).Append("\n");
             sb.Append("  Methods: ").Append(Methods).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if VPN instances are equal
-        /// </summary>
+            /// Returns true if VPN instances are equal
+            /// </summary>
         /// <param name="input">Instance of VPN to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(VPN? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
-                ) &&
-                (
-                this.Confidence == input.Confidence ||
-                (this.Confidence != null &&
-                this.Confidence.Equals(input.Confidence))
-                ) &&
-                (
-                this.MlScore == input.MlScore ||
-                (this.MlScore != null &&
-                this.MlScore.Equals(input.MlScore))
-                ) &&
-                (
-                this.OriginTimezone == input.OriginTimezone ||
-                (this.OriginTimezone != null &&
-                this.OriginTimezone.Equals(input.OriginTimezone))
-                ) &&
-                (
-                this.OriginCountry == input.OriginCountry ||
-                (this.OriginCountry != null &&
-                this.OriginCountry.Equals(input.OriginCountry))
-                ) &&
-                (
-                this.Methods == input.Methods ||
-                (this.Methods != null &&
-                this.Methods.Equals(input.Methods))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Result == input.Result ||
+            (this.Result != null &&
+            this.Result.Equals(input.Result))
+            ) && 
+            (
+            this.Confidence == input.Confidence ||
+            (this.Confidence != null &&
+            this.Confidence.Equals(input.Confidence))
+            ) && 
+            (
+            this.MlScore == input.MlScore ||
+            (this.MlScore != null &&
+            this.MlScore.Equals(input.MlScore))
+            ) && 
+            (
+            this.OriginTimezone == input.OriginTimezone ||
+            (this.OriginTimezone != null &&
+            this.OriginTimezone.Equals(input.OriginTimezone))
+            ) && 
+            (
+            this.OriginCountry == input.OriginCountry ||
+            (this.OriginCountry != null &&
+            this.OriginCountry.Equals(input.OriginCountry))
+            ) && 
+            (
+            this.Methods == input.Methods ||
+            (this.Methods != null &&
+            this.Methods.Equals(input.Methods))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
-                if (this.Confidence != null)
-                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
-                if (this.MlScore != null)
-                    hashCode = hashCode * 59 + this.MlScore.GetHashCode();
-                if (this.OriginTimezone != null)
-                    hashCode = hashCode * 59 + this.OriginTimezone.GetHashCode();
-                if (this.OriginCountry != null)
-                    hashCode = hashCode * 59 + this.OriginCountry.GetHashCode();
-                if (this.Methods != null)
-                    hashCode = hashCode * 59 + this.Methods.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Result != null)
+            hashCode = hashCode * 59 + this.Result.GetHashCode();
+            if (this.Confidence != null)
+            hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+            if (this.MlScore != null)
+            hashCode = hashCode * 59 + this.MlScore.GetHashCode();
+            if (this.OriginTimezone != null)
+            hashCode = hashCode * 59 + this.OriginTimezone.GetHashCode();
+            if (this.OriginCountry != null)
+            hashCode = hashCode * 59 + this.OriginCountry.GetHashCode();
+            if (this.Methods != null)
+            hashCode = hashCode * 59 + this.Methods.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }

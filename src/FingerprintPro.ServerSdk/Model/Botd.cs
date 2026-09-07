@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -13,168 +13,168 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
-namespace FingerprintPro.ServerSdk.Model
-{
-    /// <summary>
-    /// Contains all the information from Bot Detection product
-    /// </summary>
-    [DataContract]
-    public class Botd : IEquatable<Botd>
-    {
-
-
+        namespace FingerprintPro.ServerSdk.Model
+        {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Botd" /> class.
-        /// </summary>
-        /// <param name="bot">bot (required).</param>
-        /// <param name="meta">meta.</param>
-        /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
-        /// <param name="url">Page URL from which the request was sent. (required).</param>
-        /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
-        /// <param name="time">Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible. (required).</param>
-        /// <param name="userAgent">userAgent (required).</param>
-        /// <param name="requestId">Unique identifier of the user's request. (required).</param>
+            /// Contains all the information from Bot Detection product
+            /// </summary>
+        [DataContract]
+                public class Botd :  IEquatable<Botd>
+        {
+        
+        
+        /// <summary>
+            /// Initializes a new instance of the <see cref="Botd" /> class.
+            /// </summary>
+                /// <param name="bot">bot (required).</param>
+                /// <param name="meta">meta.</param>
+                /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
+                /// <param name="url">Page URL from which the request was sent. (required).</param>
+                /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
+                /// <param name="time">Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible. (required).</param>
+                /// <param name="userAgent">userAgent (required).</param>
+                /// <param name="requestId">Unique identifier of the user's request. (required).</param>
         public Botd(BotdBot bot = default(BotdBot), Tag meta = default(Tag), string linkedId = default(string), string url = default(string), string ip = default(string), DateTime? time = default(DateTime?), string userAgent = default(string), string requestId = default(string))
         {
-            // to ensure "bot" is required (not null)
-            // swagger debug: Botd Bot
-
-            if (bot == null)
-            {
-                throw new InvalidDataException("bot is a required property for Botd and cannot be null");
-            }
-            else
-            {
-                this.Bot = bot;
-            }
-            // to ensure "url" is required (not null)
-            // swagger debug: Botd Url
-
-            if (url == null)
-            {
-                throw new InvalidDataException("url is a required property for Botd and cannot be null");
-            }
-            else
-            {
-                this.Url = url;
-            }
-            // to ensure "ip" is required (not null)
-            // swagger debug: Botd Ip
-
-            if (ip == null)
-            {
-                throw new InvalidDataException("ip is a required property for Botd and cannot be null");
-            }
-            else
-            {
-                this.Ip = ip;
-            }
-            // to ensure "time" is required (not null)
-            // swagger debug: Botd Time
-
-            if (time == null)
-            {
-                throw new InvalidDataException("time is a required property for Botd and cannot be null");
-            }
-            else
-            {
-                this.Time = time;
-            }
-            // to ensure "userAgent" is required (not null)
-            // swagger debug: Botd UserAgent
-
-            if (userAgent == null)
-            {
-                throw new InvalidDataException("userAgent is a required property for Botd and cannot be null");
-            }
-            else
-            {
-                this.UserAgent = userAgent;
-            }
-            // to ensure "requestId" is required (not null)
-            // swagger debug: Botd RequestId
-
-            if (requestId == null)
-            {
-                throw new InvalidDataException("requestId is a required property for Botd and cannot be null");
-            }
-            else
-            {
-                this.RequestId = requestId;
-            }
-            this.Meta = meta;
-            this.LinkedId = linkedId;
+                            // to ensure "bot" is required (not null)
+                            // swagger debug: Botd Bot
+        
+                            if (bot == null)
+                            {
+                            throw new InvalidDataException("bot is a required property for Botd and cannot be null");
+                            }
+                            else
+                            {
+                            this.Bot = bot;
+                            }
+                            // to ensure "url" is required (not null)
+                            // swagger debug: Botd Url
+        
+                            if (url == null)
+                            {
+                            throw new InvalidDataException("url is a required property for Botd and cannot be null");
+                            }
+                            else
+                            {
+                            this.Url = url;
+                            }
+                            // to ensure "ip" is required (not null)
+                            // swagger debug: Botd Ip
+        
+                            if (ip == null)
+                            {
+                            throw new InvalidDataException("ip is a required property for Botd and cannot be null");
+                            }
+                            else
+                            {
+                            this.Ip = ip;
+                            }
+                            // to ensure "time" is required (not null)
+                            // swagger debug: Botd Time
+        
+                            if (time == null)
+                            {
+                            throw new InvalidDataException("time is a required property for Botd and cannot be null");
+                            }
+                            else
+                            {
+                            this.Time = time;
+                            }
+                            // to ensure "userAgent" is required (not null)
+                            // swagger debug: Botd UserAgent
+        
+                            if (userAgent == null)
+                            {
+                            throw new InvalidDataException("userAgent is a required property for Botd and cannot be null");
+                            }
+                            else
+                            {
+                            this.UserAgent = userAgent;
+                            }
+                            // to ensure "requestId" is required (not null)
+                            // swagger debug: Botd RequestId
+        
+                            if (requestId == null)
+                            {
+                            throw new InvalidDataException("requestId is a required property for Botd and cannot be null");
+                            }
+                            else
+                            {
+                            this.RequestId = requestId;
+                            }
+                                                    this.Meta = meta;
+                                                    this.LinkedId = linkedId;
         }
-
+        
+                    /// <summary>
+                        /// Gets or Sets Bot
+                        /// </summary>
+                    [DataMember(Name="bot", EmitDefaultValue=false)]
+                    [JsonPropertyName("bot")]
+                    public BotdBot Bot { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets Meta
+                        /// </summary>
+                    [DataMember(Name="meta", EmitDefaultValue=false)]
+                    [JsonPropertyName("meta")]
+                    public Tag Meta { get; set; }
+        
+                    /// <summary>
+                        /// A customer-provided id that was sent with the request.
+                        /// </summary>
+                        /// <value>A customer-provided id that was sent with the request.</value>
+                    [DataMember(Name="linkedId", EmitDefaultValue=false)]
+                    [JsonPropertyName("linkedId")]
+                    public string LinkedId { get; set; }
+        
+                    /// <summary>
+                        /// Page URL from which the request was sent.
+                        /// </summary>
+                        /// <value>Page URL from which the request was sent.</value>
+                    [DataMember(Name="url", EmitDefaultValue=false)]
+                    [JsonPropertyName("url")]
+                    public string Url { get; set; }
+        
+                    /// <summary>
+                        /// IP address of the requesting browser or bot.
+                        /// </summary>
+                        /// <value>IP address of the requesting browser or bot.</value>
+                    [DataMember(Name="ip", EmitDefaultValue=false)]
+                    [JsonPropertyName("ip")]
+                    public string Ip { get; set; }
+        
+                    /// <summary>
+                        /// Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.
+                        /// </summary>
+                        /// <value>Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.</value>
+                    [DataMember(Name="time", EmitDefaultValue=false)]
+                    [JsonPropertyName("time")]
+                    public DateTime? Time { get; set; }
+        
+                    /// <summary>
+                        /// Gets or Sets UserAgent
+                        /// </summary>
+                    [DataMember(Name="userAgent", EmitDefaultValue=false)]
+                    [JsonPropertyName("userAgent")]
+                    public string UserAgent { get; set; }
+        
+                    /// <summary>
+                        /// Unique identifier of the user's request.
+                        /// </summary>
+                        /// <value>Unique identifier of the user's request.</value>
+                    [DataMember(Name="requestId", EmitDefaultValue=false)]
+                    [JsonPropertyName("requestId")]
+                    public string RequestId { get; set; }
+        
         /// <summary>
-        /// Gets or Sets Bot
-        /// </summary>
-        [DataMember(Name = "bot", EmitDefaultValue = false)]
-        [JsonPropertyName("bot")]
-        public BotdBot Bot { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Meta
-        /// </summary>
-        [DataMember(Name = "meta", EmitDefaultValue = false)]
-        [JsonPropertyName("meta")]
-        public Tag Meta { get; set; }
-
-        /// <summary>
-        /// A customer-provided id that was sent with the request.
-        /// </summary>
-        /// <value>A customer-provided id that was sent with the request.</value>
-        [DataMember(Name = "linkedId", EmitDefaultValue = false)]
-        [JsonPropertyName("linkedId")]
-        public string LinkedId { get; set; }
-
-        /// <summary>
-        /// Page URL from which the request was sent.
-        /// </summary>
-        /// <value>Page URL from which the request was sent.</value>
-        [DataMember(Name = "url", EmitDefaultValue = false)]
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
-
-        /// <summary>
-        /// IP address of the requesting browser or bot.
-        /// </summary>
-        /// <value>IP address of the requesting browser or bot.</value>
-        [DataMember(Name = "ip", EmitDefaultValue = false)]
-        [JsonPropertyName("ip")]
-        public string Ip { get; set; }
-
-        /// <summary>
-        /// Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.
-        /// </summary>
-        /// <value>Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible.</value>
-        [DataMember(Name = "time", EmitDefaultValue = false)]
-        [JsonPropertyName("time")]
-        public DateTime? Time { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UserAgent
-        /// </summary>
-        [DataMember(Name = "userAgent", EmitDefaultValue = false)]
-        [JsonPropertyName("userAgent")]
-        public string UserAgent { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the user's request.
-        /// </summary>
-        /// <value>Unique identifier of the user's request.</value>
-        [DataMember(Name = "requestId", EmitDefaultValue = false)]
-        [JsonPropertyName("requestId")]
-        public string RequestId { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
+            /// Returns the string presentation of the object
+            /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("class Botd {\n");
+        var sb = new StringBuilder();
+        sb.Append("class Botd {\n");
             sb.Append("  Bot: ").Append(Bot).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
@@ -183,100 +183,100 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Time: ").Append(Time).Append("\n");
             sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
+        sb.Append("}\n");
+        return sb.ToString();
         }
-
+        
         /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
+            /// Returns the JSON string presentation of the object
+            /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonUtils.Serialize(this);
+        return JsonUtils.Serialize(this);
         }
-
+        
         /// <summary>
-        /// Returns true if Botd instances are equal
-        /// </summary>
+            /// Returns true if Botd instances are equal
+            /// </summary>
         /// <param name="input">Instance of Botd to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Botd? input)
         {
-            if (input == null)
-                return false;
-
-            return
-                (
-                this.Bot == input.Bot ||
-                (this.Bot != null &&
-                this.Bot.Equals(input.Bot))
-                ) &&
-                (
-                this.Meta == input.Meta ||
-                (this.Meta != null &&
-                this.Meta.Equals(input.Meta))
-                ) &&
-                (
-                this.LinkedId == input.LinkedId ||
-                (this.LinkedId != null &&
-                this.LinkedId.Equals(input.LinkedId))
-                ) &&
-                (
-                this.Url == input.Url ||
-                (this.Url != null &&
-                this.Url.Equals(input.Url))
-                ) &&
-                (
-                this.Ip == input.Ip ||
-                (this.Ip != null &&
-                this.Ip.Equals(input.Ip))
-                ) &&
-                (
-                this.Time == input.Time ||
-                (this.Time != null &&
-                this.Time.Equals(input.Time))
-                ) &&
-                (
-                this.UserAgent == input.UserAgent ||
-                (this.UserAgent != null &&
-                this.UserAgent.Equals(input.UserAgent))
-                ) &&
-                (
-                this.RequestId == input.RequestId ||
-                (this.RequestId != null &&
-                this.RequestId.Equals(input.RequestId))
-                );
+        if (input == null)
+        return false;
+        
+        return 
+            (
+            this.Bot == input.Bot ||
+            (this.Bot != null &&
+            this.Bot.Equals(input.Bot))
+            ) && 
+            (
+            this.Meta == input.Meta ||
+            (this.Meta != null &&
+            this.Meta.Equals(input.Meta))
+            ) && 
+            (
+            this.LinkedId == input.LinkedId ||
+            (this.LinkedId != null &&
+            this.LinkedId.Equals(input.LinkedId))
+            ) && 
+            (
+            this.Url == input.Url ||
+            (this.Url != null &&
+            this.Url.Equals(input.Url))
+            ) && 
+            (
+            this.Ip == input.Ip ||
+            (this.Ip != null &&
+            this.Ip.Equals(input.Ip))
+            ) && 
+            (
+            this.Time == input.Time ||
+            (this.Time != null &&
+            this.Time.Equals(input.Time))
+            ) && 
+            (
+            this.UserAgent == input.UserAgent ||
+            (this.UserAgent != null &&
+            this.UserAgent.Equals(input.UserAgent))
+            ) && 
+            (
+            this.RequestId == input.RequestId ||
+            (this.RequestId != null &&
+            this.RequestId.Equals(input.RequestId))
+            );
         }
-
+        
         /// <summary>
-        /// Gets the hash code
-        /// </summary>
+            /// Gets the hash code
+            /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Bot != null)
-                    hashCode = hashCode * 59 + this.Bot.GetHashCode();
-                if (this.Meta != null)
-                    hashCode = hashCode * 59 + this.Meta.GetHashCode();
-                if (this.LinkedId != null)
-                    hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
-                if (this.Url != null)
-                    hashCode = hashCode * 59 + this.Url.GetHashCode();
-                if (this.Ip != null)
-                    hashCode = hashCode * 59 + this.Ip.GetHashCode();
-                if (this.Time != null)
-                    hashCode = hashCode * 59 + this.Time.GetHashCode();
-                if (this.UserAgent != null)
-                    hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
-                if (this.RequestId != null)
-                    hashCode = hashCode * 59 + this.RequestId.GetHashCode();
-                return hashCode;
-            }
+        unchecked // Overflow is fine, just wrap
+        {
+            int hashCode = 41;
+            if (this.Bot != null)
+            hashCode = hashCode * 59 + this.Bot.GetHashCode();
+            if (this.Meta != null)
+            hashCode = hashCode * 59 + this.Meta.GetHashCode();
+            if (this.LinkedId != null)
+            hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
+            if (this.Url != null)
+            hashCode = hashCode * 59 + this.Url.GetHashCode();
+            if (this.Ip != null)
+            hashCode = hashCode * 59 + this.Ip.GetHashCode();
+            if (this.Time != null)
+            hashCode = hashCode * 59 + this.Time.GetHashCode();
+            if (this.UserAgent != null)
+            hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
+            if (this.RequestId != null)
+            hashCode = hashCode * 59 + this.RequestId.GetHashCode();
+        return hashCode;
         }
-
-    }
+        }
+        
+            }
 }
