@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -31,7 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices. (required).</param>
         /// <param name="osMismatch">The browser runs on a different operating system than the operating system inferred from the request network signature. (required).</param>
         /// <param name="relay">Request IP address belongs to a relay service provider, indicating the use of relay services like [Apple Private relay](https://support.apple.com/en-us/102602) or [Cloudflare Warp](https://developers.cloudflare.com/warp-client/).   * Like VPNs, relay services anonymize the visitor's true IP address. * Unlike traditional VPNs, relay services don't let visitors spoof their location by choosing an exit node in a different country.  This field allows you to differentiate VPN users and relay service users in your fraud prevention logic.  (required).</param>
-        /// <param name="mlPrediction">`true` if the request came from a device running a VPN, `false` otherwise.   .</param>
+        /// <param name="mlPrediction">`true` if the request came from a device running a VPN, `false` otherwise. .</param>
         public VPNMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?), bool? osMismatch = default(bool?), bool? relay = default(bool?), bool? mlPrediction = default(bool?))
         {
             // to ensure "timezoneMismatch" is required (not null)
@@ -133,9 +133,9 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? Relay { get; set; }
 
         /// <summary>
-        /// `true` if the request came from a device running a VPN, `false` otherwise.   
+        /// `true` if the request came from a device running a VPN, `false` otherwise. 
         /// </summary>
-        /// <value>`true` if the request came from a device running a VPN, `false` otherwise.   </value>
+        /// <value>`true` if the request came from a device running a VPN, `false` otherwise. </value>
         [DataMember(Name = "mlPrediction", EmitDefaultValue = false)]
         [JsonPropertyName("mlPrediction")]
         public bool? MlPrediction { get; set; }

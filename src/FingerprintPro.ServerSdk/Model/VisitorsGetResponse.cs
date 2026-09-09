@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -16,7 +16,7 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// Pagination-related fields `lastTimestamp` and `paginationKey` are included if you use a pagination parameter like `limit` or `before` and there is more data available on the next page.
+    /// Deprecated response shape for `GET /visitors/{visitor_id}`. The `visits` array currently contains at most one item. Use `GET /events/search` for multi-event history and filtering.
     /// </summary>
     [DataContract]
     public class VisitorsGetResponse : IEquatable<VisitorsGetResponse>
@@ -29,7 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="visitorId">visitorId (required).</param>
         /// <param name="visits">visits (required).</param>
         /// <param name="lastTimestamp">⚠️ Deprecated paging attribute, please use `paginationKey` instead. Timestamp of the last visit in the current page of results. .</param>
-        /// <param name="paginationKey">Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results..</param>
+        /// <param name="paginationKey">Use this value in the following request as the `paginationKey` parameter to get the next result..</param>
         public VisitorsGetResponse(string visitorId = default(string), List<Visit> visits = default(List<Visit>), long? lastTimestamp = default(long?), string paginationKey = default(string))
         {
             // to ensure "visitorId" is required (not null)
@@ -81,9 +81,9 @@ namespace FingerprintPro.ServerSdk.Model
         public long? LastTimestamp { get; set; }
 
         /// <summary>
-        /// Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results.
+        /// Use this value in the following request as the `paginationKey` parameter to get the next result.
         /// </summary>
-        /// <value>Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results.</value>
+        /// <value>Use this value in the following request as the `paginationKey` parameter to get the next result.</value>
         [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
         [JsonPropertyName("paginationKey")]
         public string PaginationKey { get; set; }

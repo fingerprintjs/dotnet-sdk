@@ -28,7 +28,8 @@ public class ApiTests
 
         var now = DateTimeOffset.UtcNow;
         _end = now.ToUnixTimeMilliseconds();
-        _start = now.AddDays(-90).ToUnixTimeMilliseconds();
+        // Use 89 days instead of 90 to avoid flakiness from request latency pushing the start time past the 90-day limit.
+        _start = now.AddDays(-89).ToUnixTimeMilliseconds();
 
         var events = _api.SearchEvents(2, start: _start, end: _end);
         Assert.That(events.Events, Is.Not.Null.And.Not.Empty, "No events returned by SearchEvents.");
@@ -100,7 +101,8 @@ public class ApiTests
     [Test]
     public void SearchEvents_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
+        // Use 89 days instead of 90 to avoid flakiness from request latency pushing the start time past the 90-day limit.
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
         var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
 
         var response = _api.SearchEvents(

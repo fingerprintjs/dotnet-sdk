@@ -1,7 +1,7 @@
 /* 
  * Server API v3 (deprecated)
  *
- * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -22,9 +22,9 @@ namespace FingerprintPro.ServerSdk.Model
     public class ProxyDetails : IEquatable<ProxyDetails>
     {
         /// <summary>
-        /// Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. 
+        /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
         /// </summary>
-        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. </value>
+        /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum ProxyTypeEnum
         {
@@ -45,9 +45,9 @@ namespace FingerprintPro.ServerSdk.Model
             Unknown = 3
         }
         /// <summary>
-        /// Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. 
+        /// Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type 
         /// </summary>
-        /// <value>Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type. </value>
+        /// <value>Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type </value>
         [DataMember(Name = "proxyType", EmitDefaultValue = false)]
         [JsonPropertyName("proxyType")]
         public ProxyTypeEnum ProxyType { get; set; }
@@ -56,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ProxyDetails" /> class.
         /// </summary>
-        /// <param name="proxyType">Residential proxies use real user IP addresses to appear as legitimate traffic, while data center proxies are public proxies hosted in data centers. `unknown` is reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type.  (required).</param>
+        /// <param name="proxyType">Proxy type:  * `residential` - proxies that route through residential and telecom IP addresses to appear as legitimate traffic  * `data_center` - proxies which route through data centers  * `unknown` - reported when a proxy is detected solely by the ML model and the IP sources did not determine a specific type  (required).</param>
         /// <param name="lastSeenAt">ISO 8601 formatted timestamp in UTC with hourly resolution of when this IP was last seen as a proxy when available. .</param>
         public ProxyDetails(ProxyTypeEnum proxyType = default(ProxyTypeEnum), DateTime? lastSeenAt = default(DateTime?))
         {
