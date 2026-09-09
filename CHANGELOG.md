@@ -1,5 +1,19 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.13.0
+
+### Minor Changes
+
+- Update Server API schema to v3.7.1:
+
+  - **events**: Add `RequestReadTimeout` error code
+  - **events-search**: Document `429` and `504` error responses for `GET /events/search`
+  - **events-search**: Clarify the `reverse` parameter description and set its default value to `false`
+  - **events**: Mark `Labels.label` field **required**
+  - **visitors**: Document `404`, `429`, and `504` error responses for `GET /visitors/{visitor_id}`
+  - **visitors**: Clarify that `GET /visitors/{visitor_id}` returns at most one item in `visits`, and update `limit`/`paginationKey`/`before` descriptions accordingly
+  - Clarify the `ProxyDetails.proxyType` description ([2dcb556](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/2dcb55619ffae072fae6aebdc56237a42b5eac9e))
+
 ## 7.12.0
 
 ### Minor Changes
