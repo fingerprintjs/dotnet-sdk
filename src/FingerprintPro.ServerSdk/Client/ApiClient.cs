@@ -57,9 +57,11 @@ namespace FingerprintPro.ServerSdk.Client
         /// </remarks>
         public IReadableConfiguration Configuration { get; set; }
 
-        private HttpRequestMessage CreateRequestMessage(HttpMethod method, UriBuilder uri,
+        private HttpRequestMessage CreateRequestMessage(HttpMethod method, string path,
             List<KeyValuePair<string, string>>? queryParams, HttpContent? body = null)
         {
+            var uri = GetRequestUriBuilder(path);
+
             var query = HttpUtility.ParseQueryString(uri.Query);
             query["ii"] = $"fingerprint-pro-server-api-dotnet-sdk/{ServerSdk.Client.Configuration.Version}";
             if (queryParams != null)
@@ -77,7 +79,15 @@ namespace FingerprintPro.ServerSdk.Client
 
             uri.Query = query.ToString();
 
-            var request = new HttpRequestMessage(method, uri.ToString());
+            var requestUri = new Uri(uri.ToString());
+
+            if (requestUri.AbsolutePath != path)
+            {
+                throw new ArgumentException(
+                    $"Request path changed while the URL was parsed, expected {path} but got {requestUri.AbsolutePath}");
+            }
+
+            var request = new HttpRequestMessage(method, requestUri);
             request.Content = body;
             request.Headers.TryAddWithoutValidation("User-Agent", Configuration.UserAgent);
             var apiKey = Configuration.GetApiKeyWithPrefix("Auth-API-Key");
@@ -94,23 +104,25 @@ namespace FingerprintPro.ServerSdk.Client
             return request;
         }
 
-        private UriBuilder GetRequestPath(OperationDefinition definition, params string[]? args)
+        private UriBuilder GetRequestUriBuilder(string path)
         {
-            var uriBuilder = new UriBuilder(Client.BaseAddress?.ToString() ?? Configuration.BasePath)
+            return new UriBuilder(Client.BaseAddress?.ToString() ?? Configuration.BasePath)
             {
-                Path = definition.GetPath(args)
+                Path = path
             };
-
-            return uriBuilder;
         }
 
-        public async Task<ApiResponse<object>> DoRequestEmpty(ApiRequest apiRequest)
+        public Task<ApiResponse<object>> DoRequestEmpty(ApiRequest apiRequest)
         {
-            var definition = apiRequest.OperationDefinition;
-
-            var path = GetRequestPath(definition, apiRequest.Args);
+            var path = apiRequest.OperationDefinition.GetPath(apiRequest.Args);
             var request = CreateRequestMessage(apiRequest.Method, path, apiRequest.QueryParams, apiRequest.Body);
 
+            return SendRequestEmpty(request, apiRequest.OperationDefinition);
+        }
+
+        private async Task<ApiResponse<object>> SendRequestEmpty(HttpRequestMessage request,
+            OperationDefinition definition)
+        {
             var response = await Client.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
 
@@ -120,13 +132,16 @@ namespace FingerprintPro.ServerSdk.Client
             return new ApiResponse<object>(response, null!);
         }
 
-        public async Task<ApiResponse<T>> DoRequest<T>(ApiRequest apiRequest)
+        public Task<ApiResponse<T>> DoRequest<T>(ApiRequest apiRequest)
         {
-            var definition = apiRequest.OperationDefinition;
-
-            var path = GetRequestPath(definition, apiRequest.Args);
+            var path = apiRequest.OperationDefinition.GetPath(apiRequest.Args);
             var request = CreateRequestMessage(apiRequest.Method, path, apiRequest.QueryParams, apiRequest.Body);
 
+            return SendRequest<T>(request, apiRequest.OperationDefinition);
+        }
+
+        private async Task<ApiResponse<T>> SendRequest<T>(HttpRequestMessage request, OperationDefinition definition)
+        {
             var response = await Client.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
 

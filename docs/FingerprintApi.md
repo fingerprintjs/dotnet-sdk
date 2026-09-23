@@ -84,6 +84,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **visitorId** | **string**| The [visitor ID](https://dev.fingerprint.com/reference/get-function#visitorid) you want to delete. | 
 
+> [!WARNING]
+> #### Invalid values
+>
+> `visitorId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
+
 ### Return type
 
 void (empty response body)
@@ -153,6 +158,11 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **requestId** | **string**| The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request. | 
+
+> [!WARNING]
+> #### Invalid values
+>
+> `requestId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
 
 ### Return type
 
@@ -308,6 +318,11 @@ Name | Type | Description  | Notes
  **limit** | **int?**| Limit scanned results.  `GET /visitors/{visitor_id}` currently returns at most one visit. Use `GET /events/search` for paginated multi-event queries.  | [optional] 
  **paginationKey** | **string**| Deprecated pagination parameter retained for backward compatibility.  `GET /visitors/{visitor_id}` currently returns at most one visit, so pagination is not expected. Use `GET /events/search` for paginated results.  | [optional] 
  **before** | **long?**| ⚠️ Deprecated pagination method, please use `paginationKey` instead. Timestamp (in milliseconds since epoch) used to paginate results. `GET /visitors/{visitor_id}` currently returns at most one visit, so pagination is not expected.  | [optional] 
+
+> [!WARNING]
+> #### Invalid values
+>
+> `visitorId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
 
 ### Return type
 
@@ -519,6 +534,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**EventsUpdateRequest**](EventsUpdateRequest.md)|  | 
  **requestId** | **string**| The unique event [identifier](https://dev.fingerprint.com/reference/get-function#requestid). | 
+
+> [!WARNING]
+> #### Invalid values
+>
+> `requestId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
 
 ### Return type
 

@@ -68,6 +68,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------{{/@last}}{{/parameters}}
 {{#parameters}} **{{paramName}}** | {{#isBinary}}**{{dataType}}**{{/isBinary}}{{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isBinary}}[**{{dataType}}**]({{#isContainer}}{{baseType}}{{/isContainer}}{{^isContainer}}{{dataType}}{{/isContainer}}.md){{/isBinary}}{{/isPrimitiveType}}| {{{description}}} | {{^required}}[optional] {{/required}}{{#defaultValue}}[default to {{defaultValue}}]{{/defaultValue}}
 {{/parameters}}
+{{#pathParams}}
+
+> [!WARNING]
+> #### Invalid values
+>
+> `{{paramName}}` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
+{{/pathParams}}
 
 ### Return type
 
