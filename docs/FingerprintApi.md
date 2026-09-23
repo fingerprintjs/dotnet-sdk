@@ -82,6 +82,11 @@ namespace DeleteVisitorDataExample
 |------|------|-------------|-------|
 | **visitorId** | **string** | The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. |  |
 
+> [!WARNING]
+> #### Invalid values
+>
+> `visitorId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
+
 ### Return type
 
 void (empty response body)
@@ -158,6 +163,11 @@ namespace GetEventExample
 |------|------|-------------|-------|
 | **eventId** | **string** | The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). |  |
 | **rulesetId** | **string** | The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response.  | [optional]  |
+
+> [!WARNING]
+> #### Invalid values
+>
+> `eventId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
 
 ### Return type
 
@@ -448,6 +458,11 @@ namespace UpdateEventExample
 |------|------|-------------|-------|
 | **eventId** | **string** | The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). |  |
 | **eventUpdate** | [**EventUpdate**](EventUpdate.md) |  |  |
+
+> [!WARNING]
+> #### Invalid values
+>
+> `eventId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
 
 ### Return type
 
