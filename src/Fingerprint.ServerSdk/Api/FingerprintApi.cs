@@ -1483,6 +1483,7 @@ namespace Fingerprint.ServerSdk.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/visitors/{visitor_id}"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/visitors/{visitor_id}");
+                    ClientUtils.ValidatePathParameter(visitorId.ToString(), nameof(visitorId));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bvisitor_id%7D", Uri.EscapeDataString(visitorId.ToString()));
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
@@ -1878,6 +1879,7 @@ namespace Fingerprint.ServerSdk.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/events/{event_id}"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/events/{event_id}");
+                    ClientUtils.ValidatePathParameter(eventId.ToString(), nameof(eventId));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bevent_id%7D", Uri.EscapeDataString(eventId.ToString()));
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
@@ -3419,6 +3421,7 @@ namespace Fingerprint.ServerSdk.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/events/{event_id}"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/events/{event_id}");
+                    ClientUtils.ValidatePathParameter(eventId.ToString(), nameof(eventId));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bevent_id%7D", Uri.EscapeDataString(eventId.ToString()));
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
