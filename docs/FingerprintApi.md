@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 > [!WARNING]
 > #### Invalid values
 >
-> `visitorId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
+> `visitorId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
 
 ### Return type
 
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 > [!WARNING]
 > #### Invalid values
 >
-> `requestId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
+> `requestId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
 
 ### Return type
 
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 > [!WARNING]
 > #### Invalid values
 >
-> `visitorId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
+> `visitorId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
 
 ### Return type
 
@@ -538,7 +538,7 @@ Name | Type | Description  | Notes
 > [!WARNING]
 > #### Invalid values
 >
-> `requestId` must not be empty, `.`, or `..`. When you use them, the call throws `ArgumentException` without sending a request.
+> `requestId` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
 
 ### Return type
 

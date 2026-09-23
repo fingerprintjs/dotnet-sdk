@@ -2,4 +2,4 @@
 'fingerprint-pro-server-api-dotnet-sdk': patch
 ---
 
-URL-encode path parameters. `GetEvent`, `UpdateEvent`, `GetVisits`, and `DeleteVisitorData` now throw an `ArgumentException` without sending a request when the request or visitor ID is empty, `.`, or `..`.
+Fix `GetEvent`, `UpdateEvent`, `GetVisits`, and `DeleteVisitorData` returning data for a different request when the `requestId` or `visitorId` argument contains special characters. These methods now throw an `ArgumentException` when the argument is empty, `.`, or `..`.
