@@ -15,7 +15,7 @@ if [[ "${TRACE:-}" != "true" && "${ACTIONS_STEP_DEBUG:-}" != "true" ]]; then
 fi
 
 schemaDestination="./res/fingerprint-server-api.yaml"
-baseDestination="./src/Fingerprint.ServerSdk.Test/mocks"
+exampleBaseDestination="./src/Fingerprint.ServerSdk.Test/mocks"
 
 mkdir -p "$(dirname "$schemaDestination")"
 
@@ -36,7 +36,7 @@ examples=(
 )
 
 for example in "${examples[@]}"; do
-  destinationPath="$baseDestination/$example"
+  destinationPath="$exampleBaseDestination/$example"
   mkdir -p "$(dirname "$destinationPath")"
 
   exampleUrl="$examplesBaseUrl/$example"
