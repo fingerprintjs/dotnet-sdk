@@ -315,6 +315,7 @@ Class | Method | HTTP request | Description
  - [Model.BotResult](docs/models/BotResult.md)
  - [Model.BrowserDetails](docs/models/BrowserDetails.md)
  - [Model.Canvas](docs/models/Canvas.md)
+ - [Model.DeviceDetails](docs/models/DeviceDetails.md)
  - [Model.Emoji](docs/models/Emoji.md)
  - [Model.Error](docs/models/Error.md)
  - [Model.ErrorCode](docs/models/ErrorCode.md)

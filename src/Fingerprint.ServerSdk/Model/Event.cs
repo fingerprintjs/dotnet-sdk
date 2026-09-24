@@ -38,16 +38,16 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="source">source.</param>
         /// <param name="incrementalIdentificationStatus">incrementalIdentificationStatus.</param>
-        /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
-        /// <param name="environmentId">Environment Id of the event..</param>
-        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event)..</param>
+        /// <param name="linkedId">A customer-provided ID that was sent with the request..</param>
+        /// <param name="environmentId">Environment ID of the event..</param>
+        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event)..</param>
         /// <param name="sdk">sdk.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
         /// <param name="identification">identification.</param>
         /// <param name="supplementaryIdHighRecall">supplementaryIdHighRecall.</param>
         /// <param name="tags">A customer-provided value or an object that was sent with the identification request or updated later..</param>
         /// <param name="url">Page URL from which the request was sent..</param>
-        /// <param name="bundleId">Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. .</param>
+        /// <param name="bundleId">Bundle ID of the iOS application integrated with the Fingerprint SDK for the event. .</param>
         /// <param name="packageName">Package name of the Android application integrated with the Fingerprint SDK for the event. .</param>
         /// <param name="ipAddress">IP address of the requesting browser or bot..</param>
         /// <param name="userAgent">User Agent of the client..</param>
@@ -63,6 +63,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="botInfo">botInfo.</param>
         /// <param name="clonedApp">Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. .</param>
         /// <param name="developerTools">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. .</param>
+        /// <param name="deviceDetails">deviceDetails.</param>
         /// <param name="emulator">Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android. .</param>
         /// <param name="factoryResetTimestamp">The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal. .</param>
         /// <param name="frida">[Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * `true` - Frida detected * `false` - No signs of Frida or the client is not a mobile device. .</param>
@@ -100,7 +101,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="labels">Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
+        public Event(string eventId, long timestamp, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<DeviceDetails> deviceDetails = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
@@ -131,6 +132,7 @@ namespace Fingerprint.ServerSdk.Model
             BotInfoOption = botInfo;
             ClonedAppOption = clonedApp;
             DeveloperToolsOption = developerTools;
+            DeviceDetailsOption = deviceDetails;
             EmulatorOption = emulator;
             FactoryResetTimestampOption = factoryResetTimestamp;
             FridaOption = frida;
@@ -285,9 +287,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> LinkedIdOption { get; private set; }
 
         /// <summary>
-        /// A customer-provided id that was sent with the request.
+        /// A customer-provided ID that was sent with the request.
         /// </summary>
-        /// <value>A customer-provided id that was sent with the request.</value>
+        /// <value>A customer-provided ID that was sent with the request.</value>
         [JsonPropertyName("linked_id")]
         public string LinkedId { get { return this.LinkedIdOption; } set { this.LinkedIdOption = new Option<string>(value); } }
 
@@ -299,9 +301,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> EnvironmentIdOption { get; private set; }
 
         /// <summary>
-        /// Environment Id of the event.
+        /// Environment ID of the event.
         /// </summary>
-        /// <value>Environment Id of the event.</value>
+        /// <value>Environment ID of the event.</value>
         [JsonPropertyName("environment_id")]
         public string EnvironmentId { get { return this.EnvironmentIdOption; } set { this.EnvironmentIdOption = new Option<string>(value); } }
 
@@ -313,9 +315,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<bool?> SuspectOption { get; private set; }
 
         /// <summary>
-        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).
+        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event).
         /// </summary>
-        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).</value>
+        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event).</value>
         [JsonPropertyName("suspect")]
         public bool? Suspect { get { return this.SuspectOption; } set { this.SuspectOption = new Option<bool?>(value); } }
 
@@ -408,9 +410,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> BundleIdOption { get; private set; }
 
         /// <summary>
-        /// Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. 
+        /// Bundle ID of the iOS application integrated with the Fingerprint SDK for the event. 
         /// </summary>
-        /// <value>Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. </value>
+        /// <value>Bundle ID of the iOS application integrated with the Fingerprint SDK for the event. </value>
         [JsonPropertyName("bundle_id")]
         public string BundleId { get { return this.BundleIdOption; } set { this.BundleIdOption = new Option<string>(value); } }
 
@@ -606,6 +608,19 @@ namespace Fingerprint.ServerSdk.Model
         /// <value>`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. </value>
         [JsonPropertyName("developer_tools")]
         public bool? DeveloperTools { get { return this.DeveloperToolsOption; } set { this.DeveloperToolsOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of DeviceDetails
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DeviceDetails> DeviceDetailsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DeviceDetails
+        /// </summary>
+        [JsonPropertyName("device_details")]
+        public DeviceDetails DeviceDetails { get { return this.DeviceDetailsOption; } set { this.DeviceDetailsOption = new Option<DeviceDetails>(value); } }
 
         /// <summary>
         /// Used to track the state of Emulator
@@ -1084,6 +1099,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  BotInfo: ").Append(BotInfo).Append("\n");
             sb.Append("  ClonedApp: ").Append(ClonedApp).Append("\n");
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
+            sb.Append("  DeviceDetails: ").Append(DeviceDetails).Append("\n");
             sb.Append("  Emulator: ").Append(Emulator).Append("\n");
             sb.Append("  FactoryResetTimestamp: ").Append(FactoryResetTimestamp).Append("\n");
             sb.Append("  Frida: ").Append(Frida).Append("\n");
@@ -1234,6 +1250,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<BotInfo> botInfo = default;
             Option<bool?> clonedApp = default;
             Option<bool?> developerTools = default;
+            Option<DeviceDetails> deviceDetails = default;
             Option<bool?> emulator = default;
             Option<long?> factoryResetTimestamp = default;
             Option<bool?> frida = default;
@@ -1378,6 +1395,9 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "developer_tools":
                             developerTools = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "device_details":
+                            deviceDetails = new Option<DeviceDetails>(JsonSerializer.Deserialize<DeviceDetails>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "emulator":
                             emulator = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -1594,6 +1614,9 @@ namespace Fingerprint.ServerSdk.Model
             if (developerTools.IsSet && developerTools.Value == null)
                 throw new ArgumentNullException(nameof(developerTools), "Property is not nullable for class Event.");
 
+            if (deviceDetails.IsSet && deviceDetails.Value == null)
+                throw new ArgumentNullException(nameof(deviceDetails), "Property is not nullable for class Event.");
+
             if (emulator.IsSet && emulator.Value == null)
                 throw new ArgumentNullException(nameof(emulator), "Property is not nullable for class Event.");
 
@@ -1702,7 +1725,7 @@ namespace Fingerprint.ServerSdk.Model
             if (labels.IsSet && labels.Value == null)
                 throw new ArgumentNullException(nameof(labels), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, source, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
+            return new Event(eventId.Value, timestamp.Value.Value, source, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, deviceDetails, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
         }
 
         /// <summary>
@@ -1788,6 +1811,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (varEvent.BotInfoOption.IsSet && varEvent.BotInfo == null)
                 throw new ArgumentNullException(nameof(varEvent.BotInfo), "Property is required for class Event.");
+
+            if (varEvent.DeviceDetailsOption.IsSet && varEvent.DeviceDetails == null)
+                throw new ArgumentNullException(nameof(varEvent.DeviceDetails), "Property is required for class Event.");
 
             if (varEvent.IpBlocklistOption.IsSet && varEvent.IpBlocklist == null)
                 throw new ArgumentNullException(nameof(varEvent.IpBlocklist), "Property is required for class Event.");
@@ -1927,6 +1953,11 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.DeveloperToolsOption.IsSet)
                 writer.WriteBoolean("developer_tools", varEvent.DeveloperToolsOption.Value.Value);
 
+            if (varEvent.DeviceDetailsOption.IsSet)
+            {
+                writer.WritePropertyName("device_details");
+                JsonSerializer.Serialize(writer, varEvent.DeviceDetails, jsonSerializerOptions);
+            }
             if (varEvent.EmulatorOption.IsSet)
                 writer.WriteBoolean("emulator", varEvent.EmulatorOption.Value.Value);
 

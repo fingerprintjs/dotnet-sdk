@@ -25,7 +25,7 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// Is absent if the velocity data could not be generated for the visitor Id. 
+    /// Is absent if the velocity data could not be generated for the visitor ID. 
     /// </summary>
     public partial class VelocityData : IValidatableObject
     {
