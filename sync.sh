@@ -1,15 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-defaultBaseUrl="https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi"
+# Resolve paths relative to the repository root, so the script can be run from
+# any working directory.
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+defaultBaseUrl="https://fingerprintjs.github.io/openapi"
 schemaUrl="${1:-$defaultBaseUrl/schemas/fingerprint-server-api-v4.yaml}"
 examplesBaseUrl="${2:-$defaultBaseUrl/examples}"
 
-mkdir -p ./res
+CURL_OPTS=(-fSL --retry 3 --proto-redir '=https' --connect-timeout 10 --max-time 300)
+if [[ "${TRACE:-}" != "true" && "${ACTIONS_STEP_DEBUG:-}" != "true" ]]; then
+  CURL_OPTS+=(-s)
+fi
 
-curl -fSL -o ./res/fingerprint-server-api.yaml "$schemaUrl"
+schemaDestination="./res/fingerprint-server-api.yaml"
+baseDestination="./src/Fingerprint.ServerSdk.Test/mocks"
 
-examplesList=(
+mkdir -p "$(dirname "$schemaDestination")"
+
+echo "Downloading $schemaUrl to $schemaDestination"
+curl "${CURL_OPTS[@]}" -o "$schemaDestination" "$schemaUrl"
+
+examples=(
   'errors/400_ip_address_invalid.json'
   'errors/400_request_body_invalid.json'
   'errors/403_feature_not_enabled.json'
@@ -22,16 +35,13 @@ examplesList=(
   'webhook/webhook_event.json'
 )
 
-baseDestination="./src/Fingerprint.ServerSdk.Test/mocks"
-
-for example in "${examplesList[@]}"; do
+for example in "${examples[@]}"; do
   destinationPath="$baseDestination/$example"
-  destinationDir="$(dirname "$destinationPath")"
+  mkdir -p "$(dirname "$destinationPath")"
 
-  mkdir -p "$destinationDir"
-
-  echo "Downloading $example to $destinationPath"
-  curl -fSL -o "$destinationPath" "$examplesBaseUrl/$example"
+  exampleUrl="$examplesBaseUrl/$example"
+  echo "Downloading $exampleUrl to $destinationPath"
+  curl "${CURL_OPTS[@]}" -o "$destinationPath" "$exampleUrl"
 done
 
-echo "All OpenAPI documentation downloads complete."
+echo "All OpenAPI schema downloads complete."
