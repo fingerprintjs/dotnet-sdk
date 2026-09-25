@@ -34,9 +34,9 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelsInner" /> class.
         /// </summary>
-        /// <param name="label">label (required).</param>
+        /// <param name="label">Customer-facing label name defined by the customer. (required).</param>
         /// <param name="prediction">prediction.</param>
-        /// <param name="mlScore">mlScore.</param>
+        /// <param name="mlScore">Raw model score between 0 and 1..</param>
         [JsonConstructor]
         public LabelsInner(string label, Option<bool?> prediction = default, Option<double?> mlScore = default)
         {
@@ -49,8 +49,9 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Label
+        /// Customer-facing label name defined by the customer.
         /// </summary>
+        /// <value>Customer-facing label name defined by the customer.</value>
         [JsonPropertyName("label")]
         public string Label { get; set; }
 
@@ -75,8 +76,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<double?> MlScoreOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MlScore
+        /// Raw model score between 0 and 1.
         /// </summary>
+        /// <value>Raw model score between 0 and 1.</value>
         [JsonPropertyName("ml_score")]
         public double? MlScore { get { return this.MlScoreOption; } set { this.MlScoreOption = new Option<double?>(value); } }
 

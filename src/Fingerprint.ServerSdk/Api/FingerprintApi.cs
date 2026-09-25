@@ -40,7 +40,7 @@ namespace Fingerprint.ServerSdk.Api
         /// Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
+        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteVisitorDataApiResponse"/>&gt;</returns>
         Task<IDeleteVisitorDataApiResponse> DeleteVisitorDataAsync(string visitorId, System.Threading.CancellationToken cancellationToken = default);
@@ -51,7 +51,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <remarks>
         /// Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </remarks>
-        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
+        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteVisitorDataApiResponse"/>&gt;</returns>
         Task<IDeleteVisitorDataApiResponse> DeleteVisitorDataOrDefaultAsync(string visitorId, System.Threading.CancellationToken cancellationToken = default);
@@ -63,7 +63,7 @@ namespace Fingerprint.ServerSdk.Api
         /// Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
+        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
         /// <param name="rulesetId">The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response.  (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetEventApiResponse"/>&gt;</returns>
@@ -75,7 +75,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <remarks>
         /// Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
         /// </remarks>
-        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
+        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
         /// <param name="rulesetId">The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response.  (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetEventApiResponse"/>&gt;</returns>
@@ -111,7 +111,7 @@ namespace Fingerprint.ServerSdk.Api
         /// Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request. 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id).</param>
+        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id).</param>
         /// <param name="eventUpdate"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateEventApiResponse"/>&gt;</returns>
@@ -123,7 +123,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <remarks>
         /// Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request. 
         /// </remarks>
-        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id).</param>
+        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id).</param>
         /// <param name="eventUpdate"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateEventApiResponse"/>&gt;</returns>
@@ -230,7 +230,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<string> PaginationKey { get; set; } = default;
 
         /// <summary>
-        /// Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).  (optional)
+        /// Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).  (optional)
         /// </summary>
         public Option<string> VisitorId { get; set; } = default;
 
@@ -285,7 +285,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<string> Asn { get; set; } = default;
 
         /// <summary>
-        /// Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)
+        /// Filter events by your custom identifier.  You can use [linked IDs](https://docs.fingerprint.com/reference/js-agent-get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)
         /// </summary>
         public Option<string> LinkedId { get; set; } = default;
 
@@ -582,7 +582,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the visitorId parameter.
         /// </summary>
-        /// <param name="value">Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property). </param>
+        /// <param name="value">Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property). </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithVisitorId(string value)
         {
@@ -703,7 +703,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the linkedId parameter.
         /// </summary>
-        /// <param name="value">Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. </param>
+        /// <param name="value">Filter events by your custom identifier.  You can use [linked IDs](https://docs.fingerprint.com/reference/js-agent-get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithLinkedId(string value)
         {
@@ -1440,7 +1440,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Delete a visitor ID Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </summary>
-        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
+        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteVisitorDataApiResponse"/>&gt;</returns>
         public async Task<IDeleteVisitorDataApiResponse> DeleteVisitorDataOrDefaultAsync(string visitorId, System.Threading.CancellationToken cancellationToken = default)
@@ -1462,7 +1462,7 @@ namespace Fingerprint.ServerSdk.Api
         /// Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).     
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.</param>
+        /// <param name="visitorId">The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteVisitorDataApiResponse"/>&gt;</returns>
         public async Task<IDeleteVisitorDataApiResponse> DeleteVisitorDataAsync(string visitorId, System.Threading.CancellationToken cancellationToken = default)
@@ -1833,7 +1833,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Get an event by event ID Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
         /// </summary>
-        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
+        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
         /// <param name="rulesetId">The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response.  (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetEventApiResponse"/>&gt;</returns>
@@ -1856,7 +1856,7 @@ namespace Fingerprint.ServerSdk.Api
         /// Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
+        /// <param name="eventId">The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place).</param>
         /// <param name="rulesetId">The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response.  (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetEventApiResponse"/>&gt;</returns>
@@ -3374,7 +3374,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Update an event Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request. 
         /// </summary>
-        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id).</param>
+        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id).</param>
         /// <param name="eventUpdate"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateEventApiResponse"/>&gt;</returns>
@@ -3397,7 +3397,7 @@ namespace Fingerprint.ServerSdk.Api
         /// Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request. 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id).</param>
+        /// <param name="eventId">The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id).</param>
         /// <param name="eventUpdate"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateEventApiResponse"/>&gt;</returns>

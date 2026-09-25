@@ -77,6 +77,7 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
             _jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
             _jsonOptions.Converters.Add(new CanvasJsonConverter());
+            _jsonOptions.Converters.Add(new DeviceDetailsJsonConverter());
             _jsonOptions.Converters.Add(new EmojiJsonConverter());
             _jsonOptions.Converters.Add(new ErrorJsonConverter());
             _jsonOptions.Converters.Add(new ErrorCodeJsonConverter());

@@ -9,6 +9,7 @@ docs/models/BotResult.md
 docs/models/BrowserDetails.md
 docs/models/Canvas.md
 docs/models/DecryptionKey.md
+docs/models/DeviceDetails.md
 docs/models/Emoji.md
 docs/models/Error.md
 docs/models/ErrorCode.md
@@ -96,6 +97,7 @@ src/Fingerprint.ServerSdk/Model/BotInfoIdentity.cs
 src/Fingerprint.ServerSdk/Model/BotResult.cs
 src/Fingerprint.ServerSdk/Model/BrowserDetails.cs
 src/Fingerprint.ServerSdk/Model/Canvas.cs
+src/Fingerprint.ServerSdk/Model/DeviceDetails.cs
 src/Fingerprint.ServerSdk/Model/Emoji.cs
 src/Fingerprint.ServerSdk/Model/Error.cs
 src/Fingerprint.ServerSdk/Model/ErrorCode.cs
