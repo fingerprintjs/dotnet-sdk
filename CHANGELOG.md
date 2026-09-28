@@ -1,5 +1,15 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.9.0
+
+### Minor Changes
+
+- **events**: Add `device_details` smart signal to `Event` ([b68d4c1](https://github.com/fingerprintjs/dotnet-sdk/commit/b68d4c19cbf9a0183a833e27712688ccf94634ba))
+
+### Patch Changes
+
+- **events**: Fix descriptions to use ID rather than Id. Clarify descriptions for Labels. ([b68d4c1](https://github.com/fingerprintjs/dotnet-sdk/commit/b68d4c19cbf9a0183a833e27712688ccf94634ba))
+
 ## 8.8.0
 
 ### Minor Changes
