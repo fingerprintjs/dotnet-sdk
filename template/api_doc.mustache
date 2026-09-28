@@ -182,6 +182,13 @@ catch (ApiException e)
 {{#allParams}}
 | **{{paramName}}** | {{#isFile}}**{{dataType}}**{{/isFile}}{{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{dataType}}**]({{#isContainer}}{{baseType}}{{/isContainer}}{{^isContainer}}{{dataType}}{{/isContainer}}.md){{/isFile}}{{/isPrimitiveType}} | {{{description}}} | {{^required}}[optional] {{/required}}{{#defaultValue}}[default to {{.}}]{{/defaultValue}} |
 {{/allParams}}
+{{#pathParams}}
+
+> [!WARNING]
+> #### Invalid values
+>
+> `{{paramName}}` must not be empty, `.`, or `..`. The call throws an `ArgumentException` instead of sending a request.
+{{/pathParams}}
 
 ### Return type
 

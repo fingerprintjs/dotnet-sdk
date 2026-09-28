@@ -337,6 +337,21 @@ namespace Fingerprint.ServerSdk.Client
         public static Uri GetBaseUri(Region region) => region.GetBaseUri();
 
         /// <summary>
+        /// Rejects a path parameter value that would send the request to a different endpoint.
+        /// </summary>
+        /// <param name="value">Value of the path parameter.</param>
+        /// <param name="name">Name of the argument the value came from, used in the exception message.</param>
+        /// <exception cref="ArgumentException">Thrown when the value is empty or is a dot segment.</exception>
+        public static void ValidatePathParameter(string value, string name)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException($"{name} is not set", name);
+
+            if (value == "." || value == "..")
+                throw new ArgumentException($"{name} is not valid: {value}", name);
+        }
+
+        /// <summary>
         /// The format to use for DateTime serialization
         /// </summary>
         public const string ISO8601_DATETIME_FORMAT = "o";

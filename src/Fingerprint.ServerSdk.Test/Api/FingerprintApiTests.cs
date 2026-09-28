@@ -13,13 +13,18 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Fingerprint.ServerSdk.Api;
 using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Extensions;
 using Fingerprint.ServerSdk.Model;
 
 
@@ -953,5 +958,161 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.Equal(ErrorCode.StateNotReady, errorResponse.Error.Code);
             });
         }
+
+        #region Path parameter values
+
+        private static readonly EventUpdate SomeEventUpdate = new EventUpdate { Suspect = false };
+
+        public static TheoryData<string, string> ConfinedValues => new TheoryData<string, string>
+        {
+            { "../events", "..%2Fevents" },
+            { "../../secret", "..%2F..%2Fsecret" },
+            { "a/../b", "a%2F..%2Fb" },
+            { "%2e%2e", "%252e%252e" },
+            { "test.com", "test.com" },
+            { "//test.com", "%2F%2Ftest.com" },
+            { "foo?ii=leaked", "foo%3Fii%3Dleaked" },
+            { "1708102555327.NLOjmg", "1708102555327.NLOjmg" },
+        };
+
+        public static TheoryData<string> RejectedValues => new TheoryData<string> { "", " ", ".", ".." };
+
+        /// <summary>
+        /// Records the request without sending it anywhere.
+        /// </summary>
+        private sealed class RecordingHandler : HttpMessageHandler
+        {
+            private readonly string _responseBody;
+
+            public RecordingHandler(string responseBody)
+            {
+                _responseBody = responseBody;
+            }
+
+            public List<Uri> RequestUris { get; } = new List<Uri>();
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                CancellationToken cancellationToken)
+            {
+                RequestUris.Add(request.RequestUri);
+
+                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(_responseBody, Encoding.UTF8, "application/json")
+                });
+            }
+        }
+
+        private static IHost CreateRecordingHost(RecordingHandler handler) =>
+            Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(Array.Empty<string>())
+                .ConfigureFingerprint((_, _, options) =>
+                {
+                    options.BaseUrl = ServerUrl;
+                    options.AddTokens(new BearerToken("<token>", timeout: null));
+                    options.AddApiHttpClients(
+                        builder: b => b.ConfigurePrimaryHttpMessageHandler(() => handler));
+                })
+                .Build();
+
+        private static void AssertRequestedSegment(RecordingHandler handler, string prefix, string encodedValue)
+        {
+            var requestUri = Assert.Single(handler.RequestUris);
+
+            Assert.Equal($"/{prefix}/{encodedValue}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}",
+                requestUri.PathAndQuery);
+            Assert.Equal(new Uri(ServerUrl).Host, requestUri.Host);
+        }
+
+        [Theory]
+        [MemberData(nameof(ConfinedValues))]
+        public async Task GetEventAsyncConfinesEventIdTest(string eventId, string encodedEventId)
+        {
+            var handler = new RecordingHandler(ReadMockFile("events/get_event_200.json"));
+            using var host = CreateRecordingHost(handler);
+
+            await host.Services.GetRequiredService<IFingerprintApi>().GetEventAsync(eventId);
+
+            AssertRequestedSegment(handler, "events", encodedEventId);
+        }
+
+        [Theory]
+        [MemberData(nameof(ConfinedValues))]
+        public async Task UpdateEventAsyncConfinesEventIdTest(string eventId, string encodedEventId)
+        {
+            var handler = new RecordingHandler("");
+            using var host = CreateRecordingHost(handler);
+
+            await host.Services.GetRequiredService<IFingerprintApi>().UpdateEventAsync(eventId, SomeEventUpdate);
+
+            AssertRequestedSegment(handler, "events", encodedEventId);
+        }
+
+        [Theory]
+        [MemberData(nameof(ConfinedValues))]
+        public async Task DeleteVisitorDataAsyncConfinesVisitorIdTest(string visitorId, string encodedVisitorId)
+        {
+            var handler = new RecordingHandler("");
+            using var host = CreateRecordingHost(handler);
+
+            await host.Services.GetRequiredService<IFingerprintApi>().DeleteVisitorDataAsync(visitorId);
+
+            AssertRequestedSegment(handler, "visitors", encodedVisitorId);
+        }
+
+        [Theory]
+        [MemberData(nameof(RejectedValues))]
+        public async Task GetEventAsyncRejectsEventIdTest(string eventId)
+        {
+            var handler = new RecordingHandler("");
+            using var host = CreateRecordingHost(handler);
+
+            var exception = await Assert.ThrowsAsync<ArgumentException>(
+                () => host.Services.GetRequiredService<IFingerprintApi>().GetEventAsync(eventId));
+
+            Assert.Equal("eventId", exception.ParamName);
+            Assert.StartsWith("eventId is not", exception.Message);
+            Assert.Empty(handler.RequestUris);
+        }
+
+        [Theory]
+        [MemberData(nameof(RejectedValues))]
+        public async Task UpdateEventAsyncRejectsEventIdTest(string eventId)
+        {
+            var handler = new RecordingHandler("");
+            using var host = CreateRecordingHost(handler);
+
+            var exception = await Assert.ThrowsAsync<ArgumentException>(
+                () => host.Services.GetRequiredService<IFingerprintApi>().UpdateEventAsync(eventId, SomeEventUpdate));
+
+            Assert.Equal("eventId", exception.ParamName);
+            Assert.Empty(handler.RequestUris);
+        }
+
+        [Theory]
+        [MemberData(nameof(RejectedValues))]
+        public async Task DeleteVisitorDataAsyncRejectsVisitorIdTest(string visitorId)
+        {
+            var handler = new RecordingHandler("");
+            using var host = CreateRecordingHost(handler);
+
+            var exception = await Assert.ThrowsAsync<ArgumentException>(
+                () => host.Services.GetRequiredService<IFingerprintApi>().DeleteVisitorDataAsync(visitorId));
+
+            Assert.Equal("visitorId", exception.ParamName);
+            Assert.Empty(handler.RequestUris);
+        }
+
+        [Theory]
+        [InlineData("", "eventId is not set")]
+        [InlineData(".", "eventId is not valid: .")]
+        [InlineData("..", "eventId is not valid: ..")]
+        public async Task RejectionMessageNamesTheArgumentTest(string eventId, string expectedMessage)
+        {
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() => _instance.GetEventAsync(eventId));
+
+            Assert.StartsWith(expectedMessage, exception.Message);
+        }
+
+        #endregion
     }
 }
