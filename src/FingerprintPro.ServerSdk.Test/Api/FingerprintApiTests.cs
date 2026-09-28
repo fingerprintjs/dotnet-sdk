@@ -1177,5 +1177,226 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
+
+        #region Path parameter encoding
+
+        private sealed class RecordingHandler(byte[]? responseBody) : HttpMessageHandler
+        {
+            public List<Uri> RequestUris { get; } = [];
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                CancellationToken cancellationToken)
+            {
+                RequestUris.Add(request.RequestUri!);
+
+                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(Encoding.UTF8.GetString(responseBody ?? []), Encoding.UTF8,
+                        "application/json")
+                });
+            }
+        }
+
+        private static (FingerprintApi Api, RecordingHandler Handler) CreateRecordingApi(string? mockFileName = null)
+        {
+            var handler = new RecordingHandler(mockFileName == null ? null : MockLoader.Load(mockFileName));
+
+            var config = new Configuration("123")
+            {
+                HttpClient = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(_serverUrl)
+                }
+            };
+
+            return (new FingerprintApi(config), handler);
+        }
+
+        /// <summary>
+        /// Path parameter values that must not be able to change the endpoint, or the host, the request
+        /// is sent to.
+        /// </summary>
+        private static readonly object[] PathTraversalCases =
+        [
+            new object[] { "../events", "..%2Fevents" },
+            new object[] { "../../secret", "..%2F..%2Fsecret" },
+            new object[] { "a/../b", "a%2F..%2Fb" },
+            new object[] { "%2e%2e", "%252e%252e" },
+            new object[] { "test.com", "test.com" },
+            new object[] { "//test.com", "%2F%2Ftest.com" },
+            new object[] { "foo?api_key=leaked", "foo%3Fapi_key%3Dleaked" },
+            new object[] { "foo#fragment", "foo%23fragment" },
+        ];
+
+        private static void AssertRequestedSegment(RecordingHandler handler, string prefix, string encodedParam)
+        {
+            var requestUri = handler.RequestUris.Single();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(requestUri.PathAndQuery, Does.StartWith($"/{prefix}/{encodedParam}?"));
+                Assert.That(requestUri.Host, Is.EqualTo(new Uri(_serverUrl).Host));
+            });
+        }
+
+        [TestCaseSource(nameof(PathTraversalCases))]
+        public void GetEventEncodesRequestIdTest(string requestId, string encodedRequestId)
+        {
+            var (api, handler) = CreateRecordingApi("get_event_200.json");
+
+            api.GetEvent(requestId);
+
+            AssertRequestedSegment(handler, "events", encodedRequestId);
+        }
+
+        [TestCaseSource(nameof(PathTraversalCases))]
+        public void UpdateEventEncodesRequestIdTest(string requestId, string encodedRequestId)
+        {
+            var (api, handler) = CreateRecordingApi();
+
+            api.UpdateEvent(new EventsUpdateRequest { Suspect = false }, requestId);
+
+            AssertRequestedSegment(handler, "events", encodedRequestId);
+        }
+
+        [TestCaseSource(nameof(PathTraversalCases))]
+        public void GetVisitsEncodesVisitorIdTest(string visitorId, string encodedVisitorId)
+        {
+            var (api, handler) = CreateRecordingApi("get_visitors_200_limit_1.json");
+
+            api.GetVisits(visitorId);
+
+            AssertRequestedSegment(handler, "visitors", encodedVisitorId);
+        }
+
+        [TestCaseSource(nameof(PathTraversalCases))]
+        public void DeleteVisitorDataEncodesVisitorIdTest(string visitorId, string encodedVisitorId)
+        {
+            var (api, handler) = CreateRecordingApi();
+
+            api.DeleteVisitorData(visitorId);
+
+            AssertRequestedSegment(handler, "visitors", encodedVisitorId);
+        }
+
+        /// <summary>
+        /// Request IDs contain a dot, which is a valid path character and must be left as is.
+        /// </summary>
+        [Test]
+        public void GetEventDoesNotEncodeValidRequestIdTest()
+        {
+            var (api, handler) = CreateRecordingApi("get_event_200.json");
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            api.GetEvent(requestId);
+
+            Assert.That(handler.RequestUris.Single().PathAndQuery, Does.StartWith($"/events/{requestId}?"));
+        }
+
+        /// <summary>
+        /// Rejection names the argument of the API method, not the path parameter it is substituted for.
+        /// </summary>
+        private static NUnit.Framework.Constraints.IResolveConstraint RejectsArgument(string argumentName)
+        {
+            return Throws.ArgumentException
+                .With.Property(nameof(ArgumentException.ParamName)).EqualTo(argumentName)
+                .And.Message.StartWith(argumentName);
+        }
+
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase(".")]
+        [TestCase("..")]
+        public void RejectsUnusablePathParamsTest(string pathParam)
+        {
+            var (api, handler) = CreateRecordingApi();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(() => api.GetEvent(pathParam), RejectsArgument("requestId"));
+                Assert.That(() => api.UpdateEvent(new EventsUpdateRequest(), pathParam), RejectsArgument("requestId"));
+                Assert.That(() => api.GetVisits(pathParam), RejectsArgument("visitorId"));
+                Assert.That(() => api.DeleteVisitorData(pathParam), RejectsArgument("visitorId"));
+
+                Assert.That(handler.RequestUris, Is.Empty, "no request should be sent");
+            });
+        }
+
+        [TestCase("", "requestId is not set")]
+        [TestCase(".", "requestId is not valid: .")]
+        [TestCase("..", "requestId is not valid: ..")]
+        public void RejectionMessageTest(string requestId, string expectedMessage)
+        {
+            var (api, _) = CreateRecordingApi();
+
+            Assert.That(() => api.GetEvent(requestId),
+                Throws.ArgumentException.With.Message.StartWith(expectedMessage));
+        }
+
+        [Test]
+        public async Task RejectsUnusablePathParamsAsyncTest()
+        {
+            var (api, handler) = CreateRecordingApi();
+
+            await Assert.ThatAsync(async () => await api.GetEventAsync(".."), RejectsArgument("requestId"));
+            await Assert.ThatAsync(async () => await api.GetVisitsAsync(".."), RejectsArgument("visitorId"));
+
+            Assert.That(handler.RequestUris, Is.Empty, "no request should be sent");
+        }
+
+        private sealed class NormalizedPathDefinition : OperationDefinition
+        {
+            public override string Path => "/events/../secret";
+
+            public override string OperationName => "NormalizedPath";
+
+            public override string[] PathParams => [];
+
+            public override Dictionary<int, Type> ResponseStatusCodeMap => new();
+        }
+
+        [Test]
+        public void RejectsPathChangedByNormalizationTest()
+        {
+            var handler = new RecordingHandler(null);
+
+            var client = new ApiClient(new Configuration("123")
+            {
+                HttpClient = new HttpClient(handler) { BaseAddress = new Uri(_serverUrl) }
+            });
+
+            var request = new FingerprintPro.ServerSdk.Client.ApiRequest
+            {
+                OperationDefinition = new NormalizedPathDefinition(),
+                Method = HttpMethod.Get
+            };
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(() => client.DoRequestEmpty(request),
+                    Throws.ArgumentException.With.Message.StartWith("Request path changed"));
+
+                Assert.That(handler.RequestUris, Is.Empty, "no request should be sent");
+            });
+        }
+
+        [Test]
+        public void GetVisitsEncodesQueryParamsTest()
+        {
+            var (api, handler) = CreateRecordingApi("get_visitors_200_limit_1.json");
+
+            api.GetVisits("AcxioeQKffpXF8iGQK3P", linkedId: "x&api_key=leaked");
+
+            var query = handler.RequestUris.Single().Query;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(query, Does.Contain("linked_id=x%26api_key%3dleaked"));
+                Assert.That(query, Does.EndWith("&api_key=123"));
+            });
+        }
+
+        #endregion
     }
 }
