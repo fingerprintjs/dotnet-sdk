@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.13.1
+
+### Patch Changes
+
+- Fix `GetEvent`, `UpdateEvent`, `GetVisits`, and `DeleteVisitorData` returning data for a different request when the `requestId` or `visitorId` argument contains special characters. These methods now throw an `ArgumentException` when the argument is empty, `.`, or `..`. ([1bc9bbf](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/1bc9bbfa78fadb08b3b581227e402e9377892bfb))
+
 ## 7.13.0
 
 ### Minor Changes
