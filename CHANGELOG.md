@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.9.1
+
+### Patch Changes
+
+- Reject `.` and `..` as event and visitor IDs. `GetEventAsync`, `UpdateEventAsync`, and `DeleteVisitorDataAsync` now throw an `ArgumentException` when the `eventId` or `visitorId` argument is empty, `.`, or `..`. ([fc6f3bd](https://github.com/fingerprintjs/dotnet-sdk/commit/fc6f3bdd0888dbffff8ff0997a56d320cda2c0e5))
+
 ## 8.9.0
 
 ### Minor Changes
