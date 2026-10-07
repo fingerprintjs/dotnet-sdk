@@ -16,61 +16,7 @@ Editing `src/Fingerprint.ServerSdk/**` directly is almost always wrong. That dir
 
 ## Commit messages
 
-This project follows the [Conventional Commits](https://www.conventionalcommits.org/) standard. [commitlint](https://commitlint.js.org/) checks the messages of all commits in a pull request in the `Analyze Commit Messages` check. Each commit message should be structured as:
-
-```
-<type>[(optional scope)][!]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-The type prefix says what kind of change the commit makes. Use one of these:
-
-| Type | When to use it |
-|---|---|
-| `feat` | A new feature, such as a new method, option or model field |
-| `fix` | A bug fix |
-| `docs` | Documentation-only changes |
-| `refactor` | Code changes that neither fix a bug nor add a feature |
-| `perf` | Performance improvements |
-| `test` | Adding or updating tests |
-| `build` | Changes to the build system, code generation setup or dependencies |
-| `ci` | Changes to CI workflows |
-| `chore` | Other maintenance that doesn't change the SDK's behavior |
-| `style` | Formatting changes that don't affect what the code does |
-| `revert` | Reverting a previous commit |
-
-The optional scope is a short name for the part of the SDK the commit touches, for example `fix(webhook): ...`.
-
-To mark a breaking change, add `!` after the type or scope, or add a `BREAKING CHANGE:` footer that explains what changed and how to migrate. A breaking change is anything that can break code written against the current version, such as removing or renaming a public method, changing a method signature, or dropping support for a runtime version.
-
-### Examples
-
-A new feature:
-
-```
-feat: add `device_details` smart signal to the event model
-```
-
-A fix or an update:
-
-```
-fix(webhook): accept multiple signatures in the `fpjs-event-signature` header
-```
-
-```
-build: update openapi-generator to v7.23.0
-```
-
-A breaking change:
-
-```
-feat!: drop support for .NET Framework 4.8
-
-BREAKING CHANGE: The SDK no longer targets `net48`.
-```
+This project follows the [Conventional Commits](https://www.conventionalcommits.org/) standard. [commitlint](https://commitlint.js.org/) checks the messages of all commits in a pull request in the `Analyze Commit Messages` check, using the [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) config.
 
 ### Git hooks
 
