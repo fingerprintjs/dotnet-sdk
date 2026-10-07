@@ -74,7 +74,18 @@ BREAKING CHANGE: The SDK no longer targets `net48`.
 
 ### Git hooks
 
-This repository has no Git hooks, so commit messages are only checked in CI. If the check fails, reword the offending commits (for example, with `git rebase -i`) and force-push the branch.
+This repository includes optional Git hooks in the [.git_hooks](./.git_hooks) folder. To enable them, run:
+
+```shell
+./install_hooks.sh
+```
+
+The script sets `core.hooksPath` to `.git_hooks` and installs commitlint globally with npm, so you need Node.js. The hooks do the following:
+
+- `commit-msg` checks the commit message with commitlint and rejects the commit if the message is invalid.
+- `pre-push` blocks pushing directly to `main`.
+
+Commit messages are also checked in CI. If the check fails, reword the offending commits (for example, with `git rebase -i`) and force-push the branch.
 
 ## Code generation
 
@@ -118,7 +129,7 @@ We use [changesets](https://github.com/changesets/changesets) to version the SDK
 
 #### Adding a changeset
 
-If your PR changes anything that SDK users can notice, add a changeset to it:
+If your PR changes the SDK's public API or behavior, add a changeset to it:
 
 ```shell
 pnpm install
@@ -141,7 +152,7 @@ Pick the bump type that matches the commit type:
 |---|---|---|---|
 | Bug fix | `fix` | `patch` | 8.9.0 -> 8.9.1 |
 | New backward-compatible feature | `feat` | `minor` | 8.9.0 -> 8.10.0 |
-| Breaking change | `feat!`, `fix!` or a `BREAKING CHANGE:` footer | `major` | 8.9.0 -> 9.0.0 |
+| Breaking change | Any `<type>!` (for example, `feat!`) or a `BREAKING CHANGE:` footer | `major` | 8.9.0 -> 9.0.0 |
 | Docs, tests, CI, refactoring and other internal changes | `docs`, `test`, `ci`, `refactor`, `chore`, ... | No changeset | No release |
 
 If a PR has several user-facing changes, add one changeset for each. When several changesets are released together, the highest bump wins.
