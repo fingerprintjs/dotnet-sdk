@@ -18,7 +18,7 @@ Editing `src/Fingerprint.ServerSdk/**` directly is almost always wrong. That dir
 
 This project follows the [Conventional Commits](https://www.conventionalcommits.org/) standard. [commitlint](https://commitlint.js.org/) checks the messages of all commits in a pull request in the `Analyze Commit Messages` check, using the [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) config.
 
-### Git hooks
+## Git hooks
 
 This repository includes optional Git hooks in the [.git_hooks](./.git_hooks) folder. To enable them, run:
 
