@@ -270,6 +270,27 @@ namespace Fingerprint.ServerSdk.Test.Api
         }
 
         [Fact]
+        public async Task GetEventAsyncError503()
+        {
+            SetupMockResponse("errors/503_service_unavailable.json");
+            MockResponseStatusCode = 503;
+
+            const string eventId = "1708102555327.NLOjmg";
+            var response = await _instance.GetEventAsync(eventId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+                Assert.True(response.IsServiceUnavailable);
+
+                var model = response.ServiceUnavailable();
+                Assert.NotNull(model);
+                Assert.IsType<ErrorResponse>(model);
+                Assert.Equal(ErrorCode.ServiceUnavailable, model.Error.Code);
+            });
+        }
+
+        [Fact]
         public async Task SearchEventsAsyncTest()
         {
             SetupMockResponse("events/search/get_event_search_200.json");
@@ -779,6 +800,27 @@ namespace Fingerprint.ServerSdk.Test.Api
                 var errorResponse = response.GatewayTimeout();
                 Assert.IsType<ErrorResponse>(errorResponse);
                 Assert.Equal(ErrorCode.Failed, errorResponse.Error.Code);
+            });
+        }
+
+        [Fact]
+        public async Task SearchEventsAsync503ErrorTest()
+        {
+            SetupMockResponse("errors/503_service_unavailable.json");
+            MockResponseStatusCode = 503;
+
+            const int limit = 1;
+            const string ipAddress = "61.127.217.15";
+
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithIpAddress(ipAddress));
+            Assert.Multiple(() =>
+            {
+                Assert.True(response.IsServiceUnavailable);
+                var errorResponse = response.ServiceUnavailable();
+                Assert.IsType<ErrorResponse>(errorResponse);
+                Assert.Equal(ErrorCode.ServiceUnavailable, errorResponse.Error.Code);
             });
         }
 
