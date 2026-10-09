@@ -35,7 +35,7 @@ namespace Fingerprint.ServerSdk.Model
         /// Initializes a new instance of the <see cref="DeviceDetails" /> class.
         /// </summary>
         /// <param name="deviceManufacturer">Raw device manufacturer string as reported by the device OS. Not normalized: casing is vendor-defined (samsung, Xiaomi, OPPO, HUAWEI). Always `Apple` on iOS..</param>
-        /// <param name="deviceModel">Raw device model identifier, as reported by the mobile OS..</param>
+        /// <param name="deviceModel">Raw device model identifier, as reported by the mobile OS. On Android, this is the vendor-defined model string (e.g., `SM-G991U`). On iOS, this is an Apple board code (e.g., `D84AP`)..</param>
         /// <param name="osVersion">Mobile operating system version. Component count is not fixed and must not be assumed by consumers: iOS always reports `major.minor.patch` (e.g. `17.4.1`), while Android's precision varies by OS era and which raw signal resolved it — `major` only (`9`, `13`) since Android 10 dropped point releases, `major.minor` (`16.1`) from Android 16 (API 36+) reintroducing a minor component, or a genuine `major.minor.patch` (`8.1.0`) on pre-Android 10 devices that shipped real point releases. Never a fabricated/zero-padded component..</param>
         [JsonConstructor]
         public DeviceDetails(Option<string> deviceManufacturer = default, Option<string> deviceModel = default, Option<string> osVersion = default)
@@ -70,9 +70,9 @@ namespace Fingerprint.ServerSdk.Model
         public Option<string> DeviceModelOption { get; private set; }
 
         /// <summary>
-        /// Raw device model identifier, as reported by the mobile OS.
+        /// Raw device model identifier, as reported by the mobile OS. On Android, this is the vendor-defined model string (e.g., `SM-G991U`). On iOS, this is an Apple board code (e.g., `D84AP`).
         /// </summary>
-        /// <value>Raw device model identifier, as reported by the mobile OS.</value>
+        /// <value>Raw device model identifier, as reported by the mobile OS. On Android, this is the vendor-defined model string (e.g., `SM-G991U`). On iOS, this is an Apple board code (e.g., `D84AP`).</value>
         [JsonPropertyName("device_model")]
         public string DeviceModel { get { return this.DeviceModelOption; } set { this.DeviceModelOption = new Option<string>(value); } }
 
