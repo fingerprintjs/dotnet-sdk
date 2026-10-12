@@ -202,7 +202,7 @@ To learn more, refer to example located in [src/{{packageName}}.SealedResultExam
 
 ### Deserializing the webhook payload
 
-When handling [webhooks](https://docs.fingerprint.com/reference/webhook) coming from Fingerprint, you can deserialize the request body into the built-in `Event` model. The `JsonSerializerOptionsProvider` registered by `ConfigureFingerprint` carries all the SDK's model converters, so inject it and reuse its `Options`:
+When handling [webhooks](https://docs.fingerprint.com/reference/posteventwebhook) coming from Fingerprint, you can deserialize the request body into the built-in `Event` model. The `JsonSerializerOptionsProvider` registered by `ConfigureFingerprint` carries all the SDK's model converters, so inject it and reuse its `Options`:
 
 ```csharp
 namespace FingerprintAspNetCore.Areas.Identity.Pages;
