@@ -14,6 +14,25 @@ Editing `src/Fingerprint.ServerSdk/**` directly is almost always wrong. That dir
 - [.openapi-generator-ignore](.openapi-generator-ignore) - files the generator must NOT touch (e.g. `DateOnlyJsonConverter.cs`, test `Model/*`, test README).
 - [.schema-version](.schema-version) and [.openapi-generator/VERSION](.openapi-generator/VERSION) pin the schema and generator versions.
 
+## Commit messages
+
+This project follows the [Conventional Commits](https://www.conventionalcommits.org/) standard. [commitlint](https://commitlint.js.org/) checks the messages of all commits in a pull request in the `Analyze Commit Messages` check, using the [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) config.
+
+## Git hooks
+
+This repository includes optional Git hooks in the [.git_hooks](./.git_hooks) folder. To enable them, run:
+
+```shell
+./install_hooks.sh
+```
+
+The script sets `core.hooksPath` to `.git_hooks` and installs commitlint globally with npm, so you need Node.js. The hooks do the following:
+
+- `commit-msg` checks the commit message with commitlint and rejects the commit if the message is invalid.
+- `pre-push` tries to stop accidental pushes to `main`.
+
+Commit messages are also checked in CI. If the check fails, reword the offending commits (for example, with `git rebase -i`) and force-push the branch.
+
 ## Code generation
 
 You need `openapi-generator` to run code generation. There are many ways described in the [website](https://openapi-generator.tech/docs/installation).
@@ -52,5 +71,40 @@ We recommend using our [docker-compose.yml](docker-compose.yml) file for running
 
 ### How to publish
 
-We use [changesets](https://github.com/changesets/changesets) for handling release notes. If there are relevant changes, please add them to changeset via `pnpm exec changeset`. You need to run `pnpm install` before doing so.
-After the release is created, the package is published to nuget by [publish.yml](.github/workflows/publish.yml) workflow.
+We use [changesets](https://github.com/changesets/changesets) to version the SDK and to write release notes.
+
+#### Adding a changeset
+
+If your PR changes the SDK's public API or behavior, add a changeset to it:
+
+```shell
+pnpm install
+pnpm exec changeset
+```
+
+Pick the bump type and write a short summary. The command creates a markdown file in the [.changeset](./.changeset) folder. Commit it together with the rest of your changes. The summary is copied as-is into `CHANGELOG.md` and the GitHub release notes, so write it for SDK users:
+
+```md
+---
+'fingerprint-server-dotnet-sdk': minor
+---
+
+Add `device_details` smart signal to the event model
+```
+
+Pick the bump type that matches the commit type:
+
+| Change | Commit type | Changeset bump | Version change |
+|---|---|---|---|
+| Bug fix | `fix` | `patch` | 8.9.0 -> 8.9.1 |
+| New backward-compatible feature | `feat` | `minor` | 8.9.0 -> 8.10.0 |
+| Breaking change | Any `<type>!` (for example, `feat!`) or a `BREAKING CHANGE:` footer | `major` | 8.9.0 -> 9.0.0 |
+| Docs, tests, CI, refactoring and other internal changes | `docs`, `test`, `ci`, `refactor`, `chore`, ... | No changeset | No release |
+
+If a PR has several user-facing changes, add one changeset for each. When several changesets are released together, the highest bump wins.
+
+#### Release flow
+
+1. On every PR, a bot comments with a preview of the release notes that the PR's changesets will produce. If the PR has no changesets, the comment reminds you to add one.
+2. After a PR with changesets is merged to `main`, the [Release](./.github/workflows/release.yml) workflow opens a `Release [changeset]` PR, or updates it if it's already open. That PR consumes all pending changesets, bumps the version and updates `CHANGELOG.md`.
+3. Merging the `Release [changeset]` PR creates the Git tag and the GitHub release. The [Publish](./.github/workflows/publish.yml) workflow then publishes the package to NuGet.
