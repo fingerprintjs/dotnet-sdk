@@ -169,7 +169,7 @@ namespace Fingerprint.ServerSdk.Api
     /// <summary>
     /// The <see cref="IGetEventApiResponse"/>
     /// </summary>
-    public interface IGetEventApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.Event>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>, IGatewayTimeout<Fingerprint.ServerSdk.Model.ErrorResponse>
+    public interface IGetEventApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.Event>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>, IServiceUnavailable<Fingerprint.ServerSdk.Model.ErrorResponse>, IGatewayTimeout<Fingerprint.ServerSdk.Model.ErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -206,6 +206,12 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <returns></returns>
         bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 503 ServiceUnavailable
+        /// </summary>
+        /// <returns></returns>
+        bool IsServiceUnavailable { get; }
 
         /// <summary>
         /// Returns true if the response is 504 GatewayTimeout
@@ -1164,7 +1170,7 @@ namespace Fingerprint.ServerSdk.Api
     /// <summary>
     /// The <see cref="ISearchEventsApiResponse"/>
     /// </summary>
-    public interface ISearchEventsApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.EventSearch>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>, IGatewayTimeout<Fingerprint.ServerSdk.Model.ErrorResponse>
+    public interface ISearchEventsApiResponse : Fingerprint.ServerSdk.Client.IApiResponse, IOk<Fingerprint.ServerSdk.Model.EventSearch>, IBadRequest<Fingerprint.ServerSdk.Model.ErrorResponse>, IForbidden<Fingerprint.ServerSdk.Model.ErrorResponse>, INotFound<Fingerprint.ServerSdk.Model.ErrorResponse>, ITooManyRequests<Fingerprint.ServerSdk.Model.ErrorResponse>, IInternalServerError<Fingerprint.ServerSdk.Model.ErrorResponse>, IServiceUnavailable<Fingerprint.ServerSdk.Model.ErrorResponse>, IGatewayTimeout<Fingerprint.ServerSdk.Model.ErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -1201,6 +1207,12 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <returns></returns>
         bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 503 ServiceUnavailable
+        /// </summary>
+        /// <returns></returns>
+        bool IsServiceUnavailable { get; }
 
         /// <summary>
         /// Returns true if the response is 504 GatewayTimeout
@@ -2219,6 +2231,45 @@ namespace Fingerprint.ServerSdk.Api
                 catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)500);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public bool IsServiceUnavailable => 503 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public Fingerprint.ServerSdk.Model.ErrorResponse ServiceUnavailable()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsServiceUnavailable
+                    ? System.Text.Json.JsonSerializer.Deserialize<Fingerprint.ServerSdk.Model.ErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryServiceUnavailable(out Fingerprint.ServerSdk.Model.ErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = ServiceUnavailable();
+                }
+                catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)503);
                 }
 
                 return result != null;
@@ -3251,6 +3302,45 @@ namespace Fingerprint.ServerSdk.Api
                 catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)500);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public bool IsServiceUnavailable => 503 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public Fingerprint.ServerSdk.Model.ErrorResponse ServiceUnavailable()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsServiceUnavailable
+                    ? System.Text.Json.JsonSerializer.Deserialize<Fingerprint.ServerSdk.Model.ErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryServiceUnavailable(out Fingerprint.ServerSdk.Model.ErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = ServiceUnavailable();
+                }
+                catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)503);
                 }
 
                 return result != null;

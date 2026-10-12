@@ -30,6 +30,7 @@ examples=(
   'errors/404_event_not_found.json'
   'errors/409_state_not_ready.json'
   'errors/429_too_many_requests.json'
+  'errors/503_service_unavailable.json'
   'events/get_event_200.json'
   'events/search/get_event_search_200.json'
   'webhook/webhook_event.json'
