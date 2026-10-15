@@ -295,7 +295,7 @@ To learn more, refer to example located in [src/Fingerprint.ServerSdk.WebhookExa
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.fpjs.io/v4*
+All URIs are relative to `https://api.fpjs.io/v4`
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

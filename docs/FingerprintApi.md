@@ -1,6 +1,6 @@
 # Fingerprint.ServerSdk.Api.FingerprintApi
 
-All URIs are relative to *https://api.fpjs.io/v4*
+All URIs are relative to `https://api.fpjs.io/v4`
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
