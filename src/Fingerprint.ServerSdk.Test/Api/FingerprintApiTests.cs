@@ -249,6 +249,54 @@ namespace Fingerprint.ServerSdk.Test.Api
         }
         
         [Fact]
+        public async Task GetEventWithoutSourceAsyncTest()
+        {
+            // Events stored before `source` was added do not have it.
+            var json = ReadMockFile("events/get_event_200.json")
+                .Replace("  \"source\": \"device\",\n", "")
+                .Replace("  \"source\": \"device\",\r\n", "");
+            Assert.DoesNotContain("\"source\"", json);
+            SetupMockResponseFromString(json);
+
+            const string eventId = "1708102555327.NLOjmg";
+            var response = await _instance.GetEventAsync(eventId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.True(response.TryOk(out var model));
+                Assert.NotNull(model);
+                Assert.Equal(eventId, model.EventId);
+                Assert.Null(model.Source);
+                Assert.False(model.SourceOption.IsSet);
+                Assert.NotNull(model.Identification);
+            });
+        }
+
+        [Fact]
+        public async Task GetEdgeEventAsyncTest()
+        {
+            SetupMockResponse("events/get_event_with_edge_200.json");
+
+            const string eventId = "1758130560902.8tRtrH";
+            var response = await _instance.GetEventAsync(eventId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.True(response.TryOk(out var model));
+                Assert.NotNull(model);
+                Assert.IsType<Event>(model);
+                Assert.Equal(eventId, model.EventId);
+                Assert.Equal(EventSource.Edge, model.Source);
+                Assert.Null(model.Identification);
+                Assert.False(model.IdentificationOption.IsSet);
+                Assert.Equal("ChatGPT Agent", model.BotInfo.Name);
+                Assert.Equal("104.210.139.192", model.IpInfo.V4.Address);
+            });
+        }
+
+        [Fact]
         public async Task GetEventAsyncError504()
         {
             SetupMockResponse("errors/504_search_timeout_exceeded.json");
