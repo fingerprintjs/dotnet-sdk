@@ -10,6 +10,7 @@
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Net.Http.Headers;
 using Fingerprint.ServerSdk.Client;
@@ -22,7 +23,7 @@ namespace Fingerprint.ServerSdk.Test.Api
     /// <summary>
     ///  Tests the dependency injection.
     /// </summary>
-    public class DependencyInjectionTest
+    public class DependencyInjectionTest : IDisposable
     {
 
         private const string Token = "<token>";
@@ -138,6 +139,15 @@ namespace Fingerprint.ServerSdk.Test.Api
         {
             var fingerprintApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IFingerprintApi>();
             Assert.True(fingerprintApi.HttpClient.BaseAddress != null);
+        }
+
+        public void Dispose()
+        {
+            _hostUsingConfigureWithoutAClient.Dispose();
+            _hostUsingConfigureWithAClient.Dispose();
+            _hostUsingAddWithoutAClient.Dispose();
+            _hostUsingAddWithAClient.Dispose();
+            _hostUsingDifferentUserAgent.Dispose();
         }
     }
 }
