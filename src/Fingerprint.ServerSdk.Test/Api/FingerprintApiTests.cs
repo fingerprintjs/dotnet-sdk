@@ -186,6 +186,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.False(model.Tampering);
                 Assert.False(model.VirtualMachine);
                 Assert.False(model.Vpn);
+                Assert.False(model.CompromisedDeviceIntegrity);
+                Assert.True(model.CompromisedDeviceIntegrityOption.IsSet);
                 Assert.False(model.ClonedApp);
                 Assert.IsType<long>(model.FactoryResetTimestamp);
                 var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
@@ -336,6 +338,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.False(firstEvent.Tampering);
                 Assert.False(firstEvent.VirtualMachine);
                 Assert.False(firstEvent.Vpn);
+                Assert.False(firstEvent.CompromisedDeviceIntegrity);
+                Assert.True(firstEvent.CompromisedDeviceIntegrityOption.IsSet);
                 Assert.False(firstEvent.ClonedApp);
                 Assert.IsType<long>(firstEvent.FactoryResetTimestamp);
                 var factoryResetExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
@@ -400,6 +404,7 @@ namespace Fingerprint.ServerSdk.Test.Api
                 SearchEventsIncrementalIdentificationStatus.PartiallyCompleted;
             const bool simulator = true;
             const bool activeCall = true;
+            const bool compromisedDeviceIntegrity = true;
 
             var expectedUrl = $"{ServerUrl}events?"
                               + $"ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}"
@@ -453,7 +458,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                               + $"&tor_node={torNode.ToString().ToLower()}"
                               + $"&incremental_identification_status={SearchEventsIncrementalIdentificationStatusValueConverter.ToJsonValue(incrementalIdentificationStatus)}"
                               + $"&simulator={simulator.ToString().ToLower()}"
-                              + $"&active_call={activeCall.ToString().ToLower()}";
+                              + $"&active_call={activeCall.ToString().ToLower()}"
+                              + $"&compromised_device_integrity={compromisedDeviceIntegrity.ToString().ToLower()}";
 
             var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
                 .WithLimit(limit)
@@ -501,7 +507,8 @@ namespace Fingerprint.ServerSdk.Test.Api
                 .WithHighRecallId(highRecallId)
                 .WithIncrementalIdentificationStatus(incrementalIdentificationStatus)
                 .WithSimulator(simulator)
-                .WithActiveCall(activeCall));
+                .WithActiveCall(activeCall)
+                .WithCompromisedDeviceIntegrity(compromisedDeviceIntegrity));
 
             Assert.Multiple(() =>
             {
@@ -546,6 +553,44 @@ namespace Fingerprint.ServerSdk.Test.Api
                 Assert.Equal(new DateTimeOffset(factoryResetExpectedTime).ToUnixTimeMilliseconds(),
                     firstEvent.FactoryResetTimestamp);
             });
+        }
+
+        [Fact]
+        public async Task SearchEventsAsyncCompromisedDeviceIntegrityFalseTest()
+        {
+            SetupMockResponse("events/search/get_event_search_200.json");
+
+            await _instance.SearchEventsAsync(new SearchEventsRequest().WithCompromisedDeviceIntegrity(false));
+
+            Assert.Equal(
+                $"{ServerUrl}events?ii=fingerprint-pro-server-api-dotnet-sdk%2f{ClientUtils.ClientVersion}&compromised_device_integrity=false",
+                Requests.First().Request.Url.ToString());
+        }
+
+        [Fact]
+        public async Task GetEventWithoutCompromisedDeviceIntegrityAsyncTest()
+        {
+            var json = ReadMockFile("events/get_event_200.json")
+                .Replace("\"compromised_device_integrity\": false", "\"unrelated_field\": false");
+            SetupMockResponseFromString(json);
+
+            var response = await _instance.GetEventAsync("1708102555327.NLOjmg");
+
+            var model = response.Ok();
+            Assert.False(model.CompromisedDeviceIntegrityOption.IsSet);
+            Assert.Null(model.CompromisedDeviceIntegrity);
+        }
+
+        [Fact]
+        public async Task GetEventWithTrueCompromisedDeviceIntegrityAsyncTest()
+        {
+            var json = ReadMockFile("events/get_event_200.json")
+                .Replace("\"compromised_device_integrity\": false", "\"compromised_device_integrity\": true");
+            SetupMockResponseFromString(json);
+
+            var response = await _instance.GetEventAsync("1708102555327.NLOjmg");
+
+            Assert.True(response.Ok().CompromisedDeviceIntegrity);
         }
 
         [Fact]
