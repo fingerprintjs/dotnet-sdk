@@ -62,6 +62,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="botType">Additional classification of the bot type if detected. .</param>
         /// <param name="botInfo">botInfo.</param>
         /// <param name="clonedApp">Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. .</param>
+        /// <param name="compromisedDeviceIntegrity">`true` if the Android device's boot or system integrity is compromised (e.g., an unlocked bootloader or a failed verified boot), so the device cannot be trusted. `false` if no integrity issue was detected. Available from Android SDK 2.6.0+. .</param>
         /// <param name="developerTools">`true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise. .</param>
         /// <param name="deviceDetails">deviceDetails.</param>
         /// <param name="emulator">Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android. .</param>
@@ -101,7 +102,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="labels">Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/). .</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<DeviceDetails> deviceDetails = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
+        public Event(string eventId, long timestamp, Option<EventSource?> source = default, Option<IncrementalIdentificationStatus?> incrementalIdentificationStatus = default, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> device = default, Option<string> os = default, Option<string> osVersion = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<bool?> activeCall = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> compromisedDeviceIntegrity = default, Option<bool?> developerTools = default, Option<DeviceDetails> deviceDetails = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<double?> proxyMlScore = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<bool?> simulator = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingConfidence?> tamperingConfidence = default, Option<double?> tamperingMlScore = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<double?> virtualMachineMlScore = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<double?> vpnMlScore = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<bool?> rareDevice = default, Option<RareDevicePercentileBucket?> rareDevicePercentileBucket = default, Option<RawDeviceAttributes> rawDeviceAttributes = default, Option<List<LabelsInner>> labels = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
@@ -131,6 +132,7 @@ namespace Fingerprint.ServerSdk.Model
             BotTypeOption = botType;
             BotInfoOption = botInfo;
             ClonedAppOption = clonedApp;
+            CompromisedDeviceIntegrityOption = compromisedDeviceIntegrity;
             DeveloperToolsOption = developerTools;
             DeviceDetailsOption = deviceDetails;
             EmulatorOption = emulator;
@@ -594,6 +596,20 @@ namespace Fingerprint.ServerSdk.Model
         /// <value>Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. </value>
         [JsonPropertyName("cloned_app")]
         public bool? ClonedApp { get { return this.ClonedAppOption; } set { this.ClonedAppOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of CompromisedDeviceIntegrity
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> CompromisedDeviceIntegrityOption { get; private set; }
+
+        /// <summary>
+        /// `true` if the Android device's boot or system integrity is compromised (e.g., an unlocked bootloader or a failed verified boot), so the device cannot be trusted. `false` if no integrity issue was detected. Available from Android SDK 2.6.0+. 
+        /// </summary>
+        /// <value>`true` if the Android device's boot or system integrity is compromised (e.g., an unlocked bootloader or a failed verified boot), so the device cannot be trusted. `false` if no integrity issue was detected. Available from Android SDK 2.6.0+. </value>
+        [JsonPropertyName("compromised_device_integrity")]
+        public bool? CompromisedDeviceIntegrity { get { return this.CompromisedDeviceIntegrityOption; } set { this.CompromisedDeviceIntegrityOption = new Option<bool?>(value); } }
 
         /// <summary>
         /// Used to track the state of DeveloperTools
@@ -1098,6 +1114,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  BotType: ").Append(BotType).Append("\n");
             sb.Append("  BotInfo: ").Append(BotInfo).Append("\n");
             sb.Append("  ClonedApp: ").Append(ClonedApp).Append("\n");
+            sb.Append("  CompromisedDeviceIntegrity: ").Append(CompromisedDeviceIntegrity).Append("\n");
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("  DeviceDetails: ").Append(DeviceDetails).Append("\n");
             sb.Append("  Emulator: ").Append(Emulator).Append("\n");
@@ -1249,6 +1266,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<string> botType = default;
             Option<BotInfo> botInfo = default;
             Option<bool?> clonedApp = default;
+            Option<bool?> compromisedDeviceIntegrity = default;
             Option<bool?> developerTools = default;
             Option<DeviceDetails> deviceDetails = default;
             Option<bool?> emulator = default;
@@ -1392,6 +1410,9 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "cloned_app":
                             clonedApp = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "compromised_device_integrity":
+                            compromisedDeviceIntegrity = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "developer_tools":
                             developerTools = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -1611,6 +1632,9 @@ namespace Fingerprint.ServerSdk.Model
             if (clonedApp.IsSet && clonedApp.Value == null)
                 throw new ArgumentNullException(nameof(clonedApp), "Property is not nullable for class Event.");
 
+            if (compromisedDeviceIntegrity.IsSet && compromisedDeviceIntegrity.Value == null)
+                throw new ArgumentNullException(nameof(compromisedDeviceIntegrity), "Property is not nullable for class Event.");
+
             if (developerTools.IsSet && developerTools.Value == null)
                 throw new ArgumentNullException(nameof(developerTools), "Property is not nullable for class Event.");
 
@@ -1725,7 +1749,7 @@ namespace Fingerprint.ServerSdk.Model
             if (labels.IsSet && labels.Value == null)
                 throw new ArgumentNullException(nameof(labels), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, source, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, developerTools, deviceDetails, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
+            return new Event(eventId.Value, timestamp.Value.Value, source, incrementalIdentificationStatus, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, device, os, osVersion, clientReferrer, browserDetails, proximity, activeCall, bot, botType, botInfo, clonedApp, compromisedDeviceIntegrity, developerTools, deviceDetails, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, proxyMlScore, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, simulator, suspectScore, tampering, tamperingConfidence, tamperingMlScore, tamperingDetails, velocity, virtualMachine, virtualMachineMlScore, vpn, vpnConfidence, vpnMlScore, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rareDevice, rareDevicePercentileBucket, rawDeviceAttributes, labels);
         }
 
         /// <summary>
@@ -1949,6 +1973,9 @@ namespace Fingerprint.ServerSdk.Model
             }
             if (varEvent.ClonedAppOption.IsSet)
                 writer.WriteBoolean("cloned_app", varEvent.ClonedAppOption.Value.Value);
+
+            if (varEvent.CompromisedDeviceIntegrityOption.IsSet)
+                writer.WriteBoolean("compromised_device_integrity", varEvent.CompromisedDeviceIntegrityOption.Value.Value);
 
             if (varEvent.DeveloperToolsOption.IsSet)
                 writer.WriteBoolean("developer_tools", varEvent.DeveloperToolsOption.Value.Value);

@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **BotType** | **string** | Additional classification of the bot type if detected.  | [optional] 
 **BotInfo** | [**BotInfo**](BotInfo.md) |  | [optional] 
 **ClonedApp** | **bool** | Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android.  | [optional] 
+**CompromisedDeviceIntegrity** | **bool** | `true` if the Android device's boot or system integrity is compromised (e.g., an unlocked bootloader or a failed verified boot), so the device cannot be trusted. `false` if no integrity issue was detected. Available from Android SDK 2.6.0+.  | [optional] 
 **DeveloperTools** | **bool** | `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  | [optional] 
 **DeviceDetails** | [**DeviceDetails**](DeviceDetails.md) |  | [optional] 
 **Emulator** | **bool** | Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android.  | [optional] 
