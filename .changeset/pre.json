@@ -4,5 +4,8 @@
   "initialVersions": {
     "fingerprint-server-dotnet-sdk": "8.10.0"
   },
-  "changesets": []
+  "changesets": [
+    "compromised-device-integrity-events-search",
+    "compromised-device-integrity-events"
+  ]
 }
