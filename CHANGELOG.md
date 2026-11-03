@@ -1,5 +1,12 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.11.0
+
+### Minor Changes
+
+- **events-search**: Add `compromised_device_integrity` filter query parameter ([e55abff](https://github.com/fingerprintjs/dotnet-sdk/commit/e55abfff80847214990da014c79327e6d1ce339b))
+- **events**: Add `compromised_device_integrity` to `Event` ([e55abff](https://github.com/fingerprintjs/dotnet-sdk/commit/e55abfff80847214990da014c79327e6d1ce339b))
+
 ## 8.11.0-test.0
 
 ### Minor Changes
