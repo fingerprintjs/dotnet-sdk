@@ -549,7 +549,7 @@ namespace Fingerprint.ServerSdk.Api
         public Option<SearchEventsIncrementalIdentificationStatus> IncrementalIdentificationStatus { get; set; } = default;
 
         /// <summary>
-        /// Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.  (optional)
+        /// Filter events by the Simulator Detection result (native iOS SDK and Safari on iOS).  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.  (optional)
         /// </summary>
         public Option<bool> Simulator { get; set; } = default;
 
@@ -1140,7 +1140,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Sets the simulator parameter.
         /// </summary>
-        /// <param name="value">Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response. </param>
+        /// <param name="value">Filter events by the Simulator Detection result (native iOS SDK and Safari on iOS).  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response. </param>
         /// <returns>This request instance for fluent chaining.</returns>
         public SearchEventsRequest WithSimulator(bool value)
         {
