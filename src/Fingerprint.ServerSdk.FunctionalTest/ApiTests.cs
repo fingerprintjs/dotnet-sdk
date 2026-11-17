@@ -43,7 +43,7 @@ public class ApiTests : IAsyncLifetime
 
         var now = DateTimeOffset.UtcNow;
         _end = now.ToUnixTimeMilliseconds();
-        _start = now.AddDays(-89).ToUnixTimeMilliseconds();
+        _start = now.AddDays(-29).ToUnixTimeMilliseconds();
     }
 
     private static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder()
@@ -99,7 +99,7 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(29));
         var end = DateTime.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
@@ -114,7 +114,7 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_DateTime_Returns()
     {
-        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(29));
         var end = DateTimeOffset.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
@@ -130,7 +130,7 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_StartDateTime_EndTimestamp_Returns()
     {
-        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var start = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(29));
         var end = DateTimeOffset.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
@@ -146,7 +146,7 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_StartTimestamp_EndDateTime_Returns()
     {
-        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(89));
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(29));
         var end = DateTime.UtcNow;
 
         var response = await _api.SearchEventsAsync(new SearchEventsRequest()
